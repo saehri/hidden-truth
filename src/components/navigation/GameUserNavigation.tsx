@@ -1,30 +1,26 @@
+import Icons from '../ui/Icons';
+import Button from '../ui/Button';
+
 export default function GameUserNavigation() {
+  const buttonIconSizes = 'w-6 h-6 3xl:w-10 3xl:h-10';
+
   return (
-    <li
-      id='game__user-navigation'
-      style={{gridColumn: '14/-1'}}
-      className='bg-blue-500 grid grid-cols-4 gap-6'
-    >
-      <div className='pt-[100%] relative'>
-        <span className='grid place-items-center absolute top-0 left-0 w-full h-full bg-pink-500'>
-          SH
-        </span>
-      </div>
-      <div className='pt-[100%] relative'>
-        <span className='grid place-items-center absolute top-0 left-0 w-full h-full bg-pink-500'>
-          N
-        </span>
-      </div>
-      <div className='pt-[100%] relative'>
-        <span className='grid place-items-center absolute top-0 left-0 w-full h-full bg-pink-500'>
-          B
-        </span>
-      </div>
-      <div className='pt-[100%] relative'>
-        <span className='grid place-items-center absolute top-0 left-0 w-full h-full bg-pink-500'>
-          ST
-        </span>
-      </div>
+    <li id='game__user-navigation' className='flex gap-6 2xl:gap-8 3xl:gap-12'>
+      <Button>
+        <Icons.ShoppingBag className={buttonIconSizes} />
+      </Button>
+
+      <Button>
+        <Icons.NotificationUnread className={buttonIconSizes} />
+      </Button>
+
+      <Button>
+        <Icons.Briefcase className={buttonIconSizes} />
+      </Button>
+
+      <Button>
+        <Icons.Setting className={buttonIconSizes} />
+      </Button>
     </li>
   );
 }
