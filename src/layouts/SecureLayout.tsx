@@ -1,4 +1,5 @@
 import {Outlet} from 'react-router-dom';
+import MainNavigation from '../components/navigation/MainNavigation';
 
 export default function SecureLayout() {
   return (
@@ -6,12 +7,16 @@ export default function SecureLayout() {
       id='main'
       className='bg-slate-950 h-screen w-screen grid place-items-center'
     >
-      <section className='w-full 3xl:max-w-[2000px] mx-auto'>
+      <section className='w-full mx-auto'>
         <div
           id='game__screen-size'
           className='pt-[calc((9/20)*100%)] border border-border relative'
         >
-          <div id='game__container' className='absolute top-0 left-0'>
+          <div
+            id='game__container'
+            className='absolute top-0 left-0 w-full h-full'
+          >
+            <MainNavigation />
             <Outlet />
           </div>
         </div>
