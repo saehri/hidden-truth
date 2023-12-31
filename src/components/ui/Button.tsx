@@ -2,11 +2,7 @@ import {twMerge} from 'tailwind-merge';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function NavigationButton({
-  children,
-  className,
-  ...rest
-}: ButtonProps) {
+export default function Button({children, className, ...rest}: ButtonProps) {
   return (
     <button
       className={twMerge(

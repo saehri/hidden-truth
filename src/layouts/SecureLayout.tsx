@@ -10,7 +10,7 @@ export default function SecureLayout() {
       <section className='w-full mx-auto'>
         <div
           id='game__screen-size'
-          className='pt-[calc((9/20)*100%)] border border-border relative'
+          className='pt-[calc((9/20)*100%)] border border-border relative bg-[#08222D]'
         >
           <div
             id='game__container'
