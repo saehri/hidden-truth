@@ -1,13 +1,14 @@
 import EnergyBar from '../ui/EnergyBar';
+import MoneyBar from '../ui/MoneyBar';
 
 export default function GameUserEnergyAndMoneyBar() {
   return (
     <li
       id='game__user-money-and-energy'
-      className='flex items-center gap-12 2xl:gap-14 3xl:gap-16'
+      className='flex items-center gap-11 2xl:gap-12 3xl:gap-20'
     >
       <EnergyBar />
-      <div className='bg-pink-500'>Money bar</div>
+      <MoneyBar />
     </li>
   );
 }
