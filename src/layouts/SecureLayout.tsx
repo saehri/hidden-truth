@@ -7,7 +7,7 @@ export default function SecureLayout() {
       id='main'
       className='bg-slate-950 h-screen w-screen grid place-items-center'
     >
-      <section className='w-full mx-auto'>
+      <section className='w-full'>
         <div
           id='game__screen-size'
           className='pt-[calc((9/20)*100%)] border border-border relative bg-[#08222D]'
