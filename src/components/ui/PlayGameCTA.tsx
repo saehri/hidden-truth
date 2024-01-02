@@ -1,8 +1,6 @@
-import {useState} from 'react';
-import {motion} from 'framer-motion';
-
 import Icons from './Icons';
 import Modal from '../modal/ModalGeneric';
+import ChapterSelectionTab from './ChapterSelectionTab';
 
 export default function PlayGameCTA() {
   return (
@@ -28,16 +26,22 @@ export default function PlayGameCTA() {
 
         <Modal.Content className='pb-0 grid grid-cols-[33.375%,_1fr] gap-10 max-w-[92%] left-1/2 -translate-x-1/2'>
           <div className='w-full h-full flex items-end'>
-            <div className='w-full pt-[calc((4/3)*100%)] relative'>
+            <div className='w-full pt-[calc((350/257)*100%)] relative'>
               <img
-                className='absolute top-0 left-0 w-full h-full object-cover'
+                className='absolute bottom-0 left-0 w-full h-full object-contain object-bottom'
                 src='/avatar/wijayadefacto/regular/wijaya defacto.webp'
                 alt=''
               />
             </div>
           </div>
 
-          <div className='w-full h-full'>This is the content</div>
+          <div className='w-full h-full flex flex-col gap-8 justify-end'>
+            <Modal.CloseButton className='ml-auto relative before:content-["[Esc]"] before:absolute before:top-[-50%] before:text-xs before:text-yellow-600'>
+              <Icons.CloseCircled className='w-6 h-6 3xl:w-10 3xl:h-10' />
+            </Modal.CloseButton>
+
+            <ChapterSelectionTab />
+          </div>
         </Modal.Content>
       </Modal.Wrapper>
     </>

@@ -7,9 +7,7 @@ interface ModaLWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   initialState?: boolean;
 }
 
-interface ModalTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
-  asChild?: boolean;
-}
+interface ModalTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
 interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -40,16 +38,33 @@ const Modal = {
     }
 
     return (
-      <ModalContext.Provider value={{state: isOpen, toggleState}}>
+      <ModalContext.Provider
+        value={{state: isOpen, toggleState, setState: setOpen}}
+      >
         {children}
       </ModalContext.Provider>
     );
   },
-  Trigger: ({children, className, asChild}: ModalTriggerProps) => {
+  Trigger: ({children, className}: ModalTriggerProps) => {
     const modal = useContext(ModalContext);
 
     return (
       <button className={twMerge(className)} onClick={modal.toggleState}>
+        {children}
+      </button>
+    );
+  },
+  CloseButton: ({className, children}: ModalTriggerProps) => {
+    const modal = useContext(ModalContext);
+
+    return (
+      <button
+        className={twMerge(
+          'flex gap-2 items-center justify-center shrink-0 p-1 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-50 after:transition-opacity',
+          className
+        )}
+        onClick={() => modal.setState(false)}
+      >
         {children}
       </button>
     );
