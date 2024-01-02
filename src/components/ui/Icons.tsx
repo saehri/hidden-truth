@@ -1,3 +1,4 @@
+import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 
 type SvgProps = React.SVGAttributes<HTMLOrSVGElement>;
@@ -218,6 +219,33 @@ const Icons = {
         mask='url(#path-1-inside-1_449_612)'
       />
     </svg>
+  ),
+  PlayButtonRing: ({className, ...rest}: SvgProps) => (
+    <motion.svg
+      viewBox='0 0 90 82'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+      className='absolute top-0 left-0 w-full h-full'
+      initial={{rotate: 0, scale: 1}}
+      whileHover={{
+        rotate: 360,
+        scale: 1.1,
+        transition: {rotate: {repeat: Infinity, duration: 0.8, ease: 'linear'}},
+      }}
+    >
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M27.439 80.9177C11.9175 74.4153 0.99994 58.9953 0.999941 41.0002C0.999942 23.0051 11.9175 7.58519 27.439 1.0828L27.439 0.000244141C11.3497 6.55923 -5.81946e-05 22.4449 -5.9e-05 41.0002C-5.98054e-05 59.5556 11.3496 75.4413 27.439 82.0002L27.439 80.9177Z'
+        fill='#867209'
+      />
+      <path
+        fillRule='evenodd'
+        clipRule='evenodd'
+        d='M62.561 1.08256C78.0825 7.58495 89.0001 23.0049 89.0001 41C89.0001 58.9951 78.0825 74.415 62.561 80.9174L62.561 82C78.6503 75.441 90.0001 59.5553 90.0001 41C90.0001 22.4447 78.6504 6.55899 62.561 0L62.561 1.08256Z'
+        fill='#867209'
+      />
+    </motion.svg>
   ),
 };
 
