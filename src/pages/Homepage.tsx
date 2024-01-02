@@ -1,12 +1,23 @@
+import HomepageBackground from '../components/ui/HomepageBackground';
+import HomepageGradientLayer from '../components/ui/HomepageGradientLayer';
+import HomepageMovingAvatar from '../components/ui/HomepageMovingAvatar';
+import PlayGameButton from '../components/ui/PlayGameButton';
+
 export default function Homepage() {
   return (
-    <p>
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit ut
-      ad, reiciendis, vitae sint culpa inventore architecto, necessitatibus
-      quibusdam dolorem vel nemo eos totam quod aspernatur ea asperiores non
-      explicabo quam laboriosam maiores tenetur! Et quo expedita sint explicabo,
-      rerum cumque doloribus doloremque? Id ea error minima laboriosam,
-      similique autem.
-    </p>
+    <div className='relative w-full h-full'>
+      <div className='relative h-full z-30 flex items-end justify-center'>
+        <div className='relative min-h-[12%] w-full'>
+          <span className='flex h-[1.5px] w-full bg-gradient-to-r from-transparent via-[#867209] to-transparent'></span>
+          <PlayGameButton />
+        </div>
+      </div>
+
+      <div className='absolute top-0 left-0 w-full h-full -z-0 overflow-hidden'>
+        <HomepageGradientLayer />
+        <HomepageMovingAvatar />
+        <HomepageBackground />
+      </div>
+    </div>
   );
 }
