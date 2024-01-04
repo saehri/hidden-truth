@@ -1,12 +1,36 @@
+import {useSearchParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+
 import Icons from './Icons';
 import Modal from '../modal/ModalGeneric';
+import Button from './Button';
 import ChapterSelectionTab from './ChapterSelectionTab';
 
 export default function PlayGameCTA() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [state] = useState(searchParams.get('chapterSelection') === 'open');
+
+  useEffect(() => {
+    function closeModal() {
+      setSearchParams({chapterSelection: 'close'});
+    }
+
+    window.addEventListener('keyup', (e: KeyboardEvent) => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    return window.removeEventListener('keyup', closeModal);
+  }, []);
+
   return (
     <>
-      <Modal.Wrapper>
-        <Modal.Trigger className='absolute w-[11.25%] -top-[130%] left-1/2 -translate-x-1/2 p-2 3xl:p-4 group border-none outline-none'>
+      <Modal.Wrapper initialState={state}>
+        <button
+          onClick={() =>
+            setSearchParams({chapterSelection: 'open'}, {replace: true})
+          }
+          className='absolute w-[11.25%] -top-[130%] left-1/2 -translate-x-1/2 p-2 3xl:p-4 group border-none outline-none'
+        >
           <span className='sr-only'>Play game</span>
 
           <span className='block w-full pt-[100%] relative'>
@@ -22,9 +46,12 @@ export default function PlayGameCTA() {
           </span>
 
           <Icons.PlayButtonRing />
-        </Modal.Trigger>
+        </button>
 
-        <Modal.Content className='pb-0 grid grid-cols-[33.375%,_1fr] gap-10 max-w-[92%] left-1/2 -translate-x-1/2'>
+        <Modal.Content
+          initialState={searchParams.get('chapterSelection') === 'open'}
+          className='pb-0 grid grid-cols-[33.375%,_1fr] gap-10 max-w-[92%] left-1/2 -translate-x-1/2'
+        >
           <div className='w-full h-full flex items-end'>
             <div className='w-full pt-[calc((350/257)*100%)] relative'>
               <img
@@ -36,9 +63,14 @@ export default function PlayGameCTA() {
           </div>
 
           <div className='w-full h-full flex flex-col gap-8 justify-end'>
-            <Modal.CloseButton className='ml-auto relative before:content-["[Esc]"] before:absolute before:top-[-50%] before:text-xs before:text-yellow-600'>
+            <Button
+              onClick={() =>
+                setSearchParams({chapterSelection: 'close'}, {replace: true})
+              }
+              className='ml-auto relative before:content-["[Esc]"] before:absolute before:top-[-50%] before:text-xs before:text-yellow-600'
+            >
               <Icons.CloseCircled className='w-6 h-6 3xl:w-10 3xl:h-10' />
-            </Modal.CloseButton>
+            </Button>
 
             <ChapterSelectionTab />
           </div>

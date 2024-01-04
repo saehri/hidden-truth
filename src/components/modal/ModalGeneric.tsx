@@ -1,7 +1,6 @@
 import {createContext, useContext, useEffect, useState} from 'react';
 import {createPortal} from 'react-dom';
 import {twMerge} from 'tailwind-merge';
-import {motion} from 'framer-motion';
 
 interface ModaLWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
   initialState?: boolean;
@@ -9,7 +8,9 @@ interface ModaLWrapperProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface ModalTriggerProps extends React.HTMLAttributes<HTMLButtonElement> {}
 
-interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface ModalContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  initialState?: boolean;
+}
 
 const ModalContext = createContext(null as any);
 
@@ -18,10 +19,6 @@ const Modal = {
     const [isOpen, setOpen] = useState<boolean>(initialState || false);
 
     useEffect(() => {
-      if (initialState) {
-        setOpen(initialState);
-      }
-
       function closeModal() {
         setOpen(false);
       }
@@ -69,12 +66,13 @@ const Modal = {
       </button>
     );
   },
-  Content: ({children, className}: ModalContentProps) => {
+  Content: ({children, className, initialState}: ModalContentProps) => {
     const modal = useContext(ModalContext);
+    const modalState = initialState !== null ? initialState : modal.state;
 
     return (
       <>
-        {modal.state &&
+        {modalState &&
           createPortal(
             <div className='fixed top-0 left-0 w-full h-full z-50 flex items-center'>
               <div className='w-full pt-[calc((9/20)*_100%)] relative'>
