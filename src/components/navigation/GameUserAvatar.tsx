@@ -1,9 +1,17 @@
+import {motion} from 'framer-motion';
+import {useLocation} from 'react-router-dom';
+
 import Icons from '../ui/Icons';
 
 export default function GameUserAvatar() {
+  const location = useLocation();
+
   return (
-    <li id='game__user-avatar'>
-      <button className='flex translate-y-[-10px]'>
+    <motion.li id='game__user-avatar'>
+      <button
+        className='flex translate-y-[-10px]'
+        disabled={location.pathname === '/play'}
+      >
         <div className='w-28 relative'>
           <div className='absolute w-full top-0 left-0 pt-[100%]'>
             <Icons.AvatarBackground />
@@ -21,6 +29,6 @@ export default function GameUserAvatar() {
           Ayu Cluenight
         </div>
       </button>
-    </li>
+    </motion.li>
   );
 }
