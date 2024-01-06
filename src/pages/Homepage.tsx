@@ -1,4 +1,4 @@
-import HomepageBackground from '../components/ui/HomepageBackground';
+import FullscreenBackground from '../components/ui/FullScreenBackground';
 import HomepageGradientLayer from '../components/ui/HomepageGradientLayer';
 import HomepageMovingAvatar from '../components/ui/HomepageMovingAvatar';
 import PlayGameCTA from '../components/ui/PlayGameCTA';
@@ -16,7 +16,12 @@ export default function Homepage() {
       <div className='absolute top-0 left-0 w-full h-full -z-0 overflow-hidden'>
         <HomepageGradientLayer />
         <HomepageMovingAvatar />
-        <HomepageBackground />
+        <FullscreenBackground
+          imageLink={'/background/homescreen-big.webp'}
+          placeholderLink={
+            '/background/placeholder/homescreen-placeholder.webp'
+          }
+        />
       </div>
     </div>
   );
