@@ -1,7 +1,10 @@
-import {Outlet} from 'react-router-dom';
 import MainNavigation from '../components/navigation/MainNavigation';
 
-export default function SecureLayout() {
+interface AppLayout {
+  children: React.ReactNode;
+}
+
+export default function AppLayout({children}: AppLayout) {
   return (
     <main
       id='main'
@@ -17,7 +20,7 @@ export default function SecureLayout() {
             className='absolute top-0 left-0 w-full h-full'
           >
             <MainNavigation />
-            <Outlet />
+            {children}
           </div>
         </div>
       </section>

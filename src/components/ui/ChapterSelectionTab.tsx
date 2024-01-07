@@ -1,4 +1,5 @@
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useContext, useState} from 'react';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {motion} from 'framer-motion';
 
 import ChapterCard from './ChapterCard';
@@ -71,6 +72,8 @@ function TabButton({setActiveTab, activeTab, tabId}: TabButton) {
 }
 
 function TabContent({activeTab}: TabContent) {
+  const {activePage, setActivePage} = useContext(ActivePageContext);
+
   return (
     <motion.div
       variants={{
@@ -84,7 +87,15 @@ function TabContent({activeTab}: TabContent) {
       animate='show'
       className='min-h-[57.77%] flex gap-1 mb-8'
     >
-      <ChapterCard chapterId='pemilu24' />
+      <ChapterCard
+        chapterName='pemilu'
+        onClick={() =>
+          setActivePage({
+            location: 'chapterDetail',
+            state: {chapterId: 'pemilu24', fromPage: activePage.location},
+          })
+        }
+      />
     </motion.div>
   );
 }

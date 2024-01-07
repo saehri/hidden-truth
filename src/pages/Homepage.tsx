@@ -1,4 +1,4 @@
-import FullscreenBackground from '../components/ui/FullScreenBackground';
+import FullscreenBackground from '../components/ui/FullscreenBackground';
 import HomepageGradientLayer from '../components/ui/HomepageGradientLayer';
 import HomepageMovingAvatar from '../components/ui/HomepageMovingAvatar';
 import PlayGameCTA from '../components/ui/PlayGameCTA';

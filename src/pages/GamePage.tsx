@@ -1,5 +1,5 @@
 import ImageGuesser from '../components/games/ImageGuesser';
-import FullscreenBackground from '../components/ui/FullScreenBackground';
+import FullscreenBackground from '../components/ui/FullscreenBackground';
 
 export default function GamePage() {
   return (

@@ -1,16 +1,17 @@
+import {useContext} from 'react';
 import {motion} from 'framer-motion';
-import {useLocation} from 'react-router-dom';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import Icons from '../ui/Icons';
 
 export default function GameUserAvatar() {
-  const location = useLocation();
+  const {activePage} = useContext(ActivePageContext);
 
   return (
     <motion.li id='game__user-avatar'>
       <button
         className='flex translate-y-[-10px]'
-        disabled={location.pathname === '/play'}
+        disabled={activePage.location === 'game'}
       >
         <div className='w-28 relative'>
           <div className='absolute w-full top-0 left-0 pt-[100%]'>

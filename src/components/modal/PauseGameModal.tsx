@@ -1,9 +1,10 @@
-import {Dispatch, SetStateAction} from 'react';
-import {GameStateTypes} from '../../services/utils/types';
+import {Dispatch, SetStateAction, useContext} from 'react';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {createPortal} from 'react-dom';
+import {GameStateTypes} from '../../services/utils/types';
+
 import Button from '../ui/Button';
 import Icons from '../ui/Icons';
-import {useNavigate} from 'react-router-dom';
 
 interface PauseGameModal {
   modalState: boolean;
@@ -14,7 +15,7 @@ export default function PauseGameModal({
   setGameState,
   modalState,
 }: PauseGameModal) {
-  const navigate = useNavigate();
+  const {setActivePage} = useContext(ActivePageContext);
 
   return (
     <>
@@ -34,7 +35,10 @@ export default function PauseGameModal({
 
                 <button
                   onClick={() =>
-                    navigate('/chapter', {state: {chapterId: 'pemilu24'}})
+                    setActivePage({
+                      location: 'chapterDetail',
+                      state: {chapterId: 'pemilu24'},
+                    })
                   }
                   className='py-3 px-4 rounded-sm bg-gradient-to-t from-red-600 via-red-500 to-red-400 text-white disabled:opacity-50'
                 >
