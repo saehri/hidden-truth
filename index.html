@@ -8,16 +8,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Overpass:wght@200;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,400;0,500;1,700&display=swap"
       rel="stylesheet"
     />
     <!-- End Google fonts -->
 
     <title>Hidden Truth: Detective Game</title>
   </head>
-  <body class="bg-slate-950 font-overpass font-extralight leading-4">
-    <div id="root"></div>
-    <div id="storyDialog"></div>
+  <body
+    class="bg-background font-overpass font-extralight leading-4 h-full w-full select-none overflow-hidden"
+    style="
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-optical-sizing: auto;
+    "
+  >
+    <div id="emtris__gameStart"></div>
+    <div id="emtris__dialog"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
