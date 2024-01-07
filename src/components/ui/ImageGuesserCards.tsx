@@ -1,31 +1,41 @@
 import {Dispatch, SetStateAction} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
-import {ImageGuesserGameDataTypes} from '../../services/utils/types';
+import {
+  GameStateTypes,
+  ImageGuesserGameDataTypes,
+} from '../../services/utils/types';
+import {twMerge} from 'tailwind-merge';
 
 interface Props {
   gameData: ImageGuesserGameDataTypes[];
-  setStart: Dispatch<SetStateAction<boolean>>;
+  setStart: Dispatch<SetStateAction<GameStateTypes>>;
+  gameState: GameStateTypes;
 }
 
-export default function ImageGuesserCards({gameData, setStart}: Props) {
+export default function ImageGuesserCards({
+  gameData,
+  setStart,
+  gameState,
+}: Props) {
   return (
     <motion.div
       initial='hide'
       animate='show'
       exit='exit'
       variants={{
-        hide: {opacity: 0},
+        hide: {opacity: 0, y: -100},
         show: {
+          y: 0,
           opacity: 1,
           transition: {
-            delay: 0.7,
+            delay: 2.8,
             staggerChildren: 0.1,
-            delayChildren: 1.8,
+            delayChildren: 3.2,
             staggerDirection: -1,
           },
         },
       }}
-      onAnimationComplete={() => setStart(true)}
+      onAnimationComplete={() => setStart('start')}
       className='absolute top-0 left-0 w-full h-full'
     >
       <AnimatePresence mode='popLayout'>
@@ -54,8 +64,12 @@ export default function ImageGuesserCards({gameData, setStart}: Props) {
             <div className='w-full pt-[calc((9/16)*100%)] relative'>
               <img
                 src={x.imageLink}
-                className='absolute top-0 left-0 w-full h-full object-cover'
+                className={twMerge(
+                  'absolute top-0 left-0 w-full h-full object-cover transition-all duration-100 pointer-events-none',
+                  gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+                )}
                 alt=''
+                draggable='false'
               />
             </div>
           </motion.div>
@@ -63,8 +77,4 @@ export default function ImageGuesserCards({gameData, setStart}: Props) {
       </AnimatePresence>
     </motion.div>
   );
-}
-
-{
-  /*  */
 }

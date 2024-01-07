@@ -7,7 +7,7 @@ export default function EnergyBar() {
   const [userEnergy, setUserEnergy] = useState({
     energy: 5,
     max_energy: 5,
-    recharging_energy: false,
+    recharging_energy: true,
   });
 
   return (

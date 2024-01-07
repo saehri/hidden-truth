@@ -1,34 +1,42 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 
 import Countdown, {CountdownApi} from 'react-countdown';
+import Icons from './Icons';
+import Button from './Button';
+import {GameStateTypes} from '../../services/utils/types';
+import PauseGameModal from '../modal/PauseGameModal';
 
 interface InGameCountdown {
   countdownDuration?: number;
   autoStart?: boolean;
-  countdownState: 'start' | 'pause';
+  gameState: GameStateTypes;
+  setGameState: Dispatch<SetStateAction<GameStateTypes>>;
 }
 
 export default function InGameCountdown({
   countdownDuration,
-  countdownState,
+  gameState,
+  setGameState,
 }: InGameCountdown) {
   const duration = countdownDuration ?? 180;
 
-  const [date, setDate] = useState(Date.now() + duration * 1000);
+  const [date] = useState(Date.now() + duration * 1000);
   const countdownApiRef = useRef<CountdownApi | null>(null);
 
   const startCountdown = (): void => {
     countdownApiRef.current?.start();
   };
 
-  const handlePauseClick = (): void => {
+  const pauseCountdown = (): void => {
     countdownApiRef.current?.pause();
-  };
-
-  const handleResetClick = (): void => {
-    setDate(Date.now() + 10000);
   };
 
   const isPaused = (): boolean => {
@@ -44,23 +52,66 @@ export default function InGameCountdown({
     // This function would be equivalent to the handleUpdate method
     // but since we don't have a direct equivalent to forceUpdate in functional components,
     // we rely on the change of state or props to trigger a re-render.
-    if (countdownState === 'start') {
+    if (gameState === 'start') {
       startCountdown();
     }
-  }, [countdownState, date]);
+    if (gameState === 'paused' || gameState === 'completed') {
+      pauseCountdown();
+    }
+  }, [gameState, date]);
 
   return (
-    <Countdown
-      key={date}
-      ref={(countdown) => {
-        if (countdown) {
-          countdownApiRef.current = countdown.getApi();
-        }
-      }}
-      date={date}
-      autoStart={false}
-      renderer={customRenderer({children: <span>Hello world</span>})}
-    />
+    <>
+      <motion.div
+        initial={{y: 100, opacity: 0}}
+        animate={{
+          opacity: 1,
+          y: 0,
+          transition: {delay: 2.5},
+        }}
+        className='w-full relative'
+      >
+        <Countdown
+          key={date}
+          ref={(countdown) => {
+            if (countdown) {
+              countdownApiRef.current = countdown.getApi();
+            }
+          }}
+          date={date}
+          autoStart={false}
+          renderer={customRenderer({children: <span>Hello world</span>})}
+          onComplete={() => setGameState('completed')}
+        />
+
+        <div className='absolute -top-12 left-1/2 -translate-x-1/2 z-30 bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
+          <div className='bg-background rounded-full w-8 h-8 grid place-items-center'>
+            {gameState === 'start' && (
+              <Button
+                onClick={() => setGameState('paused')}
+                disabled={isCompleted()}
+              >
+                <Icons.Pause />
+              </Button>
+            )}
+
+            {gameState === 'paused' && (
+              <Button
+                onClick={() => setGameState('start')}
+                disabled={isCompleted()}
+              >
+                <Icons.Play />
+              </Button>
+            )}
+          </div>
+        </div>
+      </motion.div>
+
+      <PauseGameModal
+        modalState={gameState === 'paused'}
+        setGameState={setGameState}
+      />
+    </>
   );
 }
 
@@ -69,7 +120,7 @@ function customRenderer({children}: {children: React.ReactNode}) {
   return ({minutes, seconds, completed}: any) => {
     if (completed)
       return (
-        <CountdownClockWrapper dontAnimate>
+        <CountdownClockWrapper>
           <CountdownClockDisplay>0{minutes}</CountdownClockDisplay>
           <CountdownClockDisplay>
             {seconds < 10 && '0'}
@@ -95,29 +146,18 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
   dontAnimate?: boolean;
 }
 
-function CountdownClockWrapper({
-  children,
-  className,
-  dontAnimate,
-}: CountdownClockWrapper) {
+function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
-    <motion.div
-      initial={!dontAnimate && {y: 100, opacity: 0}}
-      animate={
-        !dontAnimate && {
-          opacity: 1,
-          y: 0,
-          rotate: 3,
-          transition: {rotate: {delay: 1}},
-        }
-      }
+    <div
       className={twMerge(
-        'border-8 p-2 rounded-xl bg-background border-border grid grid-cols-2 gap-1 h-max text-4xl text-center w-full relative z-50',
+        'p-2 rounded-2xl bg-gradient-to-t from-[#453B06] via-[#BFA622] to-[#FFF8D1] border-border h-max text-4xl text-center w-full relative z-30',
         className
       )}
     >
-      {children}
-    </motion.div>
+      <div className='bg-background p-2 rounded-xl grid grid-cols-2 gap-1'>
+        {children}
+      </div>
+    </div>
   );
 }
 

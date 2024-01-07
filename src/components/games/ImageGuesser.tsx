@@ -1,9 +1,13 @@
 import {useState} from 'react';
 import ImageGuesserCards from '../ui/ImageGuesserCards';
 
-import {ImageGuesserGameDataTypes} from '../../services/utils/types';
-import ImageGuesserGameUserInput from '../forms/ImageGuesserGameUserInput';
+import {
+  GameStateTypes,
+  ImageGuesserGameDataTypes,
+} from '../../services/utils/types';
+import ImageGuesserGamePlayerInput from '../forms/ImageGuesserGamePlayerInput';
 import InGameCountdown from '../ui/InGameCountdown';
+import ChapterLevelSplashScreen from '../splashScreen/ChapterLevelSplashScreen';
 
 const gameDataExample: ImageGuesserGameDataTypes[] = [
   {
@@ -24,73 +28,12 @@ const gameDataExample: ImageGuesserGameDataTypes[] = [
       'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     answer: 'flower',
   },
-  {
-    id: 'pemilu24-1-06',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-07',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-08',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-09',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-10',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-11',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-12',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-13',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-14',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-  {
-    id: 'pemilu24-1-15',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
 ];
 
 export default function ImageGuesser() {
   const [gameData, setGameData] =
     useState<ImageGuesserGameDataTypes[]>(gameDataExample);
-  const [isWinning, setWinning] = useState<boolean>(false);
-  const [isStart, setStart] = useState<boolean>(false);
+  const [gameState, setGameState] = useState<GameStateTypes>('preparation');
 
   const deleteByIndex = (index: number) => {
     setGameData((oldValues) => {
@@ -102,30 +45,37 @@ export default function ImageGuesser() {
     <section className='w-full h-full max-w-[92%] flex items-end mx-auto'>
       <div className='w-full h-[85%] grid grid-cols-[15%,_50%,_1fr] gap-8 pb-8'>
         <div className='flex items-center'>
-          <InGameCountdown countdownState={isStart ? 'start' : 'pause'} />
+          <InGameCountdown
+            gameState={gameState}
+            setGameState={setGameState}
+            countdownDuration={150}
+          />
         </div>
 
         <div className='relative'>
-          <ImageGuesserCards gameData={gameData} setStart={setStart} />
+          <ImageGuesserCards
+            gameData={gameData}
+            setStart={setGameState}
+            gameState={gameState}
+          />
         </div>
 
-        <div className='h-full border border-border bg-background p-4 relative z-50 flex flex-col justify-between'>
-          <div className='text-[#FBE886]'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure eum
-            laudantium aspernatur iste eligendi ducimus quam, cupiditate illo
-            aperiam earum omnis laboriosam quaerat dolores eaque at alias nam ex
-            vel corporis deleniti voluptatem reprehenderit incidunt maxime
-            consequatur? Cumque sunt, odio dolor repellendus reiciendis tenetur.
-            Provident sequi nemo commodi distinctio earum.
-          </div>
-
-          <ImageGuesserGameUserInput
+        <div className='h-full relative flex flex-col justify-between'>
+          <ImageGuesserGamePlayerInput
             currentQuestionAnswer={gameData[0].answer}
             gameDataLength={gameData.length}
             onAnswerCorrect={deleteByIndex}
+            gameState={gameState}
+            setGameState={setGameState}
           />
         </div>
       </div>
+
+      <ChapterLevelSplashScreen
+        isOpen={gameState === 'preparation'}
+        levelInfo='Tebak Gambar'
+        levelName='CHAPTER 1 - KERIBUTAN'
+      />
     </section>
   );
 }
