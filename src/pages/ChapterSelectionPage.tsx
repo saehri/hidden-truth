@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useEffect} from 'react';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 
 import Icons from '../components/ui/Icons';
@@ -9,10 +9,21 @@ import FullscreenBackground from '../components/ui/FullscreenBackground';
 export default function ChapterSelectionPage() {
   const {setActivePage} = useContext(ActivePageContext);
 
+  useEffect(() => {
+    function handleEscapeKeyPressed(ev: KeyboardEvent) {
+      if (ev.key === 'Escape') {
+        setActivePage({location: 'home'});
+      }
+    }
+
+    window.addEventListener('keyup', handleEscapeKeyPressed);
+    return () => window.removeEventListener('keyup', handleEscapeKeyPressed);
+  }, []);
+
   return (
     <>
-      <div className='w-full h-full bg-slate-950/95 relative z-20'>
-        <section className='pb-0 grid grid-cols-[33.375%,_1fr] gap-10 max-w-[92%]'>
+      <div className='w-full h-full bg-slate-950/95 relative z-20 pt-6'>
+        <section className='pb-0 grid grid-cols-[33.375%,_1fr] gap-10 max-w-[92%] mx-auto'>
           <div className='w-full h-full flex items-end'>
             <div className='w-full pt-[calc((350/257)*100%)] relative'>
               <img
