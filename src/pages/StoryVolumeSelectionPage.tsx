@@ -3,8 +3,8 @@ import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 
 import Icons from '../components/ui/Icons';
 import Button from '../components/ui/Button';
-import storyVolumeSelectionTab from '../components/ui/StorystoryVolumeSelectionTab';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
+import StorystoryVolumeSelectionTab from '../components/ui/StoryVolumeSelectionTab';
 
 export default function StorystoryVolumeSelectionPage() {
   const {setActivePage} = useContext(ActivePageContext);
@@ -42,7 +42,7 @@ export default function StorystoryVolumeSelectionPage() {
               <Icons.CloseCircled className='w-6 h-6 3xl:w-10 3xl:h-10' />
             </Button>
 
-            <storyVolumeSelectionTab />
+            <StorystoryVolumeSelectionTab />
           </div>
         </section>
       </div>

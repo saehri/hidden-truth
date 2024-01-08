@@ -13,7 +13,6 @@ export default function StoryVolumeCard({
         rest: {opacity: 0, x: 50},
         show: {opacity: 1, x: 0},
       }}
-      whileHover={{y: -10}}
     >
       <button
         style={{clipPath: 'polygon(9% 0, 100% 0%, 91% 100%, 0% 100%)'}}
