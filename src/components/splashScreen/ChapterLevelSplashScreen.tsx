@@ -18,9 +18,9 @@ export default function ChapterLevelSplashScreen({
         createPortal(
           <motion.div
             animate={{
-              opacity: [0, 0, 0, 1, 1, 1, 1, 1, 0],
+              opacity: [0, 0, 1, 1, 1, 1, 1, 1, 0],
               transition: {
-                duration: 2,
+                duration: 3,
               },
             }}
             className='fixed top-0 left-0 w-full h-full z-50 bg-slate-950'
@@ -31,7 +31,6 @@ export default function ChapterLevelSplashScreen({
               <p className='capitalize'>{levelInfo}</p>
             </div>
           </motion.div>,
-
           document.getElementById('emtris__dialog') as
             | Element
             | DocumentFragment
