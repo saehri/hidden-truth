@@ -65,8 +65,10 @@ export default function ImageGuesserCards({
               <img
                 src={x.imageLink}
                 className={twMerge(
-                  'absolute top-0 left-0 w-full h-full object-cover transition-all duration-100 pointer-events-none',
-                  gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+                  'absolute top-0 left-0 w-full h-full object-cover transition-all duration-300 pointer-events-none',
+                  gameState === 'paused' || gameState === 'preparation'
+                    ? 'brightness-0'
+                    : 'brightness-100'
                 )}
                 alt=''
                 draggable='false'
