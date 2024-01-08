@@ -3,7 +3,7 @@ import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 
 import Button from '../components/ui/Button';
 
-export default function ChapterDetail() {
+export default function StorystoryVolumeDetail() {
   const {setActivePage} = useContext(ActivePageContext);
 
   return (
@@ -11,7 +11,9 @@ export default function ChapterDetail() {
       <section className='grid grid-cols-[1fr,_35%] h-full'>
         <div className='bg-blue-700'></div>
         <div className='bg-white flex justify-end items-start flex-col gap-8'>
-          <Button onClick={() => setActivePage({location: 'chapterSelection'})}>
+          <Button
+            onClick={() => setActivePage({location: 'storyVolumeSelection'})}
+          >
             Back button
           </Button>
 

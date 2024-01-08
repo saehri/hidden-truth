@@ -3,10 +3,10 @@ import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 
 import Icons from '../components/ui/Icons';
 import Button from '../components/ui/Button';
-import ChapterSelectionTab from '../components/ui/ChapterSelectionTab';
+import storyVolumeSelectionTab from '../components/ui/StorystoryVolumeSelectionTab';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 
-export default function ChapterSelectionPage() {
+export default function StorystoryVolumeSelectionPage() {
   const {setActivePage} = useContext(ActivePageContext);
 
   useEffect(() => {
@@ -42,7 +42,7 @@ export default function ChapterSelectionPage() {
               <Icons.CloseCircled className='w-6 h-6 3xl:w-10 3xl:h-10' />
             </Button>
 
-            <ChapterSelectionTab />
+            <storyVolumeSelectionTab />
           </div>
         </section>
       </div>

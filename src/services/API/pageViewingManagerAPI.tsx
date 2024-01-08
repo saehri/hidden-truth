@@ -14,8 +14,8 @@ import {Dispatch, SetStateAction, createContext, useState} from 'react';
 /* @types defines all the pages that the player can visit */
 export type ViewablePageTypes =
   | 'home'
-  | 'chapterSelection'
-  | 'chapterDetail'
+  | 'storyVolumeSelection'
+  | 'storyVolumeDetail'
   | 'game'
   | 'dialog'
   | 'auth'

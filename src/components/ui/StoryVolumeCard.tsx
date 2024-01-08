@@ -1,10 +1,12 @@
 import {motion} from 'framer-motion';
+import {StoryVolumeCardTypes} from '../../services/utils/types';
 
-interface ChapterCard extends React.HTMLAttributes<HTMLButtonElement> {
-  chapterName: string;
-}
-
-export default function ChapterCard({chapterName, ...rest}: ChapterCard) {
+export default function StoryVolumeCard({
+  volumeId,
+  volumeTile,
+  volumeCardBackground,
+  ...rest
+}: StoryVolumeCardTypes) {
   return (
     <motion.div
       variants={{
@@ -19,7 +21,7 @@ export default function ChapterCard({chapterName, ...rest}: ChapterCard) {
         {...rest}
       >
         <h4 className='uppercase italic text-lg 3xl:text-2xl text-[#FBE886] relative z-10'>
-          {chapterName}
+          {volumeTile}
         </h4>
         <span
           className='absolute block w-full h-full top-0 left-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent'

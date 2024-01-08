@@ -6,9 +6,9 @@ import {
 
 import AppLayout from '../layouts/AppLayout';
 import Homepage from '../pages/Homepage';
-import ChapterDetail from '../pages/ChapterDetail';
+import storyVolumeDetail from '../pages/StorystoryVolumeDetail';
 import GamePage from '../pages/GamePage';
-import ChapterSelectionPage from '../pages/ChapterSelectionPage';
+import storyVolumeSelectionPage from '../pages/StorystoryVolumeSelectionPage';
 
 export default function PageRouting() {
   return (
@@ -21,11 +21,12 @@ export default function PageRouting() {
 function PageViewer() {
   const {activePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
+  console.log({pageName});
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
     home: <Homepage />,
-    chapterSelection: <ChapterSelectionPage />,
-    chapterDetail: <ChapterDetail />,
+    storyVolumeSelection: <storyVolumeSelectionPage />,
+    storyVolumeDetail: <storyVolumeDetail />,
     game: <GamePage />,
     dialog: <div>Dialog Page</div>,
     auth: <div>Dialog Page</div>,

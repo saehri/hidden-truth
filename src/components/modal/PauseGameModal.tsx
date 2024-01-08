@@ -36,7 +36,7 @@ export default function PauseGameModal({
                 <button
                   onClick={() =>
                     setActivePage({
-                      location: 'chapterDetail',
+                      location: 'storyVolumeDetail',
                       state: {chapterId: 'pemilu24'},
                     })
                   }

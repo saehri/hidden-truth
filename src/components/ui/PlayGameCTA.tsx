@@ -8,7 +8,7 @@ export default function PlayGameCTA() {
 
   return (
     <button
-      onClick={() => setActivePage({location: 'chapterSelection'})}
+      onClick={() => setActivePage({location: 'storyVolumeSelection'})}
       className='absolute w-[11.25%] -top-[130%] left-1/2 -translate-x-1/2 p-2 3xl:p-4 group border-none outline-none'
     >
       <span className='sr-only'>Play game</span>

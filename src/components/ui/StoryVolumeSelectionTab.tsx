@@ -2,28 +2,29 @@ import {Dispatch, SetStateAction, useContext, useState} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {motion} from 'framer-motion';
 
-import ChapterCard from './ChapterCard';
-
-type TabTypes = 'special' | 'main' | 'premium';
+import VolumeCard from './StoryVolumeCard';
+import playableVolumes from '../../database/volume/playableVolumes';
+import {StoryVolumeTypes} from '../../services/utils/types';
 
 interface TabContent extends React.HTMLAttributes<HTMLDivElement> {
-  activeTab: TabTypes;
+  activeTab: StoryVolumeTypes;
 }
 
 interface TabButton extends React.HTMLAttributes<HTMLButtonElement> {
-  tabId: TabTypes;
-  activeTab: TabTypes;
-  setActiveTab: Dispatch<SetStateAction<TabTypes>>;
+  tabId: StoryVolumeTypes;
+  activeTab: StoryVolumeTypes;
+  setActiveTab: Dispatch<SetStateAction<StoryVolumeTypes>>;
 }
 
-const tabButtons: {id: TabTypes}[] = [
-  {id: 'special'},
-  {id: 'main'},
-  {id: 'premium'},
+const tabButtons: {id: StoryVolumeTypes}[] = [
+  {id: 'specialVolumes'},
+  {id: 'mainVolumes'},
+  {id: 'premiumVolumes'},
 ];
 
-export default function ChapterSelectionTab() {
-  const [activeTab, setActiveTab] = useState<TabTypes>('special');
+export default function StorystoryVolumeSelectionTab() {
+  const [activeTab, setActiveTab] =
+    useState<StoryVolumeTypes>('specialVolumes');
 
   return (
     <>
@@ -66,13 +67,14 @@ function TabButton({setActiveTab, activeTab, tabId}: TabButton) {
       onClick={() => setActiveTab(tabId)}
       className='uppercase border border-border border-b-0 p-2 pt-3 bg-gradient-to-b from-[#3E350B] via-[#3E350B]/50 to-transparent outline-none 3xl:text-3xl text-[#FBE886] relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-20 after:transition-opacity'
     >
-      {tabId} Chapters
+      {tabId} Volumes
     </motion.button>
   );
 }
 
 function TabContent({activeTab}: TabContent) {
-  const {activePage, setActivePage} = useContext(ActivePageContext);
+  const {setActivePage} = useContext(ActivePageContext);
+  const volumesData = playableVolumes.getVolume(activeTab);
 
   return (
     <motion.div
@@ -87,15 +89,20 @@ function TabContent({activeTab}: TabContent) {
       animate='show'
       className='min-h-[57.77%] flex gap-1 mb-8'
     >
-      <ChapterCard
-        chapterName='pemilu'
-        onClick={() =>
-          setActivePage({
-            location: 'chapterDetail',
-            state: {chapterId: 'pemilu24', fromPage: activePage.location},
-          })
-        }
-      />
+      {volumesData.map((v) => (
+        <VolumeCard
+          key={v.volumeId}
+          volumeId={v.volumeId}
+          volumeTile={v.volumeTile}
+          volumeCardBackground={v.volumeCardBackground}
+          onClick={() =>
+            setActivePage({
+              location: 'storyVolumeDetail',
+              state: {chapterId: v.volumeId},
+            })
+          }
+        />
+      ))}
     </motion.div>
   );
 }
