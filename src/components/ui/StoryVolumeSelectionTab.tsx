@@ -74,7 +74,7 @@ function TabButton({setActiveTab, activeTab, tabId}: TabButton) {
 
 function TabContent({activeTab}: TabContent) {
   const {setActivePage} = useContext(ActivePageContext);
-  const volumesData = playableVolumes.getVolume(activeTab);
+  const volumesData = playableVolumes.getPlayableVolume(activeTab);
 
   return (
     <motion.div
@@ -89,16 +89,16 @@ function TabContent({activeTab}: TabContent) {
       animate='show'
       className='min-h-[57.77%] flex gap-1 mb-8'
     >
-      {volumesData.map((v) => (
+      {volumesData.map(({card}) => (
         <VolumeCard
-          key={v.volumeId}
-          volumeId={v.volumeId}
-          volumeTile={v.volumeTile}
-          volumeCardBackground={v.volumeCardBackground}
+          key={card.volumeId}
+          volumeId={card.volumeId}
+          volumeTile={card.volumeTile}
+          volumeCardBackground={card.volumeCardBackground}
           onClick={() =>
             setActivePage({
               location: 'storyVolumeDetail',
-              state: {chapterId: v.volumeId},
+              state: {volumeId: card.volumeId},
             })
           }
         />

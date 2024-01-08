@@ -21,7 +21,6 @@ export default function PageRouting() {
 function PageViewer() {
   const {activePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
-  console.log({pageName});
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
     home: <Homepage />,

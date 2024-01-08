@@ -12,6 +12,8 @@ export type GameTypes = 'tg';
   tg -> tebak gambar
 */
 
+export type StoryVolumeIdTypes = 'pemilu24';
+
 export type StoryVolumeTypes =
   | 'specialVolumes'
   | 'mainVolumes'
@@ -20,13 +22,13 @@ export type StoryVolumeTypes =
 /* @types defines the game story volume chapters data structure */
 export type ChpaterGamesTypes = {
   chapterName: string;
-  games: {gameId: string; gameType: GameTypes}[];
+  games: {gameId: string; gameType: GameTypes; gameName: string}[];
 };
 
 /* @types defines the game story volume data structure */
 export interface StoryVolumeCardTypes
   extends React.HTMLAttributes<HTMLButtonElement> {
-  volumeId: string;
+  volumeId: StoryVolumeIdTypes;
   volumeTile: string;
   volumeCardBackground: string;
 }

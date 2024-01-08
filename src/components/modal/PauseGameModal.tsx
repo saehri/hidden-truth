@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction, useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {createPortal} from 'react-dom';
-import {GameStateTypes} from '../../services/utils/types';
+import {GameStateTypes, StoryVolumeIdTypes} from '../../services/utils/types';
 
 import Button from '../ui/Button';
 import Icons from '../ui/Icons';
@@ -15,7 +15,7 @@ export default function PauseGameModal({
   setGameState,
   modalState,
 }: PauseGameModal) {
-  const {setActivePage} = useContext(ActivePageContext);
+  const {activePage, setActivePage} = useContext(ActivePageContext);
 
   return (
     <>
@@ -37,7 +37,10 @@ export default function PauseGameModal({
                   onClick={() =>
                     setActivePage({
                       location: 'storyVolumeDetail',
-                      state: {chapterId: 'pemilu24'},
+                      state: {
+                        volumeId: activePage.state
+                          ?.volumeId as StoryVolumeIdTypes,
+                      },
                     })
                   }
                   className='py-3 px-4 rounded-sm bg-gradient-to-t from-red-600 via-red-500 to-red-400 text-white disabled:opacity-50'
