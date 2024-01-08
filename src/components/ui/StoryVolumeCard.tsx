@@ -5,6 +5,7 @@ export default function StoryVolumeCard({
   storyVolumeId,
   storyVolumeTitle,
   storyVolumeCardBackground,
+  storyVolumeType,
   ...rest
 }: StoryVolumeCardTypes) {
   return (

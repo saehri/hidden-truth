@@ -38,7 +38,7 @@ export default function StorystoryVolumeDetail() {
                         state: {
                           gameId: g.gameId,
                           gameType: g.gameType,
-                          gameName: g.gameName,
+                          gameName: `${ch.chapterName}: ${g.gameName}`,
                           volumeId: activePage.state
                             ?.volumeId as StoryVolumeIdTypes,
                           volumeType: activePage.state
