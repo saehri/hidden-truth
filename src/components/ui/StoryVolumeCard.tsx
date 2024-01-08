@@ -2,9 +2,9 @@ import {motion} from 'framer-motion';
 import {StoryVolumeCardTypes} from '../../services/utils/types';
 
 export default function StoryVolumeCard({
-  volumeId,
-  volumeTile,
-  volumeCardBackground,
+  storyVolumeId,
+  storyVolumeTitle,
+  storyVolumeCardBackground,
   ...rest
 }: StoryVolumeCardTypes) {
   return (
@@ -20,7 +20,7 @@ export default function StoryVolumeCard({
         {...rest}
       >
         <h4 className='uppercase italic text-lg 3xl:text-2xl text-[#FBE886] relative z-10'>
-          {volumeTile}
+          {storyVolumeTitle}
         </h4>
         <span
           className='absolute block w-full h-full top-0 left-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent'

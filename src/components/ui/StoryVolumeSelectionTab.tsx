@@ -3,7 +3,7 @@ import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {motion} from 'framer-motion';
 
 import VolumeCard from './StoryVolumeCard';
-import playableVolumes from '../../database/volume/playableVolumes';
+import {getStoryVolumeCards} from '../../database/volume/playableVolumes';
 import {StoryVolumeTypes} from '../../services/utils/types';
 
 interface TabContent extends React.HTMLAttributes<HTMLDivElement> {
@@ -13,13 +13,14 @@ interface TabContent extends React.HTMLAttributes<HTMLDivElement> {
 interface TabButton extends React.HTMLAttributes<HTMLButtonElement> {
   tabId: StoryVolumeTypes;
   activeTab: StoryVolumeTypes;
+  tabName: string;
   setActiveTab: Dispatch<SetStateAction<StoryVolumeTypes>>;
 }
 
-const tabButtons: {id: StoryVolumeTypes}[] = [
-  {id: 'specialVolumes'},
-  {id: 'mainVolumes'},
-  {id: 'premiumVolumes'},
+const tabButtons: {id: StoryVolumeTypes; name: string}[] = [
+  {id: 'specialVolumes', name: 'special volumes'},
+  {id: 'mainVolumes', name: 'main volumes'},
+  {id: 'premiumVolumes', name: 'premium volumes'},
 ];
 
 export default function StorystoryVolumeSelectionTab() {
@@ -46,6 +47,7 @@ export default function StorystoryVolumeSelectionTab() {
             tabId={tabBtn.id}
             setActiveTab={setActiveTab}
             activeTab={activeTab}
+            tabName={tabBtn.name}
           />
         ))}
       </motion.div>
@@ -55,7 +57,7 @@ export default function StorystoryVolumeSelectionTab() {
   );
 }
 
-function TabButton({setActiveTab, activeTab, tabId}: TabButton) {
+function TabButton({setActiveTab, activeTab, tabId, tabName}: TabButton) {
   return (
     <motion.button
       variants={{
@@ -67,14 +69,14 @@ function TabButton({setActiveTab, activeTab, tabId}: TabButton) {
       onClick={() => setActiveTab(tabId)}
       className='uppercase border border-border border-b-0 p-2 pt-3 bg-gradient-to-b from-[#3E350B] via-[#3E350B]/50 to-transparent outline-none 3xl:text-3xl text-[#FBE886] relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-20 after:transition-opacity'
     >
-      {tabId} Volumes
+      {tabName}
     </motion.button>
   );
 }
 
 function TabContent({activeTab}: TabContent) {
   const {setActivePage} = useContext(ActivePageContext);
-  const volumesData = playableVolumes.getPlayableVolume(activeTab);
+  const storyVolumesData = getStoryVolumeCards(activeTab);
 
   return (
     <motion.div
@@ -89,16 +91,14 @@ function TabContent({activeTab}: TabContent) {
       animate='show'
       className='min-h-[57.77%] flex gap-1 mb-8'
     >
-      {volumesData.map(({card}) => (
+      {storyVolumesData.map((v) => (
         <VolumeCard
-          key={card.volumeId}
-          volumeId={card.volumeId}
-          volumeTile={card.volumeTile}
-          volumeCardBackground={card.volumeCardBackground}
+          key={v.storyVolumeId}
+          {...v}
           onClick={() =>
             setActivePage({
               location: 'storyVolumeDetail',
-              state: {volumeId: card.volumeId},
+              state: {volumeId: v.storyVolumeId, volumeType: v.storyVolumeType},
             })
           }
         />

@@ -1,7 +1,11 @@
 import {Dispatch, SetStateAction, useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {createPortal} from 'react-dom';
-import {GameStateTypes, StoryVolumeIdTypes} from '../../services/utils/types';
+import {
+  GameStateTypes,
+  StoryVolumeIdTypes,
+  StoryVolumeTypes,
+} from '../../services/utils/types';
 
 import Button from '../ui/Button';
 import Icons from '../ui/Icons';
@@ -40,6 +44,8 @@ export default function PauseGameModal({
                       state: {
                         volumeId: activePage.state
                           ?.volumeId as StoryVolumeIdTypes,
+                        volumeType: activePage.state
+                          ?.volumeType as StoryVolumeTypes,
                       },
                     })
                   }

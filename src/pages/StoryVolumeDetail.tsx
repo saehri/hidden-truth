@@ -1,14 +1,15 @@
 import {useContext} from 'react';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
-import playableVolumes from '../database/volume/playableVolumes';
+import {getVolumeById} from '../database/volume/playableVolumes';
 
 import Button from '../components/ui/Button';
-import {StoryVolumeIdTypes} from '../services/utils/types';
+import {StoryVolumeIdTypes, StoryVolumeTypes} from '../services/utils/types';
 
 export default function StorystoryVolumeDetail() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
-  const volumeData = playableVolumes.getVolumeById(
-    activePage.state?.volumeId as StoryVolumeIdTypes
+  const storyVolumeData = getVolumeById(
+    activePage.state?.volumeId as StoryVolumeIdTypes,
+    activePage.state?.volumeType as StoryVolumeTypes
   );
 
   return (
@@ -23,7 +24,7 @@ export default function StorystoryVolumeDetail() {
             Back button
           </Button>
 
-          {volumeData.playableChapter.map((ch) => (
+          {storyVolumeData?.playableChapter.map((ch) => (
             <div key={ch.chapterName}>
               <h4 className='mb-4'>{ch.chapterName}</h4>
 
@@ -36,8 +37,12 @@ export default function StorystoryVolumeDetail() {
                         location: 'game',
                         state: {
                           gameId: g.gameId,
+                          gameType: g.gameType,
+                          gameName: g.gameName,
                           volumeId: activePage.state
                             ?.volumeId as StoryVolumeIdTypes,
+                          volumeType: activePage.state
+                            ?.volumeType as StoryVolumeTypes,
                         },
                       })
                     }

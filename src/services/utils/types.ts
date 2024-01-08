@@ -28,13 +28,14 @@ export type ChpaterGamesTypes = {
 /* @types defines the game story volume data structure */
 export interface StoryVolumeCardTypes
   extends React.HTMLAttributes<HTMLButtonElement> {
-  volumeId: StoryVolumeIdTypes;
-  volumeTile: string;
-  volumeCardBackground: string;
+  storyVolumeId: StoryVolumeIdTypes;
+  storyVolumeTitle: string;
+  storyVolumeCardBackground: string;
+  storyVolumeType: StoryVolumeTypes;
 }
 
 export interface GameStoryVolumeTypes extends StoryVolumeCardTypes {
-  volumeBackground: string;
+  storyVolumeBackground: string;
   playableChapter: ChpaterGamesTypes[];
 }
 
