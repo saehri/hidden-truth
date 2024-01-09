@@ -10,10 +10,10 @@ export default function AppLayout({children}: AppLayout) {
       id='main'
       className='bg-slate-950 h-screen w-screen grid place-items-center'
     >
-      <section className='w-full'>
+      <section className='w-full h-full 2xl:h-max'>
         <div
           id='game__screen-size'
-          className='pt-[calc((9/20)*100%)] border border-border relative bg-[#08222D]'
+          className='w-full h-full 2xl:h-max 2xl:pt-[calc((9/20)*100%)] border border-border relative bg-[#08222D]'
         >
           <div
             id='game__container'

@@ -9,7 +9,7 @@ export default function GameUserNavigation() {
   const {activePage} = useContext(ActivePageContext);
   const isUserPlayingGame = activePage.location === 'game';
 
-  const buttonIconSizes = 'w-6 h-6 3xl:w-10 3xl:h-10';
+  const buttonIconSizes = 'w-4 h-4 md:w-6 md:h-6 3xl:w-10 3xl:h-10';
 
   return (
     <motion.li
@@ -19,7 +19,7 @@ export default function GameUserNavigation() {
         transition: {duration: 0.2},
       }}
       id='game__user-navigation'
-      className='flex gap-6 2xl:gap-8 3xl:gap-12'
+      className='flex gap-2 sm:gap-4 md:gap-6 xl:gap-8 3xl:gap-12'
     >
       <Button>
         <Icons.ShoppingBag className={buttonIconSizes} />
