@@ -9,7 +9,7 @@ export default function GameUserNavigation() {
   const {activePage} = useContext(ActivePageContext);
   const isUserPlayingGame = activePage.location === 'game';
 
-  const buttonIconSizes = 'w-4 h-4 md:w-6 md:h-6 3xl:w-10 3xl:h-10';
+  const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
 
   return (
     <motion.li
