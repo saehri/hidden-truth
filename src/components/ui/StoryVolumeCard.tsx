@@ -16,17 +16,13 @@ export default function StoryVolumeCard({
       }}
     >
       <button
-        style={{clipPath: 'polygon(9% 0, 100% 0%, 91% 100%, 0% 100%)'}}
-        className='min-w-48 3xl:min-w-72 h-full p-4 flex items-end text-base border-[1.5px] border-border relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-20 after:transition-opacity'
+        className='min-w-20 md:min-w-48 3xl:min-w-72 h-full p-2 pr-4 md:p-4 bg-yellow-800 flex items-end text-base border-[1.5px] border-border relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-20 after:transition-opacity'
         {...rest}
       >
-        <h4 className='uppercase italic text-lg 3xl:text-2xl text-[#FBE886] relative z-10'>
+        <h4 className='uppercase italic text-sm sm:text-base md:text-lg 3xl:text-2xl text-[#FBE886] relative z-10'>
           {storyVolumeTitle}
         </h4>
-        <span
-          className='absolute block w-full h-full top-0 left-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent'
-          style={{clipPath: 'polygon(9% 0, 100% 0%, 91% 100%, 0% 100%)'}}
-        ></span>
+        <span className='absolute block w-full h-full top-0 left-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent'></span>
       </button>
     </motion.div>
   );

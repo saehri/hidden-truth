@@ -8,8 +8,8 @@ export default function PlayGameCTA() {
 
   return (
     <button
-      onClick={() => setActivePage({location: 'storyVolumeSelection'})}
-      className='w-[14%] sm:w-[13%] lg:w-[11.25%] p-[6px] lg:p-2 3xl:p-4 group border-none outline-none relative z-10'
+      onClick={() => setActivePage({location: 'storyTypes'})}
+      className='w-[14%] sm:w-[13%] lg:w-[11.25%] p-[6px] lg:p-2 3xl:p-4 group border-none outline-none relative z-10 block mx-auto'
     >
       <span className='sr-only'>Play game</span>
 

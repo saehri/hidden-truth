@@ -29,7 +29,7 @@ export default function GameUserAvatar() {
           </div>
         </div>
 
-        <div className='bg-primary/70 shrink-0 px-2 border border-border border-l-0 flex-1 h-5 md:h-7 3xl:h-9 overflow-hidden overflow-ellipsis text-xs sm:text-sm md:text-base 3xl:text-2xl grid place-items-center text-white translate-y-[5px] md:translate-y-[10px] -translate-x-[1.5px] text-nowrap'>
+        <div className='bg-primary/70 shrink-0 px-2 border border-border border-l-0 flex-1 h-5 md:h-7 3xl:h-9 overflow-hidden overflow-ellipsis text-xs sm:text-sm xl:text-base 3xl:text-2xl grid place-items-center text-white translate-y-[5px] md:translate-y-[10px] -translate-x-[1.5px] text-nowrap'>
           Ayu Cluenight
         </div>
       </button>

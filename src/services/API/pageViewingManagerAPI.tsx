@@ -14,6 +14,7 @@ import {Dispatch, SetStateAction, createContext, useState} from 'react';
 /* @types defines all the pages that the player can visit */
 export type ViewablePageTypes =
   | 'home'
+  | 'storyTypes'
   | 'storyVolumeSelection'
   | 'storyVolumeDetail'
   | 'game'
@@ -21,6 +22,19 @@ export type ViewablePageTypes =
   | 'auth'
   | 'logout'
   | 'settings';
+/* 
+  @definitions
+  home -> Homepage
+  storySelection -> select story types
+  storyVolumeSelection -> Story volume selections
+  storyVolumeDetails -> Story volume detail
+  game -> game page
+  dialog -> dialog page
+  auth -> authentication page
+  logout -> logout page
+  settings -> settings page
+*/
+
 /* @types defines all the value types the "state" can take */
 export type PageStateValueTypes = string | number | (() => void);
 /* @types defines the "state" object structures */

@@ -34,7 +34,7 @@ export default function EnergyBar() {
 
 function EneryCountdownDisplay() {
   return (
-    <div className='absolute leading-3 -bottom-[14px] md:-bottom-[21px] 3xl:-bottom-[29.1px] left-1/2 -translate-x-1/2 text-[8px] md:text-xs 3xl:text-base w-max bg-gradient-to-t from-primary via-yellow-500 to-yellow-50 px-1 md:p-[2px] rounded-br-md rounded-bl-md text-[#0e0c04] border border-border border-t-0'>
+    <div className='absolute leading-3 -bottom-[14px] xl:-bottom-[19px] uppercase 3xl:-bottom-[26px] left-1/2 -translate-x-1/2 text-[8px] xl:text-[10px] 3xl:text-sm w-max bg-gradient-to-t from-primary via-yellow-500 to-yellow-50 px-1 md:p-[2px] rounded-br-md rounded-bl-md text-[#0e0c04] border border-border border-t-0'>
       +1 dalam 2:49
     </div>
   );
