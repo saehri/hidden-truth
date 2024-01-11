@@ -4,6 +4,7 @@ import BackButton from '../components/ui/BackButton';
 import StoryTypeCard from '../components/ui/StoryTypeCard';
 import storyTypes from '../database/volume/storyTypes';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
+import LineDecoration from '../components/ui/LineDecoration';
 
 export default function StoryTypeSelectionPage() {
   return (
@@ -12,13 +13,14 @@ export default function StoryTypeSelectionPage() {
         className='w-full h-full bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-950 backdrop-blur-sm relative z-50 py-2 sm:py-4 lg:py-8 3xl:py-10'
         style={{WebkitBackdropFilter: 'blur(4px)'}}
       >
+        <BackButton
+          buttonName='Halaman utama'
+          goBackTo={{location: 'home'}}
+          className='top-0'
+        />
+
         <section className='pb-0 flex items-center max-w-[92%] h-full mx-auto'>
           <div className='w-full h-full flex flex-col'>
-            <BackButton
-              buttonName='Halaman utama'
-              goBackTo={{location: 'home'}}
-            />
-
             <div className='w-[90%] mx-auto grid grid-cols-[1fr,_max-content,_1fr] gap-1 mb-2 lg:mb-4 mt-6 lg:mt-10'>
               <LineDecoration />
 
@@ -86,17 +88,5 @@ export default function StoryTypeSelectionPage() {
         placeholderLink='/background/gamepage-big.webp'
       />
     </>
-  );
-}
-
-function LineDecoration() {
-  return (
-    <div className='flex items-center justify-center'>
-      <motion.div
-        initial={{width: 0}}
-        animate={{width: '100%'}}
-        className='h-[1px] rounded-full bg-yellow-700'
-      ></motion.div>
-    </div>
   );
 }

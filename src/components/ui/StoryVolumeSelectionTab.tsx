@@ -6,10 +6,10 @@ import VolumeCard from './StoryVolumeCard';
 import {getStoryVolumeCards} from '../../database/volume/playableVolumes';
 import {StoryVolumeTypes} from '../../services/utils/types';
 
-export default function StorystoryVolumeSelectionTab() {
+export default function StorysVolumeSelectionTab() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
   const storyVolumesData = getStoryVolumeCards(
-    activePage.state?.volumeTypes as StoryVolumeTypes
+    activePage.state?.volumeType as StoryVolumeTypes
   );
 
   return (
@@ -18,12 +18,12 @@ export default function StorystoryVolumeSelectionTab() {
         rest: {opacity: 1},
         show: {
           opacity: 1,
-          transition: {staggerChildren: 0.1, delayChildren: 0.6},
+          transition: {staggerChildren: 0.1},
         },
       }}
       initial='rest'
       animate='show'
-      className='h-full flex gap-1 justify-center'
+      className='h-full flex gap-2 w-max'
     >
       {storyVolumesData.map((v) => (
         <VolumeCard

@@ -19,7 +19,14 @@ export default function StorystoryVolumeDetail() {
 
         <div className='bg-white flex justify-end items-start flex-col gap-8 p-4'>
           <Button
-            onClick={() => setActivePage({location: 'storyVolumeSelection'})}
+            onClick={() =>
+              setActivePage({
+                location: 'storyVolumeSelection',
+                state: {
+                  volumeType: activePage.state?.volumeType as StoryVolumeTypes,
+                },
+              })
+            }
           >
             Back button
           </Button>

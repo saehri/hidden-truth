@@ -28,7 +28,7 @@ export default function StoryTypeCard({
       onClick={() =>
         setActivePage({
           location: 'storyVolumeSelection',
-          state: {volumeTypes: type},
+          state: {volumeType: type},
         })
       }
       variants={{
