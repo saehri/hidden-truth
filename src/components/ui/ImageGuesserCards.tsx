@@ -54,6 +54,10 @@ export default function ImageGuesserCards({
                 y: i * 25,
                 x: i * -5,
                 rotate: 0.1 * (i * 10),
+                transition: {
+                  duration: 0.1,
+                  ease: [0.85, 0.44, 0.12, 0.62],
+                },
               },
             }}
             style={{

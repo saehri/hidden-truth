@@ -1,12 +1,12 @@
 import {motion} from 'framer-motion';
 
 import BackButton from '../components/ui/BackButton';
-import StoryTypeCard from '../components/ui/StoryTypeCard';
-import storyTypes from '../database/volume/storyTypes';
+import EpisodeTypeCard from '../components/ui/StorylineTypeCard';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import LineDecoration from '../components/ui/LineDecoration';
+import storylineTypes from '../database/storyline/storylineTypes';
 
-export default function StoryTypeSelectionPage() {
+export default function StorylineTypeSelectionPage() {
   return (
     <>
       <div
@@ -15,7 +15,7 @@ export default function StoryTypeSelectionPage() {
       >
         <BackButton
           buttonName='Halaman utama'
-          goBackTo={{location: 'home'}}
+          goBackTo={{location: 'homepage'}}
           className='top-0'
         />
 
@@ -31,7 +31,7 @@ export default function StoryTypeSelectionPage() {
                     'polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)',
                 }}
               >
-                Pilih cerita
+                Pilih tipe alur cerita
               </h1>
 
               <LineDecoration />
@@ -49,14 +49,14 @@ export default function StoryTypeSelectionPage() {
               animate='show'
               className='grid grid-cols-3 gap-2 h-full'
             >
-              {storyTypes.map((st) => (
-                <StoryTypeCard
+              {storylineTypes.map((st) => (
+                <EpisodeTypeCard
                   key={st.type}
                   name={st.name}
                   description={st.description}
                   type={st.type}
                   background={st.background}
-                  locked={st.locked}
+                  locked={st.isLocked}
                 />
               ))}
             </motion.div>

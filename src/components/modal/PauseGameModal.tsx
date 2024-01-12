@@ -3,8 +3,8 @@ import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {createPortal} from 'react-dom';
 import {
   GameStateTypes,
-  StoryVolumeIdTypes,
-  StoryVolumeTypes,
+  StorylineIdTypes,
+  StorylineTypes,
 } from '../../services/utils/types';
 
 import Button from '../ui/Button';
@@ -40,12 +40,12 @@ export default function PauseGameModal({
                 <button
                   onClick={() =>
                     setActivePage({
-                      location: 'storyVolumeDetail',
+                      location: 'storylineDetailPage',
                       state: {
-                        volumeId: activePage.state
-                          ?.volumeId as StoryVolumeIdTypes,
-                        volumeType: activePage.state
-                          ?.volumeType as StoryVolumeTypes,
+                        storylineId: activePage.state
+                          ?.storylineId as StorylineIdTypes,
+                        storylineType: activePage.state
+                          ?.storylineType as StorylineTypes,
                       },
                     })
                   }

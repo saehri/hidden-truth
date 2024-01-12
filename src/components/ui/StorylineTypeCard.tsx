@@ -1,25 +1,24 @@
 import {useContext} from 'react';
 import {motion} from 'framer-motion';
-
-import {StoryVolumeTypes} from '../../services/utils/types';
-import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {twMerge} from 'tailwind-merge';
+import {StorylineTypes} from '../../services/utils/types';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-interface StoryTypeCard extends React.HTMLAttributes<HTMLButtonElement> {
+interface StorylineTypeCard extends React.HTMLAttributes<HTMLButtonElement> {
   name: string;
-  type: StoryVolumeTypes;
+  type: StorylineTypes;
   locked: boolean;
   background: string;
   description: string;
 }
 
-export default function StoryTypeCard({
+export default function StorylineTypeCard({
   background,
   locked,
   name,
   type,
   description,
-}: StoryTypeCard) {
+}: StorylineTypeCard) {
   const {setActivePage} = useContext(ActivePageContext);
 
   return (
@@ -27,8 +26,8 @@ export default function StoryTypeCard({
       disabled={locked}
       onClick={() =>
         setActivePage({
-          location: 'storyVolumeSelection',
-          state: {volumeType: type},
+          location: 'storylineSelectionPage',
+          state: {storylineType: type},
         })
       }
       variants={{

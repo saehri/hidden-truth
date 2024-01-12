@@ -1,13 +1,13 @@
 import {motion} from 'framer-motion';
-import {StoryVolumeCardTypes} from '../../services/utils/types';
+import {StorylineCardTypes} from '../../services/utils/types';
 
-export default function StoryVolumeCard({
-  storyVolumeId,
-  storyVolumeTitle,
-  storyVolumeCardBackground,
-  storyVolumeType,
+export default function StorylineCard({
+  storylineId,
+  storylineTitle,
+  storylineCardBackground,
+  storylineType,
   ...rest
-}: StoryVolumeCardTypes) {
+}: StorylineCardTypes) {
   return (
     <motion.div
       variants={{
@@ -20,7 +20,7 @@ export default function StoryVolumeCard({
         {...rest}
       >
         <h4 className='uppercase text-sm sm:text-base md:text-lg 3xl:text-2xl text-slate-50 relative z-10'>
-          {storyVolumeTitle}
+          {storylineTitle}
         </h4>
         <span className='absolute block w-full h-full top-0 left-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent'></span>
       </button>

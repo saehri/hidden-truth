@@ -1,7 +1,7 @@
 import EnergyBar from '../ui/EnergyBar';
 import MoneyBar from '../ui/MoneyBar';
 
-export default function GameUserEnergyAndMoneyBar() {
+export default function GameUserEnergyAndMoneyBarWrapper() {
   return (
     <li
       id='game__user-money-and-energy'

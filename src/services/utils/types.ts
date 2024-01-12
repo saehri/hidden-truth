@@ -7,39 +7,39 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'tg';
+export type GameTypes = 'TG';
 /* 
   tg -> tebak gambar
 */
 
-export type StoryVolumeIdTypes = 'pemilu24';
+export type StorylineIdTypes = 'PEMILU-24';
 
-export type StoryVolumeTypes =
-  | 'specialVolumes'
-  | 'mainVolumes'
-  | 'premiumVolumes';
+export type StorylineTypes =
+  | 'specialStoryline'
+  | 'mainStoryline'
+  | 'premiumStoryline';
 
-/* @types defines the game story volume chapters data structure */
-export type ChpaterGamesTypes = {
+/* @types defines the game storyline chapters data structure */
+export type StorylineChapterTypes = {
   chapterName: string;
   games: {gameId: string; gameType: GameTypes; gameName: string}[];
 };
 
-/* @types defines the game story volume data structure */
-export interface StoryVolumeCardTypes
+/* @types defines the game storyline episode data structure */
+export interface StorylineCardTypes
   extends React.HTMLAttributes<HTMLButtonElement> {
-  storyVolumeId: StoryVolumeIdTypes;
-  storyVolumeTitle: string;
-  storyVolumeCardBackground: string;
-  storyVolumeType: StoryVolumeTypes;
+  storylineId: StorylineIdTypes;
+  storylineTitle: string;
+  storylineCardBackground?: string;
+  storylineType: StorylineTypes;
 }
 
-export interface GameStoryVolumeTypes extends StoryVolumeCardTypes {
-  storyVolumeBackground: string;
-  playableChapter: ChpaterGamesTypes[];
+export interface StorylineDataTypes extends StorylineCardTypes {
+  storylineDetailPageCoverImage: string;
+  playableChapter: StorylineChapterTypes[];
 }
 
-/* @types defines the types of image gueser data stuctures */
+/* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {
   id: string;
   imageLink: string;

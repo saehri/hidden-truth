@@ -8,9 +8,9 @@ import {
 import AppLayout from '../layouts/AppLayout';
 import Homepage from '../pages/Homepage';
 import GamePage from '../pages/GamePage';
-import StorystoryVolumeSelectionPage from '../pages/StoryVolumeSelectionPage';
-import StorystoryVolumeDetail from '../pages/StoryVolumeDetail';
-import StoryTypeSelectionPage from '../pages/StoryTypesSelection';
+import EpisodeTypeSelectionPage from '../pages/StorylineTypeSelectionPage';
+import StorylineSelectionPage from '../pages/StorylineSelectionPage';
+import StorylineDetailPage from '../pages/StorylineDetailPage';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -29,15 +29,12 @@ function PageViewer() {
   const pageName = activePage.location;
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
-    home: <Homepage />,
-    storyTypes: <StoryTypeSelectionPage />,
-    storyVolumeSelection: <StorystoryVolumeSelectionPage />,
-    storyVolumeDetail: <StorystoryVolumeDetail />,
-    game: <GamePage />,
-    dialog: <div>Dialog Page</div>,
-    auth: <div>Dialog Page</div>,
-    logout: <div>Dialog Page</div>,
-    settings: <div>Dialog Page</div>,
+    homepage: <Homepage />,
+    storylineTypeSelectionPage: <EpisodeTypeSelectionPage />,
+    storylineSelectionPage: <StorylineSelectionPage />,
+    storylineDetailPage: <StorylineDetailPage />,
+    gamePage: <GamePage />,
+    dialogPage: <div>Dialog Page</div>,
   };
 
   return PAGES[pageName];

@@ -1,6 +1,6 @@
-import GameUserAvatar from './GameUserAvatar';
-import GameUserEnergyAndMoneyBar from './GameUserEnergyAndMoneyBar';
-import GameUserNavigation from './GameUserNavigation';
+import UserAvatar from './UserAvatar';
+import MainMenu from './MainMenu';
+import GameUserEnergyAndMoneyBar from './UserEnergyAndMoneyBar';
 
 export default function MainNavigation() {
   return (
@@ -10,11 +10,11 @@ export default function MainNavigation() {
     >
       <nav className='max-w-[92%] mx-auto'>
         <ul className='flex justify-between'>
-          <GameUserAvatar />
+          <UserAvatar />
 
           <GameUserEnergyAndMoneyBar />
 
-          <GameUserNavigation />
+          <MainMenu />
         </ul>
       </nav>
     </header>

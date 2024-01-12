@@ -5,7 +5,7 @@ import {useContext} from 'react';
 import Icons from '../ui/Icons';
 import Button from '../ui/Button';
 
-export default function GameUserNavigation() {
+export default function MainMenu() {
   const {activePage} = useContext(ActivePageContext);
   const isUserPlayingGame = activePage.location === 'game';
 

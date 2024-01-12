@@ -1,13 +1,15 @@
+import {useContext} from 'react';
 import {motion} from 'framer-motion';
+import {StorylineTypes} from '../services/utils/types';
+import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
+import {getStorylineCards} from '../database/storyline/storylines';
+
 import BackButton from '../components/ui/BackButton';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
-import StoryVolumeSelectionTab from '../components/ui/StoryVolumeSelectionTab';
-import {useContext} from 'react';
-import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
-import {StoryVolumeTypes} from '../services/utils/types';
 import LineDecoration from '../components/ui/LineDecoration';
+import StorylineCard from '../components/ui/StorylineCard';
 
-export default function StorystoryVolumeSelectionPage() {
+export default function StorylineSelectionPage() {
   return (
     <>
       <section
@@ -15,20 +17,20 @@ export default function StorystoryVolumeSelectionPage() {
         style={{WebkitBackdropFilter: 'blur(4px)'}}
       >
         <BackButton
-          buttonName='Tipe cerita'
-          goBackTo={{location: 'storyTypes'}}
+          buttonName='Tipe alur cerita'
+          goBackTo={{location: 'storylineTypeSelectionPage'}}
         />
 
         <div className='absolute z-[1] top-0 left-0 w-full h-full bg-gradient-to-r from-slate-950 to-transparent py-2 sm:py-4 md:py-8 3xl:py-10'>
-          <section className='grid grid-cols-[35%,_1fr] gap-10 max-w-[92%] h-full mx-auto'>
+          <section className='grid grid-cols-[40%,_1fr] lg:grid-cols-[35%,_1fr] gap-6 lg:-10 max-w-[92%] h-full mx-auto'>
             <div className='flex flex-col justify-between'>
-              <StoryColumeCategoryPill />
+              <EpisodeColumeCategoryPill />
 
               <div>
                 <motion.h1
                   initial={{y: 20, opacity: 0}}
                   animate={{y: 0, opacity: 1}}
-                  className='text uppercase font-[500] text-3xl text-slate-50 mb-8'
+                  className='text uppercase font-[500] text-xs lg:text-3xl text-slate-50 mb-4 lg:mb-8'
                 >
                   Temukan alur cerita spesial <br /> untuk kamu yang spesial
                 </motion.h1>
@@ -37,7 +39,7 @@ export default function StorystoryVolumeSelectionPage() {
                   initial={{y: 20, opacity: 0}}
                   animate={{y: 0, opacity: 1}}
                   transition={{delay: 0.4}}
-                  className='text-yellow-800'
+                  className='text-yellow-600 text-xs leading-4 text-[10px] lg:text-sm 3xl:text-base'
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
                   qui minus itaque, non esse totam minima mollitia dolores
@@ -48,8 +50,8 @@ export default function StorystoryVolumeSelectionPage() {
             </div>
 
             <div className='mt-8 lg:mt-12 relative'>
-              <div className='absolute top-0 left-0 w-full h-full overflow-x-auto bg-background/90 p-4'>
-                <StoryVolumeSelectionTab />
+              <div className='hideScrollbar absolute top-0 left-0 w-full h-full overflow-x-auto bg-background/90 p-4'>
+                <Storylines />
               </div>
             </div>
           </section>
@@ -64,14 +66,52 @@ export default function StorystoryVolumeSelectionPage() {
   );
 }
 
-function StoryColumeCategoryPill() {
-  const {activePage} = useContext(ActivePageContext);
-  const selectedCategory = activePage.state?.volumeType as StoryVolumeTypes;
+function Storylines() {
+  const {activePage, setActivePage} = useContext(ActivePageContext);
+  const storylineCards = getStorylineCards(
+    activePage.state?.storylineType as StorylineTypes
+  );
 
-  const category: Record<StoryVolumeTypes, string> = {
-    mainVolumes: 'CERITA UTAMA',
-    specialVolumes: 'CERITA SPESIAL',
-    premiumVolumes: 'CERITA PREMIUM',
+  return (
+    <motion.div
+      variants={{
+        rest: {opacity: 1},
+        show: {
+          opacity: 1,
+          transition: {staggerChildren: 0.1},
+        },
+      }}
+      initial='rest'
+      animate='show'
+      className='h-full flex gap-2 w-max'
+    >
+      {storylineCards.map((v) => (
+        <StorylineCard
+          key={v.storylineId}
+          {...v}
+          onClick={() =>
+            setActivePage({
+              location: 'storylineDetailPage',
+              state: {
+                storylineId: v.storylineId,
+                storylineType: v.storylineType,
+              },
+            })
+          }
+        />
+      ))}
+    </motion.div>
+  );
+}
+
+function EpisodeColumeCategoryPill() {
+  const {activePage} = useContext(ActivePageContext);
+  const selectedCategory = activePage.state?.storylineType as StorylineTypes;
+
+  const category: Record<StorylineTypes, string> = {
+    mainStoryline: 'ALUR CERITA UTAMA',
+    premiumStoryline: 'ALUR CERITA PREMIUM',
+    specialStoryline: 'ALUR CERITA SPESIAL',
   };
 
   return (

@@ -1,8 +1,9 @@
 import {useContext} from 'react';
-import ImageGuesser from '../components/games/ImageGuesser';
-import FullscreenBackground from '../components/ui/FullscreenBackground';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import {GameTypes} from '../services/utils/types';
+
+import ImageGuesser from '../components/games/ImageGuesser';
+import FullscreenBackground from '../components/ui/FullscreenBackground';
 
 export default function GamePage() {
   return (
@@ -23,7 +24,7 @@ function GameRouting() {
   const {activePage} = useContext(ActivePageContext);
 
   const GAMES: Record<GameTypes, React.ReactNode> = {
-    tg: <ImageGuesser />,
+    TG: <ImageGuesser />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

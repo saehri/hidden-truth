@@ -1,15 +1,15 @@
 import {useContext} from 'react';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
-import {getVolumeById} from '../database/volume/playableVolumes';
+import {StorylineIdTypes, StorylineTypes} from '../services/utils/types';
+import {getStorylineData} from '../database/storyline/storylines';
 
 import Button from '../components/ui/Button';
-import {StoryVolumeIdTypes, StoryVolumeTypes} from '../services/utils/types';
 
-export default function StorystoryVolumeDetail() {
+export default function StorylineDetailPage() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
-  const storyVolumeData = getVolumeById(
-    activePage.state?.volumeId as StoryVolumeIdTypes,
-    activePage.state?.volumeType as StoryVolumeTypes
+  const storylineData = getStorylineData(
+    activePage.state?.storylineId as StorylineIdTypes,
+    activePage.state?.storylineType as StorylineTypes
   );
 
   return (
@@ -21,9 +21,10 @@ export default function StorystoryVolumeDetail() {
           <Button
             onClick={() =>
               setActivePage({
-                location: 'storyVolumeSelection',
+                location: 'storylineSelectionPage',
                 state: {
-                  volumeType: activePage.state?.volumeType as StoryVolumeTypes,
+                  storylineType: activePage.state
+                    ?.storylineType as StorylineTypes,
                 },
               })
             }
@@ -31,7 +32,7 @@ export default function StorystoryVolumeDetail() {
             Back button
           </Button>
 
-          {storyVolumeData?.playableChapter.map((ch) => (
+          {storylineData?.playableChapter.map((ch) => (
             <div key={ch.chapterName}>
               <h4 className='mb-4'>{ch.chapterName}</h4>
 
@@ -41,15 +42,15 @@ export default function StorystoryVolumeDetail() {
                     key={g.gameId}
                     onClick={() =>
                       setActivePage({
-                        location: 'game',
+                        location: 'gamePage',
                         state: {
                           gameId: g.gameId,
                           gameType: g.gameType,
                           gameName: `${ch.chapterName}: ${g.gameName}`,
-                          volumeId: activePage.state
-                            ?.volumeId as StoryVolumeIdTypes,
-                          volumeType: activePage.state
-                            ?.volumeType as StoryVolumeTypes,
+                          storylineId: activePage.state
+                            ?.storylineId as StorylineIdTypes,
+                          storylineType: activePage.state
+                            ?.storylineType as StorylineTypes,
                         },
                       })
                     }

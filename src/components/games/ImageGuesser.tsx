@@ -6,7 +6,7 @@ import {
   GameStateTypes,
   GameTypes,
   ImageGuesserGameDataTypes,
-  StoryVolumeIdTypes,
+  StorylineIdTypes,
 } from '../../services/utils/types';
 
 import InGameCountdown from '../ui/InGameCountdown';
@@ -20,7 +20,7 @@ export default function ImageGuesser() {
     getGameData(
       activePage.state?.gameType as GameTypes,
       activePage.state?.gameId as string,
-      activePage.state?.volumeId as StoryVolumeIdTypes
+      activePage.state?.storylineId as StorylineIdTypes
     )
   );
   const [gameState, setGameState] = useState<GameStateTypes>('preparation');

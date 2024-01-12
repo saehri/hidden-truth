@@ -13,26 +13,21 @@ import {Dispatch, SetStateAction, createContext, useState} from 'react';
 
 /* @types defines all the pages that the player can visit */
 export type ViewablePageTypes =
-  | 'home'
-  | 'storyTypes'
-  | 'storyVolumeSelection'
-  | 'storyVolumeDetail'
-  | 'game'
-  | 'dialog'
-  | 'auth'
-  | 'logout'
-  | 'settings';
+  | 'homepage'
+  | 'storylineTypeSelectionPage'
+  | 'storylineSelectionPage'
+  | 'storylineDetailPage'
+  | 'gamePage'
+  | 'dialogPage';
+
 /* 
   @definitions
-  home -> Homepage
-  storySelection -> select story types
-  storyVolumeSelection -> Story volume selections
-  storyVolumeDetails -> Story volume detail
-  game -> game page
-  dialog -> dialog page
-  auth -> authentication page
-  logout -> logout page
-  settings -> settings page
+  homepage -> Homepage
+  storylineTypeSelectionPage -> Selecting storyline type
+  storylineSelectionPage -> Selecting the storyline
+  storylineDetail -> Viewing the storyline detail
+  gamePage -> Plays game
+  dialogPage -> Watch dialog and interact with it 
 */
 
 /* @types defines all the value types the "state" can take */
@@ -50,7 +45,7 @@ export type ActivePageContextTypes = {
 };
 
 export const ActivePageContext = createContext<ActivePageContextTypes>({
-  activePage: {location: 'home'},
+  activePage: {location: 'homepage'},
   setActivePage: undefined as unknown as Dispatch<
     SetStateAction<ActivePageTypes>
   >,
@@ -64,7 +59,7 @@ export default function AppPageViewingManagerAPI({
   children,
 }: AppPageViewingManagerAPI) {
   const [activePage, setActivePage] = useState<ActivePageTypes>({
-    location: 'home',
+    location: 'homepage',
   });
 
   return (
