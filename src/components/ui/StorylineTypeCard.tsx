@@ -40,7 +40,7 @@ export default function StorylineTypeCard({
         locked ? 'brightness-50' : 'brightness-100'
       )}
     >
-      <span className='uppercase text-xs lg:text-base xl:text-lg 3xl:text-2xl text-slate-50'>
+      <span className='uppercase text-xs mb-2 lg:text-base xl:text-lg 3xl:text-2xl text-slate-50'>
         {name}
       </span>
       <span className='leading-4 text-[10px] lg:text-sm 3xl:text-base text-yellow-600'>

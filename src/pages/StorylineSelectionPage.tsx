@@ -12,10 +12,7 @@ import StorylineCard from '../components/ui/StorylineCard';
 export default function StorylineSelectionPage() {
   return (
     <>
-      <section
-        className='w-full h-full bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950 relative z-50 backdrop-blur-sm'
-        style={{WebkitBackdropFilter: 'blur(4px)'}}
-      >
+      <section className='backdropBlur w-full h-full bg-gradient-to-t from-slate-950 via-slate-950/30 to-slate-950 relative z-50'>
         <BackButton
           buttonName='Tipe alur cerita'
           goBackTo={{location: 'storylineTypeSelectionPage'}}
@@ -50,8 +47,10 @@ export default function StorylineSelectionPage() {
             </div>
 
             <div className='mt-8 lg:mt-12 relative'>
-              <div className='hideScrollbar absolute top-0 left-0 w-full h-full overflow-x-auto bg-background/90 p-4'>
-                <Storylines />
+              <div className='hideScrollbar absolute top-0 left-0 w-full h-full overflow-x-auto bg-gradient-to-l from-green-900/60 to-transparent p-6 pl-0 pb-0'>
+                <div className='w-full h-full bg-gradient-to-bl border border-green-800/70 from-green-900/90 via-green-950/20 to-green-950/10 p-5'>
+                  <Storylines />
+                </div>
               </div>
             </div>
           </section>

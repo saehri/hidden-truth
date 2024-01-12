@@ -9,10 +9,7 @@ import storylineTypes from '../database/storyline/storylineTypes';
 export default function StorylineTypeSelectionPage() {
   return (
     <>
-      <div
-        className='w-full h-full bg-gradient-to-t from-slate-950 via-slate-950/85 to-slate-950 backdrop-blur-sm relative z-50 py-2 sm:py-4 lg:py-8 3xl:py-10'
-        style={{WebkitBackdropFilter: 'blur(4px)'}}
-      >
+      <div className='backdropBlur w-full h-full bg-gradient-to-t from-slate-950 via-slate-950/70 to-slate-950 relative z-50 py-2 sm:py-4 lg:py-8 3xl:py-10'>
         <BackButton
           buttonName='Halaman utama'
           goBackTo={{location: 'homepage'}}
@@ -42,7 +39,7 @@ export default function StorylineTypeSelectionPage() {
                 rest: {opacity: 1},
                 show: {
                   opacity: 1,
-                  transition: {staggerChildren: 0.1, delayChildren: 0.6},
+                  transition: {staggerChildren: 0.1, delayChildren: 0.3},
                 },
               }}
               initial='rest'
