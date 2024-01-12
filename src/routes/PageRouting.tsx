@@ -17,7 +17,7 @@ const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 export default function PageRouting() {
   return (
     <AppLayout>
-      <MotionConfig transition={{ease: defaultAnimaitonEasing, duration: 0.5}}>
+      <MotionConfig transition={{ease: defaultAnimaitonEasing, duration: 0.3}}>
         <PageViewer />
       </MotionConfig>
     </AppLayout>
