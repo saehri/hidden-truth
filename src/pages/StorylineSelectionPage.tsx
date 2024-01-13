@@ -48,7 +48,7 @@ export default function StorylineSelectionPage() {
 
             <div className='mt-8 lg:mt-12 relative'>
               <div className='hideScrollbar absolute top-0 left-0 w-full h-full overflow-x-auto bg-gradient-to-l from-green-900/60 to-transparent p-6 pl-0 pb-0'>
-                <div className='w-full h-full bg-gradient-to-bl border border-green-800/70 from-green-900/90 via-green-950/20 to-green-950/10 p-5'>
+                <div className='w-full h-full bg-gradient-to-bl border border-green-800/70 from-green-700/90 via-green-700/10 to-green-700/10 p-5'>
                   <Storylines />
                 </div>
               </div>
