@@ -4,6 +4,8 @@ import {StorylineIdTypes, StorylineTypes} from '../services/utils/types';
 import {getStorylineData} from '../database/storyline/storylines';
 
 import Button from '../components/ui/Button';
+import {Prolog, PrologWrapper} from '../components/ui/Prolog';
+import LoadingScreen from '../components/splashScreen/LoadingScreen';
 
 export default function StorylineDetailPage() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
@@ -42,7 +44,9 @@ export default function StorylineDetailPage() {
                     key={g.gameId}
                     onClick={() =>
                       setActivePage({
-                        location: 'gamePage',
+                        location: g.hasOpeningDialog
+                          ? 'dialogPage'
+                          : 'gamePage',
                         state: {
                           gameId: g.gameId,
                           gameType: g.gameType,
@@ -65,7 +69,8 @@ export default function StorylineDetailPage() {
         </div>
       </section>
 
-      {/* <LoadingScreen /> */}
+      <LoadingScreen />
+      <PrologWrapper />
     </div>
   );
 }
