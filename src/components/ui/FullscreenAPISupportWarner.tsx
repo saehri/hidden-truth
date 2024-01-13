@@ -7,8 +7,17 @@ export default function FullscreenAPISupportWarner() {
     document.fullscreenEnabled
   );
 
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
   return (
     <div
+      onDoubleClick={toggleFullScreen}
       className={twMerge(
         'fixed top-0 left-0 z-40 w-full h-full place-items-center text-border bg-slate-950/95',
         fullScreenAvailable ? 'grid' : 'hidden'
@@ -27,6 +36,9 @@ export default function FullscreenAPISupportWarner() {
         <br />
         <br /> Ketuk layar dua kali untuk masuk atau keluar dari mode layar
         fullscreen.
+        <br />
+        <br />
+        Kamu juga bisa mengaktifkan/mematikan mode fullscreen dari menu setting.
       </div>
     </div>
   );
