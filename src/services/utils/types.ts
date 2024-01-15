@@ -22,7 +22,13 @@ export type StorylineTypes =
 /* @types defines the game storyline chapters data structure */
 export type StorylineChapterTypes = {
   chapterName: string;
-  games: {gameId: string; gameType: GameTypes; gameName: string}[];
+  games: {
+    gameId: string;
+    gameType: GameTypes;
+    gameName: string;
+    hasOpeningDialog: boolean;
+    openingDialogId?: string;
+  }[];
 };
 
 /* @types defines the game storyline episode data structure */

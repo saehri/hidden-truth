@@ -11,6 +11,7 @@ import GamePage from '../pages/GamePage';
 import EpisodeTypeSelectionPage from '../pages/StorylineTypeSelectionPage';
 import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 import StorylineDetailPage from '../pages/StorylineDetailPage';
+import DialogPage from '../pages/DialogPage';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -34,7 +35,7 @@ function PageViewer() {
     storylineSelectionPage: <StorylineSelectionPage />,
     storylineDetailPage: <StorylineDetailPage />,
     gamePage: <GamePage />,
-    dialogPage: <div>Dialog Page</div>,
+    dialogPage: <DialogPage />,
   };
 
   return PAGES[pageName];
