@@ -13,7 +13,7 @@ export default function LoadingScreen() {
         delay: loadingDuration + 0.5,
         y: {duration: 0, delay: loadingDuration + 0.8},
       }}
-      className='absolute top-0 left-0 z-50 w-full h-full flex flex-col justify-end py-8 bg-slate-950'
+      className='absolute top-0 left-0 z-[100] w-full h-full flex flex-col justify-end py-8 bg-slate-950'
     >
       <div className='w-full h-full max-w-[45%] mx-auto flex flex-col gap-8 justify-center items-center text-center text-border'>
         <p>MEMUAT HALAMAN</p>
