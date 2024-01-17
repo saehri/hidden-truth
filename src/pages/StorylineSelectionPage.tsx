@@ -35,7 +35,6 @@ export default function StorylineSelectionPage() {
                 <motion.p
                   initial={{y: 20, opacity: 0}}
                   animate={{y: 0, opacity: 1}}
-                  transition={{delay: 0.4}}
                   className='text-yellow-600 text-xs leading-4 text-[10px] lg:text-sm 3xl:text-base'
                 >
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
@@ -77,7 +76,7 @@ function Storylines() {
         rest: {opacity: 1},
         show: {
           opacity: 1,
-          transition: {staggerChildren: 0.1},
+          transition: {staggerChildren: 0.1, delayChildren: 0.3},
         },
       }}
       initial='rest'
