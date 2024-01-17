@@ -1,76 +1,44 @@
 import {useContext} from 'react';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import {StorylineIdTypes, StorylineTypes} from '../services/utils/types';
-import {getStorylineData} from '../database/storyline/storylines';
 
-import Button from '../components/ui/Button';
-import {Prolog, PrologWrapper} from '../components/ui/Prolog';
+import {PrologWrapper} from '../components/ui/Prolog';
 import LoadingScreen from '../components/splashScreen/LoadingScreen';
+import FullscreenBackground from '../components/ui/FullscreenBackground';
+import StorylineDetailChapterCard from '../components/ui/StorylineDetailChapterCard';
+import BackButton from '../components/ui/BackButton';
 
 export default function StorylineDetailPage() {
-  const {activePage, setActivePage} = useContext(ActivePageContext);
-  const storylineData = getStorylineData(
-    activePage.state?.storylineId as StorylineIdTypes,
-    activePage.state?.storylineType as StorylineTypes
-  );
+  const {activePage} = useContext(ActivePageContext);
 
   return (
-    <div className='relative overflow-hidden h-full'>
-      <section className='grid grid-cols-[1fr,_35%] h-full'>
-        <div className='bg-blue-700'></div>
+    <>
+      <BackButton
+        buttonName='Pilih alur cerita'
+        goBackTo={{
+          location: 'storylineSelectionPage',
+          state: {...activePage.state},
+        }}
+      />
 
-        <div className='bg-white flex justify-end items-start flex-col gap-8 p-4'>
-          <Button
-            onClick={() =>
-              setActivePage({
-                location: 'storylineSelectionPage',
-                state: {
-                  storylineType: activePage.state
-                    ?.storylineType as StorylineTypes,
-                },
-              })
-            }
-          >
-            Back button
-          </Button>
-
-          {storylineData?.playableChapter.map((ch) => (
-            <div key={ch.chapterName}>
-              <h4 className='mb-4'>{ch.chapterName}</h4>
-
-              <div className='flex flex-col gap-4 text-left'>
-                {ch.games.map((g) => (
-                  <button
-                    key={g.gameId}
-                    onClick={() =>
-                      setActivePage({
-                        location: g.hasOpeningDialog
-                          ? 'dialogPage'
-                          : 'gamePage',
-                        state: {
-                          gameId: g.gameId,
-                          gameType: g.gameType,
-                          gameName: `${ch.chapterName}: ${g.gameName}`,
-                          storylineId: activePage.state
-                            ?.storylineId as StorylineIdTypes,
-                          storylineType: activePage.state
-                            ?.storylineType as StorylineTypes,
-                        },
-                      })
-                    }
-                    className='bg-background text-border p-2'
-                  >
-                    {g.gameName}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))}
+      <div className='relative w-full h-full z-40'>
+        <div className='absolute right-0 top-0 pt-[13%] z-50 w-full h-full p-10 overflow-y-auto hideScrollbar bg-green-800'>
+          <div className='w-max h-[calc((100%-13%)-_4rem)]'>
+            <StorylineDetailChapterCard
+              storylineId={activePage.state?.storylineId as StorylineIdTypes}
+              storylineType={activePage.state?.storylineType as StorylineTypes}
+            />
+          </div>
         </div>
-      </section>
+      </div>
 
+      <FullscreenBackground
+        imageLink={'/background/homescreen-big.webp'}
+        placeholderLink={'/background/placeholder/homescreen-placeholder.webp'}
+      />
       <LoadingScreen />
+
       <PrologWrapper />
-    </div>
+    </>
   );
 }
