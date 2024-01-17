@@ -69,7 +69,13 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
               !ds.isSpeaking ? 'brightness-[.1]' : 'brightness-100 z-30'
             )}
           >
-            <div className='absolute bottom-0 left-0 w-full pt-[calc((4/3)*100%)] bg-yellow-800'></div>
+            <div className='absolute bottom-0 left-0 w-full pt-[calc((4/3)*100%)]'>
+              <img
+                src={ds.image}
+                alt=''
+                className='absolute top-0 left-0 w-full h-full object-contain object-bottom'
+              />
+            </div>
           </div>
 
           <div
