@@ -1,5 +1,4 @@
 import {useContext} from 'react';
-import {motion} from 'framer-motion';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import Icons from '../ui/Icons';
@@ -8,13 +7,19 @@ export default function GameUserAvatar() {
   const {activePage} = useContext(ActivePageContext);
 
   return (
-    <motion.li
+    <li
+      style={{
+        opacity: activePage.location === 'storylineDetailPage' ? 0 : 1,
+      }}
       id='game__user-avatar'
       className='w-full max-w-40 sm:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-80'
     >
       <button
         className='flex translate-y-[-2px] lg:translate-y-[-8px] w-full'
-        disabled={activePage.location === 'game'}
+        disabled={
+          activePage.location === 'gamePage' ||
+          activePage.location === 'storylineDetailPage'
+        }
       >
         <div className='w-full max-w-14 sm:max-w-16 lg:max-w-20 xl:max-w-28 relative shrink-0'>
           <div className='absolute w-full top-0 left-0 pt-[100%]'>
@@ -33,6 +38,6 @@ export default function GameUserAvatar() {
           Ayu Cluenight
         </div>
       </button>
-    </motion.li>
+    </li>
   );
 }
