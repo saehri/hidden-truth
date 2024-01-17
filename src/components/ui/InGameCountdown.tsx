@@ -7,11 +7,11 @@ import React, {
 } from 'react';
 import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
+import {GameStateTypes} from '../../services/utils/types';
 
-import Countdown, {CountdownApi} from 'react-countdown';
 import Icons from './Icons';
 import Button from './Button';
-import {GameStateTypes} from '../../services/utils/types';
+import Countdown, {CountdownApi} from 'react-countdown';
 import PauseGameModal from '../modal/PauseGameModal';
 
 interface InGameCountdown {

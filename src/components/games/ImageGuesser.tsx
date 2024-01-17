@@ -1,38 +1,28 @@
-import {useState} from 'react';
-import ImageGuesserCards from '../ui/ImageGuesserCards';
+import {useContext, useState} from 'react';
 
+import {getGameData} from '../../database/gameData/imageGuesser';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {
   GameStateTypes,
+  GameTypes,
   ImageGuesserGameDataTypes,
+  StorylineIdTypes,
 } from '../../services/utils/types';
-import ImageGuesserGamePlayerInput from '../forms/ImageGuesserGamePlayerInput';
+
 import InGameCountdown from '../ui/InGameCountdown';
+import ImageGuesserCards from '../ui/ImageGuesserCards';
+import ImageGuesserGamePlayerInput from '../forms/ImageGuesserGamePlayerInput';
 import ChapterLevelSplashScreen from '../splashScreen/ChapterLevelSplashScreen';
 
-const gameDataExample: ImageGuesserGameDataTypes[] = [
-  {
-    id: 'pemilu24-1-01',
-    imageLink:
-      'https://images.unsplash.com/photo-1597953601374-1ff2d5640c85?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'panda',
-  },
-  {
-    id: 'pemilu24-1-02',
-    imageLink:
-      'https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'fish',
-  },
-  {
-    id: 'pemilu24-1-03',
-    imageLink:
-      'https://images.unsplash.com/photo-1606041008023-472dfb5e530f?q=80&w=1376&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'flower',
-  },
-];
-
 export default function ImageGuesser() {
-  const [gameData, setGameData] =
-    useState<ImageGuesserGameDataTypes[]>(gameDataExample);
+  const {activePage} = useContext(ActivePageContext);
+  const [gameData, setGameData] = useState<ImageGuesserGameDataTypes[]>(
+    getGameData(
+      activePage.state?.gameType as GameTypes,
+      activePage.state?.gameId as string,
+      activePage.state?.storylineId as StorylineIdTypes
+    )
+  );
   const [gameState, setGameState] = useState<GameStateTypes>('preparation');
 
   const deleteByIndex = (index: number) => {
@@ -74,7 +64,7 @@ export default function ImageGuesser() {
       <ChapterLevelSplashScreen
         isOpen={gameState === 'preparation'}
         levelInfo='Tebak Gambar'
-        levelName='CHAPTER 1 - KERIBUTAN'
+        levelName={activePage.state?.gameName as string}
       />
     </section>
   );
