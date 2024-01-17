@@ -26,6 +26,7 @@ export type StorylineChapterTypes = {
     gameId: string;
     gameType: GameTypes;
     gameName: string;
+    location: string;
     hasOpeningDialog: boolean;
     openingDialogId?: string;
   }[];
