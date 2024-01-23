@@ -9,7 +9,11 @@ export default function GameUserAvatar() {
   return (
     <li
       style={{
-        opacity: activePage.location === 'storylineDetailPage' ? 0 : 1,
+        opacity:
+          activePage.location === 'storylineDetailPage' ||
+          activePage.location === 'gamePage'
+            ? 0
+            : 1,
       }}
       id='game__user-avatar'
       className='w-full max-w-40 sm:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-80'
