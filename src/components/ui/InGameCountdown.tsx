@@ -73,11 +73,13 @@ export default function InGameCountdown({
         onComplete={() => setGameState('completed')}
       />
 
-      <Button onClick={() => setGameState('paused')} disabled={isCompleted()}>
-        <div className='fixed top-4 left-4 z-[60] bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
-          <div className='bg-background rounded-full grid place-items-center p-2'>
-            <Icons.Pause className='w-4 h-4 xl:w-6 xl:h-6' />
-          </div>
+      <Button
+        onClick={() => setGameState('paused')}
+        disabled={isCompleted()}
+        className='fixed top-4 left-4 z-[60] bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'
+      >
+        <div className='bg-background rounded-full grid place-items-center p-2'>
+          <Icons.Pause className='w-4 h-4 xl:w-6 xl:h-6' />
         </div>
       </Button>
 
