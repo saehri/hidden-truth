@@ -5,25 +5,22 @@ import Icons from '../ui/Icons';
 
 export default function GameUserAvatar() {
   const {activePage} = useContext(ActivePageContext);
+  const isHiden =
+    activePage.location === 'storylineDetailPage' ||
+    activePage.location === 'gamePage';
 
   return (
     <li
       style={{
-        opacity:
-          activePage.location === 'storylineDetailPage' ||
-          activePage.location === 'gamePage'
-            ? 0
-            : 1,
+        opacity: isHiden ? 0 : 1,
+        pointerEvents: isHiden ? 'none' : 'auto',
       }}
       id='game__user-avatar'
       className='w-full max-w-40 sm:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-80'
     >
       <button
         className='flex translate-y-[-2px] lg:translate-y-[-8px] w-full'
-        disabled={
-          activePage.location === 'gamePage' ||
-          activePage.location === 'storylineDetailPage'
-        }
+        disabled={isHiden}
       >
         <div className='w-full max-w-14 sm:max-w-16 lg:max-w-20 xl:max-w-28 relative shrink-0'>
           <div className='absolute w-full top-0 left-0 pt-[100%]'>

@@ -5,8 +5,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {motion} from 'framer-motion';
-import {twMerge} from 'tailwind-merge';
 import {GameStateTypes} from '../../services/utils/types';
 
 import Icons from './Icons';
@@ -62,55 +60,26 @@ export default function InGameCountdown({
 
   return (
     <>
-      <motion.div
-        initial={{y: 100, opacity: 0}}
-        animate={{
-          opacity: 1,
-          y: 0,
-          rotate: 9,
-          transition: {delay: 2.5},
+      <Countdown
+        key={date}
+        ref={(countdown) => {
+          if (countdown) {
+            countdownApiRef.current = countdown.getApi();
+          }
         }}
-        className='w-24 xl:w-48 absolute bottom-8 left-8 z-50'
-      >
-        <div className='w-full pt-[calc((9/12)*100%)]'>
-          <div className='absolute top-0 left-0 w-full h-full'>
-            <Countdown
-              key={date}
-              ref={(countdown) => {
-                if (countdown) {
-                  countdownApiRef.current = countdown.getApi();
-                }
-              }}
-              date={date}
-              autoStart={false}
-              renderer={customRenderer({children: <span>Hello world</span>})}
-              onComplete={() => setGameState('completed')}
-            />
+        date={date}
+        autoStart={false}
+        renderer={customRenderer({children: <span>Hello world</span>})}
+        onComplete={() => setGameState('completed')}
+      />
 
-            <div className='absolute -top-12 left-1/2 -translate-x-1/2 z-30 bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
-              <div className='bg-background rounded-full w-8 h-8 grid place-items-center'>
-                {gameState === 'start' && (
-                  <Button
-                    onClick={() => setGameState('paused')}
-                    disabled={isCompleted()}
-                  >
-                    <Icons.Pause />
-                  </Button>
-                )}
-
-                {gameState === 'paused' && (
-                  <Button
-                    onClick={() => setGameState('start')}
-                    disabled={isCompleted()}
-                  >
-                    <Icons.Play />
-                  </Button>
-                )}
-              </div>
-            </div>
+      <Button onClick={() => setGameState('paused')} disabled={isCompleted()}>
+        <div className='fixed top-4 left-4 z-[60] bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
+          <div className='bg-background rounded-full grid place-items-center p-2'>
+            <Icons.Pause className='w-4 h-4 xl:w-6 xl:h-6' />
           </div>
         </div>
-      </motion.div>
+      </Button>
 
       <PauseGameModal
         modalState={gameState === 'paused'}
@@ -126,7 +95,11 @@ function customRenderer({children}: {children: React.ReactNode}) {
     if (completed)
       return (
         <CountdownClockWrapper>
-          <CountdownClockDisplay>0{minutes}</CountdownClockDisplay>
+          <CountdownClockDisplay>
+            {minutes < 10 && '0'}
+            {minutes}
+          </CountdownClockDisplay>
+          <span>:</span>
           <CountdownClockDisplay>
             {seconds < 10 && '0'}
             {seconds}
@@ -136,8 +109,11 @@ function customRenderer({children}: {children: React.ReactNode}) {
 
     return (
       <CountdownClockWrapper>
-        <CountdownClockDisplay>0{minutes}</CountdownClockDisplay>
-
+        <CountdownClockDisplay>
+          {minutes < 10 && '0'}
+          {minutes}
+        </CountdownClockDisplay>
+        <span>:</span>
         <CountdownClockDisplay>
           {seconds < 10 && '0'}
           {seconds}
@@ -153,16 +129,15 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
 
 function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
-    <div
-      className={twMerge(
-        'p-1 xl:p-2 rounded-2xl bg-gradient-to-t from-[#453B06] via-[#BFA622] to-[#FFF8D1] border-border text-xs xl:text-3xl text-center w-full h-full relative z-30',
-        className
-      )}
-    >
-      <div className='bg-background p-1 xl:p-2 rounded-xl grid grid-cols-2 gap-1 h-full'>
-        {children}
+    <>
+      <div className='bg-gradient-to-t from-[#81711f] via-[#BFA622] to-[#FFF8D1] rounded-tl-none rounded-tr-none pt-0 p-1  rounded-xl absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 h-max text-2xl font-medium flex justify-center'>
+        <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] rounded-tl-none rounded-tr-none rounded-lg w-full'>
+          {children}
+        </div>
       </div>
-    </div>
+
+      <div className='absolute z-40 bg-gradient-to-r from-transparent via-[#FFF8D1] to-transparent w-full h-1 left-0'></div>
+    </>
   );
 }
 
@@ -170,8 +145,6 @@ interface CountdownClockDisplay extends React.HTMLAttributes<HTMLDivElement> {}
 
 function CountdownClockDisplay({children}: CountdownClockDisplay) {
   return (
-    <div className='bg-gradient-to-t h-full shadow-md shadow-slate-950 rounded-lg border border-slate-800 from-slate-400 via-slate-50 to-slate-200 grid items-center'>
-      {children}
-    </div>
+    <div className='h-full w-full grid place-items-center'>{children}</div>
   );
 }
