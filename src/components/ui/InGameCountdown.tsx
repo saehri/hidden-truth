@@ -67,42 +67,47 @@ export default function InGameCountdown({
         animate={{
           opacity: 1,
           y: 0,
+          rotate: 9,
           transition: {delay: 2.5},
         }}
-        className='w-full relative'
+        className='w-24 xl:w-48 absolute bottom-8 left-8 z-50'
       >
-        <Countdown
-          key={date}
-          ref={(countdown) => {
-            if (countdown) {
-              countdownApiRef.current = countdown.getApi();
-            }
-          }}
-          date={date}
-          autoStart={false}
-          renderer={customRenderer({children: <span>Hello world</span>})}
-          onComplete={() => setGameState('completed')}
-        />
+        <div className='w-full pt-[calc((9/12)*100%)]'>
+          <div className='absolute top-0 left-0 w-full h-full'>
+            <Countdown
+              key={date}
+              ref={(countdown) => {
+                if (countdown) {
+                  countdownApiRef.current = countdown.getApi();
+                }
+              }}
+              date={date}
+              autoStart={false}
+              renderer={customRenderer({children: <span>Hello world</span>})}
+              onComplete={() => setGameState('completed')}
+            />
 
-        <div className='absolute -top-12 left-1/2 -translate-x-1/2 z-30 bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
-          <div className='bg-background rounded-full w-8 h-8 grid place-items-center'>
-            {gameState === 'start' && (
-              <Button
-                onClick={() => setGameState('paused')}
-                disabled={isCompleted()}
-              >
-                <Icons.Pause />
-              </Button>
-            )}
+            <div className='absolute -top-12 left-1/2 -translate-x-1/2 z-30 bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'>
+              <div className='bg-background rounded-full w-8 h-8 grid place-items-center'>
+                {gameState === 'start' && (
+                  <Button
+                    onClick={() => setGameState('paused')}
+                    disabled={isCompleted()}
+                  >
+                    <Icons.Pause />
+                  </Button>
+                )}
 
-            {gameState === 'paused' && (
-              <Button
-                onClick={() => setGameState('start')}
-                disabled={isCompleted()}
-              >
-                <Icons.Play />
-              </Button>
-            )}
+                {gameState === 'paused' && (
+                  <Button
+                    onClick={() => setGameState('start')}
+                    disabled={isCompleted()}
+                  >
+                    <Icons.Play />
+                  </Button>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -150,11 +155,11 @@ function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
     <div
       className={twMerge(
-        'p-2 rounded-2xl bg-gradient-to-t from-[#453B06] via-[#BFA622] to-[#FFF8D1] border-border h-max text-4xl text-center w-full relative z-30',
+        'p-1 xl:p-2 rounded-2xl bg-gradient-to-t from-[#453B06] via-[#BFA622] to-[#FFF8D1] border-border text-xs xl:text-3xl text-center w-full h-full relative z-30',
         className
       )}
     >
-      <div className='bg-background p-2 rounded-xl grid grid-cols-2 gap-1'>
+      <div className='bg-background p-1 xl:p-2 rounded-xl grid grid-cols-2 gap-1 h-full'>
         {children}
       </div>
     </div>
@@ -165,7 +170,7 @@ interface CountdownClockDisplay extends React.HTMLAttributes<HTMLDivElement> {}
 
 function CountdownClockDisplay({children}: CountdownClockDisplay) {
   return (
-    <div className='bg-gradient-to-t py-12 shadow-md shadow-slate-950 rounded-lg border border-slate-800 from-slate-400 via-slate-50 to-slate-200'>
+    <div className='bg-gradient-to-t h-full shadow-md shadow-slate-950 rounded-lg border border-slate-800 from-slate-400 via-slate-50 to-slate-200 grid items-center'>
       {children}
     </div>
   );

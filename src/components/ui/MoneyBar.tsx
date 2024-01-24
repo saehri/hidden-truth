@@ -14,7 +14,7 @@ export default function MoneyBar() {
 
       <span>200</span>
 
-      {activePage.location !== 'game' && (
+      {activePage.location !== 'gamePage' && (
         <Button className='absolute -right-3 top-1/2 -translate-y-1/2 bg-primary/95 border border-border-light rounded-full'>
           <Icons.AddWhite className='w-3 h-3 lg:w-4 lg:h-4 3xl:w-6 3xl:h-6' />
         </Button>

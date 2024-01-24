@@ -1,11 +1,8 @@
 import {Dispatch, SetStateAction, useContext} from 'react';
+import {motion} from 'framer-motion';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {createPortal} from 'react-dom';
-import {
-  GameStateTypes,
-  StorylineIdTypes,
-  StorylineTypes,
-} from '../../services/utils/types';
+import {GameStateTypes} from '../../services/utils/types';
 
 import Button from '../ui/Button';
 import Icons from '../ui/Icons';
@@ -25,36 +22,49 @@ export default function PauseGameModal({
     <>
       {modalState &&
         createPortal(
-          <div className='bg-slate-950/90 absolute top-0 left-0 w-full h-full z-[60] flex flex-col items-center justify-center gap-8 text-yellow-500 text-center'>
-            <div className='w-full h-full max-w-[30%] mx-auto flex flex-col justify-center items-center text-center text-border'>
-              <div className='p-4 border border-border bg-background w-full flex flex-col gap-4 relative'>
-                <Button
-                  onClick={() => setGameState('start')}
-                  className='absolute -top-4 -right-4'
-                >
-                  <Icons.CloseCircled />
-                </Button>
+          <div className='bg-slate-950 absolute top-0 left-0 w-full h-full z-[60] flex flex-col items-center justify-center gap-8 text-yellow-500 text-center'>
+            <motion.div
+              initial={{y: 50, opacity: 0}}
+              animate={{y: 0, opacity: 1, transition: {delay: 0.3}}}
+              className='flex gap-4 items-center relative z-10'
+            >
+              <Button className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 rounded-full p-2'>
+                <div className='grid place-items-center bg-background rounded-full p-2'>
+                  <Icons.Setting className='w-7 h-7 xl:w-9 xl:h-9' />
+                </div>
+              </Button>
 
-                <h4>GAME DIJEDA</h4>
+              <Button
+                onClick={() => setGameState('start')}
+                className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 border border-slate-800 rounded-full p-2'
+              >
+                <div className='p-2 grid place-items-center border border-border bg-gradient-to-tr from-green-800 via-green-600 to-green-300 rounded-full'>
+                  <Icons.Play className='w-14 h-14 m-4 translate-x-[2px]' />
+                </div>
+              </Button>
 
-                <button
-                  onClick={() =>
-                    setActivePage({
-                      location: 'storylineDetailPage',
-                      state: {
-                        storylineId: activePage.state
-                          ?.storylineId as StorylineIdTypes,
-                        storylineType: activePage.state
-                          ?.storylineType as StorylineTypes,
-                      },
-                    })
-                  }
-                  className='py-3 px-4 rounded-sm bg-gradient-to-t from-red-600 via-red-500 to-red-400 text-white disabled:opacity-50'
-                >
-                  Menyerah
-                </button>
-              </div>
-            </div>
+              <Button
+                onClick={() =>
+                  setActivePage({
+                    location: 'storylineDetailPage',
+                    state: {...activePage.state},
+                  })
+                }
+                className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 rounded-full p-2'
+              >
+                <div className='grid place-items-center bg-background rounded-full p-2'>
+                  <Icons.Running className='w-7 h-7 xl:w-9 xl:h-9' />
+                </div>
+              </Button>
+            </motion.div>
+
+            <motion.img
+              initial={{opacity: 0}}
+              animate={{opacity: 1}}
+              src='/background/modal paused game background.webp'
+              alt=''
+              className='absolute top-0 left-0 w-full h-full object-cover'
+            />
           </div>,
           document.getElementById('emtris__dialog') as
             | Element
