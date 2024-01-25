@@ -132,13 +132,13 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
 function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
     <>
-      <div className='bg-gradient-to-t from-[#81711f] via-[#BFA622] to-[#FFF8D1] rounded-tl-none rounded-tr-none pt-0 p-1  rounded-xl absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 h-max text-2xl font-medium flex justify-center'>
+      <div className='bg-gradient-to-t from-[#81711f] via-[#BFA622] to-[#FFF8D1] rounded-tl-none rounded-tr-none pt-0 p-1 rounded-xl absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 h-max text-xl lg:text-2xl font-medium flex justify-center'>
         <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] rounded-tl-none rounded-tr-none rounded-lg w-full'>
           {children}
         </div>
       </div>
 
-      <div className='absolute z-40 bg-gradient-to-r from-transparent via-slate-50 to-transparent w-full h-1 left-0'></div>
+      <div className='absolute z-40 bg-gradient-to-r from-transparent via-slate-50 to-transparent w-full h-[2px] left-0'></div>
     </>
   );
 }

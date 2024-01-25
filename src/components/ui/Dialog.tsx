@@ -65,7 +65,7 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
         <Fragment key={ds.name}>
           <div
             className={twMerge(
-              'w-full max-w-[450px] relative',
+              'w-full max-w-[30%] lg:max-w-[450px] relative',
               !ds.isSpeaking ? 'brightness-[.1]' : 'brightness-100 z-30'
             )}
           >
@@ -80,7 +80,7 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
 
           <div
             className={twMerge(
-              'w-full absolute bottom-[10%] min-h-28 p-4 pt-10 border-t border-b border-blue-400',
+              'w-full absolute bottom-[10%] min-h-16 lg:min-h-28 p-2 pt-5 lg:p-4 lg:pt-10 border-t border-b border-blue-400',
               index === 0
                 ? 'bg-gradient-to-r from-blue-600 to-transparent left-0'
                 : 'bg-gradient-to-l from-blue-600 to-transparent right-0',
@@ -90,11 +90,11 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
           >
             <h6
               className={twMerge(
-                'mb-4 absolute bg-blue-600 -top-8 uppercase text-yellow-400 text-lg z-50 p-2 border border-blue-50',
+                'mb-4 absolute bg-blue-600 -top-8 uppercase text-yellow-400 text-sm lg:text-lg z-50 p-2 border border-blue-50',
                 index === 0 ? 'left-4' : 'right-4'
               )}
             >
-              {ds.name.replaceAll('username', 'Nissan')}
+              {ds.name.replaceAll('username', 'Jubaedah')}
             </h6>
 
             <DialogSequenceTextRenderer
@@ -142,12 +142,12 @@ function DialogSequenceTextRenderer({
 
   if (hasMultiDialogChoice) {
     return (
-      <div className='flex flex-col gap-4 text-blue-50'>
+      <div className='flex gap-2 lg:gap-4 text-blue-50 w-max ml-auto'>
         {dialogChoices?.map((dc) => (
           <button
             onClick={() => handleClick(dc.isEnding as boolean, dc.nextSequence)}
             key={dc.text}
-            className='w-max ml-auto p-2 pb-1 border border-blue-200 hover:bg-blue-500 flex gap-3'
+            className='w-max ml-auto p-2 pb-1 border border-blue-200 hover:bg-blue-500 flex gap-3 text-xs lg:text-base'
           >
             <span>{dc.text.replaceAll('username', 'Nissan')}</span>
             <span>-</span>
@@ -158,7 +158,7 @@ function DialogSequenceTextRenderer({
   }
 
   return (
-    <div className='flex flex-col gap-4 text-blue-50'>
+    <div className='flex flex-col gap-4 text-blue-50 text-xs lg:text-base'>
       <p>{dialogChoice?.text.replaceAll('username', 'Nissan')}</p>
 
       <button
@@ -168,7 +168,7 @@ function DialogSequenceTextRenderer({
             dialogChoice?.nextSequence
           )
         }
-        className='mt-8 w-max ml-auto'
+        className='mt-4 lg:mt-8 w-max ml-auto p-2'
       >
         Selanjutnya
       </button>

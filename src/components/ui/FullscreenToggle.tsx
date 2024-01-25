@@ -18,7 +18,10 @@ export default function FullscreenToggle() {
   console.log(isFullsreen);
 
   return (
-    <Button className='absolute right-2 top-2' onClick={toggleFullScreen}>
+    <Button
+      className='absolute right-2 top-2 z-[100]'
+      onClick={toggleFullScreen}
+    >
       {!isFullsreen ? <Icons.Fullscreen /> : <Icons.Minimizescreen />}
     </Button>
   );
