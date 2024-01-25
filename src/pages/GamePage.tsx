@@ -4,6 +4,7 @@ import {GameTypes} from '../services/utils/types';
 
 import ImageGuesser from '../components/games/ImageGuesser';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
+import ArrangeLetters from '../components/games/ArrangeLetters';
 
 export default function GamePage() {
   return (
@@ -25,6 +26,7 @@ function GameRouting() {
 
   const GAMES: Record<GameTypes, React.ReactNode> = {
     TG: <ImageGuesser />,
+    SK: <ArrangeLetters />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

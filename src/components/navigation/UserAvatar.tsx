@@ -2,6 +2,7 @@ import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import Icons from '../ui/Icons';
+import {twMerge} from 'tailwind-merge';
 
 export default function GameUserAvatar() {
   const {activePage} = useContext(ActivePageContext);
@@ -11,12 +12,13 @@ export default function GameUserAvatar() {
 
   return (
     <li
-      style={{
-        opacity: isHiden ? 0 : 1,
-        pointerEvents: isHiden ? 'none' : 'auto',
-      }}
       id='game__user-avatar'
-      className='w-full max-w-40 sm:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-80'
+      className={twMerge(
+        'w-full max-w-40 sm:max-w-52 lg:max-w-56 xl:max-w-64 2xl:max-w-80',
+        isHiden
+          ? 'opacity-0 pointer-events-none max-w-36 sm:max-w-40 lg:max-w-52 xl:max-w-64 2xl:max-w-80'
+          : 'opacity-100 pointer-events-auto'
+      )}
     >
       <button
         className='flex translate-y-[-2px] lg:translate-y-[-8px] w-full'
