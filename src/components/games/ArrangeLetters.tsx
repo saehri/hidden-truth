@@ -7,10 +7,9 @@ import {
   GameTypes,
   StorylineIdTypes,
 } from '../../services/utils/types';
+import {getGameData} from '../../database/gameData';
 
 import InGameCountdown from '../ui/InGameCountdown';
-import ChapterLevelSplashScreen from '../splashScreen/ChapterLevelSplashScreen';
-import {getGameData} from '../../database/gameData';
 
 export default function ArrangeLetters() {
   const [gameState, setGameState] = useState<GameStateTypes>('start');
@@ -21,11 +20,7 @@ export default function ArrangeLetters() {
     storylineId: activePage.state?.storylineId as StorylineIdTypes,
   });
   const gameDuration =
-    data.difficulty === 'easy'
-      ? 6000
-      : data.difficulty === 'medium'
-      ? 4500
-      : 3000;
+    data.difficulty === 'easy' ? 60 : data.difficulty === 'medium' ? 45 : 30;
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -35,22 +30,27 @@ export default function ArrangeLetters() {
         countdownDuration={gameDuration}
       />
 
-      <div className='relative h-full flex w-full flex-col justify-between py-36'>
+      <div className='relative h-full flex w-full flex-col justify-between pt-36'>
         <ArrangeLettersCards
           answer={data.answer}
           data={data.scrambledLetters}
         />
 
-        <div className='bg-background p-4 border border-border mx-auto max-w-96 text-yellow-500'>
-          {data.clue}
+        <div
+          className='bg-slate-100 p-4 border border-border border-b-0 mx-auto w-full max-w-[50%] text-slate-950'
+          style={{
+            clipPath: 'polygon(10% 0%, 90% 0, 100% 100%, 0% 100%)',
+          }}
+        >
+          <div className='max-w-[80%] mx-auto flex items-center gap-4'>
+            <h6 className='bg-gradient-to-t rounded-full from-yellow-700 to-yellow-600 text-yellow-300 p-1 px-2 pt-2 w-max mb-4'>
+              Clue
+            </h6>
+
+            <p className='text-slate-700'>{data.clue}</p>
+          </div>
         </div>
       </div>
-
-      {/* <ChapterLevelSplashScreen
-        isOpen={gameState === 'preparation'}
-        levelInfo='Tebak Gambar'
-        levelName={activePage.state?.gameName as string}
-      /> */}
     </section>
   );
 }
@@ -86,6 +86,7 @@ function ArrangeLettersCards({data, answer}: {data: string[]; answer: string}) {
         <Reorder.Item
           key={l}
           value={l}
+          whileHover={{scale: 1.05}}
           className='h-full bg-gradient-to-tl from-slate-300 via-slate-200 to-white shadow-md w-full pt-[100%] relative'
           variants={{
             rest: {y: 50, opacity: 0},
