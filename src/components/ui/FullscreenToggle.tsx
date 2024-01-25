@@ -1,8 +1,8 @@
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import Button from './Button';
 import Icons from './Icons';
 
-export default function FullscreenToggle() {
+const FullscreenToggle = memo(function () {
   const [isFullsreen, setIsFullscreen] = useState<boolean>(false);
 
   function toggleFullScreen() {
@@ -15,8 +15,6 @@ export default function FullscreenToggle() {
     }
   }
 
-  console.log(isFullsreen);
-
   return (
     <Button
       className='absolute right-2 top-2 z-[100]'
@@ -25,4 +23,6 @@ export default function FullscreenToggle() {
       {!isFullsreen ? <Icons.Fullscreen /> : <Icons.Minimizescreen />}
     </Button>
   );
-}
+});
+
+export default FullscreenToggle;
