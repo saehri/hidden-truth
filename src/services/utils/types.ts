@@ -7,9 +7,10 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG';
+export type GameTypes = 'TG' | 'SK';
 /* 
-  tg -> tebak gambar
+  TG -> Tebak Gambar,
+  SK -> Susun Kata
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
@@ -51,4 +52,13 @@ export type ImageGuesserGameDataTypes = {
   id: string;
   imageLink: string;
   answer: string;
+};
+
+/* @types defines the types of arrange letter game data stuctures */
+export type ArrangeLettersGameDataTypes = {
+  id: string;
+  scrambledLetters: string[];
+  answer: string;
+  clue?: string;
+  difficulty: 'easy' | 'medium' | 'hard';
 };

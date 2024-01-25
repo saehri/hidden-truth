@@ -1,5 +1,4 @@
 import MainNavigation from '../components/navigation/MainNavigation';
-import FullscreenAPISupportWarner from '../components/ui/FullscreenAPISupportWarner';
 import WrongDeviceOrientationWarner from '../components/ui/WrongDeviceOrientationWarner';
 
 interface AppLayout {
@@ -30,7 +29,6 @@ export default function AppLayout({children}: AppLayout) {
       </main>
 
       <WrongDeviceOrientationWarner />
-      <FullscreenAPISupportWarner />
     </>
   );
 }

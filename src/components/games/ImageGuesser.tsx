@@ -1,6 +1,6 @@
 import {useContext, useState} from 'react';
 
-import {getGameData} from '../../database/gameData/imageGuesser';
+import {getGameData} from '../../database/gameData';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {
   GameStateTypes,
@@ -17,11 +17,11 @@ import ChapterLevelSplashScreen from '../splashScreen/ChapterLevelSplashScreen';
 export default function ImageGuesser() {
   const {activePage} = useContext(ActivePageContext);
   const [gameData, setGameData] = useState<ImageGuesserGameDataTypes[]>(
-    getGameData(
-      activePage.state?.gameType as GameTypes,
-      activePage.state?.gameId as string,
-      activePage.state?.storylineId as StorylineIdTypes
-    )
+    getGameData({
+      gameId: activePage.state?.gameId as string,
+      gameType: activePage.state?.gameType as GameTypes,
+      storylineId: activePage.state?.storylineId as StorylineIdTypes,
+    })
   );
   const [gameState, setGameState] = useState<GameStateTypes>('preparation');
 
@@ -34,13 +34,11 @@ export default function ImageGuesser() {
   return (
     <section className='w-full h-full max-w-[92%] flex items-end mx-auto'>
       <div className='w-full h-[85%] grid grid-cols-[15%,_50%,_1fr] gap-8 pb-8'>
-        <div className='flex items-center'>
-          <InGameCountdown
-            gameState={gameState}
-            setGameState={setGameState}
-            countdownDuration={150}
-          />
-        </div>
+        <InGameCountdown
+          gameState={gameState}
+          setGameState={setGameState}
+          countdownDuration={150}
+        />
 
         <div className='relative'>
           <ImageGuesserCards
