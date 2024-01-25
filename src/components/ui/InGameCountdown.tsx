@@ -138,7 +138,7 @@ function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
         </div>
       </div>
 
-      <div className='absolute z-40 bg-gradient-to-r from-transparent via-[#FFF8D1] to-transparent w-full h-1 left-0'></div>
+      <div className='absolute z-40 bg-gradient-to-r from-transparent via-slate-50 to-transparent w-full h-1 left-0'></div>
     </>
   );
 }
