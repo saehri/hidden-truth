@@ -90,7 +90,7 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
           >
             <h6
               className={twMerge(
-                'mb-4 absolute bg-blue-600 -top-8 uppercase text-yellow-400 text-sm lg:text-lg z-50 p-2 border border-blue-50',
+                'mb-4 absolute bg-blue-600 -top-6 text-yellow-400 text-sm lg:text-lg z-50 p-1 px-2 border border-blue-50',
                 index === 0 ? 'left-4' : 'right-4'
               )}
             >
@@ -168,7 +168,7 @@ function DialogSequenceTextRenderer({
             dialogChoice?.nextSequence
           )
         }
-        className='mt-4 lg:mt-8 w-max ml-auto p-2'
+        className='lg:mt-8 w-max ml-auto p-2'
       >
         Selanjutnya
       </button>
