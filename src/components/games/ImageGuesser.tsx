@@ -12,7 +12,6 @@ import {
 import InGameCountdown from '../ui/InGameCountdown';
 import ImageGuesserCards from '../ui/ImageGuesserCards';
 import ImageGuesserGamePlayerInput from '../forms/ImageGuesserGamePlayerInput';
-import ChapterLevelSplashScreen from '../splashScreen/ChapterLevelSplashScreen';
 
 export default function ImageGuesser() {
   const {activePage} = useContext(ActivePageContext);
@@ -58,12 +57,6 @@ export default function ImageGuesser() {
           />
         </div>
       </div>
-
-      <ChapterLevelSplashScreen
-        isOpen={gameState === 'preparation'}
-        levelInfo='Tebak Gambar'
-        levelName={activePage.state?.gameName as string}
-      />
     </section>
   );
 }
