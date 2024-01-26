@@ -56,7 +56,7 @@ const Input = memo(function ({
       </div>
 
       {description?.length && (
-        <span className='inline-block mt-2 text-xs text-slate-500'>
+        <span className='inline-block text-justify mt-2 text-xs text-slate-500'>
           {description}
         </span>
       )}
