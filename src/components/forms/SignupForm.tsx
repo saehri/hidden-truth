@@ -69,7 +69,9 @@ export default function SignupForm() {
         )}
       </AnimatePresence>
 
-      <h4 className='mb-4 font-semibold text-slate-800'>Buat akun</h4>
+      <h4 className='mb-4 font-semibold lg:text-lg text-slate-800'>
+        Buat akun
+      </h4>
 
       <form onSubmit={handleSubmit} className='h-max'>
         <div className='flex flex-col gap-4'>
