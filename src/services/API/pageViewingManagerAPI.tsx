@@ -47,7 +47,7 @@ export type ActivePageContextTypes = {
 };
 
 export const ActivePageContext = createContext<ActivePageContextTypes>({
-  activePage: {location: 'signupPage'},
+  activePage: {location: 'signinPage'},
   setActivePage: undefined as unknown as Dispatch<
     SetStateAction<ActivePageTypes>
   >,
@@ -61,7 +61,7 @@ export default function AppPageViewingManagerAPI({
   children,
 }: AppPageViewingManagerAPI) {
   const [activePage, setActivePage] = useState<ActivePageTypes>({
-    location: 'signupPage',
+    location: 'signinPage',
   });
 
   return (
