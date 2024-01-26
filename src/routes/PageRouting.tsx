@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import {useContext, useLayoutEffect} from 'react';
 import {MotionConfig} from 'framer-motion';
 import {
   ActivePageContext,
@@ -27,9 +27,32 @@ export default function PageRouting() {
   );
 }
 
+const securePages = [
+  'homepage',
+  'storylineTypeSelectionPage',
+  'storylineSelectionPage',
+  'storylineDetailPage',
+  'gamePage',
+  'dialogPage',
+];
+
 function PageViewer() {
-  const {activePage} = useContext(ActivePageContext);
+  const {activePage, setActivePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
+
+  useLayoutEffect(() => {
+    // Redirect the user from secure route
+    const USER_STORAGE_KEY = 'USER_DATA';
+    if (securePages.includes(activePage.location)) {
+      if (!localStorage.getItem('USER_DATA')) {
+        setActivePage({location: 'signinPage'});
+      }
+    } else {
+      if (localStorage.getItem('USER_DATA')) {
+        setActivePage({location: 'homepage'});
+      }
+    }
+  }, [activePage.location]);
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
     homepage: <Homepage />,
