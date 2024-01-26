@@ -9,6 +9,12 @@ import FullscreenToggle from '../ui/FullscreenToggle';
 
 export default function MainNavigation() {
   const {activePage} = useContext(ActivePageContext);
+  const hideMainNavigation = [
+    'signinPage',
+    'signupPage',
+    'gamePage',
+    'storylineSelectionPage',
+  ].includes(activePage.location);
 
   return (
     <header
@@ -23,10 +29,7 @@ export default function MainNavigation() {
       <nav
         className={twMerge(
           'max-w-[92%] mx-auto z-50 relative',
-          activePage.location === 'gamePage' ||
-            activePage.location === 'storylineSelectionPage'
-            ? 'pointer-events-none opacity-0'
-            : 'pointer-events-auto'
+          hideMainNavigation ? 'hidden' : 'block'
         )}
       >
         <ul className='flex justify-between'>

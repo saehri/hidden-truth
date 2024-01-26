@@ -18,7 +18,9 @@ export type ViewablePageTypes =
   | 'storylineSelectionPage'
   | 'storylineDetailPage'
   | 'gamePage'
-  | 'dialogPage';
+  | 'dialogPage'
+  | 'signupPage'
+  | 'signinPage';
 
 /* 
   @definitions
@@ -45,7 +47,7 @@ export type ActivePageContextTypes = {
 };
 
 export const ActivePageContext = createContext<ActivePageContextTypes>({
-  activePage: {location: 'homepage'},
+  activePage: {location: 'signupPage'},
   setActivePage: undefined as unknown as Dispatch<
     SetStateAction<ActivePageTypes>
   >,
@@ -59,7 +61,7 @@ export default function AppPageViewingManagerAPI({
   children,
 }: AppPageViewingManagerAPI) {
   const [activePage, setActivePage] = useState<ActivePageTypes>({
-    location: 'homepage',
+    location: 'signupPage',
   });
 
   return (
