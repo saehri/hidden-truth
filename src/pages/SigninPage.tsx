@@ -1,14 +1,14 @@
 import {useContext} from 'react';
-import SignupForm from '../components/forms/SignupForm';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
+import SigninForm from '../components/forms/SigninForm';
 
-export default function SignupPage() {
+export default function SigninPage() {
   return (
     <div className='grid grid-cols-[40%,_1fr] lg:grid-cols-[35%,_1fr] h-full'>
       <section className='p-6 bg-slate-100 hideScrollbar overflow-y-auto h-full w-full py-10 flex flex-col gap-4'>
         <section className='border-b border-slate-500 pb-4'>
-          <SignupForm />
+          <SigninForm />
 
           <GotoLoginPageLink />
         </section>
@@ -36,9 +36,9 @@ function GotoLoginPageLink() {
   return (
     <button
       className='text-xs lg:text-sm p-1 px-2 mt-2 text-slate-500'
-      onClick={() => setActivePage({location: 'signinPage'})}
+      onClick={() => setActivePage({location: 'signupPage'})}
     >
-      Sudah punya akun? Klik di sini untuk login.
+      Belum punya akun? Klik di sini untuk sign up.
     </button>
   );
 }
@@ -47,7 +47,7 @@ function SignupOAuth() {
   return (
     <div className='w-full'>
       <h4 className='text-xs lg:text-sm mb-2 text-slate-800 text-center'>
-        Atau buat akun dengan
+        Atau buat masuk dengan
       </h4>
 
       <a

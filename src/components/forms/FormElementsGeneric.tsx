@@ -48,7 +48,7 @@ const Input = memo(function ({
           <button
             type='button'
             onClick={() => setShowPassword(!showPassword)}
-            className='absolute right-1 p-1 px-2 border bg-gradient-to-t hover:from-slate-200 hover:to-slate-100 text-slate-600 from-slate-100 to-slate-50 border-slate-300 rounded-md top-1/2 -translate-y-1/2 text-xs '
+            className='absolute right-2 p-1 px-2 border bg-gradient-to-t hover:from-slate-200 hover:to-slate-100 text-slate-600 from-slate-100 to-slate-50 border-slate-300 rounded-md top-1/2 -translate-y-1/2 text-xs '
           >
             {showPassword ? 'Hide' : 'Show'} Password
           </button>

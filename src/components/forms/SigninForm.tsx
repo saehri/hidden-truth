@@ -1,46 +1,60 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {ChangeEvent, FormEvent, useContext, useState} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
 import axios from 'axios';
 
 import Toast from '../ui/Toast';
 import Button from '../ui/Button';
 import {Input, Label} from './FormElementsGeneric';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
+import {atomWithStorage} from 'jotai/utils';
+import {useAtom} from 'jotai';
+
+type FormData = {
+  username: string;
+  password: string;
+};
+
+type ResponseData = {
+  success: boolean;
+  message: string;
+};
+
+const userAtom = atomWithStorage('USER_DATA', undefined);
 
 // @ts-ignore
 const API_URL = import.meta.env.VITE_API_URL ?? '';
 
-export default function SignupForm() {
-  const [formData, setFormData] = useState<{
-    username: string;
-    email: string;
-    password: string;
-  }>({
+export default function SigninForm() {
+  const [formData, setFormData] = useState<FormData>({
     username: '',
-    email: '',
     password: '',
   });
-  const [responseData, setResponseData] = useState<
-    | {
-        message?: string;
-        success?: boolean;
-      }
-    | undefined
-  >(undefined);
+  const [responseData, setResponseData] = useState<ResponseData | undefined>(
+    undefined
+  );
   const [isLoading, setLoading] = useState<boolean>(false);
+  const {setActivePage} = useContext(ActivePageContext);
+  const [_, setStoredUserData] = useAtom(userAtom);
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
     setLoading(true);
+
     axios
-      .post(`${API_URL}/auth/signup`, formData)
+      .post(`${API_URL}/auth/signin`, formData)
       .then((response) => {
         const {data} = response;
         setResponseData(data);
+
+        if (data.success) {
+          setStoredUserData(data.user);
+          setActivePage({location: 'homepage'});
+        }
       })
       .catch((error: any) => {
         setLoading(false);
-        console.log(error.message);
+        console.error(error.message);
       })
       .finally(() => {
         setLoading(false);
@@ -69,9 +83,7 @@ export default function SignupForm() {
         )}
       </AnimatePresence>
 
-      <h4 className='mb-4 font-semibold lg:text-lg text-slate-800'>
-        Buat akun
-      </h4>
+      <h4 className='mb-4 font-semibold lg:text-lg text-slate-800'>Login</h4>
 
       <form onSubmit={handleSubmit} className='h-max'>
         <div className='flex flex-col gap-4'>
@@ -84,23 +96,9 @@ export default function SignupForm() {
               name='username'
               onChange={(ev) => handleInputChange(ev)}
               value={formData.username}
-              description='Panjang username tidak boleh lebih dari 16 karakter dan tidak boleh mengandung karakter spesial. Kamu masih bisa mengganti username kamu di dalam game nanti.'
+              description='Panjang username tidak boleh lebih dari 16 karakter dan tidak boleh mengandung karakter spesial.'
               disabled={isLoading}
               pattern='^[a-zA-Z0-9]{3,16}$'
-            />
-          </div>
-
-          <div className='flex flex-col gap-1'>
-            <Label>Email</Label>
-            <Input
-              type='email'
-              placeholder='name@gmail.com'
-              required
-              name='email'
-              onChange={(ev) => handleInputChange(ev)}
-              value={formData.email}
-              disabled={isLoading}
-              pattern='^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$'
             />
           </div>
 
@@ -146,7 +144,7 @@ export default function SignupForm() {
                 className='block'
                 key={'b'}
               >
-                SIGN UP
+                SIGN IN
               </motion.span>
             )}
           </AnimatePresence>
