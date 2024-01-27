@@ -22,7 +22,7 @@ type ResponseData = {
 const userAtom = atomWithStorage('USER_DATA', undefined);
 
 // @ts-ignore
-const API_URL = import.meta.env.VITE_API_URL ?? '';
+const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
 
 export default function SigninForm() {
   const [formData, setFormData] = useState<FormData>({

@@ -7,7 +7,7 @@ import Button from '../ui/Button';
 import {Input, Label} from './FormElementsGeneric';
 
 // @ts-ignore
-const API_URL = import.meta.env.VITE_API_URL ?? '';
+const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
 
 export default function SignupForm() {
   const [formData, setFormData] = useState<{
