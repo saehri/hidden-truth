@@ -44,11 +44,11 @@ function PageViewer() {
     // Redirect the user from secure route
     const USER_STORAGE_KEY = 'USER_DATA';
     if (securePages.includes(activePage.location)) {
-      if (!localStorage.getItem('USER_DATA')) {
+      if (!localStorage.getItem(USER_STORAGE_KEY)) {
         setActivePage({location: 'signinPage'});
       }
     } else {
-      if (localStorage.getItem('USER_DATA')) {
+      if (localStorage.getItem(USER_STORAGE_KEY)) {
         setActivePage({location: 'homepage'});
       }
     }

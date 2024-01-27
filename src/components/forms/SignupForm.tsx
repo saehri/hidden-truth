@@ -1,49 +1,73 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
-import {motion, AnimatePresence} from 'framer-motion';
+import {ChangeEvent, FormEvent, useContext, useState} from 'react';
+import {AnimatePresence} from 'framer-motion';
 import axios from 'axios';
 
 import Toast from '../ui/Toast';
-import Button from '../ui/Button';
 import {Input, Label} from './FormElementsGeneric';
+import FormSubmitButton from '../ui/FormSubmitButton';
+import {FormStateTypes} from '../../services/utils/types';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 // @ts-ignore
 const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
 
+type FormDataTypes = {
+  email: string;
+  username: string;
+  password: string;
+};
+
+type ResponseDataTypes = {
+  success: boolean;
+  message: string;
+};
+
 export default function SignupForm() {
-  const [formData, setFormData] = useState<{
-    username: string;
-    email: string;
-    password: string;
-  }>({
+  const [formData, setFormData] = useState<FormDataTypes>({
     username: '',
     email: '',
     password: '',
   });
   const [responseData, setResponseData] = useState<
-    | {
-        message?: string;
-        success?: boolean;
-      }
-    | undefined
+    ResponseDataTypes | undefined
   >(undefined);
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [formState, setFormState] = useState<FormStateTypes>('idle');
+  const {setActivePage} = useContext(ActivePageContext);
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
-    setLoading(true);
+    setResponseData(undefined);
+    setFormState('process');
+
     axios
       .post(`${API_URL}/auth/signup`, formData)
       .then((response) => {
         const {data} = response;
         setResponseData(data);
+
+        if (data.success) {
+          console.log('success');
+          setFormState('done');
+
+          setTimeout(() => {
+            setFormState('idle');
+          }, 1000);
+
+          setTimeout(() => {
+            setActivePage({location: 'homepage'});
+          }, 2000);
+        } else {
+          throw new Error(data.message);
+        }
       })
       .catch((error: any) => {
-        setLoading(false);
-        console.log(error.message);
-      })
-      .finally(() => {
-        setLoading(false);
+        setFormState('error');
+        console.error(error.message);
+
+        setTimeout(() => {
+          setFormState('idle');
+        }, 1500);
       });
   }
 
@@ -85,7 +109,7 @@ export default function SignupForm() {
               onChange={(ev) => handleInputChange(ev)}
               value={formData.username}
               description='Panjang username tidak boleh lebih dari 16 karakter dan tidak boleh mengandung karakter spesial. Kamu masih bisa mengganti username kamu di dalam game nanti.'
-              disabled={isLoading}
+              disabled={formState === 'process'}
               pattern='^[a-zA-Z0-9]{3,16}$'
             />
           </div>
@@ -99,7 +123,7 @@ export default function SignupForm() {
               name='email'
               onChange={(ev) => handleInputChange(ev)}
               value={formData.email}
-              disabled={isLoading}
+              disabled={formState === 'process'}
               pattern='^[\w.-]+@[a-zA-Z\d.-]+\.[a-zA-Z]{2,}$'
             />
           </div>
@@ -116,41 +140,13 @@ export default function SignupForm() {
               onChange={(ev) => handleInputChange(ev)}
               value={formData.password}
               description='Password setidaknya teridiri dari satu huruf kapital, satu huruf kecil, satu angka, dan satu karakter khusus (@$!%*?&), panjang password minimal 8 dan panjang maksimal 20.'
-              disabled={isLoading}
+              disabled={formState === 'process'}
               pattern='^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$'
             />
           </div>
         </div>
 
-        <Button
-          type='submit'
-          className='inline-block rounded-md text-xs lg:text-sm font-semibold p-2 pt-3 px-4 w-full mt-8 bg-gradient-to-t from-yellow-600 via-yellow-500 to-yellow-100 border-border border text-yellow-800 overflow-hidden shadow-md shadow-slate-950/20'
-          disabled={isLoading}
-        >
-          <AnimatePresence mode='popLayout' initial={false}>
-            {isLoading ? (
-              <motion.span
-                initial={{opacity: 0, y: 20}}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: -20}}
-                key={'a'}
-                className='block'
-              >
-                MEMPROSES
-              </motion.span>
-            ) : (
-              <motion.span
-                initial={{opacity: 0, y: 20}}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, y: -20}}
-                className='block'
-                key={'b'}
-              >
-                SIGN UP
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </Button>
+        <FormSubmitButton formState={formState} buttonIdleName='SIGN UP' />
       </form>
     </>
   );

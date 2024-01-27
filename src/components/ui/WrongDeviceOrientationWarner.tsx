@@ -1,11 +1,7 @@
 export default function WrongDeviceOrientationWarner() {
   return (
     <>
-      <div
-        className={
-          'bg-slate-950 w-full h-full place-items-center fixed top-0 left-0 z-50 text-border p-4 grid xs:hidden'
-        }
-      >
+      <div className='bg-slate-950 w-full h-full place-items-center fixed top-0 left-0 z-50 text-border p-4 grid landscape:hidden'>
         <div className='p-4 bg-background border border-border relative m-4 w-full max-w-96 text-xs sm:text-sm md:text-base'>
           <strong className='font-bold'>
             Oh tidak! Layar perangkat kamu terlalu kecil untuk memainkan game

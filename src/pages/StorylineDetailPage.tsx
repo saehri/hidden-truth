@@ -38,7 +38,9 @@ export default function StorylineDetailPage() {
       />
       <LoadingScreen />
 
-      <PrologWrapper />
+      <PrologWrapper
+        storylineId={activePage.state?.storylineId as StorylineIdTypes}
+      />
     </>
   );
 }

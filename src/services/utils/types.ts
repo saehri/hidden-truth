@@ -62,3 +62,5 @@ export type ArrangeLettersGameDataTypes = {
   clue?: string;
   difficulty: 'easy' | 'medium' | 'hard';
 };
+
+export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';
