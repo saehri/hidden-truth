@@ -2,14 +2,15 @@ import {ChangeEvent, FormEvent, useContext, useState} from 'react';
 import {AnimatePresence} from 'framer-motion';
 import axios from 'axios';
 
-import {useAtom} from 'jotai';
 import {FormStateTypes} from '../../services/utils/types';
-import {atomWithStorage} from 'jotai/utils';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import Toast from '../ui/Toast';
 import {Input, Label} from './FormElementsGeneric';
 import FormSubmitButton from '../ui/FormSubmitButton';
+import useUserController from '../../services/controller/userController';
+import tokenController from '../../services/controller/tokenController';
+import useTokenController from '../../services/controller/tokenController';
 
 type FormDataTypes = {
   username: string;
@@ -20,8 +21,6 @@ type ResponseDataTypes = {
   success: boolean;
   message: string;
 };
-
-const userAtom = atomWithStorage('USER_DATA', undefined);
 
 // @ts-ignore
 const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
@@ -35,8 +34,10 @@ export default function SigninForm() {
     ResponseDataTypes | undefined
   >(undefined);
   const [formState, setFormState] = useState<FormStateTypes>('idle');
+
   const {setActivePage} = useContext(ActivePageContext);
-  const [_, setStoredUserData] = useAtom(userAtom);
+  const userController = useUserController();
+  const tokenController = useTokenController();
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
@@ -51,7 +52,9 @@ export default function SigninForm() {
         setResponseData(data);
 
         if (data.success) {
-          setStoredUserData(data.user);
+          userController.setData(data.user);
+          tokenController.setData(data.verification_token);
+
           setFormState('done');
 
           setTimeout(() => {

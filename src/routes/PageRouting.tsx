@@ -4,6 +4,9 @@ import {
   ActivePageContext,
   ViewablePageTypes,
 } from '../services/API/pageViewingManagerAPI';
+import useUserController, {
+  USER_STORAGE_KEY,
+} from '../services/controller/userController';
 
 import AppLayout from '../layouts/AppLayout';
 import Homepage from '../pages/Homepage';
@@ -14,16 +17,17 @@ import StorylineDetailPage from '../pages/StorylineDetailPage';
 import DialogPage from '../pages/DialogPage';
 import SignupPage from '../pages/SignupPage';
 import SigninPage from '../pages/SigninPage';
+import crypty from '../services/API/crypty';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
 export default function PageRouting() {
   return (
-    <AppLayout>
-      <MotionConfig transition={{ease: defaultAnimaitonEasing, duration: 0.3}}>
+    <MotionConfig transition={{ease: defaultAnimaitonEasing, duration: 0.3}}>
+      <AppLayout>
         <PageViewer />
-      </MotionConfig>
-    </AppLayout>
+      </AppLayout>
+    </MotionConfig>
   );
 }
 
@@ -39,16 +43,24 @@ const securePages = [
 function PageViewer() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
+  const userController = useUserController();
 
   useLayoutEffect(() => {
+    const userData = JSON.parse(
+      localStorage.getItem(USER_STORAGE_KEY)
+        ? crypty.decrypt(localStorage.getItem(USER_STORAGE_KEY))
+        : JSON.stringify({})
+    );
+
     // Redirect the user from secure route
-    const USER_STORAGE_KEY = 'USER_DATA';
     if (securePages.includes(activePage.location)) {
-      if (!localStorage.getItem(USER_STORAGE_KEY)) {
+      // If the user trying to access secure page but they are not logged in
+      if (!Object.keys(userData).length) {
         setActivePage({location: 'signinPage'});
       }
     } else {
-      if (localStorage.getItem(USER_STORAGE_KEY)) {
+      // If the user trying to access public page but they already logged in
+      if (Object.keys(userData).length) {
         setActivePage({location: 'homepage'});
       }
     }

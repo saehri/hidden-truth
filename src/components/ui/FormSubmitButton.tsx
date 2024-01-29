@@ -3,7 +3,6 @@ import {FormStateTypes} from '../../services/utils/types';
 
 import Icons from './Icons';
 import Button from './Button';
-import React from 'react';
 
 interface FormSubmitButton {
   formState: FormStateTypes;
@@ -22,72 +21,48 @@ export default function FormSubmitButton({
     >
       <AnimatePresence mode='popLayout' initial={false}>
         {formState === 'process' ? (
-          <ProcessState />
+          <motion.span
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -20}}
+            className='flex items-center justify-center gap-2'
+            key='b'
+          >
+            <Icons.ProgressSpinner className='w-[14px] h-[14px] animate-spin' />{' '}
+            MEMPROSES
+          </motion.span>
         ) : formState === 'done' ? (
-          <DoneState content={buttonIdleName} />
+          <motion.span
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -20}}
+            className='flex items-center justify-center gap-2'
+            key='c'
+          >
+            <Icons.CheckSmall /> {buttonIdleName} BERHASIL
+          </motion.span>
         ) : formState === 'error' ? (
-          <ErrorState content={buttonIdleName} />
+          <motion.span
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -20}}
+            className='flex items-center justify-center gap-2'
+            key='d'
+          >
+            <Icons.CloseSmall /> {buttonIdleName} GAGAL
+          </motion.span>
         ) : (
-          <IdleState content={buttonIdleName} />
+          <motion.span
+            initial={{opacity: 0, y: 20}}
+            animate={{opacity: 1, y: 0}}
+            exit={{opacity: 0, y: -20}}
+            className='block'
+            key='a'
+          >
+            {buttonIdleName}
+          </motion.span>
         )}
       </AnimatePresence>
     </Button>
-  );
-}
-
-function IdleState({content}: {content: any}) {
-  return (
-    <motion.span
-      initial={{opacity: 0, y: 20}}
-      animate={{opacity: 1, y: 0}}
-      exit={{opacity: 0, y: -20}}
-      className='block'
-      key='a'
-    >
-      {content}
-    </motion.span>
-  );
-}
-
-function ProcessState() {
-  return (
-    <motion.span
-      initial={{opacity: 0, y: 20}}
-      animate={{opacity: 1, y: 0}}
-      exit={{opacity: 0, y: -20}}
-      className='flex items-center justify-center gap-2'
-      key='b'
-    >
-      <Icons.ProgressSpinner className='w-[14px] h-[14px] animate-spin' />{' '}
-      MEMPROSES
-    </motion.span>
-  );
-}
-
-function DoneState({content}: {content: any}) {
-  return (
-    <motion.span
-      initial={{opacity: 0, y: 20}}
-      animate={{opacity: 1, y: 0}}
-      exit={{opacity: 0, y: -20}}
-      className='flex items-center justify-center gap-2'
-      key='c'
-    >
-      <Icons.CheckSmall /> {content} BERHASIL
-    </motion.span>
-  );
-}
-
-function ErrorState({content}: {content: any}) {
-  return (
-    <motion.span
-      initial={{opacity: 0, y: 20}}
-      animate={{opacity: 1, y: 0}}
-      exit={{opacity: 0, y: -20}}
-      className='flex items-center justify-center gap-2'
-      key='d'
-    >
-      <Icons.CloseSmall /> {content} GAGAL
-    </motion.span>
   );
 }

@@ -25,6 +25,13 @@
     scrollbar-width: none; /* Firefox */
   }
 
+  .polka {
+    background-image: radial-gradient(rgb(244, 236, 236) 10%, transparent 16.8%),
+      radial-gradient(rgb(244, 236, 236) 10%, transparent 16.8%);
+    background-position: 0px 0px, 8px 8px;
+    background-size: 16px 16px;
+  }
+
   @media screen and (min-width: 1024px) {
     .backdropBlur {
       backdrop-filter: blur(4px);
