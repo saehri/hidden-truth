@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {useLayoutEffect, useState} from 'react';
 import {motion} from 'framer-motion';
 
 import {StorylineIdTypes} from '../../services/utils/types';
@@ -12,20 +12,14 @@ interface PrologWrapper {
 export function PrologWrapper({storylineId}: PrologWrapper) {
   const prologController = usePrologController();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     prologController.getOpenedProlog();
   }, []);
 
-  // Check first if the prolog id is in the local storage
-  const [isOpen, setOpen] = useState<boolean>(
-    !(prologController.openedProlog.indexOf(storylineId as never) >= 0)
-  );
-
   return (
     <>
-      {isOpen && (
+      {!(prologController.openedProlog.indexOf(storylineId as never) >= 0) && (
         <Prolog
-          setOpen={setOpen}
           storylineId={storylineId}
           storeToOpenedProlog={() =>
             prologController.setOpenedProlog(storylineId)
@@ -37,12 +31,11 @@ export function PrologWrapper({storylineId}: PrologWrapper) {
 }
 
 interface Prolog {
-  setOpen: Dispatch<SetStateAction<boolean>>;
   storylineId: StorylineIdTypes;
   storeToOpenedProlog: () => void;
 }
 
-export function Prolog({setOpen, storylineId, storeToOpenedProlog}: Prolog) {
+export function Prolog({storylineId, storeToOpenedProlog}: Prolog) {
   const prologSequences = getProlog(storylineId).prologSequences;
   const [currentSequence, setCurrentSequence] = useState<number>(0);
 
@@ -78,7 +71,6 @@ export function Prolog({setOpen, storylineId, storeToOpenedProlog}: Prolog) {
               <button
                 onClick={() => {
                   storeToOpenedProlog();
-                  setOpen(false);
                 }}
                 className='w-max ml-auto p-2 pb-1 text-yellow-900 border border-yellow-600 bg-gradient-to-tr from-yellow-500 to-yellow-50 flex gap-3 text-xs lg:text-base'
               >
