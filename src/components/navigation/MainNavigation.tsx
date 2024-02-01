@@ -28,7 +28,8 @@ export default function MainNavigation() {
       <nav
         className={twMerge(
           'max-w-[92%] mx-auto z-50 relative',
-          hideMainNavigation ? 'hidden' : 'block'
+          hideMainNavigation ? 'hidden' : 'block',
+          activePage.location === 'storylineDetailPage' ? 'pl-48' : 'pl-0'
         )}
       >
         <ul className='flex justify-between'>
