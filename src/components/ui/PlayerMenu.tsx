@@ -3,70 +3,38 @@ import {SetStateAction} from 'jotai';
 import {AnimatePresence, motion} from 'framer-motion';
 
 import Icons from './Icons';
-import useCharacterController, {
-  CharacterTypes,
-} from '../../services/controller/characterController';
+import useCharacterController from '../../services/controller/characterController';
+import {CharacterTypes} from '../../services/utils/types';
+import Button from './Button';
+import useUserController from '../../services/controller/userController';
 
-interface AvatarCard {
-  isHidden: boolean;
-}
-
-const AvatarCard = memo(function ({isHidden}: AvatarCard) {
+const PlayerMenu = memo(function () {
   const [isCardOpen, setCardOpen] = useState<boolean>(false);
-  const [data, setData] = useState<CharacterTypes | null>(null);
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await useCharacterController()
-        .getItem()
-        .then((data) => JSON.parse(data));
-      setData(data);
-    }
-
-    fetchData();
-  }, []);
+  const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
 
   return (
     <>
-      <button
-        className='flex translate-y-[-2px] lg:translate-y-[-8px] w-full'
-        disabled={isHidden}
-        onClick={() => setCardOpen(!isCardOpen)}
-      >
-        <div className='w-full max-w-14 sm:max-w-16 lg:max-w-20 xl:max-w-28 relative shrink-0'>
-          <div className='absolute w-full top-0 left-0 pt-[100%]'>
-            <Icons.AvatarBackground />
-            <div className='absolute top-0 left-0 p-2 lg:p-3 w-full h-full'>
-              <img
-                src={data?.avatar.now_used.avatar_image}
-                alt=''
-                className='block w-full h-full object-cover bg-red-800'
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className='bg-primary/70 shrink-0 px-2 border border-border border-l-0 flex-1 h-5 lg:h-6 3xl:h-9 overflow-hidden overflow-ellipsis text-xs sm:text-sm xl:text-base 3xl:text-2xl grid place-items-center text-white translate-y-[5px] lg:translate-y-[10px] -translate-x-[1.5px] text-nowrap'>
-          {data?.character_name ?? 'Undefined'}
-        </div>
-      </button>
+      <Button onClick={() => setCardOpen(!isCardOpen)}>
+        <Icons.User className={buttonIconSizes} />
+      </Button>
 
       <AnimatePresence>
-        {isCardOpen && <Card setCardOpen={setCardOpen} data={data!} />}
+        {isCardOpen && <Card setCardOpen={setCardOpen} />}
       </AnimatePresence>
     </>
   );
 });
 
-export default AvatarCard;
+export default PlayerMenu;
 
-function Card({
-  setCardOpen,
-  data,
-}: {
-  setCardOpen: Dispatch<SetStateAction<boolean>>;
-  data?: CharacterTypes;
-}) {
+function Card({setCardOpen}: {setCardOpen: Dispatch<SetStateAction<boolean>>}) {
+  const characterController = useCharacterController();
+  const userController = useUserController();
+
+  useEffect(() => {
+    characterController.getCharacter(userController.user?._id!);
+  }, []);
+
   return (
     <div className='fixed top-0 left-0 w-full h-full z-50 p-8'>
       <motion.div
@@ -78,7 +46,14 @@ function Card({
       >
         <div className='pt-[calc((9/16)*100%)] relative'>
           <div className='absolute top-0 left-0 w-full h-full grid grid-cols-[40%,_1fr] gap-5'>
-            {data && <CardContent {...data} />}
+            {Object.keys(characterController.character!).length ? (
+              <CardContent {...characterController.character!} />
+            ) : (
+              <>
+                <div className='w-full h-full bg-slate-300 animate-pulse'></div>
+                <div className='w-full h-full bg-slate-300 animate-pulse'></div>
+              </>
+            )}
           </div>
 
           <img
@@ -102,13 +77,17 @@ function Card({
   );
 }
 
-function CardContent({character_name, avatar, current_rank}: CharacterTypes) {
+function CardContent({
+  character_name,
+  current_avatar,
+  current_rank,
+}: CharacterTypes) {
   return (
     <>
       <div className='h-full flex flex-col gap-4'>
         <div className='w-full h-full relative flex-1'>
           <img
-            src={avatar.now_used.avatar_image}
+            src={current_avatar.avatar_image}
             alt=''
             className='absolute top-0 left-0 w-full h-full object-cover object-bottom z-20'
             draggable={false}

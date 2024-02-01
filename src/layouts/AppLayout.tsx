@@ -10,7 +10,7 @@ export default function AppLayout({children}: AppLayout) {
     <>
       <main
         id='main'
-        className='bg-slate-950 h-full w-screen grid place-items-center fixed top-0 left-0 z-30 '
+        className='bg-slate-950 h-full w-screen grid place-items-center fixed top-0 left-0'
       >
         <section className='w-full h-full 3xl:mx-auto grid place-items-center'>
           <div

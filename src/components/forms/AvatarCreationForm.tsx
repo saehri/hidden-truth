@@ -1,19 +1,17 @@
 import {ChangeEvent, FormEvent, useState} from 'react';
 import {motion} from 'framer-motion';
-import axios from 'axios';
-import useUserController, {
-  UserTypes,
-} from '../../services/controller/userController';
 
 import Icons from '../ui/Icons';
 import {Input, Label} from './FormElementsGeneric';
-import FormSubmitButton from '../ui/FormSubmitButton';
-import useTokenController from '../../services/controller/tokenController';
-
-import useCharacterController, {
+import {
   CharacterTypes,
-} from '../../services/controller/characterController';
-import {FormStateTypes} from '../../services/utils/types';
+  FormStateTypes,
+  UserTypes,
+} from '../../services/utils/types';
+import FormSubmitButton from '../ui/FormSubmitButton';
+
+import useUserController from '../../services/controller/userController';
+import useCharacterController from '../../services/controller/characterController';
 
 export default function AvatarCreationForm() {
   const [isFormOpen, setFormOpen] = useState<boolean>(false);
@@ -56,23 +54,28 @@ function Form() {
   const [formState, setFormState] = useState<FormStateTypes>('idle');
 
   const userController = useUserController();
-  const tokenController = useTokenController();
   const characterController = useCharacterController();
-  const userData = userController.data as UserTypes;
+
+  const userData = userController.user!;
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
     const characterInitialData: CharacterTypes = {
       user_id: userData._id,
-      avatar: {
-        now_used: {
-          avatar_id: formData.avatar_id,
-          avatar_image: formData.image_link,
-          avatar_name: 'female default',
-          obtained_at: new Date().toISOString(),
-          rarity: 'common',
-        },
+      current_avatar: {
+        avatar_id: formData.avatar_id,
+        avatar_name:
+          formData.avatar_id === 'df-female'
+            ? 'female default'
+            : 'male default',
+        avatar_image: formData.image_link,
+        avatar_thumbs:
+          formData.avatar_id === 'df-female'
+            ? 'https://utfs.io/f/c50656d5-574d-4898-9caa-e50c0d0d6f6c-5f1d75.webp'
+            : 'https://utfs.io/f/6356ed1b-a1d7-4d43-a849-1d6a645494e9-44dgq6.webp',
+        obtained_at: new Date().toISOString(),
+        rarity: 'common',
       },
       character_name: formData.name,
       created_at: new Date().toISOString(),
@@ -82,8 +85,15 @@ function Form() {
         avatar: [
           {
             avatar_id: formData.avatar_id,
+            avatar_name:
+              formData.avatar_id === 'df-female'
+                ? 'female default'
+                : 'male default',
             avatar_image: formData.image_link,
-            avatar_name: 'female default',
+            avatar_thumbs:
+              formData.avatar_id === 'df-female'
+                ? 'https://utfs.io/f/c50656d5-574d-4898-9caa-e50c0d0d6f6c-5f1d75.webp'
+                : 'https://utfs.io/f/6356ed1b-a1d7-4d43-a849-1d6a645494e9-44dgq6.webp',
             obtained_at: new Date().toISOString(),
             rarity: 'common',
           },
@@ -96,65 +106,26 @@ function Form() {
 
     setFormState('process');
     try {
-      axios
-        .put(API_URL + `/user/${userData._id}`, {
-          is_new_user: false,
-          verification_token: tokenController.data,
-        })
-        .then((response) => {
-          const userRequestResponse = response;
-          const userData = userRequestResponse.data.user;
+      const userEditReqResponse = await userController.edit({
+        is_new_user: false,
+      });
 
-          // Handle the next request only if the first request is successful
-          if (userRequestResponse.data.success) {
-            axios
-              .post(API_URL + '/character', {
-                ...characterInitialData,
-                verification_token: tokenController.data,
-              })
-              .then((response) => {
-                const characterRequestResponse = response;
-
-                if (characterRequestResponse.data.success) {
-                  userController.setData(userData);
-                  characterController.setItem(
-                    characterRequestResponse.data.data
-                  );
-
-                  setFormState('done');
-
-                  setTimeout(() => {
-                    setFormState('idle');
-                  }, 1000);
-                } else {
-                  throw new Error(characterRequestResponse.data.message);
-                }
-              })
-              .catch((error: any) => {
-                setFormState('error');
-                console.error(error.message);
-
-                setTimeout(() => {
-                  setFormState('idle');
-                }, 1500);
-              });
-          } else {
-            throw new Error(userRequestResponse.data.message);
-          }
-        })
-        .catch((error: any) => {
-          setFormState('error');
-
-          // if (error.response.status === 401) {
-          //   userController.reset();
-          // }
-
-          setTimeout(() => {
-            setFormState('idle');
-          }, 1500);
-        });
+      if (userEditReqResponse.success) {
+        const characterCreateReqResponse = await characterController.create(
+          characterInitialData
+        );
+        if (characterCreateReqResponse.success) {
+          setFormState('done');
+        } else {
+          await userController.edit({
+            is_new_user: true,
+          });
+        }
+      }
     } catch (error) {
       setFormState('error');
+    } finally {
+      setFormState('idle');
     }
   }
 

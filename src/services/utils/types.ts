@@ -64,3 +64,61 @@ export type ArrangeLettersGameDataTypes = {
 };
 
 export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';
+
+/*  */
+export type ItemTypeTypes = 'energy' | 'money';
+export type ItemRarityTypes =
+  | 'common'
+  | 'uncommon'
+  | 'rare'
+  | 'epic'
+  | 'legendary';
+export type ItemNameTypes = '';
+
+export type DetectiveRankTypes = 'nobody';
+
+export type ConsumableTypes = {
+  type: ItemTypeTypes;
+  name: ItemNameTypes;
+  rarity: ItemRarityTypes;
+  quantity: number;
+};
+
+export type AvatarId = 'df-female' | 'df-male';
+
+export type AvatarTypes = {
+  avatar_id: AvatarId;
+  avatar_name: string;
+  avatar_image: string;
+  avatar_thumbs: string;
+  rarity: ItemRarityTypes;
+  obtained_at: string; // Date ISO string
+};
+
+export type CharacterTypes = {
+  user_id: string; // This is the _id of the user
+  character_name: string; // This is the character name
+  created_at: string; // Date ISO string
+  current_avatar: AvatarTypes; // Current used character
+  current_rank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
+  current_energy: number;
+  played_games: []; // string[] -> string is gameId
+  played_chapters: []; // string[] -> string is chapterId
+  inventory: {
+    consumable: ConsumableTypes[];
+    avatar: AvatarTypes[];
+  };
+};
+
+export type UserTypes = {
+  _id: string;
+  username: string;
+  email: {
+    valid: boolean;
+    value: string;
+  };
+  age: number | null;
+  gender: string | null;
+  is_new_user: boolean;
+  created_at: string;
+};

@@ -1,8 +1,8 @@
-import {memo, useContext, useState} from 'react';
+import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import {twMerge} from 'tailwind-merge';
-import AvatarCard from '../ui/AvatarCard';
+import AvatarCard from '../ui/PlayerMenu';
 
 export default function GameUserAvatar() {
   const {activePage} = useContext(ActivePageContext);
@@ -20,7 +20,7 @@ export default function GameUserAvatar() {
           : 'opacity-100 pointer-events-auto'
       )}
     >
-      <AvatarCard isHidden={isHidden} />
+      <AvatarCard />
     </li>
   );
 }

@@ -1,14 +1,13 @@
 import {motion} from 'framer-motion';
 import {createPortal} from 'react-dom';
 import {twMerge} from 'tailwind-merge';
+
 import AvatarCreationForm from '../forms/AvatarCreationForm';
-import useUserController, {
-  UserTypes,
-} from '../../services/controller/userController';
+import useUserController from '../../services/controller/userController';
 
 export default function NewUserDialog() {
   const userController = useUserController();
-  const userData = userController.data as UserTypes;
+  const userData = userController.user!;
 
   return (
     <>

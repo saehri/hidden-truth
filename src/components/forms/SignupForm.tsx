@@ -1,15 +1,10 @@
 import {ChangeEvent, FormEvent, useContext, useState} from 'react';
-import {AnimatePresence} from 'framer-motion';
-import axios from 'axios';
 
-import Toast from '../ui/Toast';
 import {Input, Label} from './FormElementsGeneric';
 import FormSubmitButton from '../ui/FormSubmitButton';
 import {FormStateTypes} from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
-
-// @ts-ignore
-const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
+import useUserController from '../../services/controller/userController';
 
 type FormDataTypes = {
   email: string;
@@ -28,47 +23,30 @@ export default function SignupForm() {
     email: '',
     password: '',
   });
-  const [responseData, setResponseData] = useState<
-    ResponseDataTypes | undefined
-  >(undefined);
   const [formState, setFormState] = useState<FormStateTypes>('idle');
+
   const {setActivePage} = useContext(ActivePageContext);
+  const userController = useUserController();
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
-    setResponseData(undefined);
     setFormState('process');
+    try {
+      const response = await userController.signUp(formData);
 
-    axios
-      .post(`${API_URL}/auth/signup`, formData)
-      .then((response) => {
-        const {data} = response;
-        setResponseData(data);
-
-        if (data.success) {
-          console.log('success');
-          setFormState('done');
-
-          setTimeout(() => {
-            setFormState('idle');
-          }, 1000);
-
-          setTimeout(() => {
-            setActivePage({location: 'homepage'});
-          }, 2000);
-        } else {
-          throw new Error(data.message);
-        }
-      })
-      .catch((error: any) => {
-        setFormState('error');
-        console.error(error.message);
-
+      if (response.success) {
         setTimeout(() => {
-          setFormState('idle');
+          setActivePage({location: 'signinPage'});
         }, 1500);
-      });
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error: any) {
+      setFormState('error');
+    } finally {
+      setFormState('idle');
+    }
   }
 
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
@@ -80,19 +58,6 @@ export default function SignupForm() {
 
   return (
     <>
-      <AnimatePresence>
-        {responseData && (
-          <Toast
-            backgroundColor={
-              responseData.success ? 'bg-background' : 'bg-red-800'
-            }
-            title={responseData.success ? 'CONGRATULATIONS!' : 'WARNING!'}
-            detail={responseData.message ?? ''}
-            closeAction={() => setResponseData(undefined)}
-          />
-        )}
-      </AnimatePresence>
-
       <h4 className='mb-4 font-semibold lg:text-lg text-slate-800'>
         Buat akun
       </h4>

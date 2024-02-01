@@ -1,81 +1,43 @@
 import {ChangeEvent, FormEvent, useContext, useState} from 'react';
-import {AnimatePresence} from 'framer-motion';
-import axios from 'axios';
 
 import {FormStateTypes} from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-import Toast from '../ui/Toast';
 import {Input, Label} from './FormElementsGeneric';
 import FormSubmitButton from '../ui/FormSubmitButton';
 import useUserController from '../../services/controller/userController';
-import tokenController from '../../services/controller/tokenController';
-import useTokenController from '../../services/controller/tokenController';
 
 type FormDataTypes = {
   username: string;
   password: string;
 };
 
-type ResponseDataTypes = {
-  success: boolean;
-  message: string;
-};
-
-// @ts-ignore
-const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
-
 export default function SigninForm() {
   const [formData, setFormData] = useState<FormDataTypes>({
     username: '',
     password: '',
   });
-  const [responseData, setResponseData] = useState<
-    ResponseDataTypes | undefined
-  >(undefined);
   const [formState, setFormState] = useState<FormStateTypes>('idle');
 
   const {setActivePage} = useContext(ActivePageContext);
   const userController = useUserController();
-  const tokenController = useTokenController();
 
   async function handleSubmit(ev: FormEvent) {
     ev.preventDefault();
 
-    setResponseData(undefined);
     setFormState('process');
-
-    axios
-      .post(`${API_URL}/auth/signin`, formData)
-      .then((response) => {
-        const {data} = response;
-        setResponseData(data);
-
-        if (data.success) {
-          userController.setData(data.user);
-          tokenController.setData(data.verification_token);
-
-          setFormState('done');
-
-          setTimeout(() => {
-            setFormState('idle');
-          }, 1000);
-
-          setTimeout(() => {
-            setActivePage({location: 'homepage'});
-          }, 2000);
-        } else {
-          throw new Error(data.message);
-        }
-      })
-      .catch((error: any) => {
-        setFormState('error');
-        console.error(error.message);
-
+    try {
+      const response = await userController.signIn(formData);
+      if (response.success) {
         setTimeout(() => {
-          setFormState('idle');
+          setActivePage({location: 'homepage'});
         }, 1500);
-      });
+      }
+    } catch (error) {
+      setFormState('error');
+    } finally {
+      setFormState('idle');
+    }
   }
 
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>) {
@@ -87,19 +49,6 @@ export default function SigninForm() {
 
   return (
     <>
-      <AnimatePresence>
-        {responseData && (
-          <Toast
-            backgroundColor={
-              responseData.success ? 'bg-background' : 'bg-red-800'
-            }
-            title={responseData.success ? 'CONGRATULATIONS!' : 'WARNING!'}
-            detail={responseData.message ?? ''}
-            closeAction={() => setResponseData(undefined)}
-          />
-        )}
-      </AnimatePresence>
-
       <h4 className='mb-4 font-semibold lg:text-lg text-slate-800'>Login</h4>
 
       <form onSubmit={handleSubmit} className='h-max'>

@@ -1,105 +1,74 @@
-import crypty from '../API/crypty';
-import {getUserData} from './userController';
-import {getVerificationToken} from './tokenController';
+import {create} from 'zustand';
+import useFetch from '../hooks/useFetch';
+import {CharacterTypes} from '../utils/types';
+import {toast} from 'react-toastify';
+import useUserController from './userController';
 
-export const CHARACTER_STORAGE_KEY = 'chr_d4t4';
-const API_URL = 'https://tricky-puce-walkingstick.cyclic.app/api';
+const CHARACTER_STORAGE_KEY = 'CHAR_DATA';
 
-function getStoredCharData() {
-  const storedValue = localStorage.getItem(CHARACTER_STORAGE_KEY);
-  let decriptedData;
+const initialState = {
+  character: JSON.parse(localStorage.getItem(CHARACTER_STORAGE_KEY) ?? '{}'),
+};
 
-  // The data stored in user storage is decrypted
-  try {
-    decriptedData = JSON.parse(crypty.decrypt(storedValue));
-  } catch {
-    decriptedData = undefined;
-  }
+const characterStore = create<{character?: CharacterTypes}>(() => initialState);
 
-  return decriptedData;
-}
-
-const useCharacterController = () => {
-  const userData = getUserData();
-  const verificationToken = getVerificationToken();
+export default function useCharacterController() {
+  const {character} = characterStore();
+  const fetch = useFetch();
 
   return {
-    getItem: async () => {
-      const decriptedData = getStoredCharData();
-
-      if (decriptedData) {
-        return decriptedData;
-      } else {
-        // Get the character data from server if it does not exits
-        const response = await fetch(
-          API_URL + `/character/${userData._id}/${verificationToken}`
-        ).then((res) => res.json());
+    character,
+    create: async (params: CharacterTypes) => {
+      try {
+        const response = await fetch.post('/character', params, true);
 
         if (response.success) {
+          characterStore.setState({character: response.data});
+          toast.success(response.message);
+
           localStorage.setItem(
             CHARACTER_STORAGE_KEY,
-            crypty.encrypt(JSON.stringify(response.data))
+            JSON.stringify(response.data)
           );
 
-          return getStoredCharData();
+          return response;
+        } else {
+          console.log(params);
+          toast.error(response.message);
+          throw new Error(response.message);
         }
+      } catch (error: any) {
+        console.error(error.response.data);
       }
     },
-    setItem(data: CharacterTypes) {
-      localStorage.setItem(
-        CHARACTER_STORAGE_KEY,
-        crypty.encrypt(JSON.stringify(data))
-      );
+    getCharacter: async (id: string) => {
+      try {
+        const characterInStorage = JSON.parse(
+          localStorage.getItem(CHARACTER_STORAGE_KEY) as string
+        );
+        if (characterInStorage) {
+          characterStore.setState({character: characterInStorage});
+          return characterInStorage;
+        }
+
+        const response = await fetch.get('/character/' + id, true);
+
+        if (response.success) {
+          characterStore.setState({character: response.data});
+          localStorage.setItem(
+            CHARACTER_STORAGE_KEY,
+            JSON.stringify(response.data)
+          );
+
+          return response.data;
+        } else {
+          throw new Error(response.message);
+        }
+      } catch (error: any) {
+        toast.error(error.response.data);
+
+        console.error(error.response.data);
+      }
     },
-    editItem(payload: any) {
-      console.log(payload);
-    },
   };
-};
-
-export default useCharacterController;
-
-export type ItemTypeTypes = 'energy' | 'money';
-export type ItemRarityTypes =
-  | 'common'
-  | 'uncommon'
-  | 'rare'
-  | 'epic'
-  | 'legendary';
-export type ItemNameTypes = '';
-
-export type DetectiveRankTypes = 'nobody';
-
-export type ConsumableTypes = {
-  type: ItemTypeTypes;
-  name: ItemNameTypes;
-  rarity: ItemRarityTypes;
-  quantity: number;
-};
-
-export type AvatarId = 'df-female' | 'df-male';
-
-export type AvatarTypes = {
-  avatar_id: AvatarId;
-  avatar_name: string;
-  avatar_image: string;
-  rarity: ItemRarityTypes;
-  obtained_at: string; // Date ISO string
-};
-
-export type CharacterTypes = {
-  user_id: string; // This is the _id of the user
-  character_name: string; // This is the character name
-  created_at: string; // Date ISO string
-  avatar: {
-    now_used: AvatarTypes; // Current used character
-  };
-  current_rank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
-  current_energy: number;
-  played_games: []; // string[] -> string is gameId
-  played_chapters: []; // string[] -> string is chapterId
-  inventory: {
-    consumable: ConsumableTypes[];
-    avatar: AvatarTypes[];
-  };
-};
+}

@@ -1,75 +1,93 @@
-import {Dispatch, SetStateAction, useState} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
-import {useAtom} from 'jotai';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {motion} from 'framer-motion';
 
-import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {StorylineIdTypes} from '../../services/utils/types';
-import {
-  PrologSequenceTypes,
-  getProlog,
-  watchedPrologData,
-} from '../../database/prolog';
-import TypingAnimation from './TypingAnimation';
-
-const PROLOG_DURATION = 4;
+import {getProlog} from '../../database/prolog';
+import usePrologController from '../../services/controller/prologController';
 
 interface PrologWrapper {
   storylineId: StorylineIdTypes;
 }
 
 export function PrologWrapper({storylineId}: PrologWrapper) {
-  const [watchedProlog, setWatchedProlog] = useAtom(watchedPrologData);
+  const prologController = usePrologController();
+
+  useEffect(() => {
+    prologController.getOpenedProlog();
+  }, []);
 
   // Check first if the prolog id is in the local storage
   const [isOpen, setOpen] = useState<boolean>(
-    !(watchedProlog.indexOf(storylineId as never) >= 0)
+    !(prologController.openedProlog.indexOf(storylineId as never) >= 0)
   );
 
   return (
-    <>{isOpen && <Prolog setOpen={setOpen} storylineId={storylineId} />}</>
+    <>
+      {isOpen && (
+        <Prolog
+          setOpen={setOpen}
+          storylineId={storylineId}
+          storeToOpenedProlog={() =>
+            prologController.setOpenedProlog(storylineId)
+          }
+        />
+      )}
+    </>
   );
 }
 
 interface Prolog {
   setOpen: Dispatch<SetStateAction<boolean>>;
   storylineId: StorylineIdTypes;
+  storeToOpenedProlog: () => void;
 }
 
-export function Prolog({setOpen, storylineId}: Prolog) {
+export function Prolog({setOpen, storylineId, storeToOpenedProlog}: Prolog) {
   const prologSequences = getProlog(storylineId).prologSequences;
   const [currentSequence, setCurrentSequence] = useState<number>(0);
 
-  console.log(prologSequences);
-
   return (
     <>
-      <motion.div
-        exit={{opacity: 0}}
-        transition={{duration: 1}}
-        className='absolute top-0 left-0 z-[90] w-full h-full'
-      >
+      <motion.div className='absolute top-0 left-0 z-[90] w-full h-full'>
         <div className='absolute top-0 left-0 z-50 w-full h-full bg-slate-950 overflow-hidden'>
-          <AnimatePresence mode='popLayout'>
-            <motion.img
-              key={prologSequences[currentSequence]?.imageCover}
-              initial={{scale: 1, opacity: 0}}
-              animate={{scale: 1.1, opacity: 1}}
-              exit={{opacity: 0}}
-              transition={{
-                duration: PROLOG_DURATION,
-                opacity: {duration: 0.5},
-              }}
-              src={prologSequences[currentSequence]?.imageCover ?? ''}
-              alt=''
-              className='absolute top-0 left-0 w-full h-full object-cover'
-            />
-          </AnimatePresence>
+          <motion.img
+            src={prologSequences[currentSequence]?.imageCover}
+            alt=''
+            className='absolute top-0 left-0 w-full h-full object-cover'
+          />
+
+          <div className='absolute bottom-0 left-0 p-8 min-h-24 flex flex-col gap-3 justify-between bg-gradient-to-r from-blue-600 via-blue-400 to-transparent w-full border-t border-b border-blue-400'>
+            <div className='max-w-[85ch]'>
+              <h4 className='text-white'>
+                {prologSequences[currentSequence]?.text}
+              </h4>
+            </div>
+
+            {currentSequence < prologSequences.length - 1 ? (
+              <button
+                onClick={() =>
+                  setCurrentSequence((prev) =>
+                    prev + 1 < prologSequences.length ? prev + 1 : prev
+                  )
+                }
+                className='w-max ml-auto p-2 pb-1 text-white border border-blue-200 hover:bg-blue-500 flex gap-3 text-xs lg:text-base'
+              >
+                Selanjutya
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  storeToOpenedProlog();
+                  setOpen(false);
+                }}
+                className='w-max ml-auto p-2 pb-1 text-yellow-900 border border-yellow-600 bg-gradient-to-tr from-yellow-500 to-yellow-50 flex gap-3 text-xs lg:text-base'
+              >
+                Mulai petualangan
+              </button>
+            )}
+          </div>
         </div>
       </motion.div>
     </>
   );
-}
-
-{
-  /* <TypingAnimation text={textSequence} /> */
 }

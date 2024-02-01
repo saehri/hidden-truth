@@ -2,7 +2,6 @@ import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {twMerge} from 'tailwind-merge';
 
-import UserAvatar from './UserAvatar';
 import MainMenu from './MainMenu';
 import GameUserEnergyAndMoneyBar from './UserEnergyAndMoneyBar';
 import FullscreenToggle from '../ui/FullscreenToggle';
@@ -33,8 +32,6 @@ export default function MainNavigation() {
         )}
       >
         <ul className='flex justify-between'>
-          <UserAvatar />
-
           <GameUserEnergyAndMoneyBar />
 
           <MainMenu />

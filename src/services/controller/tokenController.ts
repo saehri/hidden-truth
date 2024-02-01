@@ -1,48 +1,28 @@
-import {useAtom} from 'jotai';
-import {RESET, atomWithStorage} from 'jotai/utils';
+import {create} from 'zustand';
 
-export const TOKEN_STORAGE_KEY = 'v3r1f_t0k3n';
+const TOKEN_STORAGE_KEY = 'VERIF_TOKEN';
 
-// PROLOG LOCAL STORAGE FUNCTION
-const tokenController = atomWithStorage(
-  TOKEN_STORAGE_KEY,
-  '',
-  {
-    // @ts-ignore
-    getItem(key, initialValue) {
-      try {
-        const storedValue = localStorage.getItem(key);
-        return storedValue;
-      } catch (error) {
-        return initialValue;
-      }
-    },
-    setItem(TOKEN_STORAGE_KEY, value: string) {
-      localStorage.setItem(TOKEN_STORAGE_KEY, value);
-    },
-    removeItem(key) {
-      localStorage.removeItem(key);
-    },
-  },
-  {getOnInit: true}
-);
-
-const useTokenController = () => {
-  const [data, setData] = useAtom(tokenController);
-
-  function reset() {
-    setData(RESET);
-  }
-
-  return {
-    data,
-    setData,
-    reset,
-  };
+const initialState = {
+  token: localStorage.getItem(TOKEN_STORAGE_KEY),
 };
 
-export function getVerificationToken() {
-  return localStorage.getItem(TOKEN_STORAGE_KEY);
-}
+const tokenStore = create(() => initialState);
 
-export default useTokenController;
+export default function useTokenController() {
+  const {token} = tokenStore();
+
+  return {
+    token,
+    saveToken: (token: string) => {
+      localStorage.setItem(TOKEN_STORAGE_KEY, token);
+    },
+    removeToken: () => {
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
+    },
+    getToken() {
+      const token = localStorage.getItem(TOKEN_STORAGE_KEY);
+      tokenStore.setState({token});
+      return token;
+    },
+  };
+}

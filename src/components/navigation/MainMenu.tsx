@@ -1,5 +1,6 @@
 import Icons from '../ui/Icons';
 import Button from '../ui/Button';
+import PlayerMenu from '../ui/PlayerMenu';
 
 export default function MainMenu() {
   const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
@@ -17,9 +18,7 @@ export default function MainMenu() {
         <Icons.NotificationUnread className={buttonIconSizes} />
       </Button>
 
-      <Button>
-        <Icons.Briefcase className={buttonIconSizes} />
-      </Button>
+      <PlayerMenu />
 
       <Button>
         <Icons.Setting className={buttonIconSizes} />

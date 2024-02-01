@@ -1,77 +1,92 @@
-import {useAtom} from 'jotai';
-import {RESET, atomWithStorage} from 'jotai/utils';
-import crypty from '../API/crypty';
+import {create} from 'zustand';
+import useFetch from '../hooks/useFetch';
+import useTokenController from './tokenController';
+import {toast} from 'react-toastify';
 
-export type UserTypes = {
-  _id: string;
-  username: string;
-  email: string;
-  age: number | null;
-  gender: string | null;
-  is_new_user: boolean;
-  created_at: string;
+import {UserTypes} from '../utils/types';
+
+const USER_LOCAL_STORAGE_KEY = 'USER_DATA';
+
+const initialState = {
+  user: JSON.parse(localStorage.getItem(USER_LOCAL_STORAGE_KEY) ?? '{}'),
 };
 
-export const USER_STORAGE_KEY = 'u_d4t4_1mp0rt3n';
+const userStore = create<{user?: UserTypes}>(() => initialState);
 
-// PROLOG LOCAL STORAGE FUNCTION
-const userController = atomWithStorage(
-  USER_STORAGE_KEY,
-  {},
-  {
-    getItem(key) {
-      const storedValue = localStorage.getItem(key);
-
-      try {
-        return JSON.parse(crypty.decrypt(storedValue));
-      } catch {
-        return undefined;
-      }
-    },
-    setItem(STORAGE_KEY, value: UserTypes | {}) {
-      let oldData = {};
-
-      try {
-        const data = localStorage.getItem(STORAGE_KEY);
-        oldData = JSON.parse(crypty.decrypt(data));
-      } catch (error) {
-        oldData = {};
-      }
-
-      const newData = {...oldData, ...value};
-      const hashedData = crypty.encrypt(newData);
-
-      localStorage.setItem(USER_STORAGE_KEY, hashedData);
-    },
-    removeItem(key) {
-      localStorage.removeItem(key);
-    },
-  },
-  {getOnInit: true}
-);
-
-const useUserController = () => {
-  const [data, setData] = useAtom(userController);
-
-  function reset() {
-    setData(RESET);
-  }
+export default function useUserController() {
+  const {user} = userStore();
+  const fetch = useFetch();
+  const tokenController = useTokenController();
 
   return {
-    data,
-    setData,
-    reset,
+    user,
+    signIn: async (params: {username: string; password: string}) => {
+      try {
+        const response = await fetch.post('/auth/signin', params);
+
+        if (response.success) {
+          toast.success(response.message);
+
+          userStore.setState({
+            user: response.data,
+          });
+
+          localStorage.setItem(
+            USER_LOCAL_STORAGE_KEY,
+            JSON.stringify(response.data)
+          );
+          tokenController.saveToken(response.verification_token);
+
+          return response;
+        } else {
+          toast.error(response.message);
+
+          throw new Error(response.message);
+        }
+      } catch (error: any) {
+        console.error(error.response.data);
+      }
+    },
+    signUp: async (params: {
+      username: string;
+      password: string;
+      email: string;
+    }) => {
+      try {
+        const response = await fetch.post('/auth/signup', params);
+        toast.success(response.message);
+
+        return response;
+      } catch (error: any) {
+        toast.error(error.message);
+
+        console.error(error.response.data);
+      }
+    },
+    getUserFromStorage: () => {
+      return localStorage.getItem(USER_LOCAL_STORAGE_KEY);
+    },
+    edit: async (params: any) => {
+      try {
+        const response = await fetch.put('/user/' + user?._id, params);
+
+        console.log(response);
+
+        if (response.success) {
+          userStore.setState({user: response.data});
+
+          localStorage.setItem(
+            USER_LOCAL_STORAGE_KEY,
+            JSON.stringify(response.data)
+          );
+
+          return response;
+        } else {
+          throw new Error(response.message);
+        }
+      } catch (error: any) {
+        console.error(error.response.data);
+      }
+    },
   };
-};
-
-export function getUserData() {
-  const storedValue = localStorage.getItem(USER_STORAGE_KEY);
-
-  try {
-    return JSON.parse(crypty.decrypt(storedValue));
-  } catch {
-    return undefined;
-  }
 }
-
-export default useUserController;
