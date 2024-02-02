@@ -10,6 +10,7 @@ import {
 import {getGameData} from '../../database/gameData';
 
 import InGameCountdown from '../ui/InGameCountdown';
+import GameEndingModal from '../modal/GameEndingModal';
 
 export default function ArrangeLetters() {
   const [gameState, setGameState] = useState<GameStateTypes>('start');
@@ -20,7 +21,7 @@ export default function ArrangeLetters() {
     storylineId: activePage.state?.storylineId as StorylineIdTypes,
   });
   const gameDuration =
-    data.difficulty === 'easy' ? 60 : data.difficulty === 'medium' ? 45 : 30;
+    data.difficulty === 'easy' ? 60 : data.difficulty === 'medium' ? 190 : 60;
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -34,6 +35,7 @@ export default function ArrangeLetters() {
         <ArrangeLettersCards
           answer={data.answer}
           data={data.scrambledLetters}
+          setGameState={setGameState}
         />
 
         <div
@@ -51,17 +53,29 @@ export default function ArrangeLetters() {
           </div>
         </div>
       </div>
+
+      {gameState === 'completed' && (
+        <GameEndingModal status={gameState === 'completed' ? 'win' : 'over'} />
+      )}
     </section>
   );
 }
 
-function ArrangeLettersCards({data, answer}: {data: string[]; answer: string}) {
+function ArrangeLettersCards({
+  data,
+  answer,
+  setGameState,
+}: {
+  data: string[];
+  answer: string;
+  setGameState: React.Dispatch<React.SetStateAction<GameStateTypes>>;
+}) {
   const [gameData, setGameData] = useState<string[]>(data);
 
   useEffect(() => {
     const userAnswer = gameData.map((l) => l.split('_')[0]).join('');
     if (userAnswer === answer) {
-      console.log('win');
+      setGameState('completed');
     }
   }, [gameData]);
 
