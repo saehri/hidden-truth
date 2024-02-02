@@ -35,7 +35,7 @@ export default function MainNavigation() {
         <ul className='flex justify-between'>
           <GameUserEnergyAndMoneyBar />
 
-          <MainMenu />
+          {!hideMainNavigation && <MainMenu />}
         </ul>
       </nav>
 
