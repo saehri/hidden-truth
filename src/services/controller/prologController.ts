@@ -47,6 +47,12 @@ export default function usePrologController() {
 
           localStorage.setItem(STORAGE_KEY, JSON.stringify(openedProlog));
         }
+      } else {
+        prologStore.setState({
+          openedProlog: [storylineId],
+        });
+
+        localStorage.setItem(STORAGE_KEY, JSON.stringify([storylineId]));
       }
     },
   };

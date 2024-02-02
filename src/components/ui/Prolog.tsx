@@ -16,14 +16,22 @@ export function PrologWrapper({storylineId}: PrologWrapper) {
     prologController.getOpenedProlog();
   }, []);
 
+  console.log(prologController.openedProlog);
+
+  console.log(
+    !(prologController.openedProlog.indexOf(storylineId as never) > 0)
+  );
+
+  function storeToOpenedProlog() {
+    prologController.setOpenedProlog(storylineId);
+  }
+
   return (
     <>
       {!(prologController.openedProlog.indexOf(storylineId as never) >= 0) && (
         <Prolog
           storylineId={storylineId}
-          storeToOpenedProlog={() =>
-            prologController.setOpenedProlog(storylineId)
-          }
+          storeToOpenedProlog={storeToOpenedProlog}
         />
       )}
     </>
@@ -69,9 +77,7 @@ export function Prolog({storylineId, storeToOpenedProlog}: Prolog) {
               </button>
             ) : (
               <button
-                onClick={() => {
-                  storeToOpenedProlog();
-                }}
+                onClick={storeToOpenedProlog}
                 className='w-max ml-auto p-2 pb-1 text-yellow-900 border border-yellow-600 bg-gradient-to-tr from-yellow-500 to-yellow-50 flex gap-3 text-xs lg:text-base'
               >
                 Mulai petualangan
