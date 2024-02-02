@@ -16,12 +16,6 @@ export function PrologWrapper({storylineId}: PrologWrapper) {
     prologController.getOpenedProlog();
   }, []);
 
-  console.log(prologController.openedProlog);
-
-  console.log(
-    !(prologController.openedProlog.indexOf(storylineId as never) > 0)
-  );
-
   function storeToOpenedProlog() {
     prologController.setOpenedProlog(storylineId);
   }
