@@ -37,10 +37,6 @@ export default function InGameCountdown({
     countdownApiRef.current?.pause();
   };
 
-  const isPaused = (): boolean => {
-    return countdownApiRef.current?.isPaused() ?? false;
-  };
-
   const isCompleted = (): boolean => {
     return countdownApiRef.current?.isCompleted() ?? false;
   };

@@ -93,6 +93,7 @@ function Storylines() {
               state: {
                 storylineId: v.storylineId,
                 storylineType: v.storylineType,
+                storylineTitle: v.storylineTitle,
               },
             })
           }
