@@ -2,7 +2,7 @@ import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import {twMerge} from 'tailwind-merge';
-import AvatarCard from '../ui/PlayerMenu';
+import AvatarCard from '../player-menu/PlayerMenu';
 
 export default function GameUserAvatar() {
   const {activePage} = useContext(ActivePageContext);
