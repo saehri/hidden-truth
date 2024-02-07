@@ -1,6 +1,7 @@
 import {useContext} from 'react';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import {StorylineIdTypes, StorylineTypes} from '../services/utils/types';
+import {motion} from 'framer-motion';
 
 import {PrologWrapper} from '../components/ui/Prolog';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
@@ -27,8 +28,13 @@ export default function StorylineDetailPage() {
       </div>
 
       <FullscreenBackground
-        imageLink={'/background/homescreen-big.webp'}
-        placeholderLink={'/background/placeholder/homescreen-placeholder.webp'}
+        imageLink={
+          'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
+        }
+        placeholderLink={
+          'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
+        }
+        animate={false}
       />
 
       <PrologWrapper
@@ -42,8 +48,10 @@ function Navigation() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   return (
-    <div
-      className='absolute top-0 left-1/2 -translate-x-1/2 z-50 p-4 px-10 bg-background flex items-center gap-12 text-yellow-400'
+    <motion.div
+      initial={{opacity: 0, y: '-50%', x: '-50%'}}
+      animate={{opacity: 1, y: 0, x: '-50%'}}
+      className='absolute top-0 left-1/2 z-50 p-4 px-10 bg-background flex items-center gap-12 text-yellow-400'
       style={{clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)'}}
     >
       <button
@@ -79,6 +87,6 @@ function Navigation() {
           Kembali ke halaman pemilihan alur cerita
         </span>
       </button>
-    </div>
+    </motion.div>
   );
 }

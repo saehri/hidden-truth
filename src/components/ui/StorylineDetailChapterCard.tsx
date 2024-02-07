@@ -36,7 +36,7 @@ export default function StorylineDetailChapterCard({
         <div key={ch.chapterName}>
           <div className='w-full relative pt-[100%]'>
             <img
-              src='/decoration/thumbtack.webp'
+              src='https://utfs.io/f/c4aecbaa-0ed6-41c1-97a6-36715aee7b82-ynibs.webp'
               width={60}
               height={60}
               className='absolute -top-2 -right-2 z-20 rotate-[90deg]'

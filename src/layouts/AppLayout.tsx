@@ -1,3 +1,4 @@
+import WithMusicModal from '../components/audio/WithMusicModal';
 import MainNavigation from '../components/navigation/MainNavigation';
 import WrongDeviceOrientationWarner from '../components/ui/WrongDeviceOrientationWarner';
 
@@ -28,6 +29,7 @@ export default function AppLayout({children}: AppLayout) {
         </section>
       </main>
 
+      <WithMusicModal />
       <WrongDeviceOrientationWarner />
     </>
   );

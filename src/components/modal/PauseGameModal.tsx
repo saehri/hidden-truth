@@ -61,7 +61,7 @@ export default function PauseGameModal({
             <motion.img
               initial={{opacity: 0}}
               animate={{opacity: 1}}
-              src='/background/modal paused game background.webp'
+              src='https://utfs.io/f/609ea85c-f146-469c-836c-5e1fd875e5e2-emhtjq.webp'
               alt=''
               className='absolute top-0 left-0 w-full h-full object-cover'
             />

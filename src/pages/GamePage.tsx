@@ -14,8 +14,8 @@ export default function GamePage() {
       </div>
 
       <FullscreenBackground
-        imageLink='/background/gamepage-big.webp'
-        placeholderLink='/background/gamepage-big.webp'
+        imageLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
+        placeholderLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
       />
     </div>
   );

@@ -81,8 +81,13 @@ export default function StorylineTypeSelectionPage() {
       </div>
 
       <FullscreenBackground
-        imageLink='/background/gamepage-big.webp'
-        placeholderLink='/background/gamepage-big.webp'
+        imageLink={
+          'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
+        }
+        placeholderLink={
+          'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
+        }
+        animate={false}
       />
     </>
   );

@@ -124,7 +124,7 @@ function GameOverviewModal({
 
               <div className='absolute z-[-1] top-0 left-0 w-full h-full overflow-hidden rounded-md'>
                 <img
-                  src='/background/homescreen-big.webp'
+                  src='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
                   alt=''
                   className='w-full h-full object-cover brightness-50'
                 />
@@ -138,10 +138,7 @@ function GameOverviewModal({
                       gameId: gameId,
                       gameType: gameType,
                       gameName: `${chapterName}: ${gameName}`,
-                      storylineId: activePage.state
-                        ?.storylineId as StorylineIdTypes,
-                      storylineType: activePage.state
-                        ?.storylineType as StorylineTypes,
+                      ...activePage.state,
                     },
                   })
                 }
