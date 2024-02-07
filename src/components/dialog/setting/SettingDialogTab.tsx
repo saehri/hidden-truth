@@ -43,7 +43,7 @@ export default function SettingDialogTab() {
           <div className='flex justify-between items-center w-full text-slate-500 text-[10px] lg:text-sm'>
             <span className='w-max flex'>
               {/* @ts-ignore */}
-              Player ID: {characterController.character._id}
+              Player ID: {characterController.character._id || ''}
             </span>
 
             <span>Version: 1.00.1</span>
