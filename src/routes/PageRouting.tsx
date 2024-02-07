@@ -1,5 +1,6 @@
 import {useContext, useLayoutEffect} from 'react';
 import {MotionConfig} from 'framer-motion';
+import {ToastContainer} from 'react-toastify';
 import {
   ActivePageContext,
   ViewablePageTypes,
@@ -16,8 +17,6 @@ import DialogPage from '../pages/DialogPage';
 import SignupPage from '../pages/SignupPage';
 import SigninPage from '../pages/SigninPage';
 import useUserController from '../services/controller/userController';
-import {ToastContainer} from 'react-toastify';
-import useTokenController from '../services/controller/tokenController';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -52,7 +51,7 @@ const securePages = [
 function PageViewer() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
-  const tokenController = useTokenController();
+  const userController = useUserController();
 
   /* Everytime the user navigate to a differen route, we check wether:
    - Are they about to visit secure route? If so check for the user data in local storage
@@ -63,12 +62,20 @@ function PageViewer() {
     **This operation is done inside useLayoutEffect to avoid weird page rendering behavior
   */
   useLayoutEffect(() => {
-    const userVerifToken = tokenController.getToken();
+    const userData = userController.getUserDataFromSessionStorage();
 
     // Check if the user requested route is a secure route
+    /* 
+    WARNING: Do not simplify this conditonal logics. I already tried it and it resulted on infinity loop.
+    */
+
     if (securePages.includes(activePage.location)) {
-      if (!userVerifToken) {
+      if (!userData) {
         setActivePage({location: 'signinPage'});
+      }
+    } else {
+      if (userData) {
+        setActivePage({location: 'homepage'});
       }
     }
   }, [activePage.location]);
