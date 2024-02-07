@@ -1,21 +1,19 @@
 import {motion} from 'framer-motion';
-import {Dispatch, SetStateAction, memo, useEffect} from 'react';
-import useCharacterController from '../../../services/controller/characterController';
-import useUserController from '../../../services/controller/userController';
 import {createPortal} from 'react-dom';
+import {Dispatch, SetStateAction, memo} from 'react';
+
 import {CharacterTypes} from '../../../services/utils/types';
 import PlayerMenuTab from '../player-menu-tab/PlayerMenuTab';
 import Icons from '../../ui/Icons';
 
 const PlayerMenuModal = memo(
-  ({setCardOpen}: {setCardOpen: Dispatch<SetStateAction<boolean>>}) => {
-    const characterController = useCharacterController();
-    const userController = useUserController();
-
-    useEffect(() => {
-      characterController.getCharacter(userController.user?._id!);
-    }, []);
-
+  ({
+    setCardOpen,
+    character,
+  }: {
+    setCardOpen: Dispatch<SetStateAction<boolean>>;
+    character: any;
+  }) => {
     return (
       <>
         {createPortal(
@@ -36,14 +34,7 @@ const PlayerMenuModal = memo(
             >
               <div className='relative w-full h-full'>
                 <div className='absolute top-0 left-0 w-full h-full grid grid-cols-[40%,_1fr] gap-5'>
-                  {characterController.character ? (
-                    <CardContent {...characterController.character!} />
-                  ) : (
-                    <>
-                      <div className='w-full h-full bg-slate-300 animate-pulse'></div>
-                      <div className='w-full h-full bg-slate-300 animate-pulse'></div>
-                    </>
-                  )}
+                  <CardContent {...character} />
                 </div>
 
                 <img
@@ -101,12 +92,12 @@ function CardContent({
           />
         </div>
 
-        <div className='grid grid-cols-2 gap-5'>
+        <div className='grid grid-cols-[_1fr,_1fr] gap-3'>
           <div>
             <div className='grid grid-cols-[max-content,_5px,_1fr] gap-3 gap-y-0 text-slate-950 text-xs lg:text-base xl:text-xl mb-3'>
               <span>Name</span>
               <span>:</span>
-              <span>{character_name}</span>
+              <span className='block w-max'>{character_name}</span>
 
               <span>Rank</span>
               <span>:</span>
@@ -114,9 +105,9 @@ function CardContent({
             </div>
           </div>
 
-          <div className='relative w-full h-full'>
+          <div className='relative'>
             <img
-              className='absolute top-0 left-0 w-full h-full object-fill object-center'
+              className='absolute top-0 left-0 w-full h-full object-cover object-center'
               src='https://utfs.io/f/d179a575-f62b-4c7e-81c5-7a50771a35d0-m35xnk.webp'
               alt=''
               draggable={false}
