@@ -12,7 +12,7 @@ export default function MoneyBar() {
     <EnergyAndMoneyBarWrapper>
       <Icons.Dollar className='w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8 absolute -left-2 3xl:-left-4 top-1/2 -translate-y-1/2' />
 
-      <span>200</span>
+      <span>&infin;</span>
 
       {activePage.location !== 'gamePage' && (
         <Button className='absolute -right-3 top-1/2 -translate-y-1/2 bg-primary/95 border border-border-light rounded-full'>

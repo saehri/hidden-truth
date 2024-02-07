@@ -11,11 +11,11 @@ export default function MainMenu() {
       id='game__user-navigation'
       className='flex gap-2 sm:gap-4 md:gap-6 xl:gap-8 3xl:gap-12'
     >
-      <Button>
+      <Button className='sr-only'>
         <Icons.ShoppingBag className={buttonIconSizes} />
       </Button>
 
-      <Button>
+      <Button className='sr-only'>
         <Icons.NotificationUnread className={buttonIconSizes} />
       </Button>
 
