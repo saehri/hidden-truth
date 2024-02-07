@@ -4,8 +4,10 @@ import useTokenController from './tokenController';
 
 import {UserTypes} from '../utils/types';
 
+const SESSION_STORAGE_KEY = 'ud4t4';
+
 const initialState = {
-  user: undefined,
+  user: JSON.parse(sessionStorage.getItem(SESSION_STORAGE_KEY)! || '{}'),
 };
 
 const userStore = create<{user?: UserTypes}>(() => initialState);
@@ -25,6 +27,11 @@ export default function useUserController() {
           userStore.setState({
             user: response.data,
           });
+
+          sessionStorage.setItem(
+            SESSION_STORAGE_KEY,
+            JSON.stringify(response.data)
+          );
 
           tokenController.saveToken(response.verification_token);
           return response;
@@ -49,6 +56,9 @@ export default function useUserController() {
         console.error(error.response.data);
         return {message: error.response.data.message, success: false};
       }
+    },
+    getUserDataFromSessionStorage: () => {
+      return sessionStorage.getItem(SESSION_STORAGE_KEY);
     },
     edit: async (params: any) => {
       try {
