@@ -51,7 +51,7 @@ function Navigation() {
     <motion.div
       initial={{opacity: 0, y: '-50%', x: '-50%'}}
       animate={{opacity: 1, y: 0, x: '-50%'}}
-      className='absolute top-0 left-1/2 z-50 p-2 lg:p-4 px-5 lg:px-10 bg-background flex items-center gap-6 lg:gap-12 text-yellow-400'
+      className='absolute top-0 left-1/2 z-50 p-2 lg:p-4 px-5 lg:px-10 bg-background flex items-center gap-6 lg:gap-12 text-yellow-400 w-max'
       style={{clipPath: 'polygon(0 0, 100% 0, 95% 100%, 5% 100%)'}}
     >
       <button
