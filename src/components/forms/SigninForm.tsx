@@ -1,4 +1,5 @@
 import {ChangeEvent, FormEvent, useContext, useState} from 'react';
+import {toast} from 'react-toastify';
 
 import {FormStateTypes} from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
@@ -28,12 +29,18 @@ export default function SigninForm() {
     setFormState('process');
     try {
       const response = await userController.signIn(formData);
+
       if (response.success) {
+        toast.success(response.message);
+
         setTimeout(() => {
           setActivePage({location: 'homepage'});
         }, 1500);
+      } else {
+        throw new Error(response.message);
       }
-    } catch (error) {
+    } catch (error: any) {
+      toast.error(error.message);
       setFormState('error');
     } finally {
       setFormState('idle');

@@ -36,7 +36,7 @@ const PlayerMenuModal = memo(
             >
               <div className='relative w-full h-full'>
                 <div className='absolute top-0 left-0 w-full h-full grid grid-cols-[40%,_1fr] gap-5'>
-                  {Object.keys(characterController.character!).length ? (
+                  {characterController.character ? (
                     <CardContent {...characterController.character!} />
                   ) : (
                     <>

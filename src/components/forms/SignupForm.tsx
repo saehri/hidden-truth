@@ -1,4 +1,5 @@
 import {ChangeEvent, FormEvent, useContext, useState} from 'react';
+import {toast} from 'react-toastify';
 
 import {Input, Label} from './FormElementsGeneric';
 import FormSubmitButton from '../ui/FormSubmitButton';
@@ -10,11 +11,6 @@ type FormDataTypes = {
   email: string;
   username: string;
   password: string;
-};
-
-type ResponseDataTypes = {
-  success: boolean;
-  message: string;
 };
 
 export default function SignupForm() {
@@ -36,6 +32,8 @@ export default function SignupForm() {
       const response = await userController.signUp(formData);
 
       if (response.success) {
+        toast.success(response.message);
+
         setTimeout(() => {
           setActivePage({location: 'signinPage'});
         }, 1500);
@@ -43,6 +41,7 @@ export default function SignupForm() {
         throw new Error(response.message);
       }
     } catch (error: any) {
+      toast.error(error.message);
       setFormState('error');
     } finally {
       setFormState('idle');

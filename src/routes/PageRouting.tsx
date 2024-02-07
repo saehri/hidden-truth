@@ -17,6 +17,7 @@ import SignupPage from '../pages/SignupPage';
 import SigninPage from '../pages/SigninPage';
 import useUserController from '../services/controller/userController';
 import {ToastContainer} from 'react-toastify';
+import useTokenController from '../services/controller/tokenController';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -51,7 +52,7 @@ const securePages = [
 function PageViewer() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
-  const userController = useUserController();
+  const tokenController = useTokenController();
 
   /* Everytime the user navigate to a differen route, we check wether:
    - Are they about to visit secure route? If so check for the user data in local storage
@@ -62,16 +63,12 @@ function PageViewer() {
     **This operation is done inside useLayoutEffect to avoid weird page rendering behavior
   */
   useLayoutEffect(() => {
-    const userData = userController.getUserFromStorage();
+    const userVerifToken = tokenController.getToken();
 
     // Check if the user requested route is a secure route
     if (securePages.includes(activePage.location)) {
-      if (!userData) {
+      if (!userVerifToken) {
         setActivePage({location: 'signinPage'});
-      }
-    } else {
-      if (userData) {
-        setActivePage({location: 'homepage'});
       }
     }
   }, [activePage.location]);

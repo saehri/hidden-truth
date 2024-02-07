@@ -54,6 +54,44 @@ const SSPemilu24: StorylineDataTypes = {
         },
       ],
     },
+    {
+      chapterName: 'Chapter 3 - Masalah Besar',
+      games: [
+        {
+          gameId: 'PEMILU24-TG-C3-1',
+          gameType: 'TG',
+          gameName: 'Tikus yang tidur',
+          hasOpeningDialog: false,
+          location: 'Jakarta timur',
+        },
+        {
+          gameId: 'PEMILU24-TG-C3-2',
+          gameType: 'TG',
+          gameName: 'Tikus gendut',
+          hasOpeningDialog: true,
+          location: 'Jakarta utara',
+        },
+      ],
+    },
+    {
+      chapterName: 'Chapter 4 - Penjara',
+      games: [
+        {
+          gameId: 'PEMILU24-TG-C4-1',
+          gameType: 'TG',
+          gameName: 'Tikus yang tidur',
+          hasOpeningDialog: false,
+          location: 'Jakarta timur',
+        },
+        {
+          gameId: 'PEMILU24-TG-C4-2',
+          gameType: 'TG',
+          gameName: 'Tikus gendut',
+          hasOpeningDialog: true,
+          location: 'Jakarta utara',
+        },
+      ],
+    },
   ],
 };
 
