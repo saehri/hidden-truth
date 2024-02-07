@@ -1,24 +1,19 @@
 import {motion} from 'framer-motion';
-import {useContext} from 'react';
+import {memo} from 'react';
 import {createPortal} from 'react-dom';
 import {twMerge} from 'tailwind-merge';
 
 import AvatarCreationForm from '../forms/AvatarCreationForm';
 import useUserController from '../../services/controller/userController';
-import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-export default function NewUserDialog() {
-  const {setActivePage} = useContext(ActivePageContext);
+const NewUserDialog = memo(() => {
   const userController = useUserController();
   const userData = userController.getUserDataFromSessionStorage();
-
-  if (!userData) {
-    return setActivePage({location: 'signinPage'});
-  }
+  const isNewUser = userData && JSON.parse(userData).is_new_user;
 
   return (
     <>
-      {JSON.parse(userData).is_new_user &&
+      {isNewUser ? (
         createPortal(
           <motion.div
             initial={{opacity: 0}}
@@ -74,7 +69,12 @@ export default function NewUserDialog() {
           document.getElementById('emtris__dialog') as
             | Element
             | DocumentFragment
-        )}
+        )
+      ) : (
+        <div></div>
+      )}
     </>
   );
-}
+});
+
+export default NewUserDialog;
