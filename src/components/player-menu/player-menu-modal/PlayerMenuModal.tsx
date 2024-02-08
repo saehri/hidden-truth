@@ -17,7 +17,7 @@ const PlayerMenuModal = memo(
     return (
       <>
         {createPortal(
-          <div className='fixed top-0 left-0 w-full h-full z-[100] p-6 xl:p-8'>
+          <div className='fixed top-0 left-0 w-full h-full z-[100] p-6 px-12 xl:p-8 xl:px-8'>
             <motion.div
               initial={{opacity: 0, y: 50}}
               animate={{opacity: 1, y: 0, transition: {delay: 0.3}}}
