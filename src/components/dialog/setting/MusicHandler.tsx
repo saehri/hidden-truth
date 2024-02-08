@@ -7,7 +7,7 @@ export default function MusicHandler() {
   const musicController = useContext(AudioContext);
 
   const iconStyles =
-    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8';
+    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 lg:w-10 lg:h-10';
 
   function toggleAudio() {
     setOn(!isOn);
@@ -25,7 +25,7 @@ export default function MusicHandler() {
         onClick={toggleAudio}
         className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-2 rounded-full'
       >
-        <div className='w-14 h-14 grid place-items-center rounded-full bg-background relative'>
+        <div className='w-14 h-14 lg:w-20 lg:h-20 grid place-items-center rounded-full bg-background relative'>
           {isOn ? (
             <Icons.MusicOn className={iconStyles} />
           ) : (

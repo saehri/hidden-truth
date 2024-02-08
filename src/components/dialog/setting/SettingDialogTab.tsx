@@ -8,7 +8,7 @@ export default function SettingDialogTab() {
 
   return (
     <>
-      <h4 className='block absolute -top-5 left-1/2 -translate-x-1/2 p-2 pt-3 px-4 bg-gradient-to-b from-green-950 to-background text-yellow-500 rounded-full shadow-md border border-border text-base lg:text-lg'>
+      <h4 className='block absolute -top-5 left-1/2 -translate-x-1/2 p-2 pt-3 px-4 bg-gradient-to-b from-green-950 to-background text-yellow-500 rounded-full shadow-md border border-border text-xs lg:text-base'>
         PENGATURAN
       </h4>
 
@@ -19,10 +19,10 @@ export default function SettingDialogTab() {
               href='mailto:saepulbahree36@gmail.com'
               target='_blank'
               whileHover={{opacity: 0.8}}
-              className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-2 rounded-full'
+              className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-1 lg:p-2 rounded-full'
             >
-              <div className='w-14 h-14 grid place-items-center rounded-full bg-background relative'>
-                <Icons.CustomerService className='w-8 h-8' />
+              <div className='w-10 h-10 grid lg:w-12 lg:h-12 place-items-center rounded-full bg-background relative'>
+                <Icons.CustomerService className='w-5 h-5 lg:w-7 lg:h-7' />
               </div>
             </motion.a>
 
@@ -32,10 +32,10 @@ export default function SettingDialogTab() {
               whileHover={{opacity: 0.8}}
               href='mailto:saepulbahree36@gmail.com'
               target='_blank'
-              className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-2 rounded-full'
+              className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-1 lg:p-2 rounded-full'
             >
-              <div className='w-14 h-14 grid place-items-center rounded-full bg-background relative'>
-                <Icons.Share className='w-8 h-8' />
+              <div className='w-10 h-10 lg:w-12 lg:h-12 grid place-items-center rounded-full bg-background relative'>
+                <Icons.Share className='w-5 h-5 lg:w-7 lg:h-7' />
               </div>
             </motion.a>
           </div>

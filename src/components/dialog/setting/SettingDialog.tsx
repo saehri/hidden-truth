@@ -43,7 +43,7 @@ function SettingDialogContent({
             animate={{opacity: 1, y: 0, transition: {delay: 0.3}}}
             exit={{opacity: 1, y: '100%'}}
             transition={{ease: 'easeInOut', duration: 0.3}}
-            className='w-full h-full bg-white rounded-xl lg:rounded-2xl xl:rounded-3xl p-4 pb-2 mx-auto relative z-20 max-w-[500px] max-h-80 border border-border-light'
+            className='w-full h-full bg-white rounded-xl lg:rounded-2xl xl:rounded-3xl p-4 pb-2 mx-auto relative z-20 max-w-96 lg:max-w-[500px] max-h-60 lg:max-h-80 border border-border-light'
           >
             <Button
               className='absolute -right-4 -top-4'
