@@ -20,7 +20,7 @@ export default function AudioWrapper({children}: {children: React.ReactNode}) {
     <AudioContext.Provider value={{...apiValue}}>
       {children}
 
-      <audio src='/audio/afx-lounge.mp3' ref={musicRef}></audio>
+      <audio src='/audio/afx-lounge.mp3' ref={musicRef} loop></audio>
     </AudioContext.Provider>
   );
 }
