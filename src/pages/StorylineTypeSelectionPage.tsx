@@ -1,7 +1,7 @@
 import {motion} from 'framer-motion';
 
 import BackButton from '../components/ui/BackButton';
-import EpisodeTypeCard from '../components/ui/StorylineTypeCard';
+import StorylineTypeCard from '../components/ui/StorylineTypeCard';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import LineDecoration from '../components/ui/LineDecoration';
 import storylineTypes from '../database/storyline/storylineTypes';
@@ -47,7 +47,7 @@ export default function StorylineTypeSelectionPage() {
               className='grid grid-cols-3 gap-2 h-full'
             >
               {storylineTypes.map((st) => (
-                <EpisodeTypeCard
+                <StorylineTypeCard
                   key={st.type}
                   name={st.name}
                   description={st.description}
