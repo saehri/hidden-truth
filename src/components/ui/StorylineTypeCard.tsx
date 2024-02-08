@@ -37,6 +37,12 @@ export default function StorylineTypeCard({
       transition={{damping: 10}}
       className='w-full h-full bg-background border-[1.5px] border-border relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-20 disabled:after:hover:opacity-0 after:transition-opacity overflow-hidden'
     >
+      {locked && (
+        <span className='p-2 rounded-sm bg-red-800 text-yellow-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 text-xs lg:text-base'>
+          TERKUNCI
+        </span>
+      )}
+
       <div
         className={twMerge(
           'flex justify-end flex-col text-left text-base relative w-full h-full p-2 pr-4 md:p-4',
