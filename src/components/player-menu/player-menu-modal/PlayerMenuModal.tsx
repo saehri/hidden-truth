@@ -17,14 +17,7 @@ const PlayerMenuModal = memo(
     return (
       <>
         {createPortal(
-          <div className='fixed top-0 left-0 w-full h-full z-[100] p-4 lg:p-6 xl:p-8'>
-            <button
-              onClick={() => setCardOpen(false)}
-              className='absolute z-50 top-2 right-2 lg:top-4 lg:right-4 xl:top-6 xl:right-6'
-            >
-              <Icons.CloseCircled className='w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8' />
-            </button>
-
+          <div className='fixed top-0 left-0 w-full h-full z-[100] p-6 xl:p-8'>
             <motion.div
               initial={{opacity: 0, y: 50}}
               animate={{opacity: 1, y: 0, transition: {delay: 0.3}}}
@@ -32,6 +25,13 @@ const PlayerMenuModal = memo(
               transition={{ease: 'easeInOut', duration: 0.3}}
               className='w-full h-full bg-white rounded-xl lg:rounded-2xl xl:rounded-3xl p-6 pr-10 mx-auto relative z-20'
             >
+              <button
+                onClick={() => setCardOpen(false)}
+                className='absolute z-50 -top-2 -right-2'
+              >
+                <Icons.CloseCircled className='w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8' />
+              </button>
+
               <div className='relative w-full h-full'>
                 <div className='absolute top-0 left-0 w-full h-full grid grid-cols-[40%,_1fr] gap-5'>
                   <CardContent {...character} />
