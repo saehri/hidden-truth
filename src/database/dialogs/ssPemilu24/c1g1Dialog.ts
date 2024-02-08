@@ -1,6 +1,7 @@
 import {DialogSequenceTypes, DialogTypes} from '..';
 
-const MRDEFACTO_IMAGE = '/avatar/wijayadefacto/regular/wijaya defacto.webp';
+const MRDEFACTO_IMAGE =
+  'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp';
 const TELEPHONE_IMAGE = '';
 
 const MRDEFACTO_NO_SPEAK: DialogTypes = {

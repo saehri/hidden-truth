@@ -1,15 +1,12 @@
 import {motion} from 'framer-motion';
 import {useContext, useState} from 'react';
 
-import {
-  GameTypes,
-  StorylineIdTypes,
-  StorylineTypes,
-} from '../../services/utils/types';
+import {GameTypes} from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import Icons from './Icons';
 import {createPortal} from 'react-dom';
+import {homepageBackground} from '../../assets/backgrounds/homepageBackground';
 
 interface GameOverviewModalProps {
   chapterName: string;
@@ -124,7 +121,7 @@ function GameOverviewModal({
 
               <div className='absolute z-[-1] top-0 left-0 w-full h-full overflow-hidden rounded-md'>
                 <img
-                  src='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
+                  src={homepageBackground}
                   alt=''
                   className='w-full h-full object-cover brightness-50'
                 />

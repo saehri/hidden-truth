@@ -4,6 +4,8 @@ import HomepageMovingAvatar from '../components/ui/HomepageMovingAvatar';
 import NewUserDialog from '../components/ui/NewUserDialog';
 import PlayGameCTA from '../components/ui/PlayGameCTA';
 
+import {homepageBackground} from '../assets/backgrounds/homepageBackground';
+
 export default function Homepage() {
   return (
     <div className='relative w-full h-full'>
@@ -18,9 +20,7 @@ export default function Homepage() {
         <HomepageGradientLayer />
         <HomepageMovingAvatar />
         <FullscreenBackground
-          imageLink={
-            'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
-          }
+          imageLink={homepageBackground}
           placeholderLink={
             'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
           }

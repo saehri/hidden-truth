@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {motion} from 'framer-motion';
 import {getStorylineData} from '../../database/storyline/storylines';
 import {
@@ -9,6 +9,9 @@ import {
 } from '../../services/utils/types';
 
 import StorylineDetailGameCard from './StorylineDetailGameCard';
+
+/* Assets */
+import {thumbStackImage} from '../../assets/images/thumbStackImage';
 
 interface StorylineDetailChapterCard {
   storylineId: StorylineIdTypes;
@@ -36,7 +39,7 @@ export default function StorylineDetailChapterCard({
         <div key={ch.chapterName}>
           <div className='w-full relative pt-[100%]'>
             <img
-              src='https://utfs.io/f/c4aecbaa-0ed6-41c1-97a6-36715aee7b82-ynibs.webp'
+              src={thumbStackImage}
               width={60}
               height={60}
               className='absolute -top-2 -right-2 z-20 rotate-[90deg]'
