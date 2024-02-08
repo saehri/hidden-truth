@@ -2,6 +2,7 @@ import {useContext} from 'react';
 import SignupForm from '../components/forms/SignupForm';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
+import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 
 export default function SignupPage() {
   return (
@@ -21,9 +22,7 @@ export default function SignupPage() {
       <div className='relative'>
         <FullscreenBackground
           animate={false}
-          imageLink={
-            'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
-          }
+          imageLink={homepageBackground}
           placeholderLink={
             'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
           }

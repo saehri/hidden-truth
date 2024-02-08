@@ -6,6 +6,11 @@ import {CharacterTypes} from '../../../services/utils/types';
 import PlayerMenuTab from '../player-menu-tab/PlayerMenuTab';
 import Icons from '../../ui/Icons';
 
+/* Assets */
+import {barCode} from '../../../assets/images/barCode';
+import {characterPicBackground} from '../../../assets/images/characterPicBackground';
+import {mapLine} from '../../../assets/images/mapLine';
+
 const PlayerMenuModal = memo(
   ({
     setCardOpen,
@@ -38,7 +43,7 @@ const PlayerMenuModal = memo(
                 </div>
 
                 <img
-                  src='https://utfs.io/f/14a43689-bfc8-42b5-ab0d-5571a9b747fb-eaifiz.webp'
+                  src={mapLine}
                   alt=''
                   className='absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-10'
                   draggable={false}
@@ -84,7 +89,7 @@ function CardContent({
           />
 
           <img
-            src='https://utfs.io/f/77aa27d9-dcd0-4c90-aa33-637c4eae55cb-wowshz.webp'
+            src={characterPicBackground}
             alt=''
             className='absolute top-0 left-0 w-full h-full object-cover brightness-200 opacity-90'
             draggable={false}
@@ -108,7 +113,7 @@ function CardContent({
           <div className='relative'>
             <img
               className='absolute top-0 left-0 w-full h-full object-cover object-center'
-              src='https://utfs.io/f/d179a575-f62b-4c7e-81c5-7a50771a35d0-m35xnk.webp'
+              src={barCode}
               alt=''
               draggable={false}
               aria-hidden='true'

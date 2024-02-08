@@ -2,6 +2,7 @@ import {motion} from 'framer-motion';
 import useCharacterController from '../../../services/controller/characterController';
 import MusicHandler from './MusicHandler';
 import Icons from '../../ui/Icons';
+import {mapLine} from '../../../assets/images/mapLine';
 
 export default function SettingDialogTab() {
   const characterController = useCharacterController();
@@ -52,7 +53,7 @@ export default function SettingDialogTab() {
         </div>
 
         <img
-          src='https://utfs.io/f/14a43689-bfc8-42b5-ab0d-5571a9b747fb-eaifiz.webp'
+          src={mapLine}
           alt=''
           className='absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-30'
           draggable={false}

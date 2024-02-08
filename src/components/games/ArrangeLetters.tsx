@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from 'react';
-import {Reorder} from 'framer-motion';
+import {AnimatePresence, Reorder} from 'framer-motion';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {
   ArrangeLettersGameDataTypes,
@@ -54,9 +54,13 @@ export default function ArrangeLetters() {
         </div>
       </div>
 
-      {gameState === 'completed' && (
-        <GameEndingModal status={gameState === 'completed' ? 'win' : 'over'} />
-      )}
+      <AnimatePresence>
+        {gameState === 'completed' && (
+          <GameEndingModal
+            status={gameState === 'completed' ? 'win' : 'over'}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -75,7 +79,7 @@ function ArrangeLettersCards({
   useEffect(() => {
     const userAnswer = gameData.map((l) => l.split('_')[0]).join('');
     if (userAnswer === answer) {
-      setGameState('completed');
+      setTimeout(() => setGameState('completed'), 500);
     }
   }, [gameData]);
 
