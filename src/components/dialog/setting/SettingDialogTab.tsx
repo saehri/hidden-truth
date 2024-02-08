@@ -5,6 +5,10 @@ import Icons from '../../ui/Icons';
 
 export default function SettingDialogTab() {
   const characterController = useCharacterController();
+  const characterId = characterController.character
+    ? /* @ts-ignore */
+      characterController.character?._id!
+    : '';
 
   return (
     <>
@@ -41,10 +45,7 @@ export default function SettingDialogTab() {
           </div>
 
           <div className='flex justify-between items-center w-full text-slate-500 text-[10px] lg:text-sm'>
-            <span className='w-max flex'>
-              {/* @ts-ignore */}
-              Player ID: {characterController.character._id || ''}
-            </span>
+            <span className='w-max flex'>Player ID: {characterId}</span>
 
             <span>Version: 1.00.1</span>
           </div>
