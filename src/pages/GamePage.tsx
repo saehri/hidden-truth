@@ -6,6 +6,7 @@ import ImageGuesser from '../components/games/ImageGuesser';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import ArrangeLetters from '../components/games/ArrangeLetters';
 import GuessThePerson from '../components/games/GuessThePerson';
+import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 
 export default function GamePage() {
   return (
@@ -15,7 +16,7 @@ export default function GamePage() {
       </div>
 
       <FullscreenBackground
-        imageLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
+        imageLink={homepageBackground}
         placeholderLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
       />
     </div>

@@ -5,12 +5,14 @@ interface Props {
   imageLink: string;
   placeholderLink: string;
   animate?: boolean;
+  className?: string;
 }
 
 export default function FullscreenBackground({
   imageLink,
   placeholderLink,
   animate = true,
+  className,
 }: Props) {
   const placeholderImage = `bg-[url("${placeholderLink}")]`;
 
@@ -21,7 +23,8 @@ export default function FullscreenBackground({
           src={imageLink}
           className={twMerge(
             'absolute w-full h-full top-0 left-0 z-10 object-cover bg-no-repeat bg-cover pointer-events-none',
-            placeholderImage
+            placeholderImage,
+            className
           )}
           alt=''
           draggable='false'
@@ -37,7 +40,8 @@ export default function FullscreenBackground({
         src={imageLink}
         className={twMerge(
           'absolute w-full h-full top-0 left-0 z-10 object-cover bg-no-repeat bg-cover pointer-events-none',
-          placeholderImage
+          placeholderImage,
+          className
         )}
         alt=''
         draggable='false'
