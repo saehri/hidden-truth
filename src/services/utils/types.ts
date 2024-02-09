@@ -7,10 +7,11 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'SK';
+export type GameTypes = 'TG' | 'SK' | 'TO';
 /* 
   TG -> Tebak Gambar,
   SK -> Susun Kata
+  TK -> Tebak Orang
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
@@ -47,6 +48,8 @@ export interface StorylineDataTypes extends StorylineCardTypes {
   playableChapter: StorylineChapterTypes[];
 }
 
+type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
+
 /* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {
   id: string;
@@ -60,7 +63,15 @@ export type ArrangeLettersGameDataTypes = {
   scrambledLetters: string[];
   answer: string;
   clue?: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  difficulty: GameDifficultyTypes;
+};
+
+export type GuessThePersonGameDataTypes = {
+  id: string;
+  suspects: {id: number; image: string}[];
+  convictsId: number[];
+  clue: string;
+  difficulty: GameDifficultyTypes;
 };
 
 export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';

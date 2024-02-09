@@ -27,10 +27,10 @@ const SSPemilu24: StorylineDataTypes = {
           location: 'Defacto Office',
         },
         {
-          gameId: 'PEMILU24-TG-C1-3',
-          gameType: 'TG',
+          gameId: 'PEMILU24-TO-C1-3',
+          gameType: 'TO',
           gameName: 'Mengidentifikasi orang bising',
-          hasOpeningDialog: true,
+          hasOpeningDialog: false,
           location: 'Kantor Gubernur Jakarta',
         },
       ],

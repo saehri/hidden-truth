@@ -53,6 +53,8 @@ function PageViewer() {
   const pageName = activePage.location;
   const userController = useUserController();
 
+  console.log(activePage);
+
   /* Everytime the user navigate to a differen route, we check wether:
    - Are they about to visit secure route? If so check for the user data in local storage
      and redirect them to sign in page if user data is null || undefined
