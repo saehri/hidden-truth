@@ -67,6 +67,7 @@ function GameOverviewModal({
   const gameMessage: Record<GameTypes, string> = {
     SK: '[SUSUN KATA] Susun huruf - huruf yang sudah diacak sehingga membentuk suatu kata yang padu.',
     TG: '[TEBAK GAMBAR] Tebak arti tersembunyi dari sebuah gambar.',
+    TO: '[GUESS THE PERSON] Selidiki tersangka kasus.',
   };
 
   return (
