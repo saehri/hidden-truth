@@ -24,9 +24,9 @@ const GuessThePerson = memo(() => {
     storylineId: activePage.state?.storylineId as StorylineIdTypes,
   });
 
-  // const gameDuration =
-  //   data.difficulty === 'easy' ? 60 : data.difficulty === 'medium' ? 190 : 60;
-  const gameDuration = 1500;
+  const gameDuration =
+    data.difficulty === 'easy' ? 180 : data.difficulty === 'medium' ? 150 : 120;
+  const isOver = gameState === 'completed' || gameState === 'over';
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -59,7 +59,7 @@ const GuessThePerson = memo(() => {
       </div>
 
       <AnimatePresence>
-        {gameState === 'completed' && (
+        {isOver && (
           <GameEndingModal
             status={gameState === 'completed' ? 'win' : 'over'}
           />

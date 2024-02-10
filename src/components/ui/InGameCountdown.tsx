@@ -66,7 +66,7 @@ export default function InGameCountdown({
         date={date}
         autoStart={false}
         renderer={customRenderer({children: <span>Hello world</span>})}
-        onComplete={() => setGameState('completed')}
+        onComplete={() => setGameState('over')}
       />
 
       <Button

@@ -8,6 +8,7 @@ import FullscreenBackground from '../components/ui/FullscreenBackground';
 import StorylineDetailChapterCard from '../components/ui/StorylineDetailChapterCard';
 import Icons from '../components/ui/Icons';
 import Marquee from 'react-fast-marquee';
+import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 
 export default function StorylineDetailPage() {
   const {activePage} = useContext(ActivePageContext);
@@ -28,13 +29,10 @@ export default function StorylineDetailPage() {
       </div>
 
       <FullscreenBackground
-        imageLink={
-          'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
-        }
+        imageLink={homepageBackground}
         placeholderLink={
           'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
         }
-        animate={false}
       />
 
       <PrologWrapper

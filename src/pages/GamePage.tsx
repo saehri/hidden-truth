@@ -7,6 +7,7 @@ import FullscreenBackground from '../components/ui/FullscreenBackground';
 import ArrangeLetters from '../components/games/ArrangeLetters';
 import GuessThePerson from '../components/games/GuessThePerson';
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
+import MultipleChoice from '../components/games/MultipleChoice';
 
 export default function GamePage() {
   return (
@@ -18,6 +19,7 @@ export default function GamePage() {
       <FullscreenBackground
         imageLink={homepageBackground}
         placeholderLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
+        animate={false}
       />
     </div>
   );
@@ -30,6 +32,7 @@ function GameRouting() {
     TG: <ImageGuesser />,
     SK: <ArrangeLetters />,
     TO: <GuessThePerson />,
+    MC: <MultipleChoice />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

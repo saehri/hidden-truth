@@ -22,6 +22,7 @@ export default function ArrangeLetters() {
   });
   const gameDuration =
     data.difficulty === 'easy' ? 60 : data.difficulty === 'medium' ? 190 : 60;
+  const isOver = gameState === 'completed' || gameState === 'over';
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -55,7 +56,7 @@ export default function ArrangeLetters() {
       </div>
 
       <AnimatePresence>
-        {gameState === 'completed' && (
+        {isOver && (
           <GameEndingModal
             status={gameState === 'completed' ? 'win' : 'over'}
           />

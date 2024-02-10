@@ -23,6 +23,7 @@ export default function ImageGuesser() {
     })
   );
   const [gameState, setGameState] = useState<GameStateTypes>('preparation');
+  const isOver = gameState === 'completed' || gameState === 'over';
 
   const deleteByIndex = (index: number) => {
     setGameData((oldValues) => {

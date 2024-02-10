@@ -20,10 +20,10 @@ const SSPemilu24: StorylineDataTypes = {
           location: 'Defacto Office',
         },
         {
-          gameId: 'PEMILU24-TG-C1-2',
-          gameType: 'TG',
+          gameId: 'PEMILU24-MC-C1-2',
+          gameType: 'MC',
           gameName: 'Panggilan tugas',
-          hasOpeningDialog: true,
+          hasOpeningDialog: false,
           location: 'Defacto Office',
         },
         {
