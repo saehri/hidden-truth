@@ -69,6 +69,7 @@ function GameOverviewModal({
     TG: '[TEBAK GAMBAR] Tebak arti tersembunyi dari sebuah gambar.',
     TO: '[GUESS THE PERSON] Selidiki tersangka kasus.',
     MC: '[PILIHAN GANDA]',
+    RD: '[REPORT DISINFORMATION]',
   };
 
   return (

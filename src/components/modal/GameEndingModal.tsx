@@ -52,7 +52,10 @@ export default function GameEndingModal({status}: GameEndingModal) {
           onClick={() =>
             setActivePage({
               location: 'storylineDetailPage',
-              state: {...activePage.state},
+              state: {
+                storylineId: activePage?.state?.storylineId as string,
+                storylineType: activePage?.state?.storylineType as string,
+              },
             })
           }
           className='w-[25%] group border-none outline-none z-10 block mx-auto absolute -bottom-5 -right-5 lg:-bottom-8 lg:-right-8 shadow-xl shadow-slate-950 rounded-full'

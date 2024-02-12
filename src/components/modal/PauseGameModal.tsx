@@ -47,7 +47,10 @@ export default function PauseGameModal({
                 onClick={() =>
                   setActivePage({
                     location: 'storylineDetailPage',
-                    state: {...activePage.state},
+                    state: {
+                      storylineId: activePage?.state?.storylineId as string,
+                      storylineType: activePage?.state?.storylineType as string,
+                    },
                   })
                 }
                 className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 rounded-full p-2'

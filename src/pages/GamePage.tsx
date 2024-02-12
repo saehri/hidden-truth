@@ -8,6 +8,7 @@ import ArrangeLetters from '../components/games/ArrangeLetters';
 import GuessThePerson from '../components/games/GuessThePerson';
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 import MultipleChoice from '../components/games/MultipleChoice';
+import ReportDisinformation from '../components/games/ReportDisinformation';
 
 export default function GamePage() {
   return (
@@ -33,6 +34,7 @@ function GameRouting() {
     SK: <ArrangeLetters />,
     TO: <GuessThePerson />,
     MC: <MultipleChoice />,
+    RD: <ReportDisinformation />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

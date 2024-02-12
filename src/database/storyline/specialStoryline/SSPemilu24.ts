@@ -39,8 +39,8 @@ const SSPemilu24: StorylineDataTypes = {
       chapterName: 'Chapter 2 - Tikus Berdasi',
       games: [
         {
-          gameId: 'PEMILU24-TG-C2-1',
-          gameType: 'TG',
+          gameId: 'PEMILU24-RD-C2-1',
+          gameType: 'RD',
           gameName: 'Tikus yang tidur',
           hasOpeningDialog: false,
           location: 'Jakarta timur',

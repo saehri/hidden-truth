@@ -7,12 +7,13 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC';
+export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD';
 /* 
   TG -> Tebak Gambar,
   SK -> Susun Kata
   TK -> Tebak Orang
   MC -> Multiple Choice
+  RD -> Report Disinformation
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
