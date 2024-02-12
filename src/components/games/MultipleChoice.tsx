@@ -1,17 +1,25 @@
 import React, {memo, useContext, useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
-import {GameStateTypes} from '../../services/utils/types';
+import {
+  GameStateTypes,
+  MultipleChoiceGameDataTypes,
+} from '../../services/utils/types';
 
 import InGameCountdown from '../ui/InGameCountdown';
 import GameEndingModal from '../modal/GameEndingModal';
 
 import {homepageBackground} from '../../assets/backgrounds/homepageBackground';
-import {twMerge} from 'tailwind-merge';
+import {getGameData} from '../../database/gameData';
 
 const MultipleChoice = memo(() => {
   const [gameState, setGameState] = useState<GameStateTypes>('start');
   const {activePage} = useContext(ActivePageContext);
+  // @ts-ignore
+  const gameData = getGameData({
+    ...activePage.state,
+  }) as MultipleChoiceGameDataTypes[];
+
   const isOver = gameState === 'completed' || gameState === 'over';
 
   const gameDuration = 2000;
@@ -25,7 +33,7 @@ const MultipleChoice = memo(() => {
       />
 
       <div className='relative h-full flex w-full flex-col justify-between pt-16 gap-4 lg:gap-8'>
-        <MultipleChoiceGame />
+        <MultipleChoiceGame setGameState={setGameState} gameData={gameData} />
 
         <div
           className='bg-slate-100 p-2 lg:p-4 border border-border border-b-0 mx-auto w-full max-w-[90%] lg:max-w-[50%] text-slate-950'
@@ -59,96 +67,135 @@ const MultipleChoice = memo(() => {
 
 export default MultipleChoice;
 
-const MultipleChoiceGame = memo(() => {
-  const [selectedChoice, setSelectedChoice] = useState<string>('');
+interface MultipleChoiceGame {
+  setGameState: React.Dispatch<React.SetStateAction<GameStateTypes>>;
+  gameData: MultipleChoiceGameDataTypes[];
+}
 
-  return (
-    <motion.section
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      className='bg-green-800/50 h-full'
-      style={{clipPath: 'polygon(3% 0, 100% 0, 97% 100%, 0% 100%)'}}
-    >
-      <div
-        className='w-full h-full bg-slate-50 grid grid-cols-2 overflow-hidden relative'
-        style={{clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0% 100%)'}}
+const MultipleChoiceGame = memo(
+  ({setGameState, gameData}: MultipleChoiceGame) => {
+    const [currentQuestion, setCurrentQuestion] = useState<number>(0);
+
+    function handleSelectingAnswer(userAnswer: number) {
+      const isUserAnswerCorrect =
+        userAnswer === gameData[currentQuestion].correctQcId;
+      if (!isUserAnswerCorrect) {
+        return setGameState('over');
+      }
+
+      if (currentQuestion < gameData.length - 1) {
+        setTimeout(() => {
+          setCurrentQuestion((prev) => prev + 1);
+        }, 800);
+      } else {
+        setGameState('completed');
+      }
+    }
+
+    return (
+      <motion.section
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        className='bg-red-800/50 h-full'
+        style={{clipPath: 'polygon(3% 0, 100% 0, 97% 100%, 0% 100%)'}}
       >
-        <motion.div
-          initial={{opacity: 0, y: 50}}
-          animate={{opacity: 1, y: 0, transition: {delay: 1}}}
-          className='bg-gradient-to-tl from-blue-500/80 to-blue-300/90 text-white backdrop-blur-sm shadow-sm p-2 lg:p-4 text-xs lg:text-base rounded-3xl rounded-bl-none absolute top-4 right-12 lg:top-20 lg:right-20 w-[60%] z-50'
-        >
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
-          excepturi similique architecto repellat reprehenderit non quod culpa
-          quaerat itaque tenetur.
-        </motion.div>
-
         <div
-          className='relative w-full h-full overflow-hidden'
-          style={{clipPath: 'polygon(0% 0, 100% 0, 88% 100%, 0% 100%)'}}
+          className='w-full h-full bg-slate-50 grid grid-cols-2 overflow-hidden relative'
+          style={{clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0% 100%)'}}
         >
-          <motion.img
-            initial={{opacity: 0, y: 200}}
-            animate={{opacity: 1, y: 0}}
-            transition={{delay: 0.7}}
-            src='https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp'
-            alt=''
-            className='absolute w-full h-full object-contain top-0 left-0'
-          />
+          <div className='absolute top-0 right-0 text-xs lg:text-sm p-1 px-2 bg-blue-400 text-white rounded-sm'>
+            Pertanyaan {currentQuestion + 1} dari {gameData.length}
+          </div>
 
-          <motion.img
-            src={homepageBackground}
-            initial={{opacity: 0, x: 200}}
-            animate={{opacity: 1, x: 0}}
-            transition={{delay: 0.5}}
-            alt=''
-            className='absolute w-full h-full object-cover top-0 left-0 -z-10 brightness-50'
-          />
-        </div>
+          <motion.div
+            initial={{opacity: 0, y: 50}}
+            animate={{opacity: 1, y: 0, transition: {delay: 1}}}
+            className='bg-gradient-to-tl from-blue-500/80 to-blue-300/90 text-white backdrop-blur-sm shadow-sm p-2 lg:p-4 text-xs lg:text-base rounded-3xl rounded-tl-none absolute bottom-2 left-8 lg:bottom-8 lg:left-16 w-[40%] z-50'
+          >
+            {gameData[currentQuestion].question}
+          </motion.div>
 
-        <motion.div
-          transition={{staggerChildren: 0.1, delayChildren: 1.5}}
-          initial='rest'
-          animate='show'
-          className='w-full h-full flex flex-col gap-1 lg:gap-3 justify-end p-1 pb-2 pr-12 lg:p-4 lg:pb-8 lg:pr-24'
-        >
-          {['a', 'b', 'c', 'd'].map((x) => (
-            <SelectionButton
-              id={x}
-              selectedChoice={selectedChoice}
-              setSelectedChoice={setSelectedChoice}
-              key={x}
+          <div
+            className='relative w-full h-full overflow-hidden'
+            style={{clipPath: 'polygon(0% 0, 100% 0, 88% 100%, 0% 100%)'}}
+          >
+            <motion.img
+              initial={{opacity: 0, y: 200}}
+              animate={{opacity: 1, y: 0}}
+              transition={{delay: 0.7}}
+              src='https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp'
+              alt=''
+              className='absolute w-full h-full object-contain top-0 left-0'
             />
-          ))}
-        </motion.div>
-      </div>
-    </motion.section>
-  );
-});
 
-interface SelectionButton {
-  id: string;
-  selectedChoice: string;
-  setSelectedChoice: React.Dispatch<React.SetStateAction<string>>;
+            <motion.img
+              src={homepageBackground}
+              initial={{opacity: 0, x: 200}}
+              animate={{opacity: 1, x: 0}}
+              transition={{delay: 0.5}}
+              alt=''
+              className='absolute w-full h-full object-cover top-0 left-0 -z-10 brightness-50'
+            />
+          </div>
+
+          <motion.div
+            transition={{staggerChildren: 0.1, delayChildren: 1.5}}
+            initial='rest'
+            animate='show'
+            className='w-full h-full flex flex-col gap-1 lg:gap-3 justify-end p-1 pb-2 pr-12 lg:p-4 lg:pb-8 lg:pr-24'
+          >
+            {gameData[currentQuestion].qc.map((question) => (
+              <SelectionButton
+                key={question.choiceId}
+                questionId={question.choiceId}
+                qcLabel={question.answer}
+                onChoiceSelected={() =>
+                  handleSelectingAnswer(question.choiceId)
+                }
+                correctQcId={gameData[currentQuestion].correctQcId}
+              />
+            ))}
+          </motion.div>
+        </div>
+      </motion.section>
+    );
+  }
+);
+
+interface SelectionButton
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  questionId: number;
+  onChoiceSelected: () => void;
+  qcLabel: string;
+  correctQcId: number;
 }
 
 function SelectionButton({
-  selectedChoice,
-  setSelectedChoice,
-  id,
+  onChoiceSelected,
+  questionId,
+  qcLabel,
+  correctQcId,
 }: SelectionButton) {
-  const isSelected = selectedChoice === id;
+  const [buttonColor, setButtonColor] = useState<'blue' | 'red' | 'green'>(
+    'blue'
+  );
+
+  function handleClick() {
+    onChoiceSelected();
+    if (correctQcId === questionId) setButtonColor('green');
+    else setButtonColor('red');
+
+    setTimeout(() => setButtonColor('blue'), 800);
+  }
 
   return (
     <motion.button
-      onClick={() => setSelectedChoice(id)}
+      data-button-color={buttonColor}
+      onClick={handleClick}
       variants={{rest: {opacity: 0, x: 100}, show: {opacity: 1, x: 0}}}
-      className={twMerge(
-        'text-blue-950 p-1 lg:p-4 rounded-lg block text-left text-[9px]',
-        isSelected ? 'bg-blue-300/90' : 'bg-blue-300/50'
-      )}
+      className='text-blue-950 p-2 lg:p-4 rounded-lg block text-left text-xs lg:text-sm bg-blue-300/90 data-[button-color=blue]:bg-blue-300/90 data-[button-color=blue]:text-blue-950 data-[button-color=green]:bg-green-500 data-[button-color=green]:text-green-950 data-[button-color=red]:bg-red-500 data-[button-color=red]:text-red-950'
     >
-      Lorem ipsum dolor sit amet.
+      {qcLabel}
     </motion.button>
   );
 }

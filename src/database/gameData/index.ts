@@ -2,6 +2,7 @@ import {GameTypes, StorylineIdTypes} from '../../services/utils/types';
 import pemilu24ArrangeLettersData from './arrangeLetters/pemilu24ArrangeLetterData';
 import pemilu24GuessThePersonData from './guessThePerson/pemilu24GuessThePerson';
 import pemilu24ImageGuesserData from './imageGuesser/pemilu24ImageGuesserData';
+import pemilu24MultipleChoiceGameData from './multipleChoice/pemilu24MultipleChoiceGameData';
 
 const gameDataByCategory: Record<
   GameTypes,
@@ -15,6 +16,9 @@ const gameDataByCategory: Record<
   },
   TO: {
     'PEMILU-24': pemilu24GuessThePersonData,
+  },
+  MC: {
+    'PEMILU-24': pemilu24MultipleChoiceGameData,
   },
 };
 

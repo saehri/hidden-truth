@@ -75,6 +75,12 @@ export type GuessThePersonGameDataTypes = {
   difficulty: GameDifficultyTypes;
 };
 
+export type MultipleChoiceGameDataTypes = {
+  question: string;
+  correctQcId: number;
+  qc: {choiceId: number; answer: string}[];
+};
+
 export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';
 
 /*  */
