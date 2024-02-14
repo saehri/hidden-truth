@@ -22,7 +22,7 @@ const MultipleChoice = memo(() => {
 
   const isOver = gameState === 'completed' || gameState === 'over';
 
-  const gameDuration = 2000;
+  const gameDuration = 60 * 3;
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>

@@ -6,9 +6,10 @@ import ImageGuesser from '../components/games/ImageGuesser';
 import FullscreenBackground from '../components/ui/FullscreenBackground';
 import ArrangeLetters from '../components/games/ArrangeLetters';
 import GuessThePerson from '../components/games/GuessThePerson';
-import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 import MultipleChoice from '../components/games/MultipleChoice';
-import ReportDisinformation from '../components/games/ReportDisinformation';
+import ReportDisinformationGame from '../components/games/report-disinformation/ReportDisinformationGame';
+
+import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 
 export default function GamePage() {
   return (
@@ -34,7 +35,7 @@ function GameRouting() {
     SK: <ArrangeLetters />,
     TO: <GuessThePerson />,
     MC: <MultipleChoice />,
-    RD: <ReportDisinformation />,
+    RD: <ReportDisinformationGame />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

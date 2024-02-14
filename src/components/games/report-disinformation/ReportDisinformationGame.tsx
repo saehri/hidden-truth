@@ -1,13 +1,23 @@
 import {memo, useContext, useState} from 'react';
-import {GameStateTypes} from '../../services/utils/types';
-import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
-import InGameCountdown from '../ui/InGameCountdown';
+import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 import {AnimatePresence} from 'framer-motion';
-import GameEndingModal from '../modal/GameEndingModal';
+import {getGameData} from '../../../database/gameData';
+import {
+  GameStateTypes,
+  ReportDisinformationGameDataTypes,
+} from '../../../services/utils/types';
 
-const ReportDisinformation = memo(() => {
+import GameEndingModal from '../../modal/GameEndingModal';
+import InGameCountdown from '../../ui/InGameCountdown';
+import ReportDisinformation from './ReportDisinformation';
+
+const ReportDisinformationGame = memo(() => {
   const [gameState, setGameState] = useState<GameStateTypes>('start');
   const {activePage} = useContext(ActivePageContext);
+  // @ts-ignore
+  const gameData = getGameData({
+    ...activePage.state,
+  }) as ReportDisinformationGameDataTypes[];
 
   const isOver = gameState === 'completed' || gameState === 'over';
 
@@ -21,8 +31,8 @@ const ReportDisinformation = memo(() => {
         countdownDuration={gameDuration}
       />
 
-      <div className='relative h-full flex w-full flex-col justify-between pt-16 gap-4 lg:gap-8'>
-        <ReportDisinformationGame />
+      <div className='relative h-full flex w-full flex-col justify-between pt-1 lg:pt-12'>
+        <ReportDisinformation gameData={gameData} />
 
         <div
           className='bg-slate-100 p-2 lg:p-4 border border-border border-b-0 mx-auto w-full max-w-[90%] lg:max-w-[50%] text-slate-950'
@@ -35,7 +45,7 @@ const ReportDisinformation = memo(() => {
               Clue
             </h6>
 
-            <p className='text-slate-700 text-sm lg:text-base'>
+            <p className='text-slate-700 text-xs lg:text-base'>
               Pilih salah satu jawaban yang paling benar untuk lanjut ke
               pertanyaan selanjutnya.
             </p>
@@ -54,15 +64,4 @@ const ReportDisinformation = memo(() => {
   );
 });
 
-export default ReportDisinformation;
-
-const ReportDisinformationGame = memo(() => {
-  return (
-    <div>
-      <h1>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
-        odit?
-      </h1>
-    </div>
-  );
-});
+export default ReportDisinformationGame;

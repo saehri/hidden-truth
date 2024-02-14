@@ -3,6 +3,7 @@ import pemilu24ArrangeLettersData from './arrangeLetters/pemilu24ArrangeLetterDa
 import pemilu24GuessThePersonData from './guessThePerson/pemilu24GuessThePerson';
 import pemilu24ImageGuesserData from './imageGuesser/pemilu24ImageGuesserData';
 import pemilu24MultipleChoiceGameData from './multipleChoice/pemilu24MultipleChoiceGameData';
+import pemilu24ReportDisinformationGameData from './reportDisinformation/pemilu24ReportDisinformationGameData';
 
 const gameDataByCategory: Record<
   GameTypes,
@@ -19,6 +20,9 @@ const gameDataByCategory: Record<
   },
   MC: {
     'PEMILU-24': pemilu24MultipleChoiceGameData,
+  },
+  RD: {
+    'PEMILU-24': pemilu24ReportDisinformationGameData,
   },
 };
 

@@ -68,6 +68,7 @@ export type ArrangeLettersGameDataTypes = {
   difficulty: GameDifficultyTypes;
 };
 
+/* @types defines the types of guess the person game data stuctures */
 export type GuessThePersonGameDataTypes = {
   id: string;
   suspects: {id: number; image: string}[];
@@ -76,12 +77,53 @@ export type GuessThePersonGameDataTypes = {
   difficulty: GameDifficultyTypes;
 };
 
+/* @types defines the types of guess the multi choice game data stuctures */
 export type MultipleChoiceGameDataTypes = {
   question: string;
   correctQcId: number;
   qc: {choiceId: number; answer: string}[];
 };
 
+/* @types defines the types of guess the reporting disinformation game data stuctures */
+export type DisinformationTypes = [
+  {id: 1; label: 'Manipulasi video/gambar'},
+  {id: 2; label: 'Impersonasi'},
+  {id: 3; label: 'Berita bohong'},
+  {id: 4; label: 'Sumber berita tidak terpercaya'}
+];
+
+export type DisinformationInfoTypes = [
+  {id: 1; label: 'Manipulasi video/gambar'; reason?: string},
+  {id: 2; label: 'Impersonasi'; reason?: string},
+  {id: 3; label: 'Berita bohong'; reason?: string},
+  {id: 4; label: 'Sumber berita tidak terpercaya'; reason?: string}
+];
+
+export type ReportDisinformationGameDataTypes = {
+  postId: number;
+  postCaption: string;
+  postAuthor: {
+    authorName: string;
+    authorUsername: string;
+    authorProfileImage: string;
+    followerCount: number;
+    followingCount: number;
+    authorBio: string;
+  };
+  postUploadedTime: string;
+  isDisinformation: boolean;
+  disinformationCategory?: string; //The disinformation category this post lies on.
+  hasMedia: boolean;
+  mediaLink?: string;
+  disinformationCategoryInfo: DisinformationInfoTypes;
+};
+
+// {id: 1, label: 'Manipulasi video/gambar'},
+//   {id: 2, label: 'Impersonasi'},
+//   {id: 3, label: 'Berita bohong'},
+//   {id: 4, label: 'Sumber berita tidak terpercaya'},
+
+/* @types defines the form state */
 export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';
 
 /*  */

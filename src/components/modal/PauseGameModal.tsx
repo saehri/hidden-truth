@@ -50,6 +50,8 @@ export default function PauseGameModal({
                     state: {
                       storylineId: activePage?.state?.storylineId as string,
                       storylineType: activePage?.state?.storylineType as string,
+                      storylineTitle: activePage.state
+                        ?.storylineTitle as string,
                     },
                   })
                 }
