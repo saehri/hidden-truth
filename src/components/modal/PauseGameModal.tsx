@@ -22,14 +22,14 @@ export default function PauseGameModal({
     <>
       {modalState &&
         createPortal(
-          <div className='bg-slate-950 absolute top-0 left-0 w-full h-full z-[60] flex flex-col items-center justify-center gap-8 text-yellow-500 text-center'>
+          <div className='bg-slate-950 absolute top-0 left-0 w-full h-full z-[100] flex flex-col items-center justify-center gap-8 text-yellow-500 text-center'>
             <motion.div
               initial={{y: 50, opacity: 0}}
               animate={{y: 0, opacity: 1, transition: {delay: 0.3}}}
               className='flex gap-4 items-center relative z-10'
             >
               <Button className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 rounded-full p-2'>
-                <div className='grid place-items-center bg-background rounded-full p-2'>
+                <div className='grid place-items-center bg-background rounded-full p-2 pointer-events-none'>
                   <Icons.Setting className='w-7 h-7 xl:w-9 xl:h-9' />
                 </div>
               </Button>

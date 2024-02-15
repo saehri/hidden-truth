@@ -28,9 +28,9 @@ export default function ImageGuesserCards({
           y: 0,
           opacity: 1,
           transition: {
-            delay: 2.8,
+            delay: 0.5,
             staggerChildren: 0.1,
-            delayChildren: 3.2,
+            delayChildren: 1,
             staggerDirection: -1,
           },
         },

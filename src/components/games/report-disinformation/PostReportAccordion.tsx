@@ -103,19 +103,25 @@ function PostReportResult({
   const [report, setReport] = useState<any>([]);
 
   function checkReports() {
-    if (!isDisinformation) {
-      // If the player has selected any categories then deducts their score by the amount of selectedCategories
-      console.log('this is a fact');
-      setReport(disinformationCategoryInfo);
-      return;
-    }
+    // if (!isDisinformation) {
+    //   // If the player has selected any categories then deducts their score by the amount of selectedCategories
+    //   console.log('this is a fact');
+    //   setReport(disinformationCategoryInfo.map(category => ({...category, selected:})));
+    //   return;
+    // }
 
     const userAnswer = selectedCategories.join('-');
     if (userAnswer === disinformationCategoryId) {
       console.log('all correct');
     }
 
-    const disinformationCategoryIdMap = disinformationCategoryId.split('-');
+    let disinformationCategoryIdMap: any;
+    try {
+      disinformationCategoryIdMap = disinformationCategoryId.split('-');
+    } catch {
+      disinformationCategoryIdMap = [];
+    }
+
     const report = disinformationCategoryInfo?.map((category) => {
       /* 
         We will use "selected" and "isCorrect" to determine the player scores;
@@ -124,6 +130,7 @@ function PostReportResult({
         if not selected and not isCorrect -> playerScore
       */
       const selected: boolean = selectedCategories.includes(category.id);
+
       const isCorrect: boolean = disinformationCategoryIdMap.includes(
         String(category.id)
       );
@@ -154,24 +161,9 @@ function PostReportResult({
               <span className='sr-only'>Close</span>
             </button>
 
-            <div className='bg-slate-50 p-4 rounded-sm relative z-50 flex flex-col gap-3'>
+            <div className='bg-slate-50 p-4 rounded-lg relative z-50 flex flex-col gap-3 w-full max-w-96'>
               {report.map((report: any) => (
-                <div
-                  key={report.id}
-                  className={twMerge(
-                    'inline-block p-2 px-4 w-full',
-                    report.selected && report.isCorrect
-                      ? 'bg-green-300'
-                      : report.selected && !report.isCorrect
-                      ? 'bg-red-500'
-                      : !report.selected && report.isCorrect
-                      ? 'bg-red-500'
-                      : 'bg-slate-300'
-                  )}
-                >
-                  <h4>{report.label}</h4>
-                  <span>{report.reason}</span>
-                </div>
+                <ReportResultCard key={report.id} {...report} />
               ))}
             </div>
           </div>,
@@ -180,6 +172,44 @@ function PostReportResult({
             | DocumentFragment
         )}
     </>
+  );
+}
+
+interface ReportResultCard {
+  selected: boolean;
+  isCorrect: boolean;
+  label: string;
+  reason: string;
+}
+
+function ReportResultCard({
+  isCorrect,
+  label,
+  reason,
+  selected,
+}: ReportResultCard) {
+  const cardColor =
+    selected && isCorrect
+      ? 'bg-green-500'
+      : selected && !isCorrect
+      ? 'bg-red-500'
+      : !selected && isCorrect
+      ? 'bg-red-500'
+      : 'bg-slate-300';
+
+  const isCorrectAnswer = selected && isCorrect;
+
+  return (
+    <div
+      className={twMerge(
+        'p-2 px-4 w-full flex flex-col gap-2 rounded-md',
+        cardColor
+      )}
+    >
+      {isCorrectAnswer && <span>You got this one right!</span>}
+      <h4 className='font-semibold'>{label}</h4>
+      <span className='empty:hidden'>{reason}</span>
+    </div>
   );
 }
 

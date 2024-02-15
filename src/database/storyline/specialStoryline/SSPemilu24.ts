@@ -49,7 +49,7 @@ const SSPemilu24: StorylineDataTypes = {
           gameId: 'PEMILU24-TG-C2-2',
           gameType: 'TG',
           gameName: 'Tikus gendut',
-          hasOpeningDialog: true,
+          hasOpeningDialog: false,
           location: 'Jakarta utara',
         },
       ],
