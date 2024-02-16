@@ -10,6 +10,7 @@ import MultipleChoice from '../components/games/MultipleChoice';
 import ReportDisinformationGame from '../components/games/report-disinformation/ReportDisinformationGame';
 
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
+import RepeatMelodyGame from '../components/games/repeat-melody/RepeatMelodyGame';
 
 export default function GamePage() {
   return (
@@ -36,6 +37,7 @@ function GameRouting() {
     TO: <GuessThePerson />,
     MC: <MultipleChoice />,
     RD: <ReportDisinformationGame />,
+    TN: <RepeatMelodyGame />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

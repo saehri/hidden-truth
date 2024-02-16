@@ -65,24 +65,25 @@ function PageViewer() {
      
     **This operation is done inside useLayoutEffect to avoid weird page rendering behavior
   */
-  useLayoutEffect(() => {
-    const userData = userController.getUserDataFromSessionStorage();
 
-    // Check if the user requested route is a secure route
-    /* 
-    WARNING: Do not simplify this conditonal logics. I already tried it and it resulted on infinity loop.
-    */
+  // useLayoutEffect(() => {
+  //   const userData = userController.getUserDataFromSessionStorage();
 
-    if (securePages.includes(activePage.location)) {
-      if (!userData) {
-        setActivePage({location: 'signinPage'});
-      }
-    } else {
-      if (userData) {
-        setActivePage({location: 'homepage'});
-      }
-    }
-  }, [activePage.location]);
+  //   // Check if the user requested route is a secure route
+  //   /*
+  //   WARNING: Do not simplify this conditonal logics. I already tried it and it resulted on infinity loop.
+  //   */
+
+  //   if (securePages.includes(activePage.location)) {
+  //     if (!userData) {
+  //       setActivePage({location: 'signinPage'});
+  //     }
+  //   } else {
+  //     if (userData) {
+  //       setActivePage({location: 'homepage'});
+  //     }
+  //   }
+  // }, [activePage.location]);
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
     homepage: <Homepage />,

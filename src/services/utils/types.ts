@@ -7,13 +7,14 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD';
+export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD' | 'TN';
 /* 
   TG -> Tebak Gambar,
   SK -> Susun Kata
   TK -> Tebak Orang
   MC -> Multiple Choice
   RD -> Report Disinformation
+  TN - Tebak Nada
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
@@ -117,11 +118,6 @@ export type ReportDisinformationGameDataTypes = {
   mediaLink?: string;
   disinformationCategoryInfo: DisinformationInfoTypes;
 };
-
-// {id: 1, label: 'Manipulasi video/gambar'},
-//   {id: 2, label: 'Impersonasi'},
-//   {id: 3, label: 'Berita bohong'},
-//   {id: 4, label: 'Sumber berita tidak terpercaya'},
 
 /* @types defines the form state */
 export type FormStateTypes = 'idle' | 'process' | 'error' | 'done';

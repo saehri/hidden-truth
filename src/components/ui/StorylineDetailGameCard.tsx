@@ -70,6 +70,7 @@ function GameOverviewModal({
     TO: '[GUESS THE PERSON] Selidiki tersangka kasus.',
     MC: '[PILIHAN GANDA]',
     RD: '[REPORT DISINFORMATION]',
+    TN: '[TEBAK NADA]',
   };
 
   return (

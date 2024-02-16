@@ -96,7 +96,6 @@ interface PostReportResult extends PostReportAccordion {
 function PostReportResult({
   disabled,
   disinformationCategoryId,
-  isDisinformation,
   disinformationCategoryInfo,
   selectedCategories,
 }: PostReportResult) {
@@ -162,6 +161,8 @@ function PostReportResult({
             </button>
 
             <div className='bg-slate-50 p-4 rounded-lg relative z-50 flex flex-col gap-3 w-full max-w-96'>
+              <p>Kamu berhasil memilih m dari n opsi.</p>
+
               {report.map((report: any) => (
                 <ReportResultCard key={report.id} {...report} />
               ))}
@@ -190,25 +191,25 @@ function ReportResultCard({
 }: ReportResultCard) {
   const cardColor =
     selected && isCorrect
-      ? 'bg-green-500'
+      ? 'bg-green-600 border border-green-700'
       : selected && !isCorrect
-      ? 'bg-red-500'
+      ? 'bg-red-500 border border-red-600'
       : !selected && isCorrect
-      ? 'bg-red-500'
-      : 'bg-slate-300';
+      ? 'bg-red-500 border border-red-600'
+      : 'bg-slate-200 border border-slate-300';
 
   const isCorrectAnswer = selected && isCorrect;
 
   return (
-    <div
-      className={twMerge(
-        'p-2 px-4 w-full flex flex-col gap-2 rounded-md',
-        cardColor
-      )}
-    >
-      {isCorrectAnswer && <span>You got this one right!</span>}
-      <h4 className='font-semibold'>{label}</h4>
-      <span className='empty:hidden'>{reason}</span>
+    <div className={twMerge('p-2 w-full rounded-md flex gap-2', cardColor)}>
+      <div className='w-4 h-4 rounded-full bg-yellow-500'></div>
+
+      <div className='flex flex-col gap-2'>
+        {isCorrectAnswer && <span>You got this one right!</span>}
+        {!selected && isCorrect && <span>Kamu tidak memilih opsi ini.</span>}
+        <h4 className='font-semibold'>{label}</h4>
+        <span className='empty:hidden'>{reason}</span>
+      </div>
     </div>
   );
 }

@@ -58,8 +58,8 @@ const SSPemilu24: StorylineDataTypes = {
       chapterName: 'Chapter 3 - Masalah Besar',
       games: [
         {
-          gameId: 'PEMILU24-TG-C3-1',
-          gameType: 'TG',
+          gameId: 'PEMILU24-TN-C3-1',
+          gameType: 'TN',
           gameName: 'Tikus yang tidur',
           hasOpeningDialog: false,
           location: 'Jakarta timur',
