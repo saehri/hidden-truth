@@ -3,7 +3,7 @@ import {twMerge} from 'tailwind-merge';
 
 interface Props {
   imageLink: string;
-  placeholderLink: string;
+  placeholderLink?: string;
   animate?: boolean;
   className?: string;
 }

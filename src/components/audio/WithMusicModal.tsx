@@ -3,7 +3,7 @@ import {createPortal} from 'react-dom';
 import {AudioContext} from './AudioWrapper';
 
 export default function WithMusicModal() {
-  const [isOpen, setOpen] = useState<boolean>(true);
+  const [isOpen, setOpen] = useState<boolean>(false);
   const audioContext = useContext(AudioContext);
 
   return (

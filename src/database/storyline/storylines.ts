@@ -6,11 +6,7 @@ import {
 } from '../../services/utils/types';
 import {SSCDPemilu24, SSPemilu24} from './specialStoryline/SSPemilu24';
 
-const storyVolumeCards: Record<StorylineTypes, StorylineCardTypes[]> = {
-  specialStoryline: [SSCDPemilu24],
-  mainStoryline: [],
-  premiumStoryline: [],
-};
+const storyVolumeCards = [SSCDPemilu24];
 
 const storyVolumes: Record<StorylineTypes, StorylineDataTypes[]> = {
   mainStoryline: [],
@@ -18,8 +14,8 @@ const storyVolumes: Record<StorylineTypes, StorylineDataTypes[]> = {
   specialStoryline: [SSPemilu24],
 };
 
-function getStorylineCards(storylineType: StorylineTypes) {
-  return storyVolumeCards[storylineType];
+function getStorylineCards() {
+  return storyVolumeCards;
 }
 
 function getStorylineData(

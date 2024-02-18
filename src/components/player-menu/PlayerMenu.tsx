@@ -9,7 +9,6 @@ import useCharacterController from '../../services/controller/characterControlle
 
 const PlayerMenu = memo(function () {
   const [isCardOpen, setCardOpen] = useState<boolean>(false);
-  const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
 
   const userController = useUserController();
   const characterController = useCharacterController();
@@ -20,8 +19,8 @@ const PlayerMenu = memo(function () {
 
   return (
     <>
-      <Button onClick={() => setCardOpen(!isCardOpen)}>
-        <Icons.User className={buttonIconSizes} />
+      <Button onClick={() => setCardOpen(true)}>
+        <Icons.User />
       </Button>
 
       <AnimatePresence>

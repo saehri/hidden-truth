@@ -11,14 +11,13 @@ import {ErrorBoundary} from 'react-error-boundary';
 import AppLayout from '../layouts/AppLayout';
 import Homepage from '../pages/Homepage';
 import GamePage from '../pages/GamePage';
-import EpisodeTypeSelectionPage from '../pages/StorylineTypeSelectionPage';
-import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 import StorylineDetailPage from '../pages/StorylineDetailPage';
 import DialogPage from '../pages/DialogPage';
 import SignupPage from '../pages/SignupPage';
 import SigninPage from '../pages/SigninPage';
 import useUserController from '../services/controller/userController';
 import GlobalErrorBoundary from '../components/ui/GlobalErrorBoundary';
+import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -87,7 +86,6 @@ function PageViewer() {
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
     homepage: <Homepage />,
-    storylineTypeSelectionPage: <EpisodeTypeSelectionPage />,
     storylineSelectionPage: <StorylineSelectionPage />,
     storylineDetailPage: <StorylineDetailPage />,
     gamePage: <GamePage />,

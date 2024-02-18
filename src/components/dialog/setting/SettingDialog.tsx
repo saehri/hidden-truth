@@ -12,7 +12,7 @@ const SettingDialog = memo(() => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>
-        <Icons.Setting className='w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8' />
+        <Icons.Setting />
       </Button>
 
       <AnimatePresence>
