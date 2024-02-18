@@ -27,7 +27,6 @@ export default function Homepage() {
             'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
           }
         />
-        C
       </div>
     </div>
   );
