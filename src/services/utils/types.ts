@@ -44,6 +44,9 @@ export interface StorylineCardTypes
   storylineTitle: string;
   storylineCardBackground?: string;
   storylineType: StorylineTypes;
+  difficulty: string;
+  requester: string;
+  respondent: string;
 }
 
 export interface StorylineDataTypes extends StorylineCardTypes {

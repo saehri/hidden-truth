@@ -5,9 +5,12 @@ import {
 
 const SSPemilu24: StorylineDataTypes = {
   storylineId: 'PEMILU-24',
-  storylineTitle: 'BADAI DISINFORMASI PEMILU',
+  storylineTitle: 'Dunia Yang Bising',
   storylineDetailPageCoverImage: '',
   storylineType: 'specialStoryline',
+  difficulty: '⭐⭐⭐',
+  requester: 'The Governer',
+  respondent: 'Defacto Firm',
   playableChapter: [
     {
       chapterName: 'Chapter 1 - The Governer',
@@ -73,25 +76,6 @@ const SSPemilu24: StorylineDataTypes = {
         },
       ],
     },
-    {
-      chapterName: 'Chapter 4 - Penjara',
-      games: [
-        {
-          gameId: 'PEMILU24-TG-C4-1',
-          gameType: 'TG',
-          gameName: 'Tikus yang tidur',
-          hasOpeningDialog: false,
-          location: 'Jakarta timur',
-        },
-        {
-          gameId: 'PEMILU24-TG-C4-2',
-          gameType: 'TG',
-          gameName: 'Tikus gendut',
-          hasOpeningDialog: true,
-          location: 'Jakarta utara',
-        },
-      ],
-    },
   ],
 };
 
@@ -100,6 +84,9 @@ const SSCDPemilu24: StorylineCardTypes = {
   storylineTitle: SSPemilu24.storylineTitle,
   storylineType: SSPemilu24.storylineType,
   storylineCardBackground: SSPemilu24.storylineCardBackground,
+  difficulty: SSPemilu24.difficulty,
+  requester: SSPemilu24.requester,
+  respondent: SSPemilu24.respondent,
 };
 
 export {SSPemilu24, SSCDPemilu24};
