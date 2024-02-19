@@ -15,7 +15,6 @@ interface BackButton extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 export default function BackButton({
-  buttonName,
   goBackTo,
   className,
   iconType = 'back',
@@ -35,7 +34,7 @@ export default function BackButton({
         className
       )}
     >
-      <span className=''>{ButtonIcon[iconType]}</span>
+      <span>{ButtonIcon[iconType]}</span>
     </Button>
   );
 }

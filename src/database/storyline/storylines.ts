@@ -6,7 +6,7 @@ import {
 } from '../../services/utils/types';
 import {SSCDPemilu24, SSPemilu24} from './specialStoryline/SSPemilu24';
 
-const storyVolumeCards = [SSCDPemilu24];
+const storyVolumeCards: StorylineCardTypes[] = [SSCDPemilu24];
 
 const storyVolumes: Record<StorylineTypes, StorylineDataTypes[]> = {
   mainStoryline: [],

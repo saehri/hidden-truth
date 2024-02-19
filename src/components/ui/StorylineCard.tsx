@@ -9,6 +9,13 @@ const stripedGradient = {
   backgroundSize: '113.14px 113.14px',
 };
 
+interface Props extends StorylineCardTypes {
+  isActive: boolean;
+  isPrev: boolean;
+  isNext: boolean;
+  isVisible: boolean;
+}
+
 export default function StorylineCard({
   storylineId,
   storylineTitle,
@@ -17,16 +24,26 @@ export default function StorylineCard({
   difficulty,
   requester,
   respondent,
+  isActive,
+  isNext,
+  isPrev,
+  isVisible,
   ...rest
-}: StorylineCardTypes) {
+}: Props) {
   return (
     <motion.button
       variants={{
         rest: {opacity: 0, x: 50, rotate: 15, y: 200},
-        show: {opacity: 1, x: 0, rotate: 0, y: 0},
+        show: {opacity: isActive ? 1 : 0.8, x: 0, rotate: 0, y: 0},
+      }}
+      animate={{
+        scale: isActive ? 1 : 0.9,
+        opacity: isActive ? 1 : 0.8,
+        filter: isActive ? 'blur(0px)' : 'blur(1px)',
       }}
       {...(rest as any)}
-      className='w-96 group'
+      className='w-80 xs:w-96 group'
+      disabled={!isActive}
     >
       <div className='w-full pt-[calc((4/3)*100%)] relative shadow-md shadow-slate-950'>
         <div
