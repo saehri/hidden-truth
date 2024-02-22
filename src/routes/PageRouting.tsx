@@ -18,6 +18,7 @@ import SigninPage from '../pages/SigninPage';
 import useUserController from '../services/controller/userController';
 import GlobalErrorBoundary from '../components/ui/GlobalErrorBoundary';
 import StorylineSelectionPage from '../pages/StorylineSelectionPage';
+import PrologPage from '../pages/PrologPage';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -92,6 +93,7 @@ function PageViewer() {
     dialogPage: <DialogPage />,
     signupPage: <SignupPage />,
     signinPage: <SigninPage />,
+    prologPage: <PrologPage />,
   };
 
   return PAGES[pageName];

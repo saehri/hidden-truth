@@ -3,16 +3,14 @@ import StorylineSlider from '../components/slider/StorylineSlider';
 
 export default function StorylineSelectionPage() {
   return (
-    <>
-      <section className='relative w-full h-full'>
-        <BackButton
-          buttonName='Tipe alur cerita'
-          goBackTo={{location: 'homepage'}}
-          iconType='back'
-        />
+    <section className='relative w-full h-full'>
+      <BackButton
+        buttonName='Tipe alur cerita'
+        goBackTo={{location: 'homepage'}}
+        iconType='back'
+      />
 
-        <StorylineSlider />
-      </section>
-    </>
+      <StorylineSlider />
+    </section>
   );
 }

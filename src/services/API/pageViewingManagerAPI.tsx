@@ -16,6 +16,7 @@ export type ViewablePageTypes =
   | 'homepage'
   | 'storylineSelectionPage'
   | 'storylineDetailPage'
+  | 'prologPage'
   | 'gamePage'
   | 'dialogPage'
   | 'signupPage'
