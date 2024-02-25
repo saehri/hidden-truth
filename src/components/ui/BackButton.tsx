@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 import {
   ActivePageContext,
@@ -27,14 +28,20 @@ export default function BackButton({
   };
 
   return (
-    <Button
-      onClick={() => setActivePage(goBackTo)}
-      className={twMerge(
-        'absolute z-50 flex gap-3 items-center p-0 bottom-8 left-4',
-        className
-      )}
+    <motion.div
+      initial={{opacity: 0, scale: 0.9}}
+      animate={{opacity: 1, scale: 1}}
+      transition={{delay: 0.3}}
     >
-      <span>{ButtonIcon[iconType]}</span>
-    </Button>
+      <Button
+        onClick={() => setActivePage(goBackTo)}
+        className={twMerge(
+          'absolute z-50 flex gap-3 items-center p-0 bottom-8 left-4',
+          className
+        )}
+      >
+        <span>{ButtonIcon[iconType]}</span>
+      </Button>
+    </motion.div>
   );
 }

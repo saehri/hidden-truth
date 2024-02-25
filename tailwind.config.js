@@ -29,7 +29,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        arial: 'arial',
+        body: 'Inter',
       },
       colors: {
         border: {

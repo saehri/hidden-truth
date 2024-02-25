@@ -1,13 +1,11 @@
+import {motion} from 'framer-motion';
+
 import {useContext, useEffect, useState} from 'react';
 import {AudioContext} from '../../audio/AudioWrapper';
-import Icons from '../../ui/Icons';
 
 export default function MusicHandler() {
   const [isOn, setOn] = useState<boolean>(true);
   const musicController = useContext(AudioContext);
-
-  const iconStyles =
-    'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 lg:w-10 lg:h-10';
 
   function toggleAudio() {
     setOn(!isOn);
@@ -20,19 +18,25 @@ export default function MusicHandler() {
   }, [musicController.musicRef]);
 
   return (
-    <>
+    <div className='text-xs flex items-center justify-between text-slate-700'>
+      <p>Musik</p>
+
       <button
+        className='relative bg-yellow-600/80 border border-r-border-light w-6 p-[2px] rounded-full flex'
         onClick={toggleAudio}
-        className='bg-gradient-to-tl from-yellow-800 to-yellow-400 p-2 rounded-full'
+        style={{justifyContent: isOn ? 'flex-end' : 'flex-start'}}
       >
-        <div className='w-14 h-14 lg:w-20 lg:h-20 grid place-items-center rounded-full bg-background relative'>
-          {isOn ? (
-            <Icons.MusicOn className={iconStyles} />
-          ) : (
-            <Icons.MusicOff className={iconStyles} />
-          )}
-        </div>
+        <motion.div
+          layout
+          transition={{
+            duration: 0.8,
+            type: 'spring',
+            stiffness: 700,
+            damping: 30,
+          }}
+          className='w-2 h-2 rounded-full bg-yellow-400 border-l border-t border-slate-50/40'
+        ></motion.div>
       </button>
-    </>
+    </div>
   );
 }

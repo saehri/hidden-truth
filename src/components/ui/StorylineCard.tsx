@@ -51,7 +51,7 @@ export default function StorylineCard({
           style={stripedGradient}
         >
           <div className='bg-yellow-100 w-full h-full p-2 flex flex-col justify-between pt-10 relative z-40 shadow-sm shadow-slate-950/30 riggedPaperEffect'>
-            <span className='block w-full text-left border-t border-yellow-800/20 border-dashed font-arial text-xs uppercase mr-auto pt-1 text-slate-800'>
+            <span className='block w-full text-left border-t border-yellow-800/20 border-dashed font-body text-xs uppercase mr-auto pt-1 text-slate-800'>
               24 Februari 2024
             </span>
 
@@ -60,14 +60,14 @@ export default function StorylineCard({
             </div>
 
             <div className='relative z-30'>
-              <h4 className='text-left text-sm sm:text-base font-arial font-semibold text-slate-950 block w-full'>
+              <h4 className='text-left text-sm sm:text-base font-body font-semibold text-slate-950 block w-full'>
                 Kasus: {storylineTitle}
               </h4>
 
-              <p className='text-left text-xs sm:text-sm font-arial text-slate-800'>
+              <p className='text-left text-xs sm:text-sm font-body text-slate-800'>
                 Pemohon: {requester}
               </p>
-              <p className='text-left text-xs sm:text-sm font-arial text-slate-800'>
+              <p className='text-left text-xs sm:text-sm font-body text-slate-800'>
                 Termohon: {respondent}
               </p>
             </div>
