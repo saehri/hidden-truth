@@ -1,3 +1,5 @@
+import LogOutModal from './LogOutModal';
+
 export default function AccountSetting() {
   return (
     <div className='flex flex-col gap-2'>
@@ -13,9 +15,8 @@ export default function AccountSetting() {
 
       <div className='flex justify-between items-center text-xs text-slate-600'>
         <p>Keluar</p>
-        <button className='bg-red-600 text-white p-1 px-2 rounded-md'>
-          Log Out
-        </button>
+
+        <LogOutModal />
       </div>
     </div>
   );

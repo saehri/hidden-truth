@@ -75,5 +75,13 @@ export default function useUserController() {
         console.error(error.response.data);
       }
     },
+    logout: () => {
+      try {
+        userStore.setState({user: undefined});
+        sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    },
   };
 }

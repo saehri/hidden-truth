@@ -37,7 +37,9 @@ function StackedPaperEffect({children}: {children: React.ReactNode}) {
               {children}
             </div>
 
-            <div className='absolute top-0 left-1/2 -translate-x-1/2 h-full w-1/3 bg-gradient-to-r from-slate-50 via-slate-300 to-slate-50 z-0'></div>
+            <div className='absolute top-0 left-1/2 -translate-x-1/2 h-full w-1/3 bg-gradient-to-r from-slate-50 via-slate-400 to-slate-50 z-0 flex justify-center'>
+              <span className='w-[1px] h-full bg-slate-500/30 block'></span>
+            </div>
           </div>
         </div>
       </div>
