@@ -9,15 +9,11 @@ export default function StorylinePrologCard() {
   return (
     <div className='w-80 sm:w-96 group'>
       <div className='w-full pt-[calc((4/3)*100%)] relative'>
-        <div className='bg-yellow-100 absolute z-40 top-0 left-0 w-full h-full py-4 shadow-sm shadow-slate-950/30'>
-          <div className='border-y border-yellow-800/20 h-full relative flex flex-col justify-between'>
-            <div>
-              <h2 className='text-center m-4'>PENGENALAN KASUS</h2>
-
-              <p className='text-center underline underline-offset-4'>
-                Dunia Yang Kacau
-              </p>
-            </div>
+        <div className='bg-yellow-100 absolute z-40 top-0 left-0 w-full h-full p-4 shadow-sm shadow-slate-950/30'>
+          <div className='border border-dotted border-yellow-800/20 h-full relative flex flex-col justify-between px-2'>
+            <h2 className='m-4 font-semibold text-yellow-950 border-b border-slate-600/30 block pb-1'>
+              Serangan Cyber di Ibu Kota
+            </h2>
 
             <StorylinePrologPolaroid />
 

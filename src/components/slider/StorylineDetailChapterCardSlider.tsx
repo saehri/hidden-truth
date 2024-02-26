@@ -1,5 +1,6 @@
 import {useContext} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
+import {motion} from 'framer-motion';
 
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
@@ -8,6 +9,7 @@ import StorylinePrologCard from '../ui/StorylinePrologCard';
 
 import {getStorylineData} from '../../database/storyline/storylines';
 import {StorylineIdTypes, StorylineTypes} from '../../services/utils/types';
+import StorylineDetailChapterCard from './StorylineDetailChapterCard';
 
 export default function StorylineDetailChapterCardSlider() {
   const {activePage} = useContext(ActivePageContext);
@@ -17,39 +19,39 @@ export default function StorylineDetailChapterCardSlider() {
   );
 
   return (
-    <Swiper
-      slidesPerView={1}
-      navigation
-      grabCursor
-      className='overflow-visible h-full'
+    <motion.div
+      variants={{
+        rest: {opacity: 1},
+        show: {
+          opacity: 1,
+          transition: {staggerChildren: 0.1, delayChildren: 0.3},
+        },
+      }}
+      initial='rest'
+      animate='show'
+      className='h-full'
     >
-      <SwiperSlide className='grid place-items-center'>
-        <StorylinePrologCard />
-      </SwiperSlide>
-
-      {storylines?.playableChapter.map((chapter) => (
-        <SwiperSlide
-          className='grid place-items-center'
-          key={chapter.chapterName}
-        >
-          <StorylineDetailChapterCard />
+      <Swiper
+        slidesPerView={1}
+        navigation
+        grabCursor
+        className='overflow-visible h-full'
+      >
+        <SwiperSlide className='grid place-items-center'>
+          <StorylinePrologCard />
         </SwiperSlide>
-      ))}
 
-      {storylines?.playableChapter.length && <SwiperNavigation />}
-    </Swiper>
-  );
-}
+        {storylines?.playableChapter.map((chapter) => (
+          <SwiperSlide
+            className='grid place-items-center'
+            key={chapter.chapterName}
+          >
+            {(props) => <StorylineDetailChapterCard {...props} />}
+          </SwiperSlide>
+        ))}
 
-function StorylineDetailChapterCard() {
-  return (
-    <div className='w-86 sm:w-96'>
-      <div className='pt-[calc((4/3)*100%)] relative bg-yellow-100'>
-        <div className='absolute top-0 left-0 w-full h-full'>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Optio,
-          ipsam?
-        </div>
-      </div>
-    </div>
+        {storylines?.playableChapter.length && <SwiperNavigation />}
+      </Swiper>
+    </motion.div>
   );
 }

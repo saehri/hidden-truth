@@ -1,3 +1,4 @@
+import {premiumStorylineCardCover} from '../../../assets/images/premiumStorylineCardCover';
 import {
   StorylineCardTypes,
   StorylineDataTypes,
@@ -5,9 +6,10 @@ import {
 
 const SSPemilu24: StorylineDataTypes = {
   storylineId: 'PEMILU-24',
-  storylineTitle: 'Dunia Yang Bising',
+  storylineTitle: 'Serangan Cyber di Ibu Kota',
   storylineDetailPageCoverImage: '',
   storylineType: 'specialStoryline',
+  storylineCardBackground: premiumStorylineCardCover,
   difficulty: '⭐⭐⭐',
   requester: 'The Governer',
   respondent: 'Defacto Firm',

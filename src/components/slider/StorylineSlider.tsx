@@ -2,7 +2,7 @@ import {motion} from 'framer-motion';
 import {useContext} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
-import StorylineCard from '../ui/StorylineCard';
+import StorylineCard from './StorylineCard';
 
 import {getStorylineCards} from '../../database/storyline/storylines';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
@@ -41,12 +41,9 @@ export default function StorylineSlider() {
             key={card.storylineId + index}
             className='w-max h-full p-8 flex items-center'
           >
-            {({isActive, isPrev, isNext, isVisible}) => (
+            {({isActive}) => (
               <StorylineCard
                 isActive={isActive}
-                isNext={isNext}
-                isPrev={isPrev}
-                isVisible={isVisible}
                 {...card}
                 onClick={() =>
                   setActivePage({
