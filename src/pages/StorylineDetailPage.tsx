@@ -3,7 +3,7 @@ import StorylineDetailChapterCardSlider from '../components/slider/StorylineDeta
 
 export default function StorylineDetailPage() {
   return (
-    <section className='relative w-full h-full'>
+    <section className='relative w-full h-full max-w-screen-sm mx-auto'>
       <BackButton
         goBackTo={{location: 'storylineSelectionPage'}}
         iconType='back'
@@ -12,11 +12,4 @@ export default function StorylineDetailPage() {
       <StorylineDetailChapterCardSlider />
     </section>
   );
-}
-
-{
-  /* <StorylineDetailChapterCard
-  storylineId={activePage.state?.storylineId as StorylineIdTypes}
-  storylineType={activePage.state?.storylineType as StorylineTypes}
-/> */
 }

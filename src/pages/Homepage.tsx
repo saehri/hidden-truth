@@ -1,5 +1,3 @@
-import {motion} from 'framer-motion';
-
 import HomepageCTA from '../components/ui/HomepageCTA';
 import NewUserDialog from '../components/dialog/NewUserDialog';
 
@@ -11,11 +9,7 @@ export default function Homepage() {
     <>
       <NewUserDialog />
 
-      <motion.div
-        initial={{scale: 1.2, opacity: 0.1, filter: 'blur(4px)'}}
-        animate={{scale: 1, opacity: 1, filter: 'blur(0px)'}}
-        className='w-full h-full -z-0 overflow-hidden p-4 sm:p-8 pt-4 pb-8 relative'
-      >
+      <div className='w-full max-w-screen-sm mx-auto h-full -z-0 overflow-hidden p-4 sm:p-8 pt-4 pb-8 relative'>
         <div className='bg-yellow-100 p-4 w-full h-full relative'>
           <HomepageCTA />
 
@@ -35,8 +29,10 @@ export default function Homepage() {
 
         <CharacterImages />
 
+        <div className='absolute top-0 left-0 w-full h-1/4 bg-gradient-to-b from-background/60 to-transparent pointer-events-none z-40'></div>
+
         <div className='absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-background via-background/90 to-transparent pointer-events-none'></div>
-      </motion.div>
+      </div>
     </>
   );
 }

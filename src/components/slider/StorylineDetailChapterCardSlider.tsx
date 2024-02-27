@@ -29,29 +29,20 @@ export default function StorylineDetailChapterCardSlider() {
       }}
       initial='rest'
       animate='show'
-      className='h-full'
+      className='fixed top-0 left-0 w-full h-full px-10 overflow-x-auto hideScrollbar'
     >
-      <Swiper
-        slidesPerView={1}
-        navigation
-        grabCursor
-        className='overflow-visible h-full'
-      >
-        <SwiperSlide className='grid place-items-center'>
-          <StorylinePrologCard />
-        </SwiperSlide>
+      <div className='h-full w-max flex gap-5 items-center'>
+        {/* <StorylinePrologCard /> */}
 
-        {storylines?.playableChapter.map((chapter) => (
-          <SwiperSlide
-            className='grid place-items-center'
+        {storylines?.playableChapter.map((chapter, index) => (
+          <StorylineDetailChapterCard
+            games={chapter.games}
+            title={chapter.chapterName}
             key={chapter.chapterName}
-          >
-            {(props) => <StorylineDetailChapterCard {...props} />}
-          </SwiperSlide>
+            chapterIndex={index + 1}
+          />
         ))}
-
-        {storylines?.playableChapter.length && <SwiperNavigation />}
-      </Swiper>
+      </div>
     </motion.div>
   );
 }

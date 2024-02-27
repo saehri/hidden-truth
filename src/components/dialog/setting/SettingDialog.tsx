@@ -11,7 +11,7 @@ const SettingDialog = memo(() => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>
+      <Button onClick={() => setOpen(true)} className='absolute right-3 top-3'>
         <Icons.Setting />
       </Button>
 

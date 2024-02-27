@@ -32,13 +32,11 @@ export default function BackButton({
       initial={{opacity: 0, scale: 0.9}}
       animate={{opacity: 1, scale: 1}}
       transition={{delay: 0.3}}
+      className='absolute z-50 bottom-8 left-4 flex items-center gap-4'
     >
       <Button
         onClick={() => setActivePage(goBackTo)}
-        className={twMerge(
-          'absolute z-50 flex gap-3 items-center p-0 bottom-8 left-4',
-          className
-        )}
+        className={twMerge('flex gap-3 items-center p-0', className)}
       >
         <span>{ButtonIcon[iconType]}</span>
       </Button>

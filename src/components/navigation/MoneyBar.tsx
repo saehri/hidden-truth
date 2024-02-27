@@ -14,7 +14,7 @@ export default function MoneyBar() {
         <Icons.MoneyBlack />
       </motion.span>
 
-      <div className='font-body font-semibold text-background min-w-20 text-sm lg:text-base'>
+      <div className='font-semibold text-background min-w-14 text-sm lg:text-base font-sans'>
         <motion.span
           initial={{opacity: 0, x: -50}}
           animate={{opacity: 1, x: 0}}

@@ -21,7 +21,7 @@ export default function AppLayout({children}: AppLayout) {
           >
             <div
               id='game__container'
-              className='w-full absolute top-0 left-1/2 -translate-x-1/2 max-w-screen-sm h-full'
+              className='w-full absolute top-0 left-1/2 -translate-x-1/2 h-full'
             >
               <MainNavigation />
               {children}

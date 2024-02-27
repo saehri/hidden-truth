@@ -34,9 +34,9 @@
         90deg,
         #fff 12px,
         0,
-        #ae5f00 15px,
+        #14532d 15px,
         0,
-        #ae5f00 20px,
+        #14532d 20px,
         0,
         #fff 100%
       ),
@@ -47,11 +47,11 @@
       ),
       radial-gradient(
         circle at 22px 8px,
-        #ae5f00 40%,
-        #ae5f00 40%,
-        #ae5f00 100%
+        #14532d 40%,
+        #14532d 40%,
+        #14532d 100%
       );
-    background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 21'%3E%3Cpath d='M20 0h-7v6.9a7.5 7.5 0 107 0V0z' fill='%23ae5f00'/%3E%3Cpath d='M13 0h3v6.9a7.5 7.5 0 002 14 7.5 7.5 0 01-9-7.4c0-2.9 1.6-5.4 4-6.6V0z' fill='%232E1901'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg fill='none' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 21'%3E%3Cpath d='M20 0h-7v6.9a7.5 7.5 0 107 0V0z' fill='%2314532d'/%3E%3Cpath d='M13 0h3v6.9a7.5 7.5 0 002 14 7.5 7.5 0 01-9-7.4c0-2.9 1.6-5.4 4-6.6V0z' fill='%232E1901'/%3E%3C/svg%3E");
     background-size: 2em 1.3125em;
   }
 

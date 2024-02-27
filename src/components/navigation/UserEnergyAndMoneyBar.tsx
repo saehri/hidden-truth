@@ -9,7 +9,7 @@ export default function GameUserEnergyAndMoneyBarWrapper() {
       initial={{scale: 1.2, opacity: 0.1, filter: 'blur(4px)'}}
       animate={{scale: 1, opacity: 1, filter: 'blur(0px)'}}
       transition={{delay: 0.4}}
-      className='w-full p-2 max-w-screen-sm mx-auto'
+      className='pt-2 pl-2'
     >
       <div className='p-1 bg-yellow-50 w-max relative'>
         <div className='bg-slate-100 border border-slate-200 grid grid-cols-[max-content,_1fr]'>

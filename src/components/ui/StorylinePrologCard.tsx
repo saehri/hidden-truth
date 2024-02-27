@@ -7,7 +7,7 @@ import {barCode} from '../../assets/images/barCode';
 
 export default function StorylinePrologCard() {
   return (
-    <div className='w-80 sm:w-96 group'>
+    <div className='w-80 xs:w-96 group'>
       <div className='w-full pt-[calc((4/3)*100%)] relative'>
         <div className='bg-yellow-100 absolute z-40 top-0 left-0 w-full h-full p-4 shadow-sm shadow-slate-950/30'>
           <div className='border border-dotted border-yellow-800/20 h-full relative flex flex-col justify-between px-2'>

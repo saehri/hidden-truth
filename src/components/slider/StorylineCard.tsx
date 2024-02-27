@@ -50,11 +50,11 @@ export default function StorylineCard({
                   />
                 </div>
 
-                <h4 className='text-left text-base font-body font-bold text-yellow-950 block w-full border-b border-slate-600/30 pb-1 mb-3'>
+                <h4 className='text-left text-base font-body font-bold text-green-900 block w-full border-b border-slate-600/30 pb-1 mb-3'>
                   {storylineTitle}
                 </h4>
 
-                <p className='text-yellow-900/70 text-sm leading-4 text-justify font-medium'>
+                <p className='text-green-900/80 text-xs leading-4 text-justify font-medium font-sans'>
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Consequatur, dolorem? Corporis, ex eveniet, numquam possimus
                   fugiat quaerat veritatis impedit quisquam aliquid mollitia
@@ -64,7 +64,9 @@ export default function StorylineCard({
 
               <div className='flex w-full justify-between items-end'>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm text-yellow-900'>Rewards</span>
+                  <span className='text-xs text-green-800 font-semibold font-sans'>
+                    Hadiah
+                  </span>
 
                   <div className='flex gap-1'>
                     <div className='w-8 h-8 bg-slate-300'></div>
@@ -75,10 +77,10 @@ export default function StorylineCard({
 
                 <button
                   onClick={onClick}
-                  className='text-yellow-50 p-1 px-2 pr-6 rounded-full font-medium text-sm flex gap-2 items-center bg-gradient-to-tr from-green-950 to-green-800 hover:from-green-800 hover:to-green-700 transition-all h-max'
+                  className='text-yellow-50 p-2 pr-6 rounded-full font-medium text-sm flex gap-2 items-center bg-gradient-to-l from-green-950 to-green-800 hover:from-green-800 hover:to-green-700 transition-all h-max'
                 >
                   <span className='w-3 h-3 rounded-full border-4 border-yellow-200'></span>
-                  <span>Selidiki</span>
+                  <span className='leading-3'>Selidiki</span>
                 </button>
               </div>
             </div>
@@ -96,7 +98,7 @@ export default function StorylineCard({
 
 function StorylineCardYellowPaper() {
   return (
-    <div className='absolute top-0 left-0 w-full h-full bg-yellow-700 rotate-6 shadow-lg shadow-slate-950/40 sm:group-hover:rotate-3 transition-transform'></div>
+    <div className='absolute top-0 left-0 w-full h-full rotate-3 shadow-lg shadow-slate-950/40 sm:group-hover:rotate-1 transition-transform bg-green-900'></div>
   );
 }
 
