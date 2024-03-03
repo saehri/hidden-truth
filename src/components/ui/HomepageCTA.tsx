@@ -7,29 +7,59 @@ export default function HomepageCTA() {
   const {setActivePage} = useContext(ActivePageContext);
 
   return (
-    <div className='absolute bottom-12 w-full grid place-items-center gap-2'>
+    <div className='absolute bottom-12 w-full grid place-items-center gap-2 z-50'>
       <motion.button
-        whileTap={{scale: 0.8}}
+        variants={{
+          rest: {y: 100, opacity: 0},
+          show: {y: 0, opacity: 1, transition: {delay: 0.3, damping: 50}},
+        }}
+        initial='rest'
+        animate='show'
+        whileHover={'animate'}
         onClick={() => setActivePage({location: 'storylineSelectionPage'})}
-        className='bg-yellow-800/90 text-yellow-950 border border-yellow-500/40 p-3 px-6 w-max group z-40 relative'
+        className='bg-primary min-h-10 px-4 min-w-52 rounded-full border border-blue-950 text-left flex items-center justify-between relative overflow-hidden'
       >
-        <span className='w-max font-bold relative z-40 font-sans'>
+        <motion.span
+          variants={{animate: {opacity: 0, y: -50}}}
+          className='font-body font-medium uppercase text-slate-200 relative z-20'
+        >
           Mode Cerita
-        </span>
+        </motion.span>
 
-        <span className='absolute top-0 left-0 w-full h-full bg-gradient-to-t from-yellow-500 to-yellow-200 border border-yellow-400 p-1 block rotate-3 group-hover:rotate-1 transition-transform shadow-sm'></span>
-      </motion.button>
+        <motion.span
+          initial={{opacity: 0, y: 50}}
+          variants={{animate: {opacity: 1, y: 0}}}
+          className='font-body font-medium uppercase absolute left-4 text-slate-200 z-20'
+        >
+          Play Now
+        </motion.span>
 
-      <motion.button
-        whileTap={{scale: 0.8}}
-        onClick={() => setActivePage({location: 'storylineSelectionPage'})}
-        className='bg-slate-800/90 text-slate-950 border border-slate-500/40 p-3 px-6 w-max group z-40 relative'
-      >
-        <span className='w-max font-semibold relative z-40 font-sans'>
-          Mode Bebas
-        </span>
+        <motion.span
+          variants={{
+            animate: {
+              scale: [1, 0.5, 1],
+              transition: {
+                repeat: Infinity,
+                duration: 1,
+                delay: 0.5,
+                repeatDelay: 0,
+              },
+            },
+          }}
+          className='block w-2 h-2 outline-2 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20'
+        ></motion.span>
 
-        <span className='absolute top-0 left-0 w-full h-full bg-gradient-to-t from-slate-500 to-slate-200 border border-slate-400 p-1 block rotate-3 group-hover:rotate-1 transition-transform shadow-sm'></span>
+        <motion.img
+          variants={{
+            animate: {
+              y: 10,
+              transition: {damping: 50},
+            },
+          }}
+          className='absolute -right-8 w-32 h-32 object-cover z-0 opacity-90'
+          src='/images/fingerprint.png'
+          alt=''
+        />
       </motion.button>
     </div>
   );

@@ -3,7 +3,7 @@ export type GameStateTypes =
   | 'start'
   | 'paused'
   | 'completed'
-  | 'over'
+  | 'gameOver'
   | 'preparation';
 
 /* @types defines the avaliable game types */

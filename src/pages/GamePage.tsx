@@ -3,13 +3,11 @@ import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import {GameTypes} from '../services/utils/types';
 
 import ImageGuesser from '../components/games/ImageGuesser';
-import FullscreenBackground from '../components/ui/FullscreenBackground';
-import ArrangeLetters from '../components/games/ArrangeLetters';
+import ArrangeLettersGame from '../components/games/arrange-letters/ArrangeLettersGame';
 import GuessThePerson from '../components/games/GuessThePerson';
 import MultipleChoice from '../components/games/MultipleChoice';
 import ReportDisinformationGame from '../components/games/report-disinformation/ReportDisinformationGame';
 
-import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 import RepeatMelodyGame from '../components/games/repeat-melody/RepeatMelodyGame';
 
 export default function GamePage() {
@@ -18,12 +16,6 @@ export default function GamePage() {
       <div className='absolute top-0 left-0 z-40 w-full h-full bg-slate-950/70'>
         <GameRouting />
       </div>
-
-      <FullscreenBackground
-        imageLink={homepageBackground}
-        placeholderLink='https://utfs.io/f/8fd6d47e-e2a4-4842-acf7-cd88a2d78bb4-4ik1dj.webp'
-        animate={false}
-      />
     </div>
   );
 }
@@ -33,7 +25,7 @@ function GameRouting() {
 
   const GAMES: Record<GameTypes, React.ReactNode> = {
     TG: <ImageGuesser />,
-    SK: <ArrangeLetters />,
+    SK: <ArrangeLettersGame />,
     TO: <GuessThePerson />,
     MC: <MultipleChoice />,
     RD: <ReportDisinformationGame />,

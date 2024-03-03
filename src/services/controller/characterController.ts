@@ -2,8 +2,28 @@ import {create} from 'zustand';
 import useFetch from '../hooks/useFetch';
 import {CharacterTypes} from '../utils/types';
 
-const initialState = {
-  character: undefined,
+const initialState: Record<'character', CharacterTypes> = {
+  character: {
+    character_name: 'James Harlow',
+    created_at: '203949',
+    current_avatar: {
+      avatar_id: 'df-male',
+      avatar_image: '',
+      avatar_thumbs: '',
+      avatar_name: 'df male',
+      obtained_at: new Date().toISOString(),
+      rarity: 'common',
+    },
+    current_energy: 10,
+    current_rank: 'nobody',
+    inventory: {
+      avatar: [],
+      consumable: [],
+    },
+    played_chapters: [],
+    played_games: [],
+    user_id: '011',
+  },
 };
 
 const characterStore = create<{character?: CharacterTypes}>(() => initialState);

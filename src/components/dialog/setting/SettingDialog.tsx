@@ -1,9 +1,8 @@
 import {memo, useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
-
-import Button from '../../ui/Button';
-import Icons from '../../ui/Icons';
 import {createPortal} from 'react-dom';
+
+import Icons from '../../ui/Icons';
 import SettingDialogContent from './SettingDialogContent';
 
 const SettingDialog = memo(() => {
@@ -11,9 +10,12 @@ const SettingDialog = memo(() => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)} className='absolute right-3 top-3'>
+      <button
+        onClick={() => setOpen(true)}
+        className='absolute right-3 top-2 p-3'
+      >
         <Icons.Setting />
-      </Button>
+      </button>
 
       <AnimatePresence>
         {isOpen && <Dialog setOpen={setOpen} />}

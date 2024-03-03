@@ -54,7 +54,7 @@ export default function StorylineCard({
                   {storylineTitle}
                 </h4>
 
-                <p className='text-green-900/80 text-xs leading-4 text-justify font-medium font-sans'>
+                <p className='text-green-900/80 text-xs leading-4 text-justify font-medium font-body'>
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                   Consequatur, dolorem? Corporis, ex eveniet, numquam possimus
                   fugiat quaerat veritatis impedit quisquam aliquid mollitia
@@ -64,7 +64,7 @@ export default function StorylineCard({
 
               <div className='flex w-full justify-between items-end'>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-xs text-green-800 font-semibold font-sans'>
+                  <span className='text-xs text-green-800 font-semibold font-body'>
                     Hadiah
                   </span>
 

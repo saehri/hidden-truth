@@ -29,7 +29,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: 'EB Garamond',
+        body: 'Poppins',
       },
       colors: {
         border: {

@@ -1,23 +1,26 @@
+import {useContext} from 'react';
 import {motion} from 'framer-motion';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import EnergyBar from './EnergyBar';
 import MoneyBar from './MoneyBar';
 
 export default function GameUserEnergyAndMoneyBarWrapper() {
+  const {activePage} = useContext(ActivePageContext);
+
   return (
     <motion.div
-      initial={{scale: 1.2, opacity: 0.1, filter: 'blur(4px)'}}
-      animate={{scale: 1, opacity: 1, filter: 'blur(0px)'}}
+      key={activePage.location}
+      initial={{y: -100, opacity: 0.1}}
+      animate={{y: 0, opacity: 1}}
       transition={{delay: 0.4}}
       className='pt-2 pl-2'
     >
-      <div className='p-1 bg-yellow-50 w-max relative'>
-        <div className='bg-slate-100 border border-slate-200 grid grid-cols-[max-content,_1fr]'>
+      <div className='pt-1 w-max'>
+        <div className='grid grid-cols-[max-content,_1fr] gap-6'>
           <EnergyBar />
           <MoneyBar />
         </div>
-
-        <div className='absolute bg-green-800/90 top-1 left-1 -z-10 w-full h-full -rotate-1 shadow-md shadow-slate-950/40'></div>
       </div>
     </motion.div>
   );

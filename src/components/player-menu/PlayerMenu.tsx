@@ -25,7 +25,9 @@ const PlayerMenu = memo(function () {
   return (
     <>
       <Button
-        className={isHidden ? 'hidden' : 'block'}
+        className={
+          isHidden ? 'hidden' : 'block bg-transparent border-none w-max h-max'
+        }
         onClick={() => setCardOpen(true)}
       >
         <Icons.User />

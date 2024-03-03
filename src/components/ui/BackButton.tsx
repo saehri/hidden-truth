@@ -32,7 +32,7 @@ export default function BackButton({
       initial={{opacity: 0, scale: 0.9}}
       animate={{opacity: 1, scale: 1}}
       transition={{delay: 0.3}}
-      className='absolute z-50 bottom-8 left-4 flex items-center gap-4'
+      className='absolute z-50 top-20 left-4 flex items-center gap-4'
     >
       <Button
         onClick={() => setActivePage(goBackTo)}

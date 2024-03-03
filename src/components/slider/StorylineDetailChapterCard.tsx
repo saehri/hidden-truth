@@ -63,24 +63,24 @@ function CardDescription({
 
   return (
     <div className='p-2 flex-1'>
-      <div className='grid grid-cols-[15%,_1fr] gap-2'>
+      <div className='grid grid-cols-[32px,_1fr] gap-2'>
         <div className='w-full aspect-square bg-green-400 flex justify-center pt-1'>
-          <Icons.GameController className='w-8 h-7 xs:w-10 xs:h-9' />
+          <Icons.GameController className='w-7 h-6' />
         </div>
 
         <div className='w-full'>
-          <span className='bg-green-800 font-sans text-xs px-1 text-slate-50 block w-max mb-1'>
+          <span className='bg-green-800 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
             GAME
           </span>
 
-          <p className='font-sans text-slate-800'>{gameTypes[gameType]}</p>
+          <p className='font-body text-slate-800'>{gameTypes[gameType]}</p>
         </div>
       </div>
 
-      <div className='grid grid-cols-[15%,_1fr] gap-2 h-[60%]'>
+      <div className='grid grid-cols-[32px,_1fr] gap-2 h-[60%]'>
         <div className='w-full h-full bg-green-400 flex items-start justify-center pt-2'>
           <span
-            className='font-sans text-slate-50 text-2xl xs:text-4xl leading-3'
+            className='font-body text-slate-50 text-xl leading-3'
             style={{
               WebkitWritingMode: 'vertical-rl',
             }}
@@ -90,11 +90,11 @@ function CardDescription({
         </div>
 
         <div className='w-full pt-3'>
-          <span className='bg-green-800 font-sans text-xs px-1 text-slate-50 block w-max mb-1'>
+          <span className='bg-green-800 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
             SYNOPSIS
           </span>
 
-          <p className='font-sans text-slate-800'>
+          <p className='font-body text-slate-800'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Dignissimos, earum!
           </p>
@@ -177,7 +177,7 @@ function CardHeader() {
 
       <div className='flex gap-2'>
         <div className='bg-green-800 w-8 h-8'></div>
-        <div className='font-sans text-slate-50 bg-green-800 flex-1 flex items-center px-3'>
+        <div className='font-body text-slate-50 bg-green-800 flex-1 flex items-center px-3'>
           KARTU TUGAS
         </div>
       </div>
@@ -190,7 +190,7 @@ function ChapterSeparator({children}: {children: React.ReactNode}) {
     <div className='w-16 rotate-180 grid place-items-center'>
       <div className='h-[85%] grid place-items-center bg-slate-50 p-2 py-4'>
         <h4
-          className='uppercase w-max font-sans font-bold text-sm text-green-950'
+          className='uppercase w-max font-body font-bold text-sm text-green-950'
           style={{
             WebkitWritingMode: 'vertical-rl',
           }}
