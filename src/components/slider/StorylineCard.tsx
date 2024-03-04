@@ -73,15 +73,15 @@ function CardDetail({
         <p className='text-xs text-slate-50/70'>REWARDS</p>
 
         <div className='flex items-center gap-1'>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20'></div>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20'></div>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20'></div>
+          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
         </div>
       </div>
 
       <button
         onClick={onClick}
-        className='block mt-6 px-4 p-1 font-medium text-sm ml-auto mr-4 border-x border-primary/40 bg-primary/20 hover:bg-primary/50 text-slate-50'
+        className='block mt-6 w-24 hover:w-28 transition-[width] p-1 font-medium text-sm ml-auto mr-4 border-x border-primary/40 hover:border-primary bg-primary/20 hover:bg-primary/50 text-slate-50'
       >
         <span>SELIDIKI</span>
       </button>
@@ -100,7 +100,6 @@ function CardWrapper({
     <motion.div
       initial={{y: 100, opacity: 0}}
       animate={{y: 0, opacity: 1}}
-      transition={{delay: 1.4}}
       className='w-full h-max grid place-items-center relative group'
     >
       {children}
