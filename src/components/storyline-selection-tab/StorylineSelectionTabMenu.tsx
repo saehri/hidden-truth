@@ -1,6 +1,7 @@
 import {motion} from 'framer-motion';
 
 import {StorylineTypes} from '../../services/utils/types';
+import Icons from '../ui/Icons';
 
 type TabButtonTypes = {
   id: StorylineTypes;
@@ -68,6 +69,7 @@ function TabMenuHeader({children}: {children: React.ReactNode}) {
 
 function TabButton({isClickable, id, label}: TabButtonTypes) {
   const isOnDesktop = window.innerWidth >= 1280;
+  const iconColor = isClickable ? 'rgb(234, 179, 8)' : 'rgb(71, 85, 105)';
 
   return (
     <motion.button
@@ -79,7 +81,13 @@ function TabButton({isClickable, id, label}: TabButtonTypes) {
       disabled={!isClickable}
     >
       <span className='hidden sm:block p-1 pr-0 bg-blue-950/50 group-disabled:bg-slate-50'>
-        <span className='w-7 h-7 sm:w-9 sm:h-9 block border-r border-dashed border-slate-50 group-disabled:border-slate-600'></span>
+        <span className='grid place-items-center w-7 h-7 sm:w-9 sm:h-9 border-r border-dashed border-slate-50 group-disabled:border-slate-600'>
+          {id === 'mainStoryline' ? (
+            <Icons.Book fill={iconColor} />
+          ) : (
+            <Icons.DoubleStar className='w-6 h-5' fill={iconColor} />
+          )}
+        </span>
       </span>
 
       <span className='self-center text-left ml-4'>{label}</span>
