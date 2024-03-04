@@ -24,6 +24,9 @@ const gameDataByCategory: Record<
   RD: {
     'PEMILU-24': pemilu24ReportDisinformationGameData,
   },
+  TN: {
+    'PEMILU-24': pemilu24ArrangeLettersData,
+  },
 };
 
 function getGameData({
