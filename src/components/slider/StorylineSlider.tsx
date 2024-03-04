@@ -9,8 +9,10 @@ import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 // Import swiper styles
 import 'swiper/css';
+import 'swiper/css/pagination';
 
 import SwiperNavigation from './SwiperNavigation';
+import {Circle} from '../../pages/Homepage';
 
 export default function StorylineSlider() {
   const {setActivePage} = useContext(ActivePageContext);
@@ -27,19 +29,20 @@ export default function StorylineSlider() {
       }}
       initial='rest'
       animate='show'
-      className='h-full'
+      className='w-full h-full relative'
     >
       <Swiper
-        slidesPerView={'auto'}
+        slidesPerView={1}
         spaceBetween={0}
+        pagination
         navigation
         grabCursor
-        className='overflow-visible h-full'
+        className='h-full relative z-50'
       >
         {storylineCards.map((card, index) => (
           <SwiperSlide
             key={card.storylineId + index}
-            className='w-max h-full p-8 flex items-center'
+            className='w-full h-full flex items-center justify-center'
           >
             {({isActive}) => (
               <StorylineCard
@@ -62,6 +65,7 @@ export default function StorylineSlider() {
 
         {storylineCards.length > 1 && <SwiperNavigation />}
       </Swiper>
+      <Circle withColor={false} />
     </motion.div>
   );
 }

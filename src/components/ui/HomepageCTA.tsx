@@ -47,7 +47,7 @@ export default function HomepageCTA() {
             },
           }}
           className='block w-2 h-2 outline-2 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20'
-        ></motion.span>
+        />
 
         <motion.img
           variants={{

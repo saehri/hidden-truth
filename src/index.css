@@ -9,7 +9,7 @@
     --popover: 197 70% 10%;
     --popover-foreground: 0 0 100%;
     --primary: 238 42% 41%;
-    --primary-foreground: 355.7 100% 97.3%;
+    --primary-foreground: 231 35% 19%;
     --border: 50 87% 28%;
     --border-light: 50 85% 49%;
   }
@@ -55,7 +55,7 @@
     background-size: 2em 1.3125em;
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1280px) {
     .backdropBlur {
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);

@@ -29,7 +29,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: 'Poppins',
+        body: 'JetBrains Mono',
       },
       colors: {
         border: {

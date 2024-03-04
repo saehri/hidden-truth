@@ -14,9 +14,10 @@ export default function Homepage() {
       <CharacterImages />
 
       {/* DECORATIONS */}
+
       <TriangleRight />
       <TriangleLeft />
-      <Circle />
+      <Circle withColor />
       <Lines />
 
       <motion.img
@@ -30,7 +31,7 @@ export default function Homepage() {
   );
 }
 
-function Lines() {
+export function Lines() {
   return (
     <div className='w-full h-full absolute top-0 left-0 z-40 sm:z-10 bg-blue-950/10'>
       <motion.div
@@ -74,13 +75,13 @@ function Lines() {
   );
 }
 
-function Circle() {
+export function Circle({withColor}: {withColor: boolean}) {
   return (
     <motion.div
-      initial={{scale: 0.3, y: '-50%', x: '-50%'}}
+      initial={{scale: 0.3, y: '-50%', x: '-50%', opacity: withColor ? 1 : 0}}
       animate={{
         scale: 1,
-        opacity: 1,
+        opacity: [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
         y: '-50%',
         x: '-50%',
         outlineOffset: ['100px', '200px'],
@@ -92,25 +93,32 @@ function Circle() {
       }}
       className='p-10 rounded-full absolute top-1/2 left-1/2 z-20 border-2 sm:border-4 border-yellow-500/30 outline-1 outline outline-slate-50/10'
     >
-      <div
-        className='w-32 h-32 xs:w-40 xs:h-40 sm:w-52 sm:h-52 md:w lg:w-96 lg:h-96 rounded-full backdrop-blur-md outline-2 outline outline-slate-950 border border-slate-300'
-        style={{
-          backgroundColor: 'rgba(37, 99, 235, 0.3)',
-          opacity: 0.8,
-          backgroundImage:
-            'radial-gradient(#444cf7 0.5px, rgba(37, 99, 235, 0.3) 0.5px)',
-          backgroundSize: '10px 10px',
-        }}
-      ></div>
+      {withColor ? (
+        <div
+          className='w-32 h-32 xs:w-40 xs:h-40 sm:w-52 sm:h-52 md:w lg:w-96 lg:h-96 rounded-full backdrop-blur-md outline-2 outline outline-slate-950 border border-slate-300'
+          style={{
+            backgroundColor: 'rgba(37, 99, 235, 0.3)',
+            opacity: 0.8,
+            backgroundImage:
+              'radial-gradient(#444cf7 0.5px, rgba(37, 99, 235, 0.3) 0.5px)',
+            backgroundSize: '10px 10px',
+          }}
+        ></div>
+      ) : (
+        <div className='w-32 h-32 xs:w-40 xs:h-40 sm:w-52 sm:h-52 md:w lg:w-96 lg:h-96 rounded-full outline-2 outline outline-slate-950 border border-slate-300'></div>
+      )}
     </motion.div>
   );
 }
 
-function TriangleRight() {
+export function TriangleRight() {
   return (
     <motion.div
       initial={{opacity: 0}}
-      animate={{opacity: 1, transition: {delay: 1}}}
+      animate={{
+        opacity: [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+        transition: {delay: 1.3},
+      }}
       className='absolute bottom-0 sm:top-1/2 sm:right-0 sm:-translate-y-1/2 rotate-90 sm:rotate-0 w-screen h-[100vw] sm:w-[50vw] sm:h-[50vw] bg-slate-700/10 backdrop-blur-sm z-10 overflow-hidden flex justify-end'
       style={{
         backgroundImage:
@@ -124,11 +132,14 @@ function TriangleRight() {
   );
 }
 
-function TriangleLeft() {
+export function TriangleLeft() {
   return (
     <motion.div
       initial={{opacity: 0}}
-      animate={{opacity: 1, transition: {delay: 1}}}
+      animate={{
+        opacity: [0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
+        transition: {delay: 1},
+      }}
       className='absolute top-0 rotate-90 sm:rotate-0 sm:top-1/2 left-0 sm:-translate-y-1/2 h-[100vw] w-screen sm:w-[50vw] sm:h-[50vw] bg-slate-700/10 backdrop-blur-sm z-20 sm:z-10'
       style={{
         backgroundImage:
@@ -144,7 +155,7 @@ function TriangleLeft() {
 
 function CharacterImages() {
   return (
-    <div className='w-full max-w-2xl absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-30'>
+    <div className='w-full max-w-2xl xl:max-w-screen-md absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none z-30'>
       <div className='pb-[calc((4/4)*100%)] relative'>
         <img
           src={homepageCharacter}

@@ -19,10 +19,7 @@ export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD' | 'TN';
 
 export type StorylineIdTypes = 'PEMILU-24';
 
-export type StorylineTypes =
-  | 'specialStoryline'
-  | 'mainStoryline'
-  | 'premiumStoryline';
+export type StorylineTypes = 'specialStoryline' | 'mainStoryline';
 
 /* @types defines the game storyline chapters data structure */
 export type StorylineChapterTypes = {
