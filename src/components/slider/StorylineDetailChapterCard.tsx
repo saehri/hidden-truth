@@ -77,7 +77,7 @@ function CardDescription({
             GAME
           </span>
 
-          <p className='font-body text-slate-50 text-sm'>
+          <p className='font-body text-slate-300 text-sm'>
             {gameTypes[gameType]}
           </p>
         </div>
@@ -100,7 +100,7 @@ function CardDescription({
             SYNOPSIS
           </span>
 
-          <p className='font-body text-slate-50 uppercase text-xs'>
+          <p className='font-body text-slate-300 uppercase text-xs'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Dignissimos, earum!
           </p>
