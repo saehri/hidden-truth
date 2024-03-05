@@ -1,8 +1,6 @@
 import {motion} from 'framer-motion';
 import {StorylineCardTypes} from '../../services/utils/types';
 
-import {barCode} from '../../assets/images/barCode';
-
 interface Props extends StorylineCardTypes {
   isActive: boolean;
   onClick: any;
@@ -16,7 +14,7 @@ export default function StorylineCard({
   onClick,
 }: Props) {
   return (
-    <CardWrapper isActive={isActive}>
+    <CardWrapper>
       <CardImageWrapper>
         <span className='bg-slate-50/20 text-slate-50 text-[10px] px-1 block w-max absolute top-1 left-1 z-30'>
           SPECIAL CHAPTER
@@ -89,32 +87,48 @@ function CardDetail({
   );
 }
 
-function CardWrapper({
-  children,
-  isActive,
-}: {
-  children: React.ReactNode;
-  isActive: boolean;
-}) {
+const cardWrapperAnimation = {
+  initial: {y: 100, opacity: 0},
+  animate: {y: 0, opacity: 1},
+};
+
+function CardWrapper({children}: {children: React.ReactNode}) {
   return (
     <motion.div
-      initial={{y: 100, opacity: 0}}
-      animate={{y: 0, opacity: 1}}
+      variants={{...cardWrapperAnimation}}
+      initial='initial'
+      animate='animate'
+      whileHover='whileHover'
       className='w-full h-max grid place-items-center relative group'
     >
       {children}
 
-      <motion.div
-        initial={{scale: 0.9, opacity: 0}}
-        animate={{scale: 1, opacity: 1}}
-        transition={{delay: 1.8}}
-        className='pointer-events-none absolute top-0 left-0 w-full h-full z-20 hidden lg:block'
-      >
-        <span className='topLeft block absolute top-0 left-0 w-10 h-10 border-l border-t border-slate-50/30' />
-        <span className='topRight block absolute top-0 right-0 w-10 h-10 border-r border-t border-slate-50/30' />
-        <span className='bottomLeft block absolute bottom-0 left-0 w-10 h-10 border-l border-b border-slate-50/30' />
-        <span className='bottomRight block absolute bottom-0 right-0 w-10 h-10 border-r border-b border-slate-50/30' />
-      </motion.div>
+      <CrossHair />
+    </motion.div>
+  );
+}
+
+const crossHairAnimations = {
+  initial: {scaleX: 0.9, opacity: 0},
+  animate: {scaleX: 1, opacity: 1},
+  whileHover: {scale: 0.9},
+};
+
+function CrossHair() {
+  return (
+    <motion.div
+      variants={{...crossHairAnimations}}
+      className='pointer-events-none absolute top-0 left-0 w-full h-full z-20 hidden lg:block'
+    >
+      <span className='topLeft block absolute top-0 left-0 w-10 h-10 border-l border-t border-slate-50/30' />
+      <span className='topRight block absolute top-0 right-0 w-10 h-10 border-r border-t border-slate-50/30' />
+      <span className='bottomLeft block absolute bottom-0 left-0 w-10 h-10 border-l border-b border-slate-50/30' />
+      <span className='bottomRight block absolute bottom-0 right-0 w-10 h-10 border-r border-b border-slate-50/30' />
+
+      <div className='crossHair absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10'>
+        <span className='w-[1px] h-full bg-slate-50/20 absolute left-1/2 -translate-x-1/2' />
+        <span className='h-[1px] w-full bg-slate-50/20 absolute top-1/2 -translate-y-1/2' />
+      </div>
     </motion.div>
   );
 }

@@ -24,7 +24,7 @@ export default function StorylineTypeTabMenu() {
       </h4>
 
       <motion.div
-        transition={{staggerChildren: 0.1, delayChildren: 2}}
+        transition={{staggerChildren: 0.1, delayChildren: 0.5}}
         animate='show'
         initial='rest'
         className='w-full grid grid-cols-2 max-w-screen-sm mx-auto px-4 lg:px-0'
@@ -47,12 +47,10 @@ function TabMenuHeader({children}: {children: React.ReactNode}) {
 
   return (
     <motion.header
-      initial={isOnDesktop && {x: -200, opacity: 0}}
       animate={
         isOnDesktop && {
-          x: 0,
-          opacity: [1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1],
-          transition: {damping: 50, delay: 0.5, opacity: {delay: 0.5}},
+          opacity: [0, , 0, 1, 0, 1, 0, 1, 1],
+          transition: {damping: 50, delay: 0.3},
         }
       }
       style={{
@@ -74,8 +72,8 @@ function TabButton({isClickable, id, label}: TabButtonTypes) {
   return (
     <motion.button
       variants={{
-        rest: {x: isOnDesktop ? -100 : 0, opacity: 0},
-        show: {x: 0, opacity: isClickable ? 1 : 0.5, transition: {damping: 50}},
+        rest: {x: isOnDesktop ? -50 : 0, opacity: 0},
+        show: {x: 0, opacity: isClickable ? 1 : 0.5},
       }}
       className='group bg-primary font-semibold text-slate-100 disabled:bg-slate-50 disabled:text-slate-600 border-y border-blue-950 text-xs sm:text-sm grid grid-cols-[max-content,_1fr] relative py-3 px-1 sm:py-0 sm:px-0'
       disabled={!isClickable}
