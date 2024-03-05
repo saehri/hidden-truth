@@ -125,7 +125,7 @@ function CrossHair() {
       <span className='bottomLeft block absolute bottom-0 left-0 w-10 h-10 border-l border-b border-slate-50/30' />
       <span className='bottomRight block absolute bottom-0 right-0 w-10 h-10 border-r border-b border-slate-50/30' />
 
-      <div className='crossHair absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10'>
+      <div className='crossHair absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 group-hover:opacity-0'>
         <span className='w-[1px] h-full bg-slate-50/20 absolute left-1/2 -translate-x-1/2' />
         <span className='h-[1px] w-full bg-slate-50/20 absolute top-1/2 -translate-y-1/2' />
       </div>
