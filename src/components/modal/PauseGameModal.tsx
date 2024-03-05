@@ -39,7 +39,7 @@ export default function PauseGameModal({
                 className='bg-gradient-to-tr from-yellow-800 via-yellow-500 to-yellow-300 border border-slate-800 rounded-full p-2'
               >
                 <div className='p-2 grid place-items-center border border-border bg-gradient-to-tr from-green-800 via-green-600 to-green-300 rounded-full'>
-                  <Icons.Play className='w-14 h-14 m-4 translate-x-[2px]' />
+                  {/* <Icons.Play className='w-14 h-14 m-4 translate-x-[2px]' /> */}
                 </div>
               </Button>
 

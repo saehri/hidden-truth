@@ -75,15 +75,15 @@ function TabButton({isClickable, id, label}: TabButtonTypes) {
         rest: {x: isOnDesktop ? -50 : 0, opacity: 0},
         show: {x: 0, opacity: isClickable ? 1 : 0.5},
       }}
-      className='group bg-primary font-semibold text-slate-100 disabled:bg-slate-50 disabled:text-slate-600 border-y border-blue-950 text-xs sm:text-sm grid grid-cols-[max-content,_1fr] relative py-3 px-1 sm:py-0 sm:px-0'
+      className='group bg-primary font-semibold text-slate-100 disabled:bg-slate-50 disabled:text-slate-600 border-y border-blue-950 text-xs grid grid-cols-[max-content,_1fr] relative py-2 px-1 sm:py-0 sm:px-0'
       disabled={!isClickable}
     >
       <span className='hidden sm:block p-1 pr-0 bg-blue-950/50 group-disabled:bg-slate-50'>
-        <span className='grid place-items-center w-7 h-7 sm:w-9 sm:h-9 border-r border-dashed border-slate-50 group-disabled:border-slate-600'>
+        <span className='grid place-items-center w-7 h-7 sm:w-7 sm:h-7 border-r border-dashed border-slate-50 group-disabled:border-slate-600'>
           {id === 'mainStoryline' ? (
-            <Icons.Book fill={iconColor} />
+            <Icons.Book fill={iconColor} className='w-[18px] h-[14px]' />
           ) : (
-            <Icons.DoubleStar className='w-6 h-5' fill={iconColor} />
+            <Icons.DoubleStar className='w-5 h-4' fill={iconColor} />
           )}
         </span>
       </span>
@@ -102,7 +102,7 @@ function TabButton({isClickable, id, label}: TabButtonTypes) {
               },
             },
           }}
-          className='block w-2 h-2 outline-2 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20 absolute top-1/2 right-4'
+          className='block w-1 h-1 outline-1 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20 absolute top-1/2 right-4'
         />
       )}
     </motion.button>

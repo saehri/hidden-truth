@@ -29,7 +29,8 @@ const SSPemilu24: StorylineDataTypes = {
   background: premiumStorylineCardCover,
   types: 'specialStoryline',
   rewards: chapterRewards,
-  synopsis: 'DISINFORMASI MENGGANGU',
+  synopsis:
+    'Retas konspirasi organisasi gelap yang mengganggu pemilihan umum, pecahkan teka-teki, dan ungkap kebenaran dalam game detektif yang mendebarkan ini',
   playableChapter: [
     {
       chapterName: 'Chapter 1 - The Governer',

@@ -14,7 +14,7 @@ export default function MoneyBar() {
         <Icons.MoneyAlt className='w-4' />
       </motion.span>
 
-      <div className='font-semibold text-slate-50/70 mx-3 text-base font-body'>
+      <div className='font-semibold text-slate-50/70 mx-3 text-sm'>
         <motion.span
           initial={{opacity: 0, y: 50}}
           animate={{opacity: 1, y: 0}}

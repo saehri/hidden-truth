@@ -135,7 +135,7 @@ function CardWrapper({children, index}: CardWrapperTypes) {
       initial={animation.initial}
       whileInView={animation.whileInView}
       viewport={{once: true, amount: 'some'}}
-      className='w-72 xs:w-[340px]'
+      className='w-72'
     >
       <div className='pt-[calc((4/3)*100%)] relative'>
         <div

@@ -1,7 +1,7 @@
 import {ImageGuesserGameDataTypes} from '../../../services/utils/types';
 
 const pemilu24ImageGuesserData: Record<string, ImageGuesserGameDataTypes[]> = {
-  'PEMILU24-TG-C2-2': [
+  'PEMILU24-TG-C1-1': [
     {
       id: 'PEMILU24-TG-C1-1-02',
       imageLink:

@@ -17,7 +17,7 @@ export default function HomepageCTA() {
         animate='show'
         whileHover={'animate'}
         onClick={() => setActivePage({location: 'storylineSelectionPage'})}
-        className='bg-primary min-h-10 px-4 min-w-52 rounded-full border border-blue-950 text-left flex items-center justify-between relative overflow-hidden'
+        className='bg-primary min-h-9 px-4 min-w-52 rounded-full border border-blue-950 text-left flex items-center justify-between relative overflow-hidden text-sm'
       >
         <motion.span
           variants={{animate: {opacity: 0, y: -50}}}
@@ -37,7 +37,7 @@ export default function HomepageCTA() {
         <motion.span
           variants={{
             animate: {
-              scale: [1, 0.5, 1],
+              scale: [1, 0.8, 1],
               transition: {
                 repeat: Infinity,
                 duration: 1,
@@ -46,7 +46,7 @@ export default function HomepageCTA() {
               },
             },
           }}
-          className='block w-2 h-2 outline-2 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20'
+          className='block w-2 h-2 outline-1 outline-slate-50 outline outline-offset-4 bg-slate-50 rounded-full z-20'
         />
 
         <motion.img

@@ -81,7 +81,7 @@ function CardDetail({
   return (
     <div className='absolute z-30 bottom-4 left-1/2 -translate-x-1/2 w-full max-w-[450px]'>
       <div className='px-4'>
-        <h4 className='uppercase font-medium text-slate-50 text-left leading-6 bg-primary/20 border border-primary/50 w-max px-2 mb-2'>
+        <h4 className='uppercase font-medium text-sm text-slate-50 text-left leading-6 bg-primary/20 border border-primary/50 w-max px-2 mb-2'>
           {storylineTitle}
         </h4>
 
@@ -169,7 +169,7 @@ function CrossHair() {
 
 function CardImageWrapper({children}: {children: React.ReactNode}) {
   return (
-    <div className='w-80 sm:w-[350px]'>
+    <div className='w-80 2xl:w-96'>
       <div className='pt-[calc((4/3)*100%)] relative border border-yellow-500'>
         <div className='absolute top-0 left-0 w-full h-full p-[2px]'>
           {children}

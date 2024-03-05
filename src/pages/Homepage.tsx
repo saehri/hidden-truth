@@ -37,7 +37,7 @@ export function Lines() {
       <motion.div
         initial={{y: -100}}
         animate={{y: 0, transition: {delay: 0.5, damping: 50}}}
-        className='absolute w-full h-16 bg-slate-900/10 backdrop-blur-sm border-b border-slate-300/10 flex items-center justify-between'
+        className='absolute w-full h-14 bg-slate-900/10 backdrop-blur-sm border-b border-slate-300/10 flex items-center justify-between'
       >
         <motion.span
           initial={{width: 0}}
@@ -56,7 +56,7 @@ export function Lines() {
       <motion.div
         initial={{y: 100}}
         animate={{y: 0, transition: {delay: 0.5, damping: 50}}}
-        className='absolute hidden bottom-0 w-full h-16 bg-slate-900/10 backdrop-blur-sm sm:flex items-center justify-between border-t border-slate-300/10'
+        className='absolute hidden bottom-0 w-full h-12 bg-slate-900/10 backdrop-blur-sm sm:flex items-center justify-between border-t border-slate-300/10'
       >
         <motion.span
           initial={{width: 0}}

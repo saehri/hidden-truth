@@ -19,7 +19,7 @@ export default function EnergyBar() {
         transition={{staggerChildren: 0.01, delayChildren: 0.9}}
         initial='rest'
         animate='show'
-        className='flex items-center gap-[2px] w-full h-4 mx-3'
+        className='flex items-center gap-[2px] w-full h-3 mx-3'
       >
         {energyBars.map((bar) => (
           <motion.div
