@@ -1,80 +1,49 @@
 import {premiumStorylineCardCover} from '../../../assets/images/premiumStorylineCardCover';
 import {
+  RewardTypes,
   StorylineCardTypes,
   StorylineDataTypes,
 } from '../../../services/utils/types';
 
+const chapterRewards: RewardTypes[] = [
+  {
+    id: 'big_energy_bottle',
+    label: 'Big energy bottle (+3 energy)',
+    image: '',
+  },
+  {
+    id: 'big_money_bag',
+    label: 'Big money bag (+300)',
+    image: '',
+  },
+  {
+    id: 'avatar_bundle_unique_batik_24',
+    label: 'Skins Batik (+3 energy)',
+    image: '',
+  },
+];
+
 const SSPemilu24: StorylineDataTypes = {
-  storylineId: 'PEMILU-24',
-  storylineTitle: 'Serangan Cyber di Ibu Kota',
-  storylineDetailPageCoverImage: '',
-  storylineType: 'specialStoryline',
-  storylineCardBackground: premiumStorylineCardCover,
-  difficulty: '⭐⭐⭐',
-  requester: 'The Governer',
-  respondent: 'Defacto Firm',
+  id: 'PEMILU-24',
+  title: 'Serangan Cyber di Ibu Kota',
+  background: premiumStorylineCardCover,
+  types: 'specialStoryline',
+  rewards: chapterRewards,
+  synopsis: 'DISINFORMASI MENGGANGU',
   playableChapter: [
     {
       chapterName: 'Chapter 1 - The Governer',
       games: [
         {
-          gameId: 'PEMILU24-SK-C1-1',
-          gameType: 'SK',
-          gameName: 'Kabar buruk',
+          id: 'PEMILU24-TG-C1-1',
+          type: 'TG',
+          name: 'Kabar buruk',
           hasOpeningDialog: true,
-          location: 'Defacto Office',
-        },
-        {
-          gameId: 'PEMILU24-MC-C1-2',
-          gameType: 'MC',
-          gameName: 'Panggilan tugas',
-          hasOpeningDialog: false,
-          location: 'Defacto Office',
-        },
-        {
-          gameId: 'PEMILU24-TO-C1-3',
-          gameType: 'TO',
-          gameName: 'Mengidentifikasi orang bising',
-          hasOpeningDialog: false,
-          location: 'Kantor Gubernur Jakarta',
-        },
-      ],
-    },
-    {
-      chapterName: 'Chapter 2 - Tikus Berdasi',
-      games: [
-        {
-          gameId: 'PEMILU24-RD-C2-1',
-          gameType: 'RD',
-          gameName: 'Tikus yang tidur',
-          hasOpeningDialog: false,
-          location: 'Jakarta timur',
-        },
-        {
-          gameId: 'PEMILU24-TG-C2-2',
-          gameType: 'TG',
-          gameName: 'Tikus gendut',
-          hasOpeningDialog: false,
-          location: 'Jakarta utara',
-        },
-      ],
-    },
-    {
-      chapterName: 'Chapter 3 - Masalah Besar',
-      games: [
-        {
-          gameId: 'PEMILU24-TN-C3-1',
-          gameType: 'TN',
-          gameName: 'Tikus yang tidur',
-          hasOpeningDialog: false,
-          location: 'Jakarta timur',
-        },
-        {
-          gameId: 'PEMILU24-TG-C3-2',
-          gameType: 'TG',
-          gameName: 'Tikus gendut',
-          hasOpeningDialog: true,
-          location: 'Jakarta utara',
+          openingDialogId: 'DIALOG_PEMILU_C1G1',
+          rewards: [
+            {id: 'small_money_bag', label: 'Small money bag (+100)', image: ''},
+          ],
+          synopsis: 'Gak tahu harus ngapain di sini sumpah',
         },
       ],
     },
@@ -82,13 +51,12 @@ const SSPemilu24: StorylineDataTypes = {
 };
 
 const SSCDPemilu24: StorylineCardTypes = {
-  storylineId: SSPemilu24.storylineId,
-  storylineTitle: SSPemilu24.storylineTitle,
-  storylineType: SSPemilu24.storylineType,
-  storylineCardBackground: SSPemilu24.storylineCardBackground,
-  difficulty: SSPemilu24.difficulty,
-  requester: SSPemilu24.requester,
-  respondent: SSPemilu24.respondent,
+  id: SSPemilu24.id,
+  title: SSPemilu24.title,
+  types: SSPemilu24.types,
+  background: SSPemilu24.background,
+  rewards: SSPemilu24.rewards,
+  synopsis: SSPemilu24.synopsis,
 };
 
 export {SSPemilu24, SSCDPemilu24};

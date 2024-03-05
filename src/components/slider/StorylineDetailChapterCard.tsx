@@ -2,10 +2,14 @@ import {motion} from 'framer-motion';
 import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-import {GameTypes} from '../../services/utils/types';
+import {
+  GameCardTypes,
+  GameTypes,
+  RewardTypes,
+} from '../../services/utils/types';
 
 interface StorylineDetailChapterCard {
-  games: any;
+  games: GameCardTypes[];
   title: string;
   chapterIndex: number;
 }
@@ -20,19 +24,20 @@ export default function StorylineDetailChapterCard({
       <ChapterSeparator>{title}</ChapterSeparator>
 
       <motion.div transition={{staggerChildren: 0.1}} className='flex gap-2'>
-        {games.map((game: any, index: number) => (
-          <CardWrapper key={game.gameId} index={index}>
+        {games.map((game, index: number) => (
+          <CardWrapper key={game.id} index={index}>
             <CardHeader />
             <CardContent>
               <CardDescription
                 chapterIndex={chapterIndex}
                 index={index + 1}
-                gameType={game.gameType}
+                gameType={game.type}
+                synopsis={game.synopsis}
               />
 
               <div className='flex justify-between items-end p-2 border-b border-primary/50'>
-                <CardRewardGrid />
-                <CardCTA gameId={game.gameId} gameType={game.gameType} />
+                <CardRewardGrid rewards={game.rewards} />
+                <CardCTA gameId={game.id} gameType={game.type} />
               </div>
 
               <div className='h-8 grid place-items-center'>
@@ -47,21 +52,22 @@ export default function StorylineDetailChapterCard({
 }
 
 /* ----------------- CARD DESCRIPTION*/
+type CardDescriptionTypes = {
+  gameType: GameTypes;
+  index: number;
+  chapterIndex: number;
+  synopsis: string;
+};
 function CardDescription({
   gameType,
   index,
   chapterIndex,
-}: {
-  gameType: GameTypes;
-  index: number;
-  chapterIndex: number;
-}) {
+  synopsis,
+}: CardDescriptionTypes) {
   const gameTypes: Record<GameTypes, string> = {
     MC: 'PILIHAN GANDA',
     RD: 'LAPOR DISINFORMASI',
-    SK: 'SUSUN KATA',
     TG: 'TEBAK GAMBAR',
-    TN: 'TEBAK NADA',
     TO: 'CARI ORANG',
   };
 
@@ -101,8 +107,7 @@ function CardDescription({
           </span>
 
           <p className='font-body text-slate-300 uppercase text-xs'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos, earum!
+            {synopsis}
           </p>
         </div>
       </div>
@@ -174,15 +179,20 @@ function CardCTA({gameId, gameType}: CardCTATypes) {
 }
 
 /* ----------------- TASK REWARD GRID */
-function CardRewardGrid() {
+type CardRewardGridTypes = {rewards: RewardTypes[]};
+function CardRewardGrid({rewards}: CardRewardGridTypes) {
   return (
     <div>
       <p className='text-xs text-slate-50/70'>REWARDS</p>
 
       <div className='flex items-center gap-1'>
-        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
-        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
-        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+        {rewards.map((reward) => (
+          <div
+            key={reward.id}
+            className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'
+            title={reward.label}
+          ></div>
+        ))}
       </div>
     </div>
   );

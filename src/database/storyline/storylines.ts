@@ -10,7 +10,6 @@ const storyVolumeCards: StorylineCardTypes[] = [SSCDPemilu24];
 
 const storyVolumes: Record<StorylineTypes, StorylineDataTypes[]> = {
   mainStoryline: [],
-  premiumStoryline: [],
   specialStoryline: [SSPemilu24],
 };
 
@@ -23,7 +22,9 @@ function getStorylineData(
   storylineType: StorylineTypes
 ) {
   try {
-    return storyVolumes[storylineType].filter((v) => v.storylineId === _id)[0];
+    return storyVolumes[storylineType].filter(
+      (storyline) => storyline.id === _id
+    )[0];
   } catch (error: any) {
     console.error(error.message);
   }

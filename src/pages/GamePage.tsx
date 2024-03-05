@@ -3,12 +3,9 @@ import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import {GameTypes} from '../services/utils/types';
 
 import ImageGuesser from '../components/games/ImageGuesser';
-import ArrangeLettersGame from '../components/games/arrange-letters/ArrangeLettersGame';
 import GuessThePerson from '../components/games/GuessThePerson';
 import MultipleChoice from '../components/games/MultipleChoice';
 import ReportDisinformationGame from '../components/games/report-disinformation/ReportDisinformationGame';
-
-import RepeatMelodyGame from '../components/games/repeat-melody/RepeatMelodyGame';
 
 export default function GamePage() {
   return (
@@ -25,11 +22,9 @@ function GameRouting() {
 
   const GAMES: Record<GameTypes, React.ReactNode> = {
     TG: <ImageGuesser />,
-    SK: <ArrangeLettersGame />,
     TO: <GuessThePerson />,
     MC: <MultipleChoice />,
     RD: <ReportDisinformationGame />,
-    TN: <RepeatMelodyGame />,
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];

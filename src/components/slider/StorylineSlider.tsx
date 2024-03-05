@@ -16,7 +16,7 @@ import {Circle} from '../../pages/Homepage';
 
 export default function StorylineSlider() {
   const {setActivePage} = useContext(ActivePageContext);
-  const storylineCards = getStorylineCards();
+  const storylines = getStorylineCards();
 
   return (
     <motion.div
@@ -39,22 +39,22 @@ export default function StorylineSlider() {
         grabCursor
         className='h-full relative z-50'
       >
-        {storylineCards.map((card, index) => (
+        {storylines.map((storyline, index) => (
           <SwiperSlide
-            key={card.storylineId + index}
+            key={storyline.id}
             className='w-full h-full flex items-center justify-center'
           >
             {({isActive}) => (
               <StorylineCard
                 isActive={isActive}
-                {...card}
+                {...storyline}
                 onClick={() =>
                   setActivePage({
                     location: 'storylineDetailPage',
                     state: {
-                      storylineId: card.storylineId,
-                      storylineType: card.storylineType,
-                      storylineTitle: card.storylineTitle,
+                      storylineId: storyline.id,
+                      storylineType: storyline.types,
+                      storylineTitle: storyline.title,
                     },
                   })
                 }
@@ -63,7 +63,7 @@ export default function StorylineSlider() {
           </SwiperSlide>
         ))}
 
-        {storylineCards.length > 1 && <SwiperNavigation />}
+        {storylines.length > 1 && <SwiperNavigation />}
       </Swiper>
       <Circle withColor={false} />
     </motion.div>

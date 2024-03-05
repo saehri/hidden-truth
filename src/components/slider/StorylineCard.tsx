@@ -1,5 +1,5 @@
 import {motion} from 'framer-motion';
-import {StorylineCardTypes} from '../../services/utils/types';
+import {RewardTypes, StorylineCardTypes} from '../../services/utils/types';
 
 interface Props extends StorylineCardTypes {
   isActive: boolean;
@@ -7,24 +7,34 @@ interface Props extends StorylineCardTypes {
 }
 
 export default function StorylineCard({
-  storylineTitle,
-  difficulty,
   isActive,
-  storylineCardBackground,
   onClick,
+  title,
+  background,
+  rewards,
+  synopsis,
+  types,
 }: Props) {
+  const storylineTypes =
+    types === 'mainStoryline' ? 'MAIN CHAPTER' : 'SPECIAL CHAPTER';
+
   return (
     <CardWrapper>
       <CardImageWrapper>
         <span className='bg-slate-50/20 text-slate-50 text-[10px] px-1 block w-max absolute top-1 left-1 z-30'>
-          SPECIAL CHAPTER
+          {storylineTypes}
         </span>
 
         <Progress />
-        <CardDetail onClick={onClick} storylineTitle={storylineTitle} />
+        <CardDetail
+          rewards={rewards}
+          onClick={onClick}
+          storylineTitle={title}
+          synopsis={synopsis}
+        />
 
         <img
-          src={storylineCardBackground}
+          src={background}
           className='w-full h-full object-cover opacity-75 grayscale group-hover:grayscale-0 transition-all'
           alt=''
         />
@@ -34,25 +44,40 @@ export default function StorylineCard({
 }
 
 function Progress() {
+  const progress = 50;
+
   return (
     <div className='absolute top-1 right-1 z-40 w-1/3'>
       <p className='text-slate-50 text-[10px] text-right'>PROGRESS</p>
 
       <div className='w-full h-4 relative flex items-center justify-center bg-slate-50/10'>
-        <span className='text-[10px] relative z-30 text-slate-50'>50%</span>
-        <div className='absolute top-0 right-0 bg-slate-50/40 h-full w-1/2' />
+        <span className='text-[10px] relative z-30 text-slate-50'>
+          {progress}%
+        </span>
+
+        <motion.div
+          initial={{width: 0}}
+          animate={{width: `${progress}%`}}
+          className='absolute top-0 right-0 bg-slate-50/40 h-full'
+        />
       </div>
     </div>
   );
 }
 
+type CardDetailTypes = {
+  storylineTitle: string;
+  onClick: () => void;
+  rewards: RewardTypes[];
+  synopsis: string;
+};
+
 function CardDetail({
   storylineTitle,
   onClick,
-}: {
-  storylineTitle: string;
-  onClick: any;
-}) {
+  rewards,
+  synopsis,
+}: CardDetailTypes) {
   return (
     <div className='absolute z-30 bottom-4 left-1/2 -translate-x-1/2 w-full max-w-[450px]'>
       <div className='px-4'>
@@ -61,21 +86,11 @@ function CardDetail({
         </h4>
 
         <p className='text-slate-50/50 text-[10px] leading-tight uppercase'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic, ullam
-          ipsa tenetur autem iusto possimus, nesciunt provident maxime nobis
-          officia, nemo saepe et minus voluptates.
+          {synopsis}
         </p>
       </div>
 
-      <div className='mt-2 px-4'>
-        <p className='text-xs text-slate-50/70'>REWARDS</p>
-
-        <div className='flex items-center gap-1'>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
-          <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
-        </div>
-      </div>
+      <RewardsBox rewards={rewards} />
 
       <button
         onClick={onClick}
@@ -83,6 +98,25 @@ function CardDetail({
       >
         <span>SELIDIKI</span>
       </button>
+    </div>
+  );
+}
+
+type RewardsBoxTypes = {rewards: RewardTypes[]};
+function RewardsBox({rewards}: RewardsBoxTypes) {
+  return (
+    <div className='mt-2 px-4'>
+      <p className='text-xs text-slate-50/70'>REWARDS</p>
+
+      <div className='flex items-center gap-1'>
+        {rewards.map((reward) => (
+          <div
+            key={reward.id}
+            className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'
+            title={reward.label}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 }

@@ -7,47 +7,48 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD' | 'TN';
+export type GameTypes = 'TG' | 'TO' | 'MC' | 'RD';
 /* 
   TG -> Tebak Gambar,
-  SK -> Susun Kata
   TK -> Tebak Orang
   MC -> Multiple Choice
   RD -> Report Disinformation
-  TN - Tebak Nada
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
 
 export type StorylineTypes = 'specialStoryline' | 'mainStoryline';
 
+export type RewardTypes = {id: string; label: string; image: string};
+
 /* @types defines the game storyline chapters data structure */
+export type GameCardTypes = {
+  id: string;
+  type: GameTypes;
+  name: string;
+  hasOpeningDialog: boolean;
+  openingDialogId?: string;
+  synopsis: string;
+  rewards: RewardTypes[];
+};
+
 export type StorylineChapterTypes = {
   chapterName: string;
-  games: {
-    gameId: string;
-    gameType: GameTypes;
-    gameName: string;
-    location: string;
-    hasOpeningDialog: boolean;
-    openingDialogId?: string;
-  }[];
+  games: GameCardTypes[];
 };
 
 /* @types defines the game storyline episode data structure */
 export interface StorylineCardTypes
   extends React.HTMLAttributes<HTMLButtonElement> {
-  storylineId: StorylineIdTypes;
-  storylineTitle: string;
-  storylineCardBackground?: string;
-  storylineType: StorylineTypes;
-  difficulty: string;
-  requester: string;
-  respondent: string;
+  id: StorylineIdTypes;
+  title: string;
+  background: string;
+  types: StorylineTypes;
+  synopsis: string;
+  rewards: RewardTypes[];
 }
 
 export interface StorylineDataTypes extends StorylineCardTypes {
-  storylineDetailPageCoverImage: string;
   playableChapter: StorylineChapterTypes[];
 }
 
@@ -58,15 +59,6 @@ export type ImageGuesserGameDataTypes = {
   id: string;
   imageLink: string;
   answer: string;
-};
-
-/* @types defines the types of arrange letter game data stuctures */
-export type ArrangeLettersGameDataTypes = {
-  id: string;
-  scrambledLetters: string[];
-  answer: string;
-  clue?: string;
-  difficulty: GameDifficultyTypes;
 };
 
 /* @types defines the types of guess the person game data stuctures */
