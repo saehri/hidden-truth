@@ -31,7 +31,7 @@ function LogOutButton() {
   return (
     <button
       onClick={handleLoggingOut}
-      className='bg-red-500/50 border-x border-red-400 uppercase text-slate-50 p-1 w-20 hover:w-24 transition-[width]'
+      className='bg-red-500/50 border-x border-red-400 uppercase text-red-200 p-1 w-20 hover:w-24 transition-[width]'
     >
       Log Out
     </button>
