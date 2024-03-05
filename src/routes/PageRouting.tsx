@@ -19,6 +19,7 @@ import useUserController from '../services/controller/userController';
 import GlobalErrorBoundary from '../components/ui/GlobalErrorBoundary';
 import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 import PrologPage from '../pages/PrologPage';
+import StartPage from '../pages/StartPage';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -86,6 +87,7 @@ function PageViewer() {
   // }, [activePage.location]);
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
+    startPage: <StartPage />,
     homepage: <Homepage />,
     storylineSelectionPage: <StorylineSelectionPage />,
     storylineDetailPage: <StorylineDetailPage />,

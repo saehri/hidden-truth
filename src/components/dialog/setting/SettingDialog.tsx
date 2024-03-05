@@ -1,18 +1,26 @@
-import {memo, useState} from 'react';
-import {AnimatePresence} from 'framer-motion';
+import {memo, useContext, useState} from 'react';
 import {createPortal} from 'react-dom';
+import {AnimatePresence} from 'framer-motion';
+import {twMerge} from 'tailwind-merge';
+
+import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 
 import Icons from '../../ui/Icons';
 import SettingDialogContent from './SettingDialogContent';
 
 const SettingDialog = memo(() => {
   const [isOpen, setOpen] = useState<boolean>(false);
+  const {activePage} = useContext(ActivePageContext);
+  const isHidden = activePage.location === 'startPage';
 
   return (
     <>
       <button
         onClick={() => setOpen(true)}
-        className='absolute right-3 top-2 p-3'
+        className={twMerge(
+          'absolute right-3 top-2 p-3',
+          isHidden ? 'hidden' : 'block'
+        )}
       >
         <Icons.Setting />
       </button>

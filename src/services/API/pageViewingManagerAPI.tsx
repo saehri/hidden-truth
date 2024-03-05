@@ -20,12 +20,12 @@ export type ViewablePageTypes =
   | 'gamePage'
   | 'dialogPage'
   | 'signupPage'
-  | 'signinPage';
+  | 'signinPage'
+  | 'startPage';
 
 /* 
   @definitions
   homepage -> Homepage
-  storylineTypeSelectionPage -> Selecting storyline type
   storylineSelectionPage -> Selecting the storyline
   storylineDetail -> Viewing the storyline detail
   gamePage -> Plays game
@@ -61,7 +61,7 @@ export default function AppPageViewingManagerAPI({
   children,
 }: AppPageViewingManagerAPI) {
   const [activePage, setActivePage] = useState<ActivePageTypes>({
-    location: 'homepage',
+    location: 'startPage',
   });
 
   return (
