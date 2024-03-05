@@ -1,63 +1,95 @@
+import React, {useState} from 'react';
+import {AnimatePresence, motion} from 'framer-motion';
+import {twMerge} from 'tailwind-merge';
+
+import AccountSetting from './AccountSetting';
 import MusicHandler from './MusicHandler';
 
-import useCharacterController from '../../../services/controller/characterController';
-import AccountSetting from './AccountSetting';
-
+type SettingTypes = 'general' | 'account';
+const settingMenu: SettingTypes[] = ['general', 'account'];
 export default function SettingDialogContent() {
-  const characterController = useCharacterController();
-  const characterId = characterController.character
-    ? /* @ts-ignore */
-      characterController.character?._id!
-    : '';
+  const [currentSetting, setCurrentSetting] = useState<SettingTypes>('general');
+
+  const settingContentComponent: Record<SettingTypes, React.ReactNode> = {
+    account: <AccountSetting />,
+    general: <MusicHandler />,
+  };
 
   return (
-    <StackedPaperEffect>
-      <h4 className='text-yellow-900 font-semibold text-sm sm:text-base'>
-        Pengaturan
-      </h4>
+    <>
+      <div className='flex gap-1'>
+        {settingMenu.map((menu) => (
+          <SettingMenuButton
+            menu={menu}
+            setCurrentSetting={setCurrentSetting}
+            isActive={menu === currentSetting}
+            key={menu}
+          />
+        ))}
+      </div>
 
-      <SettingDivider name='General'>
-        <MusicHandler />
-      </SettingDivider>
+      <AnimatePresence mode='popLayout'>
+        <motion.div
+          key={currentSetting}
+          initial={{height: 0, opacity: 0}}
+          animate={{height: 'auto', opacity: 1}}
+          exit={{height: 0, opacity: 0}}
+          transition={{damping: 50}}
+        >
+          <div className='pt-4 pb-6 h-max'>
+            {settingContentComponent[currentSetting]}
+          </div>
+        </motion.div>
+      </AnimatePresence>
 
-      <SettingDivider name='Akun'>
-        <AccountSetting />
-      </SettingDivider>
-    </StackedPaperEffect>
+      <SettingMenuFooter />
+    </>
   );
 }
 
-function StackedPaperEffect({children}: {children: React.ReactNode}) {
+function SettingMenuFooter() {
   return (
-    <div className='bg-slate-200 w-full h-full rounded-sm px-2'>
-      <div className='px-1 bg-slate-200 shadow-sm shadow-slate-950/30 w-full h-full border border-slate-300 rounded-sm'>
-        <div className='px-1 bg-slate-200 shadow-sm shadow-slate-950/30 w-full h-full border border-slate-300 rounded-sm'>
-          <div className='bg-slate-50 shadow-sm shadow-slate-950/30 w-full h-full border border-t-0 border-b-0 border-slate-100 rounded-sm relative'>
-            <div className='relative z-20 flex flex-col gap-4 px-3 pt-5'>
-              {children}
-            </div>
+    <div className='border-t pt-2 text-xs flex items-center justify-between gap-4 flex-wrap gap-y-0 pr-4 text-slate-50/40 border-slate-50/20'>
+      <span className='hover:text-slate-50/90'>About Us</span>
 
-            <div className='absolute top-0 left-1/2 -translate-x-1/2 h-full w-1/3 bg-gradient-to-r from-slate-50 via-slate-400 to-slate-50 z-0 flex justify-center'>
-              <span className='w-[1px] h-full bg-slate-500/30 block'></span>
-            </div>
-          </div>
-        </div>
+      <div>
+        <a
+          href='mailto:bahreesaepul1@gmail.com'
+          className='hover:text-slate-50/90'
+        >
+          [twitter]
+        </a>
+        <a
+          href='mailto:bahreesaepul1@gmail.com'
+          className='hover:text-slate-50/90'
+        >
+          [email]
+        </a>
       </div>
     </div>
   );
 }
 
-interface SettingDivider extends React.HTMLAttributes<HTMLDivElement> {
-  name: string;
-}
+type SettingMenuButtonTypes = {
+  isActive: boolean;
+  setCurrentSetting: React.Dispatch<React.SetStateAction<SettingTypes>>;
+  menu: SettingTypes;
+};
 
-function SettingDivider({children, name}: SettingDivider) {
+function SettingMenuButton({
+  isActive,
+  setCurrentSetting,
+  menu,
+}: SettingMenuButtonTypes) {
   return (
-    <div>
-      <h5 className='font-semibold text-xs sm:text-sm border-b border-yellow-800/10 text-yellow-800 block w-full mb-2'>
-        {name}
-      </h5>
-      {children}
-    </div>
+    <button
+      onClick={() => setCurrentSetting(menu)}
+      className={twMerge(
+        'uppercase flex-1 p-2 transition-colors text-xs xs:text-sm',
+        isActive ? 'bg-primary' : 'bg-slate-600/40 text-slate-400'
+      )}
+    >
+      {menu} setting
+    </button>
   );
 }

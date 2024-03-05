@@ -1,5 +1,5 @@
 import {memo, useState} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
+import {AnimatePresence} from 'framer-motion';
 import {createPortal} from 'react-dom';
 
 import Icons from '../../ui/Icons';
@@ -26,18 +26,6 @@ const SettingDialog = memo(() => {
 
 export default SettingDialog;
 
-const animationVariants = {
-  mainWrapper: {
-    rest: {opacity: 0},
-    show: {opacity: 1},
-  },
-  dialogContainer: {
-    rest: {opacity: 0, y: 50},
-    show: {opacity: 1, y: 0, transition: {delay: 0.3}},
-    exit: {opacity: 1, y: 200},
-  },
-};
-
 function Dialog({
   setOpen,
 }: {
@@ -46,45 +34,50 @@ function Dialog({
   return (
     <>
       {createPortal(
-        <motion.div
-          variants={animationVariants.mainWrapper}
-          initial='rest'
-          animate='show'
-          exit='rest'
-          className='fixed top-0 left-0 z-50 w-full h-full grid place-items-center p-4 lg:p-8'
-        >
-          <motion.div
-            variants={animationVariants.dialogContainer}
-            initial='rest'
-            animate='show'
-            exit='exit'
-            transition={{ease: 'easeInOut', duration: 0.3}}
-            className='w-full h-full bg-gradient-to-l from-yellow-900 via-yellow-950 to-yellow-900 rounded-md border border-slate-50/20 p-2 mx-auto relative z-20 max-w-96 sm:max-w-[500px] max-h-60 sm:max-h-80'
-          >
-            <button
-              className='absolute -right-4 -top-4'
-              onClick={() => setOpen(false)}
-            >
-              <Icons.CloseCircled className='w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8' />
-            </button>
+        <DialogContentWrapper setOpen={setOpen}>
+          <DialogContentHeader setOpen={setOpen} />
 
-            <SettingDialogContent />
-
-            <div
-              className='w-5 h-10 absolute -bottom-8 left-1/3 bg-blue-600'
-              style={{
-                clipPath: 'polygon(100% 0, 100% 100%, 48% 75%, 0 100%, 0 0)',
-              }}
-            ></div>
-          </motion.div>
-
-          <div
-            onClick={() => setOpen(false)}
-            className='absolute top-0 left-0 -z-10 w-full h-full bg-slate-950/75'
-          ></div>
-        </motion.div>,
+          <SettingDialogContent />
+        </DialogContentWrapper>,
         document.getElementById('emtris__dialog') as Element | DocumentFragment
       )}
     </>
+  );
+}
+
+interface DialogContentWrapper extends React.HTMLAttributes<HTMLDivElement> {
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function DialogContentHeader({setOpen}: DialogContentWrapper) {
+  return (
+    <header className='flex justify-between items-center mb-3 border-b border-slate-50/10 pb-2'>
+      <h4>SETTING</h4>
+
+      <button onClick={() => setOpen(false)}>
+        [X]
+        <span className='sr-only'>Close modal</span>
+      </button>
+    </header>
+  );
+}
+
+function DialogContentWrapper({children, setOpen}: DialogContentWrapper) {
+  return (
+    <div className='absolute top-0 left-0 w-full h-full z-50 grid place-items-center p-4'>
+      <div
+        className='relative z-50 w-full max-w-96 p-4 bg-primary/20 border-x border-primary/60 sm:backdrop-blur-sm text-slate-50'
+        style={{
+          clipPath: 'polygon(0 0, 100% 0, 100% 80%, 93% 100%, 0 100%, 0% 50%)',
+        }}
+      >
+        {children}
+      </div>
+
+      <div
+        onClick={() => setOpen(false)}
+        className='absolute top-0 left-0 w-full h-full bg-slate-950/90'
+      />
+    </div>
   );
 }
