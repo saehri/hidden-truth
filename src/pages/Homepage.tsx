@@ -33,7 +33,7 @@ export default function Homepage() {
 
 export function Lines() {
   return (
-    <div className='w-full h-full absolute top-0 left-0 z-40 sm:z-10 bg-blue-950/10'>
+    <div className='w-full h-full absolute top-0 left-0 z-40 sm:z-10 bg-blue-950/10 pointer-events-none'>
       <motion.div
         initial={{y: -100}}
         animate={{y: 0, transition: {delay: 0.5, damping: 50}}}

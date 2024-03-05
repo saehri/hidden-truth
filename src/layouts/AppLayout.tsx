@@ -1,4 +1,3 @@
-import {axiomPattern} from '../assets/backgrounds/axiomPattern';
 import WithMusicModal from '../components/audio/WithMusicModal';
 import MainNavigation from '../components/navigation/MainNavigation';
 
@@ -16,8 +15,7 @@ export default function AppLayout({children}: AppLayout) {
         <section className='w-full h-full grid place-items-center'>
           <div
             id='game__screen-size'
-            className='w-full h-full relative bg-background'
-            style={{backgroundImage: `url(${axiomPattern})`}}
+            className='w-full h-full relative bg-slate-950'
           >
             <div
               id='game__container'

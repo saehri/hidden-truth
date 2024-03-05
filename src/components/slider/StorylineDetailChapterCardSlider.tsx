@@ -1,10 +1,8 @@
 import {useContext} from 'react';
-import {Swiper, SwiperSlide} from 'swiper/react';
 import {motion} from 'framer-motion';
 
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-import SwiperNavigation from './SwiperNavigation';
 import StorylinePrologCard from '../ui/StorylinePrologCard';
 
 import {getStorylineData} from '../../database/storyline/storylines';

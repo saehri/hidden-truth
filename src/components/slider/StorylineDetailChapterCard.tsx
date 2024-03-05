@@ -3,7 +3,6 @@ import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import {GameTypes} from '../../services/utils/types';
-import Icons from '../ui/Icons';
 
 interface StorylineDetailChapterCard {
   games: any;
@@ -31,9 +30,13 @@ export default function StorylineDetailChapterCard({
                 gameType={game.gameType}
               />
 
-              <div className='flex justify-between items-end p-2'>
+              <div className='flex justify-between items-end p-2 border-b border-primary/50'>
                 <CardRewardGrid />
                 <CardCTA gameId={game.gameId} gameType={game.gameType} />
+              </div>
+
+              <div className='h-8 grid place-items-center'>
+                <span className='block h-[1px] w-1/3 bg-slate-50/20' />
               </div>
             </CardContent>
           </CardWrapper>
@@ -43,6 +46,7 @@ export default function StorylineDetailChapterCard({
   );
 }
 
+/* ----------------- CARD DESCRIPTION*/
 function CardDescription({
   gameType,
   index,
@@ -64,21 +68,23 @@ function CardDescription({
   return (
     <div className='p-2 flex-1'>
       <div className='grid grid-cols-[32px,_1fr] gap-2'>
-        <div className='w-full aspect-square bg-green-400 flex justify-center pt-1'>
-          <Icons.GameController className='w-7 h-6' />
+        <div className='w-full aspect-square bg-primary flex justify-center pt-1'>
+          {/* <Icons.GameController className='w-7 h-6' /> */}
         </div>
 
         <div className='w-full'>
-          <span className='bg-green-800 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
+          <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
             GAME
           </span>
 
-          <p className='font-body text-slate-800'>{gameTypes[gameType]}</p>
+          <p className='font-body text-slate-50 text-sm'>
+            {gameTypes[gameType]}
+          </p>
         </div>
       </div>
 
       <div className='grid grid-cols-[32px,_1fr] gap-2 h-[60%]'>
-        <div className='w-full h-full bg-green-400 flex items-start justify-center pt-2'>
+        <div className='w-full h-full bg-primary flex items-start justify-center pt-2'>
           <span
             className='font-body text-slate-50 text-xl leading-3'
             style={{
@@ -90,11 +96,11 @@ function CardDescription({
         </div>
 
         <div className='w-full pt-3'>
-          <span className='bg-green-800 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
+          <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
             SYNOPSIS
           </span>
 
-          <p className='font-body text-slate-800'>
+          <p className='font-body text-slate-50 uppercase text-xs'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Dignissimos, earum!
           </p>
@@ -104,27 +110,33 @@ function CardDescription({
   );
 }
 
-function CardWrapper({
-  children,
-  index,
-}: {
+/* ----------------- CARD WRAPPER */
+type CardWrapperTypes = {
   children: React.ReactNode;
   index: number;
-}) {
+};
+
+const cardWrapperAnimation = (index: number) => ({
+  initial: {opacity: 0, y: 40, rotate: 15},
+  whileInView: {opacity: 1, y: 0, rotate: 0, transition: {delay: index / 10}},
+});
+
+function CardWrapper({children, index}: CardWrapperTypes) {
+  const animation = cardWrapperAnimation(index);
+  const clipPath = 'polygon(0 0, 100% 0, 100% 93%, 93% 100%, 0 100%, 0% 50%)';
+
   return (
     <motion.div
-      initial={{opacity: 0, y: 40, rotate: 15}}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-        rotate: 0,
-        transition: {delay: index / 10},
-      }}
+      initial={animation.initial}
+      whileInView={animation.whileInView}
       viewport={{once: true, amount: 'some'}}
       className='w-72 xs:w-[340px]'
     >
       <div className='pt-[calc((4/3)*100%)] relative'>
-        <div className='absolute w-full h-full top-0 left-0 bg-slate-50 rounded-md flex flex-col'>
+        <div
+          className='absolute w-full h-full top-0 left-0 bg-primary/30 flex flex-col border-x border-primary sm:backdrop-blur-sm'
+          style={{clipPath}}
+        >
           {children}
         </div>
       </div>
@@ -132,11 +144,16 @@ function CardWrapper({
   );
 }
 
+/* ----------------- CARD CONTENT WRAPPER*/
 function CardContent({children}: {children: React.ReactNode}) {
   return <div className='flex flex-col justify-between flex-1'>{children}</div>;
 }
 
-function CardCTA({gameId, gameType}: {gameId: string; gameType: GameTypes}) {
+/* ----------------- CARD CTA */
+
+type CardCTATypes = {gameId: string; gameType: GameTypes};
+
+function CardCTA({gameId, gameType}: CardCTATypes) {
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   function goToGamePage() {
@@ -149,35 +166,41 @@ function CardCTA({gameId, gameType}: {gameId: string; gameType: GameTypes}) {
   return (
     <button
       onClick={goToGamePage}
-      className='text-yellow-50 p-2 pr-6 rounded-full font-medium text-sm flex gap-2 items-center bg-gradient-to-l from-green-950 to-green-800 hover:from-green-800 hover:to-green-700 transition-all h-max'
+      className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium text-sm py-1 w-24 hover:w-28 transition-[width] border-x border-yellow-600'
     >
-      <span className='w-3 h-3 rounded-full border-4 border-yellow-200'></span>
-      <span className='leading-3'>Selidiki</span>
+      <span className='leading-3'>SELIDIKI</span>
     </button>
   );
 }
 
+/* ----------------- TASK REWARD GRID */
 function CardRewardGrid() {
   return (
-    <div className='flex gap-2'>
-      <div className='w-12 h-12 bg-slate-300'></div>
-      <div className='w-12 h-12 bg-slate-300'></div>
+    <div>
+      <p className='text-xs text-slate-50/70'>REWARDS</p>
+
+      <div className='flex items-center gap-1'>
+        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+        <div className='w-12 h-12 border border-primary/40 bg-primary/20 hover:bg-primary/40 hover:border-primary'></div>
+      </div>
     </div>
   );
 }
 
+/* ----------------- CARD HEADER */
 function CardHeader() {
   return (
-    <div className='p-2 border-b border-background border-dashed'>
+    <div className='p-2 border-b border-slate-50/40 border-dashed'>
       <div className='flex justify-between mb-2'>
-        <div className='w-2 h-2 rounded-full bg-background'></div>
-        <div className='w-1/4 h-2 rounded-full bg-background'></div>
-        <div className='w-2 h-2 rounded-full bg-background'></div>
+        <div className='w-2 h-2 rounded-full bg-slate-50/10'></div>
+        <div className='w-1/4 h-2 rounded-full bg-slate-50/10'></div>
+        <div className='w-2 h-2 rounded-full bg-slate-50/10'></div>
       </div>
 
       <div className='flex gap-2'>
-        <div className='bg-green-800 w-8 h-8'></div>
-        <div className='font-body text-slate-50 bg-green-800 flex-1 flex items-center px-3'>
+        <div className='bg-primary w-8 h-8'></div>
+        <div className='font-body text-slate-50 bg-primary flex-1 flex items-center px-3 text-sm'>
           KARTU TUGAS
         </div>
       </div>
@@ -185,12 +208,13 @@ function CardHeader() {
   );
 }
 
+/* ----------------- CARD SEPARATOR */
 function ChapterSeparator({children}: {children: React.ReactNode}) {
   return (
     <div className='w-16 rotate-180 grid place-items-center'>
-      <div className='h-[85%] grid place-items-center bg-slate-50 p-2 py-4'>
+      <div className='h-[85%] grid place-items-center bg-slate-50/10 hover:bg-slate-50/20 p-2 py-4 border-y border-slate-50/60'>
         <h4
-          className='uppercase w-max font-body font-bold text-sm text-green-950'
+          className='uppercase w-max font-body font-bold text-sm text-slate-50'
           style={{
             WebkitWritingMode: 'vertical-rl',
           }}
