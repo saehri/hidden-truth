@@ -41,7 +41,6 @@ function GameInformationBar() {
 
   return (
     <motion.div
-      initial={false}
       animate={{top: isMaximize ? '56px' : '-4px'}}
       className='absolute left-0 w-full px-4 z-50'
     >
@@ -53,6 +52,7 @@ function GameInformationBar() {
         }}
       >
         <span className='block w-1/2 h-[1px] bg-slate-50/70' />
+        <span className='sr-only'>Toggle hud</span>
       </button>
 
       <motion.div

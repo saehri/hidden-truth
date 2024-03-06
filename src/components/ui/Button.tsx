@@ -8,7 +8,7 @@ export default function Button({children, className, ...rest}: ButtonProps) {
     <motion.button
       whileTap={{scale: 0.6}}
       className={twMerge(
-        'bg-primary/30 border border-slate-50/50 w-12 h-12 relative group shadow-sm shadow-slate-950/30',
+        'bg-primary/30 border border-slate-50/50 w-9 h-9 relative group shadow-sm shadow-slate-950/30',
         className
       )}
       {...(rest as any)}
