@@ -10,7 +10,7 @@ import {GameStateTypes} from '../../services/utils/types';
 import Icons from './Icons';
 import Button from './Button';
 import Countdown, {CountdownApi} from 'react-countdown';
-import PauseGameModal from '../modal/PauseGameModal';
+import PauseGameModal from '../modal/pause-game-modal/PauseGameModal';
 
 interface InGameCountdown {
   countdownDuration?: number;

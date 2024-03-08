@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 
 import AccountSetting from './AccountSetting';
 import MusicHandler from './MusicHandler';
 
+import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
+
 type SettingTypes = 'general' | 'account';
 const settingMenu: SettingTypes[] = ['general', 'account'];
+
 export default function SettingDialogContent() {
+  const {activePage} = useContext(ActivePageContext);
   const [currentSetting, setCurrentSetting] = useState<SettingTypes>('general');
 
   const settingContentComponent: Record<SettingTypes, React.ReactNode> = {
@@ -15,9 +19,10 @@ export default function SettingDialogContent() {
     general: <MusicHandler />,
   };
 
-  return (
-    <>
-      <div className='flex gap-1'>
+  // THIS IS PROBABLY NOT A GOOD IDEA BUT ANYWAY 💅
+  const TabButtons = () => {
+    return (
+      <>
         {settingMenu.map((menu) => (
           <SettingMenuButton
             menu={menu}
@@ -26,7 +31,16 @@ export default function SettingDialogContent() {
             key={menu}
           />
         ))}
-      </div>
+      </>
+    );
+  };
+
+  // We used this variable to hidden some components when player is viewing certain page
+  const isHidden: boolean = activePage.location === 'gamePage';
+
+  return (
+    <>
+      <div className='flex gap-1'>{!isHidden && <TabButtons />}</div>
 
       <AnimatePresence mode='popLayout'>
         <motion.div
