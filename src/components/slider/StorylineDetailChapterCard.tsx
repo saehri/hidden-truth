@@ -194,6 +194,9 @@ function CardCTA({
     <button
       onClick={goToGamePage}
       className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium text-sm py-1 w-24 hover:w-28 transition-[width] border-x border-yellow-600'
+      style={{
+        clipPath: 'polygon(100% 0, 100% 78%, 94% 100%, 0 100%, 0 0)',
+      }}
     >
       <span className='leading-3'>SELIDIKI</span>
     </button>
