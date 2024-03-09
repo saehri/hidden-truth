@@ -17,6 +17,7 @@ export default function GamePage() {
       </div>
 
       {/* DECORATION */}
+      <Boxes />
       <Lines />
       <img
         src={homepageBackground}
@@ -38,4 +39,13 @@ function GameRouting() {
   };
 
   return GAMES[activePage?.state?.gameType as GameTypes];
+}
+
+function Boxes() {
+  return (
+    <div className='absolute justify-between items-center top-0 left-0 w-full h-full z-10 gap-96 hidden lg:flex pointer-events-none'>
+      <div className='w-[100vh] h-[100vh] rotate-45 border-slate-50/10 border-t border-r'></div>
+      <div className='w-[100vh] h-[100vh] rotate-45 border-slate-50/10 border-l border-b'></div>
+    </div>
+  );
 }
