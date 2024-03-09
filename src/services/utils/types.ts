@@ -30,6 +30,8 @@ export type GameCardTypes = {
   openingDialogId?: string;
   chapterName: string;
   synopsis: string;
+  hasTutorial?: boolean;
+  tutorialId?: string;
   rewards: RewardTypes[];
   difficulty: GameDifficultyTypes;
 };
@@ -58,9 +60,9 @@ export type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
 
 /* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {
-  id: string;
   imageLink: string;
   answer: string;
+  clue: string;
 };
 
 /* @types defines the types of guess the person game data stuctures */

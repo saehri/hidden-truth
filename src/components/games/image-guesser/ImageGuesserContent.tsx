@@ -1,4 +1,4 @@
-import {FormEvent, memo, useEffect, useState} from 'react';
+import {FormEvent, memo, useState} from 'react';
 import {motion} from 'framer-motion';
 import {
   GameStateTypes,
@@ -32,6 +32,7 @@ const ImageGuesserContent = memo(
         transition={{staggerChildren: 0.1, delayChildren: 0.8}}
         className='p-4 md:p-0 flex flex-col gap-5 w-full'
       >
+        <CluePopup />
         <ImageViewer imageLink={gameData.imageLink} />
         <AnswerInput
           questionAnswer={gameData.answer}
@@ -42,6 +43,10 @@ const ImageGuesserContent = memo(
     );
   }
 );
+
+function CluePopup() {
+  return <button>CLUE</button>;
+}
 
 type AnswerInputTypes = {
   questionAnswer: string;
