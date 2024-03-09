@@ -21,12 +21,12 @@ export default function ImageGuesser() {
     reducePlayerLife,
   } = gameController;
 
-  // useEffect(() => {
-  //   // Handle the start of game
-  //   const startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
+  useEffect(() => {
+    // Handle the start of game
+    const startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
 
-  //   return () => clearTimeout(startTimer);
-  // }, []);
+    return () => clearTimeout(startTimer);
+  }, []);
 
   return (
     <section className='w-full h-full'>

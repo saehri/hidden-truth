@@ -7,18 +7,6 @@ const pemilu24ImageGuesserData: Record<string, ImageGuesserGameDataTypes> = {
       'https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     answer: 'fish',
   },
-  'PEMILU24-TG-C1-2': {
-    id: 'a2',
-    imageLink:
-      'https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'fish',
-  },
-  'PEMILU24-TG-C1-3': {
-    id: 'a3',
-    imageLink:
-      'https://images.unsplash.com/photo-1578507065211-1c4e99a5fd24?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    answer: 'fish',
-  },
 };
 
 export default pemilu24ImageGuesserData;
