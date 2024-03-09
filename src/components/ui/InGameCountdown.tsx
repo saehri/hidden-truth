@@ -5,10 +5,9 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import {motion} from 'framer-motion';
 import {GameStateTypes} from '../../services/utils/types';
 
-import Icons from './Icons';
-import Button from './Button';
 import Countdown, {CountdownApi} from 'react-countdown';
 import PauseGameModal from '../modal/pause-game-modal/PauseGameModal';
 
@@ -69,11 +68,14 @@ export default function InGameCountdown({
         onComplete={() => setGameState('gameOver')}
       />
 
-      <Button
+      <motion.button
+        initial={{y: 50, opacity: 0}}
+        animate={{y: 0, opacity: 1}}
+        transition={{damping: 50, delay: 1}}
         onClick={() => setGameState('paused')}
         disabled={isCompleted()}
-        className='absolute bottom-16 right-3 z-[80]'
-      ></Button>
+        className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 z-[80] w-8 h-8 bg-primary/40'
+      ></motion.button>
 
       <PauseGameModal
         modalState={gameState === 'paused'}
@@ -123,15 +125,11 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
 
 function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
-    <>
-      <div className='pt-0 p-1 rounded-xl absolute bottom-4 right-4 z-50 w-28 h-max text-xl lg:text-2xl font-medium flex justify-center'>
-        <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] w-full font-body'>
-          {children}
-        </div>
+    <div className='pt-0 p-1 rounded-xl absolute bottom-4 sm:bottom-16 right-4 z-50 w-28 h-max text-xl lg:text-2xl font-medium flex justify-center'>
+      <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] w-full font-body'>
+        {children}
       </div>
-
-      <div className='absolute z-40 bg-gradient-to-r from-transparent via-slate-50 to-transparent w-full h-[2px] left-0'></div>
-    </>
+    </div>
   );
 }
 

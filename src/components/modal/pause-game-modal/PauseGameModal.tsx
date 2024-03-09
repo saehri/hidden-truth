@@ -78,7 +78,7 @@ function ModalWrapper({children}: {children: React.ReactNode}) {
       initial='rest'
       animate='animate'
       transition={{staggerChildren: 0.1}}
-      className='bg-slate-950/60 lg:backdrop-blur-sm absolute p-4 top-0 left-0 w-full h-full z-[100] grid place-items-center text-slate-950'
+      className='bg-slate-950/95 lg:bg-slate-950/80 lg:backdrop-blur-sm absolute p-4 top-0 left-0 w-full h-full z-[100] grid place-items-center text-slate-950'
     >
       <motion.div
         variants={modalWrapperAnimation}

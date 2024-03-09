@@ -41,6 +41,8 @@ const SSPemilu24: StorylineDataTypes = {
           name: 'Kabar buruk',
           hasOpeningDialog: true,
           openingDialogId: 'DIALOG_PEMILU_C1G1',
+          difficulty: 'easy',
+          chapterName: 'CH 1.1 - Kabar Buruk',
           rewards: [
             {id: 'small_money_bag', label: 'Small money bag (+100)', image: ''},
           ],

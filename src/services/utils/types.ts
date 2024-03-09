@@ -28,8 +28,10 @@ export type GameCardTypes = {
   name: string;
   hasOpeningDialog: boolean;
   openingDialogId?: string;
+  chapterName: string;
   synopsis: string;
   rewards: RewardTypes[];
+  difficulty: GameDifficultyTypes;
 };
 
 export type StorylineChapterTypes = {
@@ -52,7 +54,7 @@ export interface StorylineDataTypes extends StorylineCardTypes {
   playableChapter: StorylineChapterTypes[];
 }
 
-type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
+export type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
 
 /* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {

@@ -16,11 +16,13 @@ const animationVariants = {
 export default function MainMenu() {
   const {activePage} = useContext(ActivePageContext);
   const isInHomepage = activePage.location === 'homepage';
+  const isHidden = activePage.location === 'gamePage';
 
   return (
     <nav
       className={twMerge(
-        'flex items-center justify-end fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-screen-sm z-50'
+        'items-center justify-end fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-screen-sm z-50',
+        isHidden ? 'hidden' : 'flex'
       )}
     >
       <motion.div

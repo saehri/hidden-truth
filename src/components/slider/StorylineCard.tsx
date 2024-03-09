@@ -169,7 +169,7 @@ function CrossHair() {
 
 function CardImageWrapper({children}: {children: React.ReactNode}) {
   return (
-    <div className='w-80 2xl:w-96'>
+    <div className='w-72 xs:w-80 2xl:w-96'>
       <div className='pt-[calc((4/3)*100%)] relative border border-yellow-500'>
         <div className='absolute top-0 left-0 w-full h-full p-[2px]'>
           {children}

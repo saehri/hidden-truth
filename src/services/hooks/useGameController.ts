@@ -3,15 +3,24 @@ import {GameStateTypes, GameTypes, StorylineIdTypes} from '../utils/types';
 import {getGameData} from '../../database/gameData';
 import {ActivePageContext} from '../API/pageViewingManagerAPI';
 
-export default function useGameController(
-  customDuration?: GameDifficultyTypes
-) {
+type useGameControllerTypes = {customDuration?: GameDurationTypes};
+
+export default function useGameController({
+  customDuration,
+}: useGameControllerTypes) {
   // Current active page
   const {activePage} = useContext(ActivePageContext);
 
   // Global state of the game state: Handle the game state
-  const [gameState, setGameState] = useState<GameStateTypes>('start');
+  const [gameState, setGameState] = useState<GameStateTypes>('preparation');
+  // Player life state
+  const [playerLife, setPlayerLife] = useState<number>(3);
 
+  function reducePlayerLife() {
+    setPlayerLife((prev) => prev--);
+  }
+
+  // Game state abstractions
   const isGameOver = gameState === 'gameOver';
   const isGameCompleted = gameState === 'completed';
 
@@ -24,7 +33,10 @@ export default function useGameController(
 
   // Controll the game duration: should be able to add custom duration
   /* @ts-ignore */
-  const gameDuration = getGameDuration(gameData.difficulty, customDuration);
+  const gameDuration = getGameDuration(
+    activePage.state?.gameDifficulty as GameDifficultyTypes,
+    customDuration
+  );
 
   return {
     gameState,
@@ -33,6 +45,8 @@ export default function useGameController(
     isGameOver,
     gameDuration,
     isGameCompleted,
+    playerLife,
+    reducePlayerLife,
   };
 }
 
@@ -48,9 +62,9 @@ function getGameDuration(
   customDuration?: GameDurationTypes
 ) {
   let duration: GameDurationTypes = {
-    easy: 6000,
-    medium: 5000,
-    hard: 4000,
+    easy: 240,
+    medium: 180,
+    hard: 120,
   };
 
   // Double check to make sure that custom duration is exist and valid

@@ -4,6 +4,7 @@ import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import {
   GameCardTypes,
+  GameDifficultyTypes,
   GameTypes,
   RewardTypes,
 } from '../../services/utils/types';
@@ -37,7 +38,12 @@ export default function StorylineDetailChapterCard({
 
               <div className='flex justify-between items-end p-2 border-b border-primary/50'>
                 <CardRewardGrid rewards={game.rewards} />
-                <CardCTA gameId={game.id} gameType={game.type} />
+                <CardCTA
+                  gameId={game.id}
+                  gameType={game.type}
+                  gameDifficulty={game.difficulty}
+                  chapterName={game.chapterName}
+                />
               </div>
 
               <div className='h-8 grid place-items-center'>
@@ -156,15 +162,31 @@ function CardContent({children}: {children: React.ReactNode}) {
 
 /* ----------------- CARD CTA */
 
-type CardCTATypes = {gameId: string; gameType: GameTypes};
+type CardCTATypes = {
+  gameId: string;
+  gameType: GameTypes;
+  gameDifficulty: GameDifficultyTypes;
+  chapterName: string;
+};
 
-function CardCTA({gameId, gameType}: CardCTATypes) {
+function CardCTA({
+  gameId,
+  gameType,
+  gameDifficulty,
+  chapterName,
+}: CardCTATypes) {
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   function goToGamePage() {
     setActivePage({
       location: 'gamePage',
-      state: {gameId, gameType, ...activePage.state},
+      state: {
+        gameId,
+        gameType,
+        gameDifficulty,
+        chapterName,
+        ...activePage.state,
+      },
     });
   }
 
@@ -180,6 +202,7 @@ function CardCTA({gameId, gameType}: CardCTATypes) {
 
 /* ----------------- TASK REWARD GRID */
 type CardRewardGridTypes = {rewards: RewardTypes[]};
+
 function CardRewardGrid({rewards}: CardRewardGridTypes) {
   return (
     <div>
