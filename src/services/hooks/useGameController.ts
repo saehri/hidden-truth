@@ -17,7 +17,13 @@ export default function useGameController({
   const [playerLife, setPlayerLife] = useState<number>(3);
 
   function reducePlayerLife() {
-    setPlayerLife((prev) => prev--);
+    let currentLife = playerLife;
+    if (currentLife - 1 === 0) {
+      setPlayerLife(0);
+      setGameState('gameOver');
+    } else {
+      setPlayerLife((prev) => prev - 1);
+    }
   }
 
   // Game state abstractions

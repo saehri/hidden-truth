@@ -48,7 +48,10 @@ export default function InGameCountdown({
     if (gameState === 'start') {
       startCountdown();
     }
-    if (gameState === 'paused' || gameState === 'completed') {
+    if (gameState === 'paused' || gameState === 'gameOver') {
+      pauseCountdown();
+    }
+    if (gameState === 'completed') {
       pauseCountdown();
     }
   }, [gameState, date]);

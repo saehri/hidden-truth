@@ -80,7 +80,13 @@ const GameHeader = memo(({playerLife}: GameHeaderTypes) => {
           className='w-max flex gap-1'
         >
           {playerLifes.map((_, index) => (
-            <motion.div key={index + _} variants={animations.popUp}>
+            <motion.div
+              key={index + _}
+              variants={animations.popUp}
+              className={twMerge(
+                playerLife === 1 ? 'animate-pulse' : 'animate-none'
+              )}
+            >
               <Icons.Heart fill='rgb(220, 38, 38)' />
             </motion.div>
           ))}
