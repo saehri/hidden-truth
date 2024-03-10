@@ -1,4 +1,4 @@
-import SettingDialog from '../dialog/setting/SettingDialog';
+import SettingDialog from '../modal/setting-modal/SettingDialog';
 import MainMenu from './MainMenu';
 import GameUserEnergyAndMoneyBar from './UserEnergyAndMoneyBar';
 

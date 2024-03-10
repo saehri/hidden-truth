@@ -7,7 +7,7 @@ import {
   ReportDisinformationGameDataTypes,
 } from '../../../services/utils/types';
 
-import GameEndingModal from '../../modal/GameEndingModal';
+import GameEndingModal from '../../modal/game-ending-modal/GameEndingModal';
 import InGameCountdown from '../../ui/InGameCountdown';
 import ReportDisinformation from './ReportDisinformation';
 

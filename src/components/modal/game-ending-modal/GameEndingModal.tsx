@@ -1,10 +1,10 @@
 import {AnimatePresence, motion} from 'framer-motion';
 import React, {useContext} from 'react';
-import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
+import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 
-import {GameStateTypes} from '../../services/utils/types';
+import {GameStateTypes} from '../../../services/utils/types';
 import {twMerge} from 'tailwind-merge';
-import {barCode} from '../../assets/images/barCode';
+import {barCode} from '../../../assets/images/barCode';
 
 type DivTypes = React.HTMLAttributes<HTMLDivElement>;
 

@@ -10,7 +10,7 @@ import {
 } from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {AnimatePresence} from 'framer-motion';
-import GameEndingModal from '../modal/GameEndingModal';
+import GameEndingModal from '../modal/game-ending-modal/GameEndingModal';
 import {thumbStackImage} from '../../assets/images/thumbStackImage';
 import {twMerge} from 'tailwind-merge';
 import {getGameData} from '../../database/gameData';

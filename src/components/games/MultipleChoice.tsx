@@ -7,7 +7,7 @@ import {
 } from '../../services/utils/types';
 
 import InGameCountdown from '../ui/InGameCountdown';
-import GameEndingModal from '../modal/GameEndingModal';
+import GameEndingModal from '../modal/game-ending-modal/GameEndingModal';
 
 import {homepageBackground} from '../../assets/backgrounds/homepageBackground';
 import {getGameData} from '../../database/gameData';

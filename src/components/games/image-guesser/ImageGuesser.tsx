@@ -1,10 +1,9 @@
 import {useEffect} from 'react';
-import {AnimatePresence, motion} from 'framer-motion';
 
 import useGameController from '../../../services/hooks/useGameController';
 
 import InGameCountdown from '../../ui/InGameCountdown';
-import GameEndingModal from '../../modal/GameEndingModal';
+import GameEndingModal from '../../modal/game-ending-modal/GameEndingModal';
 import GameHeader from '../GameHeader';
 import ImageGuesserContent from './ImageGuesserContent';
 import BlinkingRedLayer from '../../ui/BlinkingRedLayer';

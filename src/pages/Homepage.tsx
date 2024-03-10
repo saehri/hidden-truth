@@ -1,7 +1,6 @@
 import {motion} from 'framer-motion';
 
 import HomepageCTA from '../components/ui/HomepageCTA';
-import NewUserDialog from '../components/dialog/NewUserDialog';
 
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 import {homepageCharacter} from '../assets/backgrounds/homepageCharacter';
@@ -9,7 +8,6 @@ import {homepageCharacter} from '../assets/backgrounds/homepageCharacter';
 export default function Homepage() {
   return (
     <section className='w-full h-full relative'>
-      <NewUserDialog />
       <HomepageCTA />
       <CharacterImages />
 
