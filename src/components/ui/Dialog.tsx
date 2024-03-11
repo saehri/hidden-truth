@@ -265,7 +265,7 @@ function DialogSequenceTextRenderer({
             dialogChoice?.nextSequence
           )
         }
-        className='w-max ml-auto flex gap-3 items-center hover:opacity-80 text-slate-50 text-xs sm:text-sm tracking-tighter leading-tight'
+        className='w-max ml-auto flex gap-3 items-center hover:opacity-80 text-slate-50 text-xs sm:text-sm tracking-tighter leading-tight group'
       >
         <span>Selanjutnya</span>
         <span className='w-1 h-1 xs:w-2 xs:h-2 bg-slate-50 rotate-45 group-hover:animate-pulse shrink-0' />
