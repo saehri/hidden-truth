@@ -8,7 +8,8 @@ const initialState: Record<'character', CharacterTypes> = {
     created_at: '203949',
     current_avatar: {
       avatar_id: 'df-male',
-      avatar_image: '',
+      avatar_image:
+        'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp',
       avatar_thumbs: '',
       avatar_name: 'df male',
       obtained_at: new Date().toISOString(),

@@ -4,6 +4,7 @@ import {twMerge} from 'tailwind-merge';
 import {DialogChoiceTypes, DialogTypes} from '../../database/dialogs';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import useCharacterController from '../../services/controller/characterController';
+import TextGenerateEffect from './TextGenerateEffect';
 
 interface Dialog {
   dialogSquences: Record<string, DialogTypes[]>;
@@ -22,7 +23,7 @@ export default function Dialog({dialogSquences}: Dialog) {
           initial={{opacity: 0}}
           animate={{opacity: 1}}
           transition={{delay: 1.5}}
-          className='w-full h-[80%] flex justify-between'
+          className='w-full h-[80%] flex justify-between relative'
         >
           <DialogSequenceRenderer dialogSequences={dialogSquences} />
         </motion.div>
@@ -49,14 +50,13 @@ interface DialogSequenceRenderer {
   dialogSequences: Record<string, DialogTypes[]>;
 }
 
-const continerBgGradAppearance = (index: number, isActive: boolean) => {
+const containerBgGradAppearance = (index: number, isActive: boolean) => {
   let classes: string = '';
 
   if (index === 0) {
-    classes += 'bg-gradient-to-r from-blue-600 to-transparent left-0 text-left';
+    classes += 'text-left';
   } else {
-    classes +=
-      'bg-gradient-to-l from-blue-600 to-transparent right-0 text-right';
+    classes += 'text-right';
   }
 
   if (isActive) {
@@ -74,28 +74,29 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
   const characterController = useCharacterController();
 
   const characterName = characterController.character?.character_name || '';
+  const characterImage =
+    characterController.character?.current_avatar.avatar_image || '';
 
   return (
     <>
       {dialogSequenceToRender.map((ds, index) => (
         <Fragment key={ds.name}>
           <CharacterImageRendrer
-            imageLink={ds.image}
+            imageLink={ds.isUser ? characterImage : ds.image}
             isActive={ds.isSpeaking}
             position={index === 0 ? 'left' : 'right'}
           />
 
           <div
             className={twMerge(
-              'w-full absolute z-50 bottom-4 lg:bottom-[10%] min-h-16 lg:min-h-28 p-2 pt-5 lg:p-4 lg:pt-10 border-t border-b border-blue-400',
-              continerBgGradAppearance(index, ds.isSpeaking)
+              'w-full bg-primary/80 lg:bg-primary/50 lg:backdrop-blur-sm max-w-[calc(100%-2em)] md:max-w-screen-sm lg:max-w-screen-md absolute left-1/2 -translate-x-1/2 -bottom-10 sm:bottom-4 p-2 px-4',
+              containerBgGradAppearance(index, ds.isSpeaking)
             )}
           >
             <CharacterNameIndicator
               charaterName={ds.name.replaceAll('username', characterName)}
               position={index === 0 ? 'left' : 'right'}
             />
-
             <DialogSequenceTextRenderer
               charName={ds.name}
               hasMultiDialogChoice={ds.hasMultiDialogChoice}
@@ -105,9 +106,33 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
               setCurrentDialogId={setCurrentDialogId}
               characterName={characterName}
             />
+
+            <CornerDots />
           </div>
         </Fragment>
       ))}
+    </>
+  );
+}
+
+function CornerDots() {
+  return (
+    <>
+      {/* RECTANGLE */}
+      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -left-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -right-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -left-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -right-1 w-2 h-2' />
+
+      {/* CORNER LINE */}
+      <span className='border-t border-l border-slate-50 absolute top-0 left-0 w-5 h-5' />
+      <span className='border-t border-r border-slate-50 absolute top-0 right-0 w-5 h-5' />
+      <span className='border-b border-l border-slate-50 absolute bottom-0 left-0 w-5 h-5' />
+      <span className='border-b border-r border-slate-50 absolute bottom-0 right-0 w-5 h-5' />
+
+      {/* MIDDLE T & B LINE */}
+      <span className='absolute -top-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
+      <span className='absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
     </>
   );
 }
@@ -121,16 +146,17 @@ function CharacterNameIndicator({
   charaterName,
   position,
 }: CharacterNameIndicatorProps) {
-  const pos = position === 'left' ? 'left-4' : 'right-4';
+  const pos = position === 'left' ? 'justify-start' : 'justify-end';
 
   return (
     <h6
       className={twMerge(
-        'mb-4 absolute bg-blue-600 -top-6 text-yellow-400 text-sm lg:text-lg z-50 p-1 px-2 border border-blue-50',
+        'text-sm sm:text-base font-semibold z-50 mb-3 sm:mb-5 lg:mb-5 text-slate-50 flex gap-2 items-center h-max',
         pos
       )}
     >
-      {charaterName}
+      <span className='w-2 h-2 border-t border-r rotate-45 border-slate-50 bg-yellow-500' />
+      <span className='border-b border-slate-50/50'>{charaterName}</span>
     </h6>
   );
 }
@@ -149,8 +175,10 @@ function CharacterImageRendrer({
   return (
     <div
       className={twMerge(
-        'absolute bottom-[10%] w-full max-w-52 lg:max-w-[450px] pointer-events-none bg-blue-600',
-        isActive ? 'brightness-100 z-30' : 'brightness-50',
+        'absolute bottom-0 w-full max-w-[70%] sm:max-w-80 md:max-w-96 lg:max-w-[450px] pointer-events-none',
+        isActive
+          ? 'brightness-100 z-30'
+          : 'opacity-0 sm:opacity-100 brightness-[.2]',
         position === 'left' ? 'left-0' : 'right-0'
       )}
     >
@@ -197,24 +225,38 @@ function DialogSequenceTextRenderer({
 
   if (hasMultiDialogChoice) {
     return (
-      <div className='flex flex-col xl:flex-col gap-2 lg:gap-4 text-blue-50 xl:ml-auto'>
+      <motion.div
+        initial='initial'
+        animate='animate'
+        transition={{staggerChildren: 0.2, damping: 50}}
+        className='flex flex-col xl:flex-col gap-2 text-blue-50 xl:ml-auto'
+      >
         {dialogChoices?.map((dc) => (
-          <button
+          <motion.button
+            variants={{
+              initial: {opacity: 0, y: 10},
+              animate: {opacity: 1, y: 0},
+            }}
             onClick={() => handleClick(dc.isEnding as boolean, dc.nextSequence)}
             key={dc.text}
-            className='lg:w-max text-right ml-auto p-2 pb-1 border border-blue-200 hover:bg-blue-500 flex gap-3 text-xs sm:text-sm'
+            className='lg:w-max text-right ml-auto flex gap-3 items-center text-xs hover:opacity-80 sm:text-sm group tracking-tighter leading-tight'
           >
             <span>{dc.text.replaceAll('username', characterName)}</span>
-            <span>-</span>
-          </button>
+            <span className='w-1 h-1 xs:w-2 xs:h-2 bg-slate-50 rotate-45 group-hover:animate-pulse shrink-0' />
+          </motion.button>
         ))}
-      </div>
+      </motion.div>
     );
   }
 
   return (
-    <div className='flex flex-col gap-4 text-blue-50 text-xs sm:text-sm'>
-      <p>{dialogChoice?.text.replaceAll('username', characterName)}</p>
+    <div className='flex flex-col gap-4'>
+      <TextGenerateEffect
+        words={
+          dialogChoice?.text.replaceAll('username', characterName) as string
+        }
+        className='text-slate-50 text-xs sm:text-sm font-normal leading-tight'
+      />
 
       <button
         onClick={() =>
@@ -223,9 +265,10 @@ function DialogSequenceTextRenderer({
             dialogChoice?.nextSequence
           )
         }
-        className='w-max ml-auto p-2'
+        className='w-max ml-auto flex gap-3 items-center hover:opacity-80 text-slate-50 text-xs sm:text-sm tracking-tighter leading-tight'
       >
-        Selanjutnya
+        <span>Selanjutnya</span>
+        <span className='w-1 h-1 xs:w-2 xs:h-2 bg-slate-50 rotate-45 group-hover:animate-pulse shrink-0' />
       </button>
     </div>
   );

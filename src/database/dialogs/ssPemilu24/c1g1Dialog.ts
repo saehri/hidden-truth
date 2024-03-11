@@ -9,6 +9,7 @@ const MRDEFACTO_NO_SPEAK: DialogTypes = {
   hasMultiDialogChoice: false,
   image: MRDEFACTO_IMAGE,
   isSpeaking: false,
+  isUser: false,
 };
 const PLAYER_NO_SPEAK: DialogTypes = {
   name: 'username',
@@ -24,6 +25,7 @@ const sequence1: DialogTypes[] = [
     image: MRDEFACTO_IMAGE,
     hasMultiDialogChoice: false,
     isSpeaking: true,
+    isUser: false,
     dialogChoice: {
       text: 'username, apakah kamu sudah mendengar mengenai kejadian di Jakarta baru - baru ini?',
       nextSequence: 'sequence2',
@@ -55,6 +57,7 @@ const sequence3a: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Ada kasus keributan di sana. Orang - orang dari dua kubu pendukung pasangan calon presiden saling baku hantam di jalanan.',
@@ -69,6 +72,7 @@ const sequence3b: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Benar. Kasusnya makin parah. Orang - orang dari dua kubu pendukung pasangan calon presiden saling baku hantam di jalanan.',
@@ -85,6 +89,7 @@ const sequence4: DialogTypes[] = [
     image: '/avatar/player/female/regular/female avatar default.webp',
     hasMultiDialogChoice: false,
     isSpeaking: true,
+    isUser: true,
     dialogChoice: {
       text: 'Wah, menyeramkan sekali. Apakah sudah diketahui kenapa mereka sampai melakukan hal seperti itu?',
       nextSequence: 'sequence5',
@@ -97,6 +102,7 @@ const sequence5: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Untuk saat ini penyebabnya belum jelas. Tapi, dugaan paling kuat keributan ini dipicu oleh  berita hoax di sosial media.',
@@ -111,6 +117,7 @@ const sequence6: DialogTypes[] = [
     name: 'Telepon',
     image: TELEPHONE_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Kring.. kring! (Bunyi suara telepon)',
@@ -125,6 +132,7 @@ const sequence7: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Sebentar, saya mau mengangkat telpon dulu.',
@@ -141,6 +149,7 @@ const sequence8: DialogTypes[] = [
     image: '/avatar/player/female/regular/female avatar default.webp',
     hasMultiDialogChoice: true,
     isSpeaking: true,
+    isUser: true,
     dialogChoices: [
       {
         text: 'Oh, silakan Sir!',
@@ -159,6 +168,7 @@ const sequence9a: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: 'Tunggu sebentar ya.',
@@ -174,6 +184,7 @@ const sequence9b: DialogTypes[] = [
     name: 'Mr Defacto',
     image: MRDEFACTO_IMAGE,
     isSpeaking: true,
+    isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
       text: '(side eye)',

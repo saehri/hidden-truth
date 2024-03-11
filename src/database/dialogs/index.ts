@@ -10,7 +10,7 @@ export type DialogChoiceTypes = {
 
 export type DialogTypes = {
   name: string;
-  isUser?: boolean;
+  isUser: boolean;
   image: string;
   isSpeaking: boolean;
   hasMultiDialogChoice: boolean;
