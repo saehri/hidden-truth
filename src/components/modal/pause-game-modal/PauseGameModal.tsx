@@ -44,7 +44,7 @@ export default function PauseGameModal({
               <motion.button
                 whileHover={{opacity: 0.7}}
                 onClick={unPauseGame}
-                className='bg-slate-950 text-sm w-max h-max text-primary'
+                className='bg-slate-950 text-sm w-max h-max text-yellow-600'
               >
                 [X]
               </motion.button>
@@ -85,7 +85,7 @@ function ModalWrapper({children}: {children: React.ReactNode}) {
         transition={{damping: 50}}
         className='overflow-hidden w-full max-w-96'
       >
-        <div className='bg-primary p-2 w-full'>{children}</div>
+        <div className='bg-yellow-600 p-2 w-full'>{children}</div>
       </motion.div>
     </motion.div>
   );
@@ -103,7 +103,7 @@ function ModalButton({onClick, name, withOutline}: ModalButtonTypes) {
       onClick={onClick}
       whileHover={{opacity: 0.7}}
       className={twMerge(
-        'text-primary p-1 px-2 uppercase bg-slate-950 text-sm',
+        'text-yellow-600 p-1 px-2 uppercase bg-slate-950 text-sm',
         withOutline
           ? 'outline outline-slate-950 outline-1 outline-offset-2'
           : ''
