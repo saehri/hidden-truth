@@ -1,6 +1,3 @@
-import FullscreenBackground from './FullscreenBackground';
-import {homepageBackground} from '../../assets/backgrounds/homepageBackground';
-
 export default function GlobalErrorBoundary({error, resetErrorBoundary}: any) {
   return (
     <div className='w-full h-full p-6 relative' role='alert'>
@@ -29,14 +26,6 @@ export default function GlobalErrorBoundary({error, resetErrorBoundary}: any) {
           Pesan error: {error.message}
         </p>
       </div>
-
-      <FullscreenBackground
-        imageLink={homepageBackground}
-        placeholderLink={
-          'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
-        }
-        className='brightness-50'
-      />
     </div>
   );
 }

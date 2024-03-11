@@ -7,6 +7,17 @@ import GameEndingModal from '../../modal/game-ending-modal/GameEndingModal';
 import GameHeader from '../GameHeader';
 import ImageGuesserContent from './ImageGuesserContent';
 import BlinkingRedLayer from '../../ui/BlinkingRedLayer';
+import GameTutorial from '../../game-tutorial/GameTutorial';
+import {twMerge} from 'tailwind-merge';
+
+/* used in the game tutorial component */
+const tutorialText: string[] = [
+  'Selamat datang di game pertama kamu!',
+  'Di game ini kamu harus mencari makna tersembunyi dari gambar yang disediakan',
+  'Kamu punya tiga kesempatan untuk menjawab',
+  'Cari makna tersembunyi gambar dengan cepat sebelum waktu habis',
+  'Selamat bertugas!',
+];
 
 export default function ImageGuesser() {
   const customDuration = {easy: 120, medium: 100, hard: 80};
@@ -20,11 +31,15 @@ export default function ImageGuesser() {
     reducePlayerLife,
   } = gameController;
 
-  useEffect(() => {
-    // Handle the start of game
-    const startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
+  const hideGame = ['gameOver', 'completed', 'preparation'].includes(gameState);
 
-    return () => clearTimeout(startTimer);
+  useEffect(() => {
+    if (!gameData.hasTutorial) {
+      // Start the game after 1 seconds delay
+      const startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
+
+      return () => clearTimeout(startTimer);
+    }
   }, []);
 
   return (
@@ -39,16 +54,30 @@ export default function ImageGuesser() {
         <GameHeader playerLife={playerLife} />
 
         <div className='flex-1 flex items-center'>
-          <ImageGuesserContent
-            gameData={gameData}
-            reducePlayerLife={reducePlayerLife}
-            setGameState={setGameState}
-          />
+          {!hideGame && (
+            <div
+              className={twMerge(
+                'w-full flex-1',
+                gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+              )}
+            >
+              <ImageGuesserContent
+                gameData={gameData.data}
+                reducePlayerLife={reducePlayerLife}
+                setGameState={setGameState}
+              />
+            </div>
+          )}
         </div>
       </div>
 
+      <GameTutorial
+        isOpen={gameData.hasTutorial && gameState === 'preparation'}
+        onTutorialEnd={() => setGameState('start')}
+        tutorialText={tutorialText}
+      />
       <BlinkingRedLayer playerLife={playerLife} />
-      <GameEndingModal status={gameState} />
+      <GameEndingModal status={gameState} gameRewards={gameData.rewards} />
     </section>
   );
 }

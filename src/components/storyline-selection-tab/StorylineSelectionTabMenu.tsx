@@ -14,7 +14,15 @@ const storylineTypes: TabButtonTypes[] = [
   {id: 'specialStoryline', label: 'SPECIAL MISSION', isClickable: true},
 ];
 
-export default function StorylineTypeTabMenu() {
+type StorylineTypeTabMenuProps = {
+  setStorylineSelectedCategory: React.Dispatch<
+    React.SetStateAction<StorylineTypes>
+  >;
+};
+
+export default function StorylineTypeTabMenu({
+  setStorylineSelectedCategory,
+}: StorylineTypeTabMenuProps) {
   return (
     <TabMenuHeader>
       <h4 className='hidden text-lg font-semibold text-slate-100 items-center gap-2 bg-gradient-to-r from-primary/50 to-transparent mb-4'>
@@ -35,6 +43,9 @@ export default function StorylineTypeTabMenu() {
             id={btn.id}
             isClickable={btn.isClickable}
             label={btn.label}
+            setStorylineSelectedCategory={() =>
+              setStorylineSelectedCategory(btn.id)
+            }
           />
         ))}
       </motion.div>
@@ -65,7 +76,16 @@ function TabMenuHeader({children}: {children: React.ReactNode}) {
   );
 }
 
-function TabButton({isClickable, id, label}: TabButtonTypes) {
+interface TabButton extends TabButtonTypes {
+  setStorylineSelectedCategory: () => void;
+}
+
+function TabButton({
+  isClickable,
+  id,
+  label,
+  setStorylineSelectedCategory,
+}: TabButton) {
   const isOnDesktop = window.innerWidth >= 1280;
   const iconColor = isClickable ? 'rgb(234, 179, 8)' : 'rgb(71, 85, 105)';
 
@@ -75,6 +95,7 @@ function TabButton({isClickable, id, label}: TabButtonTypes) {
         rest: {x: isOnDesktop ? -50 : 0, opacity: 0},
         show: {x: 0, opacity: isClickable ? 1 : 0.5},
       }}
+      onClick={setStorylineSelectedCategory}
       className='group bg-primary font-semibold text-slate-100 disabled:bg-slate-50 disabled:text-slate-600 border-y border-blue-950 text-xs grid grid-cols-[max-content,_1fr] relative py-2 px-1 sm:py-0 sm:px-0'
       disabled={!isClickable}
     >

@@ -6,6 +6,7 @@ import StorylineCard from './StorylineCard';
 
 import {getStorylineCards} from '../../database/storyline/storylines';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
+import {StorylineTypes} from '../../services/utils/types';
 
 // Import swiper styles
 import 'swiper/css';
@@ -14,9 +15,13 @@ import 'swiper/css/pagination';
 import SwiperNavigation from './SwiperNavigation';
 import {Circle} from '../../pages/Homepage';
 
-export default function StorylineSlider() {
+type StorylineSliderProps = {selectedStorylineCategory: StorylineTypes};
+
+export default function StorylineSlider({
+  selectedStorylineCategory,
+}: StorylineSliderProps) {
   const {setActivePage} = useContext(ActivePageContext);
-  const storylines = getStorylineCards();
+  const storylines = getStorylineCards(selectedStorylineCategory);
 
   return (
     <motion.div

@@ -43,6 +43,8 @@ export default function StorylineDetailChapterCard({
                   gameType={game.type}
                   gameDifficulty={game.difficulty}
                   chapterName={game.chapterName}
+                  hasOpeningDialog={game.hasOpeningDialog}
+                  dialogId={game.openingDialogId}
                 />
               </div>
 
@@ -167,6 +169,8 @@ type CardCTATypes = {
   gameType: GameTypes;
   gameDifficulty: GameDifficultyTypes;
   chapterName: string;
+  hasOpeningDialog: boolean;
+  dialogId?: string;
 };
 
 function CardCTA({
@@ -174,12 +178,14 @@ function CardCTA({
   gameType,
   gameDifficulty,
   chapterName,
+  hasOpeningDialog,
+  dialogId,
 }: CardCTATypes) {
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   function goToGamePage() {
     setActivePage({
-      location: 'gamePage',
+      location: hasOpeningDialog ? 'dialogPage' : 'gamePage',
       state: {
         gameId,
         gameType,

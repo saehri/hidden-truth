@@ -4,8 +4,6 @@ import {twMerge} from 'tailwind-merge';
 import {DialogChoiceTypes, DialogTypes} from '../../database/dialogs';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-import FullscreenBackground from './FullscreenBackground';
-
 interface Dialog {
   dialogSquences: Record<string, DialogTypes[]>;
 }
@@ -42,15 +40,6 @@ export default function Dialog({dialogSquences}: Dialog) {
         transition={{delay: 0.8, damping: 8}}
         className='absolute left-0 bottom-0 z-50 w-full h-[10%] bg-slate-950'
       ></motion.div>
-
-      <FullscreenBackground
-        imageLink={
-          'https://utfs.io/f/1f6ec64e-2de0-45ef-93f3-1b27a37c0db3-gpa8vq.webp'
-        }
-        placeholderLink={
-          'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
-        }
-      />
     </div>
   );
 }

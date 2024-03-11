@@ -10,6 +10,7 @@ import {GameStateTypes} from '../../services/utils/types';
 
 import Countdown, {CountdownApi} from 'react-countdown';
 import PauseGameModal from '../modal/pause-game-modal/PauseGameModal';
+import Icons from './Icons';
 
 interface InGameCountdown {
   countdownDuration?: number;
@@ -48,7 +49,11 @@ export default function InGameCountdown({
     if (gameState === 'start') {
       startCountdown();
     }
-    if (gameState === 'paused' || gameState === 'gameOver') {
+    if (
+      gameState === 'paused' ||
+      gameState === 'gameOver' ||
+      gameState === 'preparation'
+    ) {
       pauseCountdown();
     }
     if (gameState === 'completed') {
@@ -77,8 +82,11 @@ export default function InGameCountdown({
         transition={{damping: 50, delay: 1}}
         onClick={() => setGameState('paused')}
         disabled={isCompleted()}
-        className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 z-[80] w-8 h-8 bg-primary/40'
-      ></motion.button>
+        className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 xl:right-auto
+         xl:left-5 xl:bottom-auto xl:top-32 z-[80] w-8 h-8 bg-orange-400/50 border border-orange-500 grid place-items-center hover:opacity-50'
+      >
+        <Icons.TimerPause fill='rgb(254 215 170)' />
+      </motion.button>
 
       <PauseGameModal
         modalState={gameState === 'paused'}
@@ -128,8 +136,12 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
 
 function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
-    <div className='pt-0 p-1 rounded-xl absolute bottom-4 sm:bottom-16 right-4 z-50 w-28 h-max text-xl lg:text-2xl font-medium flex justify-center'>
-      <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] w-full font-body'>
+    <div className='pt-0 p-1 absolute bottom-4 sm:bottom-16 right-4 xl:bottom-auto xl:top-16 xl:right-auto xl:left-4 z-50 w-32 h-max text-xl lg:text-2xl font-medium flex justify-center'>
+      <div className='bg-primary/50 text-slate-50 border border-slate-50/50 grid grid-cols-[_1fr,_1fr,max-content,_1fr] w-full font-body'>
+        <div className='grid place-items-center mr-2'>
+          <Icons.Timer fill='rgb(248, 250, 252)' className='w-4 h-[19px]' />
+        </div>
+
         {children}
       </div>
     </div>

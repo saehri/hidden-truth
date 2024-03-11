@@ -12,8 +12,7 @@ import StorylineDetailChapterCard from './StorylineDetailChapterCard';
 export default function StorylineDetailChapterCardSlider() {
   const {activePage} = useContext(ActivePageContext);
   const storylines = getStorylineData(
-    activePage?.state?.storylineId as StorylineIdTypes,
-    activePage?.state?.storylineType as StorylineTypes
+    activePage?.state?.storylineId as StorylineIdTypes
   );
 
   return (

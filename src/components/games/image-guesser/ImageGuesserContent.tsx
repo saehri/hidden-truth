@@ -1,13 +1,10 @@
 import {FormEvent, memo, useState} from 'react';
 import {motion} from 'framer-motion';
-import {
-  GameStateTypes,
-  ImageGuesserGameDataTypes,
-} from '../../../services/utils/types';
+import {GameStateTypes} from '../../../services/utils/types';
 import {twMerge} from 'tailwind-merge';
 
 type ImageGuesserContentTypes = {
-  gameData: ImageGuesserGameDataTypes;
+  gameData: {imageLink: string; answer: string; clue: string};
   reducePlayerLife: () => void;
   setGameState: React.Dispatch<React.SetStateAction<GameStateTypes>>;
 };
@@ -32,7 +29,7 @@ const ImageGuesserContent = memo(
         transition={{staggerChildren: 0.1, delayChildren: 0.8}}
         className='p-4 md:p-0 flex flex-col gap-5 w-full'
       >
-        <CluePopup />
+        {/* <CluePopup /> */}
         <ImageViewer imageLink={gameData.imageLink} />
         <AnswerInput
           questionAnswer={gameData.answer}
@@ -43,10 +40,6 @@ const ImageGuesserContent = memo(
     );
   }
 );
-
-function CluePopup() {
-  return <button>CLUE</button>;
-}
 
 type AnswerInputTypes = {
   questionAnswer: string;
@@ -75,13 +68,15 @@ function AnswerInput({
       const sameLastLetter =
         answer[answer.length - 1] === questionAnswer[questionAnswer.length - 1];
 
-      if (isSameLength && sameFirstLetter && sameLastLetter) {
+      if (!answer.length) {
+        setErrorMessage('Jawaban tidak boleh kosong');
+      } else if (isSameLength && sameFirstLetter && sameLastLetter) {
         setErrorMessage('Dikit lagi');
+        reducePlayerLife();
       } else {
         setErrorMessage('Jawaban kamu salah');
+        reducePlayerLife();
       }
-
-      reducePlayerLife();
     }
   }
 
@@ -104,15 +99,16 @@ function AnswerInput({
           autoCorrect='off'
         />
 
-        <button
+        <motion.button
+          whileTap={{opacity: 0.5, transition: {duration: 0.3}}}
           type='submit'
           className='outline-none border-t hover:bg-slate-50/20 border-slate-50/20 py-1 pb-2 px-10 bg-slate-50/10 grid place-items-center lg:backdrop-blur-sm text-xs text-slate-50'
           style={{
             clipPath: 'polygon(0 0, 100% 0, 87% 100%, 15% 100%)',
           }}
         >
-          Check Jawaban
-        </button>
+          CHECK JAWABAN
+        </motion.button>
       </motion.form>
 
       <Anouncer message={errorMessage} setMessage={setErrorMessage} />
@@ -126,7 +122,7 @@ type AnouncerTypes = {
 };
 function Anouncer({message, setMessage}: AnouncerTypes) {
   return (
-    <div className='absolute left-1/2 -translate-x-1/2 bottom-28'>
+    <div className='absolute left-1/2 -translate-x-1/2 bottom-24'>
       <motion.div
         animate={{
           width: ['0%', '100%', '100%', '100%', '100%', '0%'],
@@ -153,7 +149,7 @@ function ImageViewer({imageLink}: ImageViewerTypes) {
   return (
     <motion.div
       variants={animations.scaleUp}
-      className='bg-slate-600/30 lg:backdrop-blur-sm p-4 border-x border-slate-50/80 relative'
+      className='bg-slate-600/30 p-4 border-x border-slate-50/80 relative'
     >
       <div className='pt-[calc((9/20)*100%)] relative border border-slate-50/10 bg-slate-600/50'>
         <motion.img

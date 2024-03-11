@@ -23,23 +23,6 @@ export type DialogSequenceTypes = {
   dialogSequences: Record<string, DialogTypes[]>;
 };
 
-const dialogData: Record<
-  StorylineTypes,
-  Record<StorylineIdTypes, DialogSequenceTypes[]>
-> = {
-  specialStoryline: {
-    'PEMILU-24': SSPemilu24DialogList,
-  },
-  mainStoryline: {'PEMILU-24': SSPemilu24DialogList},
-  premiumStoryline: {'PEMILU-24': SSPemilu24DialogList},
-};
-
-export function getDialog(
-  storylineType: StorylineTypes,
-  StorylineId: StorylineIdTypes,
-  dialogId: string
-) {
-  return dialogData[storylineType][StorylineId].filter(
-    (d) => d.dialogId === dialogId
-  )[0];
+export function getDialog() {
+  return SSPemilu24DialogList;
 }
