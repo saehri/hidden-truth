@@ -55,18 +55,12 @@ export default function ImageGuesser() {
 
         <div className='flex-1 flex items-center'>
           {!hideGame && (
-            <div
-              className={twMerge(
-                'w-full flex-1',
-                gameState === 'paused' ? 'brightness-0' : 'brightness-100'
-              )}
-            >
-              <ImageGuesserContent
-                gameData={gameData.data}
-                reducePlayerLife={reducePlayerLife}
-                setGameState={setGameState}
-              />
-            </div>
+            <ImageGuesserContent
+              gameState={gameState}
+              gameData={gameData.data}
+              reducePlayerLife={reducePlayerLife}
+              setGameState={setGameState}
+            />
           )}
         </div>
       </div>

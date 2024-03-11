@@ -7,6 +7,7 @@ type ImageGuesserContentTypes = {
   gameData: {imageLink: string; answer: string; clue: string};
   reducePlayerLife: () => void;
   setGameState: React.Dispatch<React.SetStateAction<GameStateTypes>>;
+  gameState: GameStateTypes;
 };
 
 const animations = {
@@ -21,13 +22,21 @@ const animations = {
 };
 
 const ImageGuesserContent = memo(
-  ({gameData, reducePlayerLife, setGameState}: ImageGuesserContentTypes) => {
+  ({
+    gameData,
+    reducePlayerLife,
+    setGameState,
+    gameState,
+  }: ImageGuesserContentTypes) => {
     return (
       <motion.div
         initial='rest'
         animate='show'
         transition={{staggerChildren: 0.1, delayChildren: 0.8}}
-        className='p-4 md:p-0 flex flex-col gap-5 w-full'
+        className={twMerge(
+          'p-4 md:p-0 flex flex-col gap-5 w-full',
+          gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+        )}
       >
         {/* <CluePopup /> */}
         <ImageViewer imageLink={gameData.imageLink} />
