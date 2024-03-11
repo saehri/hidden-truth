@@ -19,7 +19,7 @@ const ReportDisinformationGame = memo(() => {
     ...activePage.state,
   }) as ReportDisinformationGameDataTypes[];
 
-  const isOver = gameState === 'completed' || gameState === 'over';
+  const isOver = gameState === 'completed' || gameState === 'gameOver';
 
   const gameDuration = 2000;
 
@@ -53,13 +53,13 @@ const ReportDisinformationGame = memo(() => {
         </div>
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOver && (
           <GameEndingModal
             status={gameState === 'completed' ? 'win' : 'over'}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </section>
   );
 });

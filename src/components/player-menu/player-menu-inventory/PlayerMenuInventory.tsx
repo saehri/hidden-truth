@@ -76,7 +76,7 @@ const filterButtonComponents: {
 }[] = [
   {
     id: 'all',
-    icon: <Icons.Grid className='w-3 h-3 lg:w-4 lg:h-4' />,
+    icon: <Icons.AddAlt className='w-3 h-3 lg:w-4 lg:h-4' />,
     label: 'See all items',
   },
   {

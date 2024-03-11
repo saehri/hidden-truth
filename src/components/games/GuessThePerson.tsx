@@ -26,7 +26,7 @@ const GuessThePerson = memo(() => {
 
   const gameDuration =
     data.difficulty === 'easy' ? 180 : data.difficulty === 'medium' ? 150 : 120;
-  const isOver = gameState === 'completed' || gameState === 'over';
+  const isOver = gameState === 'completed' || gameState === 'gameOver';
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -58,13 +58,13 @@ const GuessThePerson = memo(() => {
         </div>
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOver && (
           <GameEndingModal
-            status={gameState === 'completed' ? 'win' : 'over'}
+            ={gameState === 'completed' ? 'win' : 'over'}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </section>
   );
 });

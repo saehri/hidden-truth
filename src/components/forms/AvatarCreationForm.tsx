@@ -188,9 +188,7 @@ function Form() {
               />
             </span>
 
-            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'>
-              <Icons.CheckSmall />
-            </span>
+            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'></span>
           </label>
         </div>
 
@@ -218,9 +216,7 @@ function Form() {
               />
             </span>
 
-            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'>
-              <Icons.CheckSmall />
-            </span>
+            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'></span>
           </label>
         </div>
       </div>

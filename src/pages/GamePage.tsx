@@ -33,8 +33,6 @@ function GameRouting() {
 
   const GAMES: Record<GameTypes, React.ReactNode> = {
     TG: <ImageGuesser />,
-    TO: <GuessThePerson />,
-    MC: <MultipleChoice />,
     RD: <ReportDisinformationGame />,
   };
 

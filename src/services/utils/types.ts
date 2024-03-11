@@ -7,7 +7,7 @@ export type GameStateTypes =
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'TO' | 'MC' | 'RD';
+export type GameTypes = 'TG' | 'RD';
 /* 
   TG -> Tebak Gambar,
   TK -> Tebak Orang
