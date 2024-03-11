@@ -38,7 +38,6 @@ const ImageGuesserContent = memo(
           gameState === 'paused' ? 'brightness-0' : 'brightness-100'
         )}
       >
-        {/* <CluePopup /> */}
         <ImageViewer imageLink={gameData.imageLink} />
         <AnswerInput
           questionAnswer={gameData.answer}
@@ -131,7 +130,7 @@ type AnouncerTypes = {
 };
 function Anouncer({message, setMessage}: AnouncerTypes) {
   return (
-    <div className='absolute left-1/2 -translate-x-1/2 bottom-24'>
+    <div className='absolute left-1/2 -translate-x-1/2 -bottom-10'>
       <motion.div
         animate={{
           width: ['0%', '100%', '100%', '100%', '100%', '0%'],
@@ -140,7 +139,7 @@ function Anouncer({message, setMessage}: AnouncerTypes) {
         key={message}
         onAnimationComplete={() => setMessage('')}
         className={twMerge(
-          'overflow-hidden max-w-96 mx-auto bg-red-600/30 border-x border-red-600/60',
+          'overflow-hidden max-w-96 mx-auto bg-red-400/30 border-x border-red-400/60',
           message.length ? 'block' : 'hidden'
         )}
       >
