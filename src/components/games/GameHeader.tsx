@@ -6,10 +6,8 @@ import {motion} from 'framer-motion';
 import Icons from '../ui/Icons';
 
 const gameTypes: Record<GameTypes, string> = {
-  MC: 'PILIHAN GANDA',
   RD: 'LAPOR DISINFORMASI',
   TG: 'TEBAK GAMBAR',
-  TO: 'CARI ORANG',
 };
 
 const animations = {

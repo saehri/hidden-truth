@@ -73,10 +73,8 @@ function CardDescription({
   synopsis,
 }: CardDescriptionTypes) {
   const gameTypes: Record<GameTypes, string> = {
-    MC: 'PILIHAN GANDA',
     RD: 'LAPOR DISINFORMASI',
     TG: 'TEBAK GAMBAR',
-    TO: 'CARI ORANG',
   };
 
   return (

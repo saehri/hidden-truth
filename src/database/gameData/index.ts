@@ -13,12 +13,6 @@ const gameDataByCategory: GameDataByCategoryTypes = {
   TG: {
     'PEMILU-24': pemilu24ImageGuesserData,
   },
-  TO: {
-    'PEMILU-24': pemilu24GuessThePersonData,
-  },
-  MC: {
-    'PEMILU-24': pemilu24MultipleChoiceGameData,
-  },
   RD: {
     'PEMILU-24': pemilu24ReportDisinformationGameData,
   },
