@@ -16,7 +16,9 @@ const animationVariants = {
 export default function MainMenu() {
   const {activePage} = useContext(ActivePageContext);
   const isInHomepage = activePage.location === 'homepage';
-  const isHidden = activePage.location === 'gamePage';
+
+  const isHidden =
+    activePage.location === 'gamePage' || activePage.location === 'dialogPage';
 
   return (
     <nav

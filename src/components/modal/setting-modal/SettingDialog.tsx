@@ -11,7 +11,8 @@ import SettingDialogContent from './SettingDialogContent';
 const SettingDialog = memo(() => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const {activePage} = useContext(ActivePageContext);
-  const isHidden = activePage.location === 'startPage';
+  const isHidden =
+    activePage.location === 'startPage' || activePage.location === 'dialogPage';
 
   return (
     <>

@@ -8,7 +8,8 @@ import MoneyBar from './MoneyBar';
 
 export default function GameUserEnergyAndMoneyBarWrapper() {
   const {activePage} = useContext(ActivePageContext);
-  const isHidden = activePage.location === 'startPage';
+  const isHidden =
+    activePage.location === 'startPage' || activePage.location === 'dialogPage';
 
   return (
     <motion.div
