@@ -103,7 +103,7 @@ function ModalButton({onClick, name, withOutline}: ModalButtonTypes) {
       onClick={onClick}
       whileHover={{opacity: 0.7}}
       className={twMerge(
-        'text-primary p-1 px-2 uppercase bg-slate-950',
+        'text-primary p-1 px-2 uppercase bg-slate-950 text-sm',
         withOutline
           ? 'outline outline-slate-950 outline-1 outline-offset-2'
           : ''
@@ -150,14 +150,14 @@ function GameCancelationDialog({abortGame}: GameCancelationDialogType) {
               <motion.button
                 whileHover={{opacity: 0.7}}
                 onClick={abortGame}
-                className='bg-slate-950 text-red-600 p-1 px-2 uppercase'
+                className='bg-slate-950 text-red-600 p-1 px-2 uppercase text-sm'
               >
                 IYA BATALIN
               </motion.button>
               <motion.button
                 whileHover={{opacity: 0.7}}
                 onClick={toggleCancelation}
-                className='bg-slate-950 text-red-600 p-1 px-2 uppercase outline outline-slate-950 outline-1 outline-offset-2'
+                className='bg-slate-950 text-red-600 p-1 px-2 uppercase text-sm outline outline-slate-950 outline-1 outline-offset-2'
               >
                 ENGGAK DEH
               </motion.button>

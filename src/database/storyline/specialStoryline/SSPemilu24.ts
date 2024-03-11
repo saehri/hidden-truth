@@ -23,6 +23,10 @@ const chapterRewards: RewardTypes[] = [
   },
 ];
 
+export const imageGuesserRewardsList: Record<string, RewardTypes[]> = {
+  game1: [{id: 'small_money_bag', label: 'Small money bag (+100)', image: ''}],
+};
+
 const SSPemilu24: StorylineDataTypes = {
   id: 'PEMILU-24',
   title: 'Serangan Cyber di Ibu Kota',
@@ -45,9 +49,19 @@ const SSPemilu24: StorylineDataTypes = {
           chapterName: 'CH 1.1 - Kabar Buruk',
           hasTutorial: true,
           tutorialId: '',
-          rewards: [
-            {id: 'small_money_bag', label: 'Small money bag (+100)', image: ''},
-          ],
+          rewards: imageGuesserRewardsList.game1,
+          synopsis: 'Gak tahu harus ngapain di sini sumpah',
+        },
+        {
+          id: 'PEMILU24-TG-C1-2',
+          type: 'TG',
+          name: 'Tugas',
+          hasOpeningDialog: false,
+          difficulty: 'easy',
+          chapterName: 'CH 1.2 - Tugas',
+          hasTutorial: true,
+          tutorialId: '',
+          rewards: imageGuesserRewardsList.game1,
           synopsis: 'Gak tahu harus ngapain di sini sumpah',
         },
       ],

@@ -2,13 +2,21 @@ import {AnimatePresence, motion} from 'framer-motion';
 import React, {useContext} from 'react';
 import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 
-import {GameStateTypes} from '../../../services/utils/types';
+import {GameStateTypes, RewardTypes} from '../../../services/utils/types';
 import {twMerge} from 'tailwind-merge';
 import {barCode} from '../../../assets/images/barCode';
 
 type DivTypes = React.HTMLAttributes<HTMLDivElement>;
 
-export default function GameEndingModal({status}: {status: GameStateTypes}) {
+type GameEndingModalProps = {
+  status: GameStateTypes;
+  gameRewards: RewardTypes[];
+};
+
+export default function GameEndingModal({
+  status,
+  gameRewards,
+}: GameEndingModalProps) {
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   function closeModal() {
@@ -18,15 +26,6 @@ export default function GameEndingModal({status}: {status: GameStateTypes}) {
         storylineId: activePage?.state?.storylineId as string,
         storylineType: activePage?.state?.storylineType as string,
         storylineTitle: activePage.state?.storylineTitle as string,
-      },
-    });
-  }
-
-  function repeatMission() {
-    setActivePage({
-      location: 'gamePage',
-      state: {
-        ...activePage.state,
       },
     });
   }
@@ -48,7 +47,9 @@ export default function GameEndingModal({status}: {status: GameStateTypes}) {
             {description}
           </p>
 
-          {status === 'completed' && <RewardsContainer />}
+          {status === 'completed' && (
+            <RewardsContainer gameRewards={gameRewards} />
+          )}
 
           <div className='flex justify-between gap-4 mt-6 border-t border-dashed border-slate-50/30 pt-1'>
             <img src={barCode} alt='' className='w-24 h-7 object-cover' />
@@ -72,11 +73,24 @@ export default function GameEndingModal({status}: {status: GameStateTypes}) {
   );
 }
 
-function RewardsContainer() {
+type RewardsContainerPops = {
+  gameRewards: RewardTypes[];
+};
+
+function RewardsContainer({gameRewards}: RewardsContainerPops) {
   return (
     <div className='mt-4'>
       <h5 className='text-xs text-slate-300/50 mb-2'>REWARDS</h5>
-      <div className='w-12 h-12 bg-slate-50/20 border border-slate-50/40'></div>
+
+      <div>
+        {gameRewards.map((reward) => (
+          <div
+            key={reward.id}
+            title={reward.label}
+            className='w-12 h-12 bg-slate-50/20 hover:bg-slate-50/40 border border-slate-50/40 hover:border-slate-50/60'
+          ></div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -109,12 +123,13 @@ function Wrapper({children, gameState}: Wrapper) {
     gameState === 'completed' ? 'bg-green-400' : 'bg-red-600';
 
   return (
-    <div className='fixed top-0 left-0 w-full h-full z-[100] grid place-items-center p-4 bg-slate-950/90 lg:backdrop-blur-sm'>
+    <div className='fixed top-0 left-0 w-full h-full z-[100] grid place-items-center p-4'>
       <motion.div
         initial={{y: 50, opacity: 0}}
         animate={{y: 0, opacity: 1}}
+        transition={{delay: 1}}
         className={twMerge(
-          'w-full max-w-96 p-6 relative',
+          'w-full max-w-96 p-6 relative z-50',
           gameState === 'completed'
             ? 'border-green-400 bg-green-400/20'
             : 'border-red-600 bg-red-600/20'
@@ -124,6 +139,13 @@ function Wrapper({children, gameState}: Wrapper) {
 
         <CornerDots backgroundColor={backgroundColor} />
       </motion.div>
+
+      <motion.span
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        transition={{delay: 0.5}}
+        className='absolute w-full h-full bg-slate-950/90 lg:backdrop-blur-sm'
+      />
     </div>
   );
 }

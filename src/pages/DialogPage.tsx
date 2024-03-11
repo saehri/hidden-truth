@@ -7,11 +7,7 @@ import Dialog from '../components/ui/Dialog';
 
 export default function DialogPage() {
   const {activePage} = useContext(ActivePageContext);
-  const dialogData = getDialog(
-    activePage.state?.storylineType as StorylineTypes,
-    activePage.state?.storylineId as StorylineIdTypes,
-    activePage.state?.gameId as string
-  );
+  const dialogData = getDialog();
 
   return (
     <div className='absolute w-full h-full'>
@@ -21,7 +17,7 @@ export default function DialogPage() {
         </nav>
       </header>
 
-      <Dialog dialogSquences={dialogData.dialogSequences} />
+      <Dialog dialogSquences={dialogData[0].dialogSequences} />
     </div>
   );
 }

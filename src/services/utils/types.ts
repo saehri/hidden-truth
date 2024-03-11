@@ -60,9 +60,9 @@ export type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
 
 /* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {
-  imageLink: string;
-  answer: string;
-  clue: string;
+  data: {imageLink: string; answer: string; clue: string};
+  rewards: RewardTypes[];
+  hasTutorial: boolean;
 };
 
 /* @types defines the types of guess the person game data stuctures */

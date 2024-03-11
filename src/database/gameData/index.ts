@@ -4,10 +4,12 @@ import pemilu24ImageGuesserData from './imageGuesser/pemilu24ImageGuesserData';
 import pemilu24MultipleChoiceGameData from './multipleChoice/pemilu24MultipleChoiceGameData';
 import pemilu24ReportDisinformationGameData from './reportDisinformation/pemilu24ReportDisinformationGameData';
 
-const gameDataByCategory: Record<
+type GameDataByCategoryTypes = Record<
   GameTypes,
   Record<StorylineIdTypes, Record<string, any>>
-> = {
+>;
+
+const gameDataByCategory: GameDataByCategoryTypes = {
   TG: {
     'PEMILU-24': pemilu24ImageGuesserData,
   },
@@ -22,15 +24,13 @@ const gameDataByCategory: Record<
   },
 };
 
-function getGameData({
-  gameId,
-  gameType,
-  storylineId,
-}: {
+type GetGameDataProps = {
   gameType: GameTypes;
   gameId: string;
   storylineId: StorylineIdTypes;
-}) {
+};
+
+function getGameData({gameId, gameType, storylineId}: GetGameDataProps) {
   return gameDataByCategory[gameType][storylineId][gameId];
 }
 
