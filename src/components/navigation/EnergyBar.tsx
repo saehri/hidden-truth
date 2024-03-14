@@ -1,8 +1,13 @@
 import {motion} from 'framer-motion';
+import {twMerge} from 'tailwind-merge';
+
+import useCharacterController from '../../services/controller/characterController';
 
 import Icons from '../ui/Icons';
 
 export default function EnergyBar() {
+  const characterController = useCharacterController();
+  const energyCount = characterController.character?.energy.current as number;
   const energyBars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
@@ -21,18 +26,19 @@ export default function EnergyBar() {
         animate='show'
         className='flex items-center gap-[2px] w-full h-3 mx-3'
       >
-        {energyBars.map((bar) => (
+        {energyBars.map((bar, index) => (
           <motion.div
             variants={{
               rest: {opacity: 0, y: 50},
               show: {
-                opacity: 1,
+                opacity: index + 1 > energyCount ? 0.2 : 1,
                 y: 0,
               },
             }}
+            animate={{opacity: index + 1 > energyCount ? 0.2 : 1}}
             transition={{damping: 50}}
             key={bar}
-            className='w-[6px] sm:w-2 bg-slate-50/60 h-full'
+            className={twMerge('w-[6px] sm:w-2 bg-slate-50/60 h-full')}
           ></motion.div>
         ))}
       </motion.div>

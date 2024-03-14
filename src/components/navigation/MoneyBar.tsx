@@ -1,8 +1,13 @@
 import {motion} from 'framer-motion';
 
+import useCharacterController from '../../services/controller/characterController';
+
 import Icons from '../ui/Icons';
 
 export default function MoneyBar() {
+  const characterController = useCharacterController();
+  const moneyCount = characterController.character?.money as number;
+
   return (
     <div className='flex items-center overflow-hidden'>
       <motion.span
@@ -21,7 +26,7 @@ export default function MoneyBar() {
           transition={{delay: 1, damping: 50}}
           className='block'
         >
-          2000
+          {moneyCount}
         </motion.span>
       </div>
 

@@ -1,22 +1,26 @@
 import {motion} from 'framer-motion';
+import {memo} from 'react';
+
 import {RewardTypes, StorylineCardTypes} from '../../services/utils/types';
+
+import useCharacterProgressController from '../../services/controller/characterProgressController';
 
 interface Props extends StorylineCardTypes {
   isActive: boolean;
   onClick: any;
 }
 
-export default function StorylineCard({
-  isActive,
-  onClick,
-  title,
-  background,
-  rewards,
-  synopsis,
-  types,
-}: Props) {
+const StorylineCard = memo((props: Props) => {
   const storylineTypes =
-    types === 'mainStoryline' ? 'MAIN CHAPTER' : 'SPECIAL CHAPTER';
+    props.types === 'mainStoryline' ? 'MAIN CHAPTER' : 'SPECIAL CHAPTER';
+
+  const charProgress = useCharacterProgressController();
+  const storylineProgress = charProgress.getStorylineProgress(props.id);
+
+  function handleClick() {
+    props.onClick();
+    charProgress.addUnlockedStoryline(props.id);
+  }
 
   return (
     <CardWrapper>
@@ -25,27 +29,43 @@ export default function StorylineCard({
           {storylineTypes}
         </span>
 
-        <Progress />
+        {storylineProgress && (
+          <Progress
+            progress={
+              storylineProgress.playedChapterCount /
+              storylineProgress.totalChapter
+            }
+          />
+        )}
+
         <CardDetail
-          rewards={rewards}
-          onClick={onClick}
-          storylineTitle={title}
-          synopsis={synopsis}
-        />
+          rewards={props.rewards}
+          storylineTitle={props.title}
+          synopsis={props.synopsis}
+        >
+          <button
+            onClick={handleClick}
+            className='block mt-6 w-24 hover:w-28 transition-[width] p-1 font-medium text-sm ml-auto mr-4 border-x border-primary/40 hover:border-primary bg-primary/20 hover:bg-primary/50 text-slate-50'
+          >
+            <span>SELIDIKI</span>
+          </button>
+        </CardDetail>
 
         <img
-          src={background}
+          src={props.background}
           className='w-full h-full object-cover opacity-75 grayscale group-hover:grayscale-0 transition-all'
           alt=''
         />
       </CardImageWrapper>
     </CardWrapper>
   );
-}
+});
 
-function Progress() {
-  const progress = 50;
+export default StorylineCard;
 
+type ProgressProps = {progress: number};
+
+function Progress({progress}: ProgressProps) {
   return (
     <div className='absolute top-1 right-1 z-40 w-1/3'>
       <p className='text-slate-50 text-[10px] text-right'>PROGRESS</p>
@@ -67,16 +87,16 @@ function Progress() {
 
 type CardDetailTypes = {
   storylineTitle: string;
-  onClick: () => void;
   rewards: RewardTypes[];
   synopsis: string;
+  children: React.ReactNode;
 };
 
 function CardDetail({
   storylineTitle,
-  onClick,
   rewards,
   synopsis,
+  children,
 }: CardDetailTypes) {
   return (
     <div className='absolute z-30 bottom-4 left-1/2 -translate-x-1/2 w-full max-w-[450px]'>
@@ -92,12 +112,7 @@ function CardDetail({
 
       <RewardsBox rewards={rewards} />
 
-      <button
-        onClick={onClick}
-        className='block mt-6 w-24 hover:w-28 transition-[width] p-1 font-medium text-sm ml-auto mr-4 border-x border-primary/40 hover:border-primary bg-primary/20 hover:bg-primary/50 text-slate-50'
-      >
-        <span>SELIDIKI</span>
-      </button>
+      {children}
     </div>
   );
 }

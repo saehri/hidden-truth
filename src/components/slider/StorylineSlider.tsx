@@ -1,12 +1,11 @@
 import {motion} from 'framer-motion';
-import {useContext} from 'react';
+import {memo, useContext} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
 import StorylineCard from './StorylineCard';
 
-import {getStorylineCards} from '../../database/storyline/storylines';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
-import {StorylineTypes} from '../../services/utils/types';
+import {StorylineCardTypes} from '../../services/utils/types';
 
 // Import swiper styles
 import 'swiper/css';
@@ -15,13 +14,10 @@ import 'swiper/css/pagination';
 import SwiperNavigation from './SwiperNavigation';
 import {Circle} from '../../pages/Homepage';
 
-type StorylineSliderProps = {selectedStorylineCategory: StorylineTypes};
+type StorylineSliderProps = {storylines: StorylineCardTypes[]};
 
-export default function StorylineSlider({
-  selectedStorylineCategory,
-}: StorylineSliderProps) {
+const StorylineSlider = memo(({storylines}: StorylineSliderProps) => {
   const {setActivePage} = useContext(ActivePageContext);
-  const storylines = getStorylineCards(selectedStorylineCategory);
 
   return (
     <motion.div
@@ -73,4 +69,6 @@ export default function StorylineSlider({
       <Circle withColor={false} />
     </motion.div>
   );
-}
+});
+
+export default StorylineSlider;

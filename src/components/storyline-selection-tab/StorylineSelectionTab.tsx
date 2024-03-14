@@ -4,10 +4,12 @@ import StorylineSlider from '../slider/StorylineSlider';
 import StorylineTypeTabMenu from './StorylineSelectionTabMenu';
 
 import {StorylineTypes} from '../../services/utils/types';
+import {getStorylineCards} from '../../database/storyline/storylines';
 
 export default function StorylineSelectionTab() {
   const [selectedStorylineCategory, setStorylineSelectedCategory] =
     useState<StorylineTypes>('specialStoryline');
+  const storylines = getStorylineCards(selectedStorylineCategory);
 
   return (
     <div className='absolute w-full h-full flex flex-col z-30'>
@@ -18,9 +20,7 @@ export default function StorylineSelectionTab() {
       </div>
 
       <MissionContainerWrapper>
-        <StorylineSlider
-          selectedStorylineCategory={selectedStorylineCategory}
-        />
+        <StorylineSlider storylines={storylines} />
       </MissionContainerWrapper>
     </div>
   );

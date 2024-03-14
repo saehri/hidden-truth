@@ -26,6 +26,7 @@ export type GameCardTypes = {
   id: string;
   type: GameTypes;
   name: string;
+  gamePosition: number;
   hasOpeningDialog: boolean;
   openingDialogId?: string;
   chapterName: string;
@@ -53,6 +54,7 @@ export interface StorylineCardTypes
 }
 
 export interface StorylineDataTypes extends StorylineCardTypes {
+  totalChapter: number;
   playableChapter: StorylineChapterTypes[];
 }
 
@@ -149,18 +151,22 @@ export type AvatarTypes = {
 };
 
 export type CharacterTypes = {
-  user_id: string; // This is the _id of the user
-  character_name: string; // This is the character name
-  created_at: string; // Date ISO string
-  current_avatar: AvatarTypes; // Current used character
-  current_rank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
-  current_energy: number;
-  played_games: []; // string[] -> string is gameId
-  played_chapters: []; // string[] -> string is chapterId
+  userId: string; // This is the _id of the user
+  name: string; // This is the character name
+  currentAvatar: AvatarTypes; // Current used character
+  currentRank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
+  energy: {
+    current: number;
+    isFilling: boolean;
+  };
+  money: number;
+  createdAt: string; // Date ISO string
+  updatedAt: string;
   inventory: {
     consumable: ConsumableTypes[];
     avatar: AvatarTypes[];
   };
+  hiddenItems: string[];
 };
 
 export type UserTypes = {
@@ -174,4 +180,19 @@ export type UserTypes = {
   gender: string | null;
   is_new_user: boolean;
   created_at: string;
+};
+
+/* CHARACTER PROGRESS */
+export type CharacterProgressTypes = {
+  chardId: string;
+  userId: string;
+  userEmail: string;
+  unlockedStoryline: {
+    storylineId: StorylineIdTypes;
+    gamePlayedList: string[];
+    totalChapter: number;
+    finishedChapterList: string[];
+    playedChapterCount: number; // We incre
+  }[];
+  hiddenPrologList: string[];
 };

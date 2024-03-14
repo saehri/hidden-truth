@@ -7,7 +7,11 @@ import {
   GameDifficultyTypes,
   GameTypes,
   RewardTypes,
+  StorylineIdTypes,
 } from '../../services/utils/types';
+import useCharacterProgressController from '../../services/controller/characterProgressController';
+import {twMerge} from 'tailwind-merge';
+import useCharacterController from '../../services/controller/characterController';
 
 interface StorylineDetailChapterCard {
   games: GameCardTypes[];
@@ -26,7 +30,12 @@ export default function StorylineDetailChapterCard({
 
       <motion.div transition={{staggerChildren: 0.1}} className='flex gap-2'>
         {games.map((game, index: number) => (
-          <CardWrapper key={game.id} index={index}>
+          <CardWrapper
+            key={game.id}
+            index={index}
+            gameId={game.id}
+            gamePosition={game.gamePosition}
+          >
             <CardHeader />
             <CardContent>
               <CardDescription
@@ -125,6 +134,8 @@ function CardDescription({
 type CardWrapperTypes = {
   children: React.ReactNode;
   index: number;
+  gameId: string;
+  gamePosition: number;
 };
 
 const cardWrapperAnimation = (index: number) => ({
@@ -132,16 +143,37 @@ const cardWrapperAnimation = (index: number) => ({
   whileInView: {opacity: 1, y: 0, rotate: 0, transition: {delay: index / 10}},
 });
 
-function CardWrapper({children, index}: CardWrapperTypes) {
+function CardWrapper({
+  children,
+  index,
+  gameId,
+  gamePosition,
+}: CardWrapperTypes) {
   const animation = cardWrapperAnimation(index);
   const clipPath = 'polygon(0 0, 100% 0, 100% 93%, 93% 100%, 0 100%, 0% 50%)';
+
+  const {activePage} = useContext(ActivePageContext);
+  const characterProgress = useCharacterProgressController();
+  const charProgress = characterProgress.getStorylineProgress(
+    activePage.state?.storylineId as StorylineIdTypes
+  );
+
+  // shows wether the player already played the game or not
+  const isCompleted = charProgress?.gamePlayedList.includes(gameId);
+  // shows wether the game is ready to be played or not
+  const isUnlocked = isCompleted
+    ? true
+    : charProgress?.gamePlayedList.length === gamePosition - 1;
 
   return (
     <motion.div
       initial={animation.initial}
       whileInView={animation.whileInView}
       viewport={{once: true, amount: 'some'}}
-      className='w-72'
+      className={twMerge(
+        'w-72',
+        isUnlocked ? 'brightness-100' : 'brightness-50 pointer-events-none'
+      )}
     >
       <div className='pt-[calc((4/3)*100%)] relative'>
         <div
@@ -179,9 +211,12 @@ function CardCTA({
   hasOpeningDialog,
   dialogId,
 }: CardCTATypes) {
+  const characterController = useCharacterController();
   const {activePage, setActivePage} = useContext(ActivePageContext);
 
   function goToGamePage() {
+    characterController.reduceEnergy(1);
+
     setActivePage({
       location: hasOpeningDialog ? 'dialogPage' : 'gamePage',
       state: {

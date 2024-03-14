@@ -4,9 +4,11 @@ import {CharacterTypes} from '../utils/types';
 
 const initialState: Record<'character', CharacterTypes> = {
   character: {
-    character_name: 'James Harlow',
-    created_at: '203949',
-    current_avatar: {
+    userId: '011',
+    name: 'James Harlow',
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    currentAvatar: {
       avatar_id: 'df-male',
       avatar_image:
         'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp',
@@ -15,15 +17,14 @@ const initialState: Record<'character', CharacterTypes> = {
       obtained_at: new Date().toISOString(),
       rarity: 'common',
     },
-    current_energy: 10,
-    current_rank: 'nobody',
+    money: 300,
+    energy: {current: 10, isFilling: false},
+    currentRank: 'nobody',
     inventory: {
       avatar: [],
       consumable: [],
     },
-    played_chapters: [],
-    played_games: [],
-    user_id: '011',
+    hiddenItems: [],
   },
 };
 
@@ -68,6 +69,42 @@ export default function useCharacterController() {
         }
       } catch (error: any) {
         console.error(error.response.data);
+      }
+    },
+    reduceEnergy: async (amount: number) => {
+      try {
+        const currentEnergy = character?.energy.current as number;
+        if (currentEnergy - amount > -1) {
+          const newEnergyAmount = currentEnergy - amount;
+          const editedCharacterData = {
+            ...character,
+            energy: {current: newEnergyAmount, isFilling: newEnergyAmount < 10},
+          };
+
+          characterStore.setState({
+            character: editedCharacterData as CharacterTypes,
+          });
+        } else throw new Error('Your energy cannot go lower than 0');
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    },
+    addEnergy: async (amount: number) => {
+      try {
+        const currentEnergy = character?.energy.current as number;
+        if (currentEnergy + amount > -1) {
+          const newEnergyAmount = currentEnergy + amount;
+          const editedCharacterData = {
+            ...character,
+            energy: {current: newEnergyAmount, isFilling: newEnergyAmount < 10},
+          };
+
+          characterStore.setState({
+            character: editedCharacterData as CharacterTypes,
+          });
+        } else throw new Error('Your energy cannot go lower than 0');
+      } catch (error: any) {
+        console.error(error.message);
       }
     },
   };

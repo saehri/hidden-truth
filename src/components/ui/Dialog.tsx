@@ -50,14 +50,8 @@ interface DialogSequenceRenderer {
   dialogSequences: Record<string, DialogTypes[]>;
 }
 
-const containerBgGradAppearance = (index: number, isActive: boolean) => {
+const containerBgGradAppearance = (isActive: boolean) => {
   let classes: string = '';
-
-  if (index === 0) {
-    classes += 'text-left';
-  } else {
-    classes += 'text-right';
-  }
 
   if (isActive) {
     classes += ' opacity-100 z-40 ';
@@ -73,9 +67,9 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
   const dialogSequenceToRender = dialogSequences[currentDialogId];
   const characterController = useCharacterController();
 
-  const characterName = characterController.character?.character_name || '';
+  const characterName = characterController.character?.name || '';
   const characterImage =
-    characterController.character?.current_avatar.avatar_image || '';
+    characterController.character?.currentAvatar.avatar_image || '';
 
   return (
     <>
@@ -90,7 +84,7 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
           <div
             className={twMerge(
               'w-full bg-primary/80 lg:bg-primary/50 lg:backdrop-blur-sm max-w-[calc(100%-2em)] md:max-w-screen-sm lg:max-w-screen-md absolute left-1/2 -translate-x-1/2 -bottom-10 sm:bottom-4 p-2 px-4',
-              containerBgGradAppearance(index, ds.isSpeaking)
+              containerBgGradAppearance(ds.isSpeaking)
             )}
           >
             <CharacterNameIndicator

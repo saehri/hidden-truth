@@ -1,12 +1,16 @@
 import {AnimatePresence, motion} from 'framer-motion';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 
-import {GameStateTypes, RewardTypes} from '../../../services/utils/types';
+import {
+  GameStateTypes,
+  RewardTypes,
+  StorylineIdTypes,
+} from '../../../services/utils/types';
 import {twMerge} from 'tailwind-merge';
 import {barCode} from '../../../assets/images/barCode';
 
-type DivTypes = React.HTMLAttributes<HTMLDivElement>;
+import useCharacterProgressController from '../../../services/controller/characterProgressController';
 
 type GameEndingModalProps = {
   status: GameStateTypes;
@@ -17,7 +21,17 @@ export default function GameEndingModal({
   status,
   gameRewards,
 }: GameEndingModalProps) {
+  const charProgress = useCharacterProgressController();
   const {activePage, setActivePage} = useContext(ActivePageContext);
+
+  useEffect(() => {
+    if (status === 'completed') {
+      charProgress.addGamePlayedList(
+        activePage.state?.storylineId as StorylineIdTypes,
+        activePage.state?.gameId as string
+      );
+    }
+  }, [status]);
 
   function closeModal() {
     setActivePage({
