@@ -16,7 +16,7 @@ export default function StorylineSelectionPage() {
       </div>
 
       {/* DECORATION */}
-      <div className='absolute w-full h-full top-0 left-0 z-20 bg-gradient-to-l from-slate-950 via-slate-950/40 to-slate-950'></div>
+      <div className='absolute w-full h-full top-0 left-0 z-20 bg-gradient-to-l from-slate-950/90 via-transparent to-slate-950/90'></div>
       <Block />
 
       <TriangleLeft />
@@ -26,7 +26,7 @@ export default function StorylineSelectionPage() {
       {/* change the bg */}
       <img
         src={homepageBackground}
-        className='w-full h-full object-cover brightness-50 absolute top-0 left-0 z-0'
+        className='w-full h-full object-cover brightness-75 absolute top-0 left-0 z-0'
         alt=''
       />
     </section>
