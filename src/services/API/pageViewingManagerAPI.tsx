@@ -33,7 +33,7 @@ export type ViewablePageTypes =
 */
 
 /* @types defines all the value types the "state" can take */
-export type PageStateValueTypes = string | number | (() => void);
+export type PageStateValueTypes = string | number | boolean | (() => void);
 /* @types defines the "state" object structures */
 export type PageStateTypes = Record<string, PageStateValueTypes>;
 export type ActivePageTypes = {

@@ -26,9 +26,11 @@ export default function GameEndingModal({
 
   useEffect(() => {
     if (status === 'completed') {
-      charProgress.addGamePlayedList(
+      charProgress.updateStorylineProgress(
         activePage.state?.storylineId as StorylineIdTypes,
-        activePage.state?.gameId as string
+        activePage.state?.gameId as string,
+        activePage.state?.chapterId as string,
+        activePage.state?.isFinalGame as boolean
       );
     }
   }, [status]);

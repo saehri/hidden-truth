@@ -17,12 +17,14 @@ interface StorylineDetailChapterCard {
   games: GameCardTypes[];
   title: string;
   chapterIndex: number;
+  chapterId: string;
 }
 
 export default function StorylineDetailChapterCard({
   games,
   title,
   chapterIndex,
+  chapterId,
 }: StorylineDetailChapterCard) {
   return (
     <section className='flex gap-5 ml-12'>
@@ -54,6 +56,8 @@ export default function StorylineDetailChapterCard({
                   chapterName={game.chapterName}
                   hasOpeningDialog={game.hasOpeningDialog}
                   dialogId={game.openingDialogId}
+                  isFinalGame={game.isFinalGame}
+                  chapterId={chapterId}
                 />
               </div>
 
@@ -163,7 +167,7 @@ function CardWrapper({
   // shows wether the game is ready to be played or not
   const isUnlocked = isCompleted
     ? true
-    : charProgress?.gamePlayedList.length === gamePosition - 1;
+    : charProgress?.gamePlayedList.length === gamePosition;
 
   return (
     <motion.div
@@ -201,6 +205,8 @@ type CardCTATypes = {
   chapterName: string;
   hasOpeningDialog: boolean;
   dialogId?: string;
+  isFinalGame: boolean;
+  chapterId: string;
 };
 
 function CardCTA({
@@ -209,7 +215,8 @@ function CardCTA({
   gameDifficulty,
   chapterName,
   hasOpeningDialog,
-  dialogId,
+  isFinalGame,
+  chapterId,
 }: CardCTATypes) {
   const characterController = useCharacterController();
   const {activePage, setActivePage} = useContext(ActivePageContext);
@@ -222,8 +229,10 @@ function CardCTA({
       state: {
         gameId,
         gameType,
+        isFinalGame,
         gameDifficulty,
         chapterName,
+        chapterId,
         ...activePage.state,
       },
     });
@@ -231,8 +240,9 @@ function CardCTA({
 
   return (
     <button
+      disabled={(characterController.character?.energy.current as number) === 0}
       onClick={goToGamePage}
-      className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium text-sm py-1 w-24 hover:w-28 transition-[width] border-x border-yellow-600'
+      className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium disabled:opacity-50 disabled:pointer-events-none text-sm py-1 w-24 hover:w-28 transition-[width] border-x border-yellow-600'
       style={{
         clipPath: 'polygon(100% 0, 100% 78%, 94% 100%, 0 100%, 0 0)',
       }}

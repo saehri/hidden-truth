@@ -8,7 +8,6 @@ import GameHeader from '../GameHeader';
 import ImageGuesserContent from './ImageGuesserContent';
 import BlinkingRedLayer from '../../ui/BlinkingRedLayer';
 import GameTutorial from '../../game-tutorial/GameTutorial';
-import {twMerge} from 'tailwind-merge';
 
 /* used in the game tutorial component */
 const tutorialText: string[] = [
@@ -34,12 +33,13 @@ export default function ImageGuesser() {
   const hideGame = ['gameOver', 'completed', 'preparation'].includes(gameState);
 
   useEffect(() => {
+    let startTimer: any;
     if (!gameData.hasTutorial) {
       // Start the game after 1 seconds delay
-      const startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
-
-      return () => clearTimeout(startTimer);
+      startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
     }
+
+    return () => clearTimeout(startTimer);
   }, []);
 
   return (

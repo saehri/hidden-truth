@@ -4,7 +4,7 @@ const pemilu24ReportDisinformationGameData: Record<
   string,
   ReportDisinformationGameDataTypes[]
 > = {
-  'PEMILU24-RD-C2-1': [
+  'PEMILU24-RD-C1-2': [
     {
       postId: 1,
       postCaption: 'Pilih 2,3',

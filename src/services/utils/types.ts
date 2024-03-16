@@ -28,17 +28,16 @@ export type GameCardTypes = {
   name: string;
   gamePosition: number;
   hasOpeningDialog: boolean;
-  openingDialogId?: string;
   chapterName: string;
   synopsis: string;
-  hasTutorial?: boolean;
-  tutorialId?: string;
+  isFinalGame: boolean;
   rewards: RewardTypes[];
   difficulty: GameDifficultyTypes;
 };
 
 export type StorylineChapterTypes = {
   chapterName: string;
+  chapterId: string;
   games: GameCardTypes[];
 };
 
@@ -192,7 +191,7 @@ export type CharacterProgressTypes = {
     gamePlayedList: string[];
     totalChapter: number;
     finishedChapterList: string[];
-    playedChapterCount: number; // We incre
+    finishedChapterCount: number; // We incre
   }[];
   hiddenPrologList: string[];
 };

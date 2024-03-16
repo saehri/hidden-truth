@@ -7,6 +7,8 @@ import StorylineDetailChapterCardSlider from '../components/slider/StorylineDeta
 import {Lines} from './Homepage';
 
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
+import useCharacterProgressController from '../services/controller/characterProgressController';
+import {StorylineIdTypes} from '../services/utils/types';
 
 export default function StorylineDetailPage() {
   return (
@@ -38,6 +40,10 @@ export default function StorylineDetailPage() {
 function GameInformationBar() {
   const {activePage} = useContext(ActivePageContext);
   const [isMaximize, setMaximize] = useState<boolean>(true);
+  const gameProgress = useCharacterProgressController();
+  const currentProgress = gameProgress.getStorylineProgress(
+    activePage.state?.storylineId as StorylineIdTypes
+  );
 
   return (
     <motion.div
@@ -76,7 +82,10 @@ function GameInformationBar() {
           <span className='text-[10px] text-slate-300 bg-slate-50/10 px-2 mb-1 w-max block border-x border-slate-50'>
             COMPLETED/TOTAL
           </span>
-          <p className='text-right'>0/10</p>
+          <p className='text-right'>
+            {currentProgress?.finishedChapterCount}/
+            {currentProgress?.totalChapter}
+          </p>
         </div>
       </motion.div>
     </motion.div>

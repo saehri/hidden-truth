@@ -32,7 +32,7 @@ const StorylineCard = memo((props: Props) => {
         {storylineProgress && (
           <Progress
             progress={
-              storylineProgress.playedChapterCount /
+              storylineProgress.finishedChapterCount /
               storylineProgress.totalChapter
             }
           />
@@ -72,12 +72,12 @@ function Progress({progress}: ProgressProps) {
 
       <div className='w-full h-4 relative flex items-center justify-center bg-slate-50/10'>
         <span className='text-[10px] relative z-30 text-slate-50'>
-          {progress}%
+          {progress * 100}%
         </span>
 
         <motion.div
           initial={{width: 0}}
-          animate={{width: `${progress}%`}}
+          animate={{width: `${progress * 100}%`}}
           className='absolute top-0 right-0 bg-slate-50/40 h-full'
         />
       </div>

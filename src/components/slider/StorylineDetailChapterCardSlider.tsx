@@ -36,6 +36,7 @@ export default function StorylineDetailChapterCardSlider() {
             games={chapter.games}
             title={chapter.chapterName}
             key={chapter.chapterName}
+            chapterId={chapter.chapterId}
             chapterIndex={index + 1}
           />
         ))}

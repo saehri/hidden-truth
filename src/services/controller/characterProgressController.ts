@@ -38,7 +38,7 @@ export default function useCharacterProgressController() {
             gamePlayedList: [],
             totalChapter: storyline.totalChapter,
             finishedChapterList: [],
-            playedChapterCount: 0,
+            finishedChapterCount: 0,
           };
 
           const newState: CharacterProgressTypes = {
@@ -69,40 +69,56 @@ export default function useCharacterProgressController() {
         console.error(error.message);
       }
     },
-    addGamePlayedList: (storylineId: StorylineIdTypes, gameId: string) => {
+    updateStorylineProgress: (
+      storylineId: StorylineIdTypes,
+      gameId: string,
+      chapterId: string,
+      isFinalGame: boolean
+    ) => {
       try {
         const stateRecord = characterProgress.unlockedStoryline;
         const selectedRecord = stateRecord.filter(
           (s) => s.storylineId === storylineId
         )[0];
-        const isPlayed = selectedRecord.gamePlayedList.includes(gameId);
+        const isGamePlayed = selectedRecord.gamePlayedList.includes(gameId);
+        const isChapterComleted =
+          selectedRecord.finishedChapterList.includes(chapterId);
 
-        if (!isPlayed) {
-          // add new record
-          const updatedGamePlayedList = [
-            ...selectedRecord.gamePlayedList,
-            gameId,
-          ];
+        let updatedCompletedChapter: string[] =
+          selectedRecord.finishedChapterList;
+        let updatedGamePlayedList: string[] = selectedRecord.gamePlayedList;
 
-          // update the selected record
-          const updatedSelectedRecord = {
-            ...selectedRecord,
-            gamePlayedList: updatedGamePlayedList,
-          };
-
-          // update the whole state
-          const updatedState = {
-            ...characterProgress,
-            unlockedStoryline: [
-              ...characterProgress.unlockedStoryline.filter(
-                (s) => s.storylineId !== storylineId
-              ),
-              updatedSelectedRecord,
-            ],
-          };
-
-          characterProgressStore.setState({characterProgress: updatedState});
+        if (isFinalGame) {
+          if (!isChapterComleted) {
+            updatedCompletedChapter.push(chapterId);
+          }
         }
+
+        if (!isGamePlayed) {
+          updatedGamePlayedList.push(gameId);
+        }
+
+        // update the selected record
+        const updatedSelectedRecord = {
+          ...selectedRecord,
+          gamePlayedList: updatedGamePlayedList,
+          finishedChapterList: updatedCompletedChapter,
+          finishedChapterCount: updatedCompletedChapter.length,
+        };
+
+        // update the whole state
+        const updatedState = {
+          ...characterProgress,
+          unlockedStoryline: [
+            ...characterProgress.unlockedStoryline.filter(
+              (s) => s.storylineId !== storylineId
+            ),
+            updatedSelectedRecord,
+          ],
+        };
+
+        console.log('game played list', updatedSelectedRecord);
+        characterProgressStore.setState({characterProgress: updatedState});
       } catch (error: any) {
         console.error(error.message);
       }
