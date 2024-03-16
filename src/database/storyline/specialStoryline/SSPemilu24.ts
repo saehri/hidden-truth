@@ -26,6 +26,9 @@ const chapterRewards: RewardTypes[] = [
 export const imageGuesserRewardsList: Record<string, RewardTypes[]> = {
   game1: [{id: 'small_money_bag', label: 'Small money bag (+100)', image: ''}],
 };
+export const reportDisinformationRewardsList: Record<string, RewardTypes[]> = {
+  game1: [{id: 'small_money_bag', label: 'Small money bag (+100)', image: ''}],
+};
 
 const SSPemilu24: StorylineDataTypes = {
   id: 'PEMILU-24',
@@ -61,7 +64,7 @@ const SSPemilu24: StorylineDataTypes = {
           difficulty: 'easy',
           gamePosition: 0,
           chapterName: 'CH 1.2 - Orang Aneh',
-          rewards: imageGuesserRewardsList.game1,
+          rewards: reportDisinformationRewardsList.game1,
           synopsis: 'Gak tahu harus ngapain di sini sumpah',
           isFinalGame: true,
         },

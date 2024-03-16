@@ -1,34 +1,41 @@
 import React, {memo} from 'react';
 import {motion} from 'framer-motion';
 
-import {ReportDisinformationGameDataTypes} from '../../../services/utils/types';
+import {GameStateTypes, RDPostTypes} from '../../../services/utils/types';
 import ReportDisinformationPost from './ReportDisinformationPost';
+import {twMerge} from 'tailwind-merge';
 
 interface ReportDisinformation {
-  gameData: ReportDisinformationGameDataTypes[];
+  gameData: RDPostTypes[];
+  gameState: GameStateTypes;
 }
 
-const ReportDisinformation = memo(({gameData}: ReportDisinformation) => {
-  return (
-    <motion.section
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      className='h-full grid place-items-center p-4 py-0 overflow-hidden'
-    >
-      <PhoneFrame>
-        <div className='h-max pb-16'>
-          <Header />
+const ReportDisinformation = memo(
+  ({gameData, gameState}: ReportDisinformation) => {
+    return (
+      <motion.section
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        className={twMerge(
+          'h-full grid place-items-center p-4 py-0 overflow-hidden transition-all',
+          gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+        )}
+      >
+        <PhoneFrame>
+          <div className='h-max pb-16'>
+            <Header />
 
-          <div>
-            {gameData.map((data) => (
-              <ReportDisinformationPost key={data.postId} {...data} />
-            ))}
+            <div>
+              {gameData.map((data) => (
+                <ReportDisinformationPost key={data.postId} {...data} />
+              ))}
+            </div>
           </div>
-        </div>
-      </PhoneFrame>
-    </motion.section>
-  );
-});
+        </PhoneFrame>
+      </motion.section>
+    );
+  }
+);
 
 export default ReportDisinformation;
 

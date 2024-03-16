@@ -97,7 +97,7 @@ export type DisinformationInfoTypes = [
   {id: 4; label: 'Sumber berita tidak terpercaya'; reason?: string}
 ];
 
-export type ReportDisinformationGameDataTypes = {
+export type RDPostTypes = {
   postId: number;
   postCaption: string;
   postAuthor: {
@@ -114,6 +114,12 @@ export type ReportDisinformationGameDataTypes = {
   hasMedia: boolean;
   mediaLink?: string;
   disinformationCategoryInfo: DisinformationInfoTypes;
+};
+
+export type ReportDisinformationGameDataTypes = {
+  data: RDPostTypes[];
+  hasTutorial: boolean;
+  rewards: RewardTypes[];
 };
 
 /* @types defines the form state */

@@ -1,4 +1,7 @@
-import {ReportDisinformationGameDataTypes} from '../../../services/utils/types';
+import {
+  RDPostTypes,
+  ReportDisinformationGameDataTypes,
+} from '../../../services/utils/types';
 import PostImageViewer from './PostImageViewer';
 import PostReportAccordion from './PostReportAccordion';
 
@@ -11,7 +14,7 @@ export default function ReportDisinformationPost({
   isDisinformation,
   disinformationCategory,
   disinformationCategoryInfo,
-}: ReportDisinformationGameDataTypes) {
+}: RDPostTypes) {
   return (
     <div className='flex gap-4 px-4 py-2 border-b border-slate-300'>
       <div className='w-11 h-11 rounded-full shrink-0 bg-slate-300'>

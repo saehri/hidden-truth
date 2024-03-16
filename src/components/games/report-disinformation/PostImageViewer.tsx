@@ -31,7 +31,7 @@ export default function PostImageViewer({mediaLink}: {mediaLink: string}) {
               className='w-full max-w-[70%]'
             >
               <div className='relative w-full pt-[calc((9/16)*100%)]'>
-                <div className='bg-slate-950 rounded-xl absolute top-0 left-0 w-full h-full overflow-hidden'>
+                <div className='bg-slate-600 rounded-xl absolute top-0 left-0 w-full h-full overflow-hidden'>
                   <img
                     src={mediaLink}
                     alt=''
