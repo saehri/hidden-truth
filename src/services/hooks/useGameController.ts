@@ -3,10 +3,14 @@ import {GameStateTypes, GameTypes, StorylineIdTypes} from '../utils/types';
 import {getGameData} from '../../database/gameData';
 import {ActivePageContext} from '../API/pageViewingManagerAPI';
 
-type useGameControllerTypes = {customDuration?: GameDurationTypes};
+type useGameControllerTypes = {
+  customDuration?: GameDurationTypes;
+  initialLife?: number;
+};
 
 export default function useGameController({
   customDuration,
+  initialLife,
 }: useGameControllerTypes) {
   // Current active page
   const {activePage} = useContext(ActivePageContext);
@@ -14,15 +18,17 @@ export default function useGameController({
   // Global state of the game state: Handle the game state
   const [gameState, setGameState] = useState<GameStateTypes>('preparation');
   // Player life state
-  const [playerLife, setPlayerLife] = useState<number>(3);
+  const [playerLife, setPlayerLife] = useState<number>(initialLife || 3);
 
-  function reducePlayerLife() {
+  function reducePlayerLife(amount?: number) {
+    const amountToReduce = amount || 1;
+
     let currentLife = playerLife;
-    if (currentLife - 1 === 0) {
+    if (currentLife - amountToReduce === 0) {
       setPlayerLife(0);
       setGameState('gameOver');
     } else {
-      setPlayerLife((prev) => prev - 1);
+      setPlayerLife((prev) => prev - amountToReduce);
     }
   }
 

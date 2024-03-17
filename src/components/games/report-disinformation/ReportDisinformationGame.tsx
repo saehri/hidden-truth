@@ -8,7 +8,15 @@ import GameTutorial from '../../game-tutorial/GameTutorial';
 import BlinkingRedLayer from '../../ui/BlinkingRedLayer';
 import GameHeader from '../GameHeader';
 
-const tutorialText = ['text', 'text'];
+const tutorialText = [
+  'Kamu benar - benar luar biasa! Kamu bisa bertahan sejauh ini, sangat hebat sekali',
+  'Di misi kali ini kamu akan diberikan beberapa postingan sosial media',
+  'Tugasmu adalah untuk mengidentifikasi kategori disinformasi yang ada pada postingan tersebut',
+  'Jika kamu gagal menebak kategori disinformasi yang ada dalam suatu postingan, maka nyawamu akan berkurang sejumlah kategori yang salah kamu tebak',
+  'Harap diingat tidak semua postingan yang diberikan mengandung disinformasi',
+  'Pesan terakhir dariku, jika kamu merasa terhambat kamu bisa memulai ulang misi ini',
+  'Selamat bertugas!',
+];
 
 const ReportDisinformationGame = memo(() => {
   const {
@@ -20,6 +28,7 @@ const ReportDisinformationGame = memo(() => {
     reducePlayerLife,
   } = useGameController({
     customDuration: {easy: 5000, hard: 5000, medium: 5000},
+    initialLife: 5,
   });
 
   const hideGame = ['gameOver', 'completed', 'preparation'].includes(gameState);
@@ -42,14 +51,17 @@ const ReportDisinformationGame = memo(() => {
         countdownDuration={gameDuration}
       />
 
-      <div className='w-full h-full flex flex-col mx-auto max-w-screen-sm py-16'>
+      <div className='w-full h-full flex flex-col gap-8 mx-auto max-w-screen-sm pt-16'>
         <GameHeader playerLife={playerLife} />
 
-        <div className='flex-1 flex items-center'>
+        <div className='overflow-y-auto hideScrollbar'>
           {!hideGame && (
             <ReportDisinformation
               gameState={gameState}
-              gameData={gameData.data}
+              posts={gameData.data}
+              reducePlayerLife={reducePlayerLife}
+              totalDisinformation={gameData.totalDisinformationCategory}
+              setGameState={setGameState}
             />
           )}
         </div>

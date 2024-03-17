@@ -6,8 +6,9 @@ const pemilu24ReportDisinformationGameData: Record<
   ReportDisinformationGameDataTypes
 > = {
   'PEMILU24-RD-C1-2': {
-    hasTutorial: false,
+    hasTutorial: true,
     rewards: reportDisinformationRewardsList.game1,
+    totalDisinformationCategory: 3,
     data: [
       {
         postId: 1,
@@ -61,6 +62,52 @@ const pemilu24ReportDisinformationGameData: Record<
       },
       {
         postId: 3,
+        postCaption: 'Pilih 1,2',
+        isDisinformation: false,
+        postAuthor: {
+          authorName: 'Nana',
+          authorProfileImage:
+            'https://assets-global.website-files.com/6350fb37e2d185647cd723a2/64c0cd0fd61a175666ee0e41_090b38a64e7faeb41473fe34e7859e69.png',
+          authorUsername: '@nanabot',
+          authorBio:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste hic in, odio voluptate molestiae.',
+          followerCount: 120,
+          followingCount: 80,
+        },
+        postUploadedTime: '12m',
+        hasMedia: false,
+        disinformationCategoryInfo: [
+          {id: 1, label: 'Manipulasi video/gambar'},
+          {id: 2, label: 'Impersonasi'},
+          {id: 3, label: 'Berita bohong'},
+          {id: 4, label: 'Sumber berita tidak terpercaya'},
+        ],
+      },
+      {
+        postId: 4,
+        postCaption: 'Pilih 1,2',
+        isDisinformation: false,
+        postAuthor: {
+          authorName: 'Nana',
+          authorProfileImage:
+            'https://assets-global.website-files.com/6350fb37e2d185647cd723a2/64c0cd0fd61a175666ee0e41_090b38a64e7faeb41473fe34e7859e69.png',
+          authorUsername: '@nanabot',
+          authorBio:
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste hic in, odio voluptate molestiae.',
+          followerCount: 120,
+          followingCount: 80,
+        },
+        postUploadedTime: '12m',
+        hasMedia: false,
+        disinformationCategoryInfo: [
+          {id: 1, label: 'Manipulasi video/gambar'},
+          {id: 2, label: 'Impersonasi'},
+          {id: 3, label: 'Berita bohong'},
+          {id: 4, label: 'Sumber berita tidak terpercaya'},
+        ],
+      },
+      {
+        postId: 5,
         postCaption: 'Pilih 1,2',
         isDisinformation: false,
         postAuthor: {

@@ -120,6 +120,7 @@ export type ReportDisinformationGameDataTypes = {
   data: RDPostTypes[];
   hasTutorial: boolean;
   rewards: RewardTypes[];
+  totalDisinformationCategory: number;
 };
 
 /* @types defines the form state */
