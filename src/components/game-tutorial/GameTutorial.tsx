@@ -1,6 +1,7 @@
 import {memo, useState} from 'react';
 import {createPortal} from 'react-dom';
 import {motion} from 'framer-motion';
+import {tutorialPortait} from '../../assets/images/tutorialPortrait';
 
 type ImageGuesserTutorialProps = {
   isOpen: boolean;
@@ -109,7 +110,13 @@ const GameTutorial = memo(
 function MrDefactoThirstTrap() {
   return (
     <div>
-      <div className='pt-[calc((4/4)*100%)] bg-slate-300'></div>
+      <div className='pt-[calc((4/4)*100%)] bg-slate-300 relative'>
+        <img
+          src={tutorialPortait}
+          alt=''
+          className='absolute w-full h-full object-cover top-0'
+        />
+      </div>
     </div>
   );
 }
