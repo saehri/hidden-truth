@@ -11,7 +11,6 @@ import {
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {AnimatePresence} from 'framer-motion';
 import GameEndingModal from '../modal/game-ending-modal/GameEndingModal';
-import {thumbStackImage} from '../../assets/images/thumbStackImage';
 import {twMerge} from 'tailwind-merge';
 import {getGameData} from '../../database/gameData';
 
@@ -156,7 +155,7 @@ const PersonCard = memo(
         }}
       >
         <motion.img
-          src={thumbStackImage}
+          src=''
           alt=''
           className='w-5 h-5 lg:w-8 lg:h-8 absolute top-1 left-1/2 -translate-x-1/2 z-50'
           initial={{

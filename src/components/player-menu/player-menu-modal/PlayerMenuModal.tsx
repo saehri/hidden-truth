@@ -9,7 +9,6 @@ import Icons from '../../ui/Icons';
 /* Assets */
 import {barCode} from '../../../assets/images/barCode';
 import {characterPicBackground} from '../../../assets/images/characterPicBackground';
-import {mapLine} from '../../../assets/images/mapLine';
 
 const PlayerMenuModal = memo(
   ({
@@ -43,7 +42,7 @@ const PlayerMenuModal = memo(
                 </div>
 
                 <img
-                  src={mapLine}
+                  src=''
                   alt=''
                   className='absolute top-0 left-0 w-full h-full object-cover -z-10 opacity-10'
                   draggable={false}
@@ -71,17 +70,13 @@ const PlayerMenuModal = memo(
 
 export default PlayerMenuModal;
 
-function CardContent({
-  character_name,
-  current_avatar,
-  current_rank,
-}: CharacterTypes) {
+function CardContent({name, currentAvatar, currentRank}: CharacterTypes) {
   return (
     <>
       <div className='h-full flex flex-col gap-4'>
         <div className='w-full flex-1 relative'>
           <img
-            src={current_avatar.avatar_image}
+            src={currentAvatar.avatar_image}
             alt=''
             className='absolute top-0 left-0 w-full h-full object-cover object-bottom z-20'
             draggable={false}
@@ -102,11 +97,11 @@ function CardContent({
             <div className='grid grid-cols-[max-content,_5px,_1fr] gap-3 gap-y-0 text-slate-950 text-xs lg:text-base xl:text-xl mb-3'>
               <span>Name</span>
               <span>:</span>
-              <span className='block w-max'>{character_name}</span>
+              <span className='block w-max'>{name}</span>
 
               <span>Rank</span>
               <span>:</span>
-              <span className='capitalize'>{current_rank}</span>
+              <span className='capitalize'>{currentRank}</span>
             </div>
           </div>
 

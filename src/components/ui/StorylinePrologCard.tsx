@@ -1,8 +1,6 @@
 import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
-import {tornNewspaper1} from '../../assets/images/tornNewspaper1';
-import {tornNewspaper2} from '../../assets/images/tornNewspaper2';
 import {barCode} from '../../assets/images/barCode';
 
 export default function StorylinePrologCard() {
@@ -38,27 +36,15 @@ function StorylinePrologNewspaper() {
       className='cursor-pointer block absolute top-0 left-0 w-full h-full bg-slate-100 rotate-6 group-hover:rotate-3 transition-transform brightness-95 z-30'
     >
       <div className='absolute top-0 left-0 w-36 h-24'>
-        <img
-          src={tornNewspaper1}
-          className='w-full h-full object-fill'
-          alt=''
-        />
+        <img src='' className='w-full h-full object-fill' alt='' />
       </div>
 
       <div className='absolute bottom-0 left-0 w-36 h-24'>
-        <img
-          src={tornNewspaper1}
-          className='w-full h-full object-fill'
-          alt=''
-        />
+        <img src='' className='w-full h-full object-fill' alt='' />
       </div>
 
       <div className='absolute -bottom-4 right-0 w-36 h-24'>
-        <img
-          src={tornNewspaper2}
-          className='w-full h-full object-fill'
-          alt=''
-        />
+        <img src='' className='w-full h-full object-fill' alt='' />
       </div>
     </button>
   );
