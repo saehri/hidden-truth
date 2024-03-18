@@ -28,7 +28,7 @@ export type GameCardTypes = {
   name: string;
   gamePosition: number;
   hasOpeningDialog: boolean;
-  chapterName: string;
+  gameName: string;
   synopsis: string;
   isFinalGame: boolean;
   rewards: RewardTypes[];
@@ -36,7 +36,7 @@ export type GameCardTypes = {
 };
 
 export type StorylineChapterTypes = {
-  chapterName: string;
+  gameName: string;
   chapterId: string;
   games: GameCardTypes[];
 };

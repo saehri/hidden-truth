@@ -34,8 +34,8 @@ export default function StorylineDetailChapterCardSlider() {
         {storylines?.playableChapter.map((chapter, index) => (
           <StorylineDetailChapterCard
             games={chapter.games}
-            title={chapter.chapterName}
-            key={chapter.chapterName}
+            title={chapter.gameName}
+            key={chapter.gameName}
             chapterId={chapter.chapterId}
             chapterIndex={index + 1}
           />

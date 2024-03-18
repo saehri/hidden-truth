@@ -38,6 +38,15 @@ const ImageGuesserContent = memo(
           gameState === 'paused' ? 'brightness-0' : 'brightness-100'
         )}
       >
+        {gameData.clue.length && (
+          <motion.div
+            variants={animations.popUp}
+            className='text-slate-50 text-xs sm:text-sm'
+          >
+            CLUE: {gameData.clue}
+          </motion.div>
+        )}
+
         <ImageViewer imageLink={gameData.imageLink} />
         <AnswerInput
           questionAnswer={gameData.answer}
@@ -162,7 +171,7 @@ function ImageViewer({imageLink}: ImageViewerTypes) {
       <div className='pt-[calc((9/20)*100%)] relative border border-slate-50/10 bg-slate-600/50'>
         <motion.img
           variants={animations.scaleUp}
-          className='absolute top-0 left-0 w-full h-full object-cover'
+          className='absolute top-0 left-0 w-full h-full object-cover  object-center'
           src={imageLink}
           alt=''
         />

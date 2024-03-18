@@ -38,13 +38,15 @@ export default function StorylineDetailChapterCard({
             gameId={game.id}
             gamePosition={game.gamePosition}
           >
-            <CardHeader />
+            <CardHeader gameName={game.gameName} />
+
             <CardContent>
               <CardDescription
                 chapterIndex={chapterIndex}
                 index={index + 1}
                 gameType={game.type}
                 synopsis={game.synopsis}
+                difficulty={game.difficulty}
               />
 
               <div className='flex justify-between items-end p-2 border-b border-primary/50'>
@@ -53,9 +55,8 @@ export default function StorylineDetailChapterCard({
                   gameId={game.id}
                   gameType={game.type}
                   gameDifficulty={game.difficulty}
-                  chapterName={game.chapterName}
+                  gameName={game.gameName}
                   hasOpeningDialog={game.hasOpeningDialog}
-                  dialogId={game.openingDialogId}
                   isFinalGame={game.isFinalGame}
                   chapterId={chapterId}
                 />
@@ -78,12 +79,14 @@ type CardDescriptionTypes = {
   index: number;
   chapterIndex: number;
   synopsis: string;
+  difficulty: 'easy' | 'medium' | 'hard';
 };
 function CardDescription({
   gameType,
   index,
   chapterIndex,
   synopsis,
+  difficulty,
 }: CardDescriptionTypes) {
   const gameTypes: Record<GameTypes, string> = {
     RD: 'LAPOR DISINFORMASI',
@@ -93,17 +96,23 @@ function CardDescription({
   return (
     <div className='p-2 flex-1'>
       <div className='grid grid-cols-[32px,_1fr] gap-2'>
-        <div className='w-full aspect-square bg-primary flex justify-center pt-1'>
-          {/* <Icons.GameController className='w-7 h-6' /> */}
-        </div>
+        <div className='w-full aspect-square bg-primary flex justify-center pt-1'></div>
 
-        <div className='w-full'>
+        <div className='w-full grid grid-cols-[1fr,_max-content]'>
           <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
             GAME
           </span>
 
-          <p className='font-body text-slate-300 text-sm'>
+          <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
+            DIFFICULTY
+          </span>
+
+          <p className='font-body text-slate-300 text-sm tracking-tight'>
             {gameTypes[gameType]}
+          </p>
+
+          <p className='font-body text-slate-300 text-sm uppercase tracking-tight'>
+            {difficulty}
           </p>
         </div>
       </div>
@@ -121,12 +130,20 @@ function CardDescription({
         </div>
 
         <div className='w-full pt-3'>
-          <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
-            SYNOPSIS
-          </span>
+          {synopsis.length ? (
+            <span className='bg-slate-50/20 font-body text-xs px-1 text-slate-50 block w-max mb-1'>
+              REPORT
+            </span>
+          ) : (
+            <></>
+          )}
 
-          <p className='font-body text-slate-300 uppercase text-xs'>
+          <p className='font-body text-xs text-slate-300 uppercase group-[.hide]:hidden'>
             {synopsis}
+          </p>
+
+          <p className='font-body text-xs text-slate-300 uppercase group-[.show]:hidden'>
+            (selesaikan tugas untuk melihat synopsis)
           </p>
         </div>
       </div>
@@ -163,11 +180,13 @@ function CardWrapper({
   );
 
   // shows wether the player already played the game or not
-  const isCompleted = charProgress?.gamePlayedList.includes(gameId);
+  // const isCompleted = charProgress?.gamePlayedList.includes(gameId);
   // shows wether the game is ready to be played or not
-  const isUnlocked = isCompleted
-    ? true
-    : charProgress?.gamePlayedList.length === gamePosition;
+  // const isUnlocked = isCompleted
+  //   ? true
+  //   : charProgress?.gamePlayedList.length === gamePosition;
+  const isUnlocked = true;
+  const isCompleted = true;
 
   return (
     <motion.div
@@ -175,8 +194,9 @@ function CardWrapper({
       whileInView={animation.whileInView}
       viewport={{once: true, amount: 'some'}}
       className={twMerge(
-        'w-72',
-        isUnlocked ? 'brightness-100' : 'brightness-50 pointer-events-none'
+        'w-[300px] group',
+        isUnlocked ? 'brightness-100' : 'brightness-50 pointer-events-none',
+        isCompleted ? 'show' : 'hide'
       )}
     >
       <div className='pt-[calc((4/3)*100%)] relative'>
@@ -202,7 +222,7 @@ type CardCTATypes = {
   gameId: string;
   gameType: GameTypes;
   gameDifficulty: GameDifficultyTypes;
-  chapterName: string;
+  gameName: string;
   hasOpeningDialog: boolean;
   dialogId?: string;
   isFinalGame: boolean;
@@ -213,7 +233,7 @@ function CardCTA({
   gameId,
   gameType,
   gameDifficulty,
-  chapterName,
+  gameName,
   hasOpeningDialog,
   isFinalGame,
   chapterId,
@@ -231,7 +251,7 @@ function CardCTA({
         gameType,
         isFinalGame,
         gameDifficulty,
-        chapterName,
+        gameName,
         chapterId,
         ...activePage.state,
       },
@@ -242,12 +262,12 @@ function CardCTA({
     <button
       disabled={(characterController.character?.energy.current as number) === 0}
       onClick={goToGamePage}
-      className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium disabled:opacity-50 disabled:pointer-events-none text-sm py-1 w-24 hover:w-28 transition-[width] border-x border-yellow-600'
+      className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium disabled:opacity-50 disabled:pointer-events-none text-sm py-1 w-20 hover:w-24 transition-[width] border-x border-yellow-600'
       style={{
         clipPath: 'polygon(100% 0, 100% 78%, 94% 100%, 0 100%, 0 0)',
       }}
     >
-      <span className='leading-3'>SELIDIKI</span>
+      <span className='leading-3'>MAIN</span>
     </button>
   );
 }
@@ -274,7 +294,9 @@ function CardRewardGrid({rewards}: CardRewardGridTypes) {
 }
 
 /* ----------------- CARD HEADER */
-function CardHeader() {
+type CardHeaderProps = {gameName: string};
+
+function CardHeader({gameName}: CardHeaderProps) {
   return (
     <div className='p-2 border-b border-slate-50/40 border-dashed'>
       <div className='flex justify-between mb-2'>
@@ -285,8 +307,10 @@ function CardHeader() {
 
       <div className='flex gap-2'>
         <div className='bg-primary w-8 h-8'></div>
-        <div className='font-body text-slate-50 bg-primary flex-1 flex items-center px-3 text-sm'>
-          KARTU TUGAS
+        <div className='font-body text-slate-50 bg-primary flex-1 flex items-center px-2 text-sm overflow-hidden'>
+          <span className='w-max whitespace-nowrap tracking-tight'>
+            {gameName}
+          </span>
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ const tutorialText: string[] = [
 ];
 
 export default function ImageGuesser() {
-  const customDuration = {easy: 120, medium: 100, hard: 80};
+  const customDuration = {easy: 50, medium: 40, hard: 30};
   const gameController = useGameController({customDuration});
   const {
     gameData,

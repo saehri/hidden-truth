@@ -2,7 +2,7 @@ import {DialogSequenceTypes, DialogTypes} from '..';
 
 const MRDEFACTO_IMAGE =
   'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp';
-const TELEPHONE_IMAGE = '';
+const TELEPHONE_IMAGE = '/images/tele.webp';
 
 const MRDEFACTO_NO_SPEAK: DialogTypes = {
   name: 'Mr Defacto',
@@ -13,7 +13,7 @@ const MRDEFACTO_NO_SPEAK: DialogTypes = {
 };
 const PLAYER_NO_SPEAK: DialogTypes = {
   name: 'username',
-  image: '/avatar/player/female/regular/female avatar default.webp',
+  image: '',
   isSpeaking: false,
   isUser: true,
   hasMultiDialogChoice: false,
@@ -38,7 +38,7 @@ const sequence2: DialogTypes[] = [
   MRDEFACTO_NO_SPEAK,
   {
     name: 'username',
-    image: '/avatar/player/female/regular/female avatar default.webp',
+    image: '',
     isUser: true,
     isSpeaking: true,
     hasMultiDialogChoice: true,
@@ -86,7 +86,7 @@ const sequence4: DialogTypes[] = [
   MRDEFACTO_NO_SPEAK,
   {
     name: 'username',
-    image: '/avatar/player/female/regular/female avatar default.webp',
+    image: '',
     hasMultiDialogChoice: false,
     isSpeaking: true,
     isUser: true,
@@ -120,7 +120,7 @@ const sequence6: DialogTypes[] = [
     isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
-      text: 'Kring.. kring! (Bunyi suara telepon)',
+      text: 'KRINGG!!! KRINGG!!!',
       nextSequence: 'sequence7',
     },
   },
@@ -146,7 +146,7 @@ const sequence8: DialogTypes[] = [
   MRDEFACTO_NO_SPEAK,
   {
     name: 'username',
-    image: '/avatar/player/female/regular/female avatar default.webp',
+    image: '',
     hasMultiDialogChoice: true,
     isSpeaking: true,
     isUser: true,
@@ -173,7 +173,7 @@ const sequence9a: DialogTypes[] = [
     dialogChoice: {
       text: 'Tunggu sebentar ya.',
       isEnding: true,
-      nextSequence: 'end',
+      nextSequence: 'sequence10',
     },
   },
   PLAYER_NO_SPEAK,
@@ -187,16 +187,31 @@ const sequence9b: DialogTypes[] = [
     isUser: false,
     hasMultiDialogChoice: false,
     dialogChoice: {
-      text: '(side eye)',
+      text: '(Gak beres nih anak)',
       isEnding: true,
-      nextSequence: 'end',
+      nextSequence: 'sequence10',
     },
   },
   PLAYER_NO_SPEAK,
 ];
 
+const sequence10: DialogTypes[] = [
+  MRDEFACTO_NO_SPEAK,
+  {
+    name: 'username',
+    image: '',
+    hasMultiDialogChoice: false,
+    isSpeaking: true,
+    isUser: true,
+    dialogChoice: {
+      text: '(Ada yang menghubungi Mr Defacto secara pribadi, sepertinya ada tugas baru dari orang penting)',
+      nextSequence: 'end',
+    },
+  },
+];
+
 const c1g1Dialog: DialogSequenceTypes = {
-  dialogId: 'PEMILU24-SK-C1-1',
+  dialogId: 'PEMILU24-TG-C1-1',
   dialogSequences: {
     sequence1,
     sequence2,
@@ -209,6 +224,7 @@ const c1g1Dialog: DialogSequenceTypes = {
     sequence8,
     sequence9a,
     sequence9b,
+    sequence10,
   },
 };
 

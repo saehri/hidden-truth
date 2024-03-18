@@ -4,6 +4,7 @@ import {twMerge} from 'tailwind-merge';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 
 import EnergyBar from './EnergyBar';
+import MoneyBar from './MoneyBar';
 
 export default function GameUserEnergyAndMoneyBarWrapper() {
   const {activePage} = useContext(ActivePageContext);
@@ -21,6 +22,7 @@ export default function GameUserEnergyAndMoneyBarWrapper() {
       <div className='pt-1 w-max'>
         <div className='grid grid-cols-[max-content,_1fr] gap-6'>
           <EnergyBar />
+          <MoneyBar />
         </div>
       </div>
     </motion.div>

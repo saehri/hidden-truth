@@ -79,9 +79,13 @@ function GameInformationBar() {
         </div>
 
         <div>
-          <span className='text-[10px] text-slate-300 bg-slate-50/10 px-2 mb-1 w-max block border-x border-slate-50'>
-            COMPLETED/TOTAL
-          </span>
+          <div className='text-[10px] text-slate-300 bg-slate-50/10 px-2 mb-1 w-max border-x border-slate-50 flex'>
+            <span>COMPLETED</span>
+            <span className='hidden sm:block ml-1'>CHAPTER</span>
+            <span>/</span>
+            <span>TOTAL</span>
+            <span className='hidden sm:block ml-1'>CHAPTER</span>
+          </div>
           <p className='text-right'>
             {currentProgress?.finishedChapterCount}/
             {currentProgress?.totalChapter}

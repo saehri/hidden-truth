@@ -4,7 +4,6 @@ import {twMerge} from 'tailwind-merge';
 import {DialogChoiceTypes, DialogTypes} from '../../database/dialogs';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import useCharacterController from '../../services/controller/characterController';
-import TextGenerateEffect from './TextGenerateEffect';
 
 interface Dialog {
   dialogSquences: Record<string, DialogTypes[]>;
@@ -109,28 +108,6 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
   );
 }
 
-function CornerDots() {
-  return (
-    <>
-      {/* RECTANGLE */}
-      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -left-1 w-2 h-2' />
-      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -right-1 w-2 h-2' />
-      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -left-1 w-2 h-2' />
-      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -right-1 w-2 h-2' />
-
-      {/* CORNER LINE */}
-      <span className='border-t border-l border-slate-50 absolute top-0 left-0 w-5 h-5' />
-      <span className='border-t border-r border-slate-50 absolute top-0 right-0 w-5 h-5' />
-      <span className='border-b border-l border-slate-50 absolute bottom-0 left-0 w-5 h-5' />
-      <span className='border-b border-r border-slate-50 absolute bottom-0 right-0 w-5 h-5' />
-
-      {/* MIDDLE T & B LINE */}
-      <span className='absolute -top-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
-      <span className='absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
-    </>
-  );
-}
-
 type CharacterNameIndicatorProps = {
   charaterName: string;
   position: 'left' | 'right';
@@ -169,10 +146,10 @@ function CharacterImageRendrer({
   return (
     <div
       className={twMerge(
-        'absolute bottom-0 w-full max-w-[70%] sm:max-w-80 md:max-w-96 lg:max-w-[450px] pointer-events-none',
+        'absolute bottom-0 w-full max-w-[70%] transition-transform sm:max-w-80 md:max-w-96 lg:max-w-[450px] pointer-events-none',
         isActive
-          ? 'brightness-100 z-30'
-          : 'opacity-0 sm:opacity-100 brightness-[.2]',
+          ? 'brightness-100 z-30 scale-100'
+          : 'opacity-0 sm:opacity-100 brightness-[.2] scale-90',
         position === 'left' ? 'left-0' : 'right-0'
       )}
     >
@@ -245,12 +222,9 @@ function DialogSequenceTextRenderer({
 
   return (
     <div className='flex flex-col gap-4'>
-      <TextGenerateEffect
-        words={
-          dialogChoice?.text.replaceAll('username', characterName) as string
-        }
-        className='text-slate-50 text-xs sm:text-sm font-normal leading-tight'
-      />
+      <div className='text-slate-50 text-xs sm:text-sm font-normal leading-tight'>
+        {dialogChoice?.text.replaceAll('username', characterName) as string}
+      </div>
 
       <button
         onClick={() =>
@@ -265,5 +239,27 @@ function DialogSequenceTextRenderer({
         <span className='w-1 h-1 xs:w-2 xs:h-2 bg-slate-50 rotate-45 group-hover:animate-pulse shrink-0' />
       </button>
     </div>
+  );
+}
+
+function CornerDots() {
+  return (
+    <>
+      {/* RECTANGLE */}
+      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -left-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -top-1 -right-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -left-1 w-2 h-2' />
+      <span className='border border-slate-50 absolute bg-slate-50 -bottom-1 -right-1 w-2 h-2' />
+
+      {/* CORNER LINE */}
+      <span className='border-t border-l border-slate-50 absolute top-0 left-0 w-5 h-5' />
+      <span className='border-t border-r border-slate-50 absolute top-0 right-0 w-5 h-5' />
+      <span className='border-b border-l border-slate-50 absolute bottom-0 left-0 w-5 h-5' />
+      <span className='border-b border-r border-slate-50 absolute bottom-0 right-0 w-5 h-5' />
+
+      {/* MIDDLE T & B LINE */}
+      <span className='absolute -top-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
+      <span className='absolute -bottom-[2px] left-1/2 -translate-x-1/2 w-full max-w-[calc(40%)] h-1 bg-slate-50/50' />
+    </>
   );
 }

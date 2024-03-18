@@ -9,7 +9,6 @@ import BlinkingRedLayer from '../../ui/BlinkingRedLayer';
 import GameHeader from '../GameHeader';
 
 const tutorialText = [
-  'Kamu benar - benar luar biasa! Kamu bisa bertahan sejauh ini, sangat hebat sekali',
   'Di misi kali ini kamu akan diberikan beberapa postingan sosial media',
   'Tugasmu adalah untuk mengidentifikasi kategori disinformasi yang ada pada postingan tersebut',
   'Jika kamu gagal menebak kategori disinformasi yang ada dalam suatu postingan, maka nyawamu akan berkurang sejumlah kategori yang salah kamu tebak',
@@ -27,7 +26,7 @@ const ReportDisinformationGame = memo(() => {
     playerLife,
     reducePlayerLife,
   } = useGameController({
-    customDuration: {easy: 5000, hard: 5000, medium: 5000},
+    customDuration: {easy: 180, medium: 170, hard: 160},
     initialLife: 5,
   });
 

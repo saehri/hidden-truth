@@ -5,7 +5,7 @@ const pemilu24ReportDisinformationGameData: Record<
   string,
   ReportDisinformationGameDataTypes
 > = {
-  'PEMILU24-RD-C1-2': {
+  'PEMILU24-RD-C1-5': {
     hasTutorial: true,
     rewards: reportDisinformationRewardsList.game1,
     totalDisinformationCategory: 3,

@@ -21,7 +21,7 @@ const GameHeader = memo(({playerLife}: GameHeaderTypes) => {
   const {activePage} = useContext(ActivePageContext);
 
   const playerLifes = Array(playerLife).fill(1);
-  const chapterName: string = activePage.state?.chapterName as string;
+  const gameName: string = activePage.state?.gameName as string;
   const gameDifficulty: GameDifficultyTypes = activePage.state
     ?.gameDifficulty as GameDifficultyTypes;
   const gameType: string = gameTypes[activePage.state?.gameType as GameTypes];
@@ -46,7 +46,7 @@ const GameHeader = memo(({playerLife}: GameHeaderTypes) => {
           className='overflow-hidden'
         >
           <p className='tracking-tighter flex gap-2 lg:backdrop-blur-sm uppercase text-slate-300 bg-slate-600/40 w-max p-1 text-sm pr-6 mb-1'>
-            <span className='hidden sm:block'>{chapterName}</span>
+            <span className='hidden sm:block'>{gameName}</span>
             <span className='hidden sm:block'>|</span>
             <span>{gameType}</span>
           </p>

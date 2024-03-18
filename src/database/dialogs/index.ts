@@ -1,4 +1,3 @@
-import {StorylineIdTypes, StorylineTypes} from '../../services/utils/types';
 import SSPemilu24DialogList from './ssPemilu24';
 
 /* TYPES */
@@ -23,6 +22,6 @@ export type DialogSequenceTypes = {
   dialogSequences: Record<string, DialogTypes[]>;
 };
 
-export function getDialog() {
-  return SSPemilu24DialogList;
+export function getDialog(gameId: string) {
+  return SSPemilu24DialogList.filter((s) => s.dialogId === gameId);
 }
