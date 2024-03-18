@@ -22,7 +22,7 @@ export default function GameUserEnergyAndMoneyBarWrapper() {
       <div className='pt-1 w-max'>
         <div className='grid grid-cols-[max-content,_1fr] gap-6'>
           <EnergyBar />
-          <MoneyBar />
+          {/* <MoneyBar /> */}
         </div>
       </div>
     </motion.div>
