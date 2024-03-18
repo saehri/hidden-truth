@@ -1,7 +1,5 @@
 import {GameTypes, StorylineIdTypes} from '../../services/utils/types';
-import pemilu24GuessThePersonData from './guessThePerson/pemilu24GuessThePerson';
 import pemilu24ImageGuesserData from './imageGuesser/pemilu24ImageGuesserData';
-import pemilu24MultipleChoiceGameData from './multipleChoice/pemilu24MultipleChoiceGameData';
 import pemilu24ReportDisinformationGameData from './reportDisinformation/pemilu24ReportDisinformationGameData';
 
 type GameDataByCategoryTypes = Record<
