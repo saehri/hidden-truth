@@ -24,10 +24,10 @@ const chapterRewards: RewardTypes[] = [
 ];
 
 export const imageGuesserRewardsList: Record<string, RewardTypes[]> = {
-  game1: [{id: 'small_money_bag', label: 'Small money bag (+100)', image: ''}],
+  game1: [],
 };
 export const reportDisinformationRewardsList: Record<string, RewardTypes[]> = {
-  game1: [{id: 'small_money_bag', label: 'Small money bag (+100)', image: ''}],
+  game1: [],
 };
 
 const SSPemilu24: StorylineDataTypes = {
@@ -41,7 +41,7 @@ const SSPemilu24: StorylineDataTypes = {
     'Retas konspirasi organisasi gelap yang mengganggu pemilihan umum, pecahkan teka-teki, dan ungkap kebenaran dalam game detektif yang mendebarkan ini',
   playableChapter: [
     {
-      gameName: 'Chapter 1 - The Governer',
+      gameName: 'Chapter 1 - Kasus Pertama',
       chapterId: 'PEMILU-24-1',
       games: [
         {
@@ -98,16 +98,88 @@ const SSPemilu24: StorylineDataTypes = {
         {
           id: 'PEMILU24-RD-C1-5',
           type: 'RD',
-          name: 'Sang Peniru',
-          hasOpeningDialog: false,
+          name: 'Disinformasi 1',
+          hasOpeningDialog: true,
           difficulty: 'hard',
           gamePosition: 4,
-          gameName: 'CH 1.5 - SANG PENIRU',
+          gameName: 'CH 1.5 - DISINFORMASI 1',
+          rewards: imageGuesserRewardsList.game1,
+          synopsis:
+            'CATATAN: Disinformasi di sosial media biasanya berupa postingan yang berisi klaim tanpa bukti dan/atau sumber terpecaya.',
+          isFinalGame: true,
+        },
+      ],
+    },
+    {
+      gameName: 'Chapter 2 - Kasus Kedua',
+      chapterId: 'PEMILU24-2',
+      games: [
+        {
+          id: 'PEMILU24-TG-C2-1',
+          type: 'TG',
+          name: 'Berita Kerusuhan',
+          hasOpeningDialog: true,
+          difficulty: 'easy',
+          gamePosition: 5,
+          gameName: 'CH 2.1 - BERITA KERUSUHAN',
           rewards: imageGuesserRewardsList.game1,
           synopsis: '',
           isFinalGame: false,
         },
+        {
+          id: 'PEMILU24-TG-C2-2',
+          type: 'TG',
+          name: 'Berita Kerusuhan',
+          hasOpeningDialog: true,
+          difficulty: 'easy',
+          gamePosition: 6,
+          gameName: 'CH 2.2 - BERITA KERUSUHAN',
+          rewards: imageGuesserRewardsList.game1,
+          synopsis: '',
+          isFinalGame: false,
+        },
+        {
+          id: 'PEMILU24-TG-C2-3',
+          type: 'TG',
+          name: 'Berita Kerusuhan',
+          hasOpeningDialog: true,
+          difficulty: 'easy',
+          gamePosition: 7,
+          gameName: 'CH 2.3 - BERITA KERUSUHAN',
+          rewards: imageGuesserRewardsList.game1,
+          synopsis: '',
+          isFinalGame: false,
+        },
+        {
+          id: 'PEMILU24-TG-C2-4',
+          type: 'TG',
+          name: 'Berita Kerusuhan',
+          hasOpeningDialog: true,
+          difficulty: 'easy',
+          gamePosition: 8,
+          gameName: 'CH 2.4 - BERITA KERUSUHAN',
+          rewards: imageGuesserRewardsList.game1,
+          synopsis: '',
+          isFinalGame: false,
+        },
+        {
+          id: 'PEMILU24-TG-C2-5',
+          type: 'TG',
+          name: 'Berita Kerusuhan',
+          hasOpeningDialog: true,
+          difficulty: 'easy',
+          gamePosition: 9,
+          gameName: 'CH 2.5 - BERITA KERUSUHAN',
+          rewards: imageGuesserRewardsList.game1,
+          synopsis: '',
+          isFinalGame: true,
+        },
       ],
+    },
+    {
+      gameName: 'more coming soon',
+      chapterId: 'PEMILU24-3',
+      games: [],
     },
   ],
 };

@@ -76,17 +76,19 @@ export default function InGameCountdown({
         onComplete={() => setGameState('gameOver')}
       />
 
-      <motion.button
-        initial={{y: 50, opacity: 0}}
-        animate={{y: 0, opacity: 1}}
-        transition={{damping: 50, delay: 1}}
-        onClick={() => setGameState('paused')}
-        disabled={isCompleted()}
-        className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 xl:right-auto
+      {gameState !== 'preparation' && (
+        <motion.button
+          initial={{y: 50, opacity: 0}}
+          animate={{y: 0, opacity: 1}}
+          transition={{damping: 50, delay: 1}}
+          onClick={() => setGameState('paused')}
+          disabled={isCompleted()}
+          className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 xl:right-auto
          xl:left-5 xl:bottom-auto xl:top-32 z-[80] w-8 h-8 bg-orange-400/50 border border-orange-500 grid place-items-center hover:opacity-50'
-      >
-        <Icons.TimerPause fill='rgb(254 215 170)' />
-      </motion.button>
+        >
+          <Icons.TimerPause fill='rgb(254 215 170)' />
+        </motion.button>
+      )}
 
       <PauseGameModal
         modalState={gameState === 'paused'}

@@ -30,7 +30,7 @@ export default function StorylineDetailPage() {
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         src={homepageBackground}
-        className='w-full h-full object-cover brightness-[.1] sm:brightness-[.3] absolute top-0 left-0 z-0'
+        className='w-full h-full object-cover brightness-[.1] absolute top-0 left-0 z-0'
         alt=''
       />
     </section>

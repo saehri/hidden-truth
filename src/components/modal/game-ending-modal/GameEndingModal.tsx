@@ -63,7 +63,7 @@ export default function GameEndingModal({
             {description}
           </p>
 
-          {status === 'completed' && (
+          {status === 'completed' && gameRewards.length > 0 && (
             <RewardsContainer gameRewards={gameRewards} />
           )}
 

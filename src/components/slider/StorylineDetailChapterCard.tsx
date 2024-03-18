@@ -201,7 +201,7 @@ function CardWrapper({
     >
       <div className='pt-[calc((4/3)*100%)] relative'>
         <div
-          className='absolute w-full h-full top-0 left-0 bg-primary/30 flex flex-col border-x border-primary sm:backdrop-blur-sm'
+          className='absolute w-full h-full top-0 left-0 bg-primary/60 flex flex-col border-x border-primary sm:backdrop-blur-sm'
           style={{clipPath}}
         >
           {children}
@@ -278,7 +278,9 @@ type CardRewardGridTypes = {rewards: RewardTypes[]};
 function CardRewardGrid({rewards}: CardRewardGridTypes) {
   return (
     <div>
-      <p className='text-xs text-slate-50/70'>REWARDS</p>
+      {rewards.length > 0 && (
+        <p className='text-xs text-slate-50/70'>REWARDS</p>
+      )}
 
       <div className='flex items-center gap-1'>
         {rewards.map((reward) => (
@@ -321,9 +323,9 @@ function CardHeader({gameName}: CardHeaderProps) {
 function ChapterSeparator({children}: {children: React.ReactNode}) {
   return (
     <div className='w-16 rotate-180 grid place-items-center'>
-      <div className='h-[85%] grid place-items-center bg-slate-50/10 hover:bg-slate-50/20 p-2 py-4 border-y border-slate-50/60'>
+      <div className='h-full grid place-items-center bg-slate-50/10 hover:bg-slate-50/20 p-2 py-4 border-y border-slate-50/60'>
         <h4
-          className='uppercase w-max font-body font-bold text-sm text-slate-50'
+          className='uppercase w-max whitespace-nowrap font-body font-bold text-sm text-slate-50'
           style={{
             WebkitWritingMode: 'vertical-rl',
           }}

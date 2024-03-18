@@ -221,11 +221,11 @@ function ReportResultCard({
       : 'bg-slate-200';
 
   return (
-    <div className={twMerge('p-2 sm:w-max h-max flex gap-2', cardColor)}>
+    <div className={twMerge('p-2 h-max flex gap-2', cardColor)}>
       <div className='flex flex-col gap-1'>
         <ReportCardHeader isCorrect={isCorrect} selected={selected} />
 
-        <h4 className='font-bold mb-1 text-sm pl-1'>{label}</h4>
+        <h4 className='font-bold text-sm'>{label}</h4>
 
         {selected && isCorrect && (
           <span className='empty:hidden text-xs'>{reason}</span>
