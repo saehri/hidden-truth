@@ -29,10 +29,6 @@ export default function MoneyBar() {
           {moneyCount}
         </motion.span>
       </div>
-
-      <button className='bg-yellow-400/40 rounded-full w-5 h-5 grid shrink-0 place-items-center border border-yellow-500'>
-        <Icons.AddAlt className='w-[12px] h-[12px]' />
-      </button>
     </div>
   );
 }

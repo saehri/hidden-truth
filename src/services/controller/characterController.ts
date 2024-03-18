@@ -71,7 +71,7 @@ export default function useCharacterController() {
         console.error(error.response.data);
       }
     },
-    reduceEnergy: async (amount: number) => {
+    reduceEnergy: (amount: number) => {
       try {
         const currentEnergy = character?.energy.current as number;
         if (currentEnergy - amount > -1) {
@@ -89,9 +89,22 @@ export default function useCharacterController() {
         console.error(error.message);
       }
     },
-    addEnergy: async (amount: number) => {
+    addEnergy: (amount: number) => {
       try {
         const currentEnergy = character?.energy.current as number;
+        if (currentEnergy + amount >= 11) {
+          const editedCharacterData = {
+            ...character,
+            energy: {current: 10, isFilling: false},
+          };
+
+          characterStore.setState({
+            character: editedCharacterData as CharacterTypes,
+          });
+
+          return;
+        }
+
         if (currentEnergy + amount > -1) {
           const newEnergyAmount = currentEnergy + amount;
           const editedCharacterData = {

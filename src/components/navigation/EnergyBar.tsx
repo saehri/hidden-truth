@@ -1,3 +1,4 @@
+import {memo} from 'react';
 import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 
@@ -5,10 +6,10 @@ import useCharacterController from '../../services/controller/characterControlle
 
 import Icons from '../ui/Icons';
 
-export default function EnergyBar() {
+const EnergyBar = memo(() => {
+  const energyBars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const characterController = useCharacterController();
   const energyCount = characterController.character?.energy.current as number;
-  const energyBars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <div className='p-1 px-2 flex items-center overflow-hidden'>
@@ -42,10 +43,8 @@ export default function EnergyBar() {
           ></motion.div>
         ))}
       </motion.div>
-
-      <button className='bg-yellow-400/40 rounded-full w-5 h-5 grid shrink-0 place-items-center border border-yellow-500'>
-        <Icons.AddAlt className='w-[12px] h-[12px]' />
-      </button>
     </div>
   );
-}
+});
+
+export default EnergyBar;

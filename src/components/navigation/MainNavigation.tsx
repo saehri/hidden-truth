@@ -1,4 +1,5 @@
 import SettingDialog from '../modal/setting-modal/SettingDialog';
+import AddEnergyCD from './AddEnergyCountdown';
 import MainMenu from './MainMenu';
 import GameUserEnergyAndMoneyBar from './UserEnergyAndMoneyBar';
 
@@ -10,6 +11,7 @@ export default function MainNavigation() {
         <SettingDialog />
 
         <MainMenu />
+        <AddEnergyCD />
       </div>
     </header>
   );
