@@ -143,7 +143,7 @@ function CardDescription({
           </p>
 
           <p className='font-body text-xs text-slate-300 uppercase group-[.show]:hidden'>
-            (selesaikan tugas untuk melihat synopsis)
+            (selesaikan tugas untuk melihat laporan)
           </p>
         </div>
       </div>
