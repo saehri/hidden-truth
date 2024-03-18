@@ -195,9 +195,10 @@ const sequence11: DialogTypes[] = [
 ];
 
 const sequence12: DialogTypes[] = [
+  GOVERNOR_NO_SPEAK,
   {
-    name: 'Wali Kota',
-    image: GOVERNER_IMAGE,
+    name: 'Mr Defacto',
+    image: MRDEFACTO_IMAGE,
     isSpeaking: true,
     isUser: false,
     hasMultiDialogChoice: false,
@@ -206,7 +207,6 @@ const sequence12: DialogTypes[] = [
       nextSequence: 'sequence13',
     },
   },
-  MRDEFACTO_NO_SPEAK,
 ];
 
 const sequence13: DialogTypes[] = [

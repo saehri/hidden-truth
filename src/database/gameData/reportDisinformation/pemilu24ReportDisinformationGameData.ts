@@ -107,7 +107,7 @@ const pemilu24ReportDisinformationGameData: Record<
         postAuthor: {
           authorName: 'Raflesia Arnoldy',
           authorProfileImage:
-            'https://www.dropbox.com/scl/fi/a045frr1f1w02lksbr99l/profile-image-postID-2.webp?rlkey=a7blttmj0w2t2g12d9nwtvgw6&ram=1',
+            'https://www.dropbox.com/scl/fi/a045frr1f1w02lksbr99l/profile-image-postID-2.webp?rlkey=a7blttmj0w2t2g12d9nwtvgw6&raw=1',
           authorUsername: '@raflesiarnoldy',
           authorBio:
             'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil iste hic in, odio voluptate molestiae.',

@@ -180,11 +180,13 @@ function CardWrapper({
   );
 
   // shows wether the player already played the game or not
-  const isCompleted = charProgress?.gamePlayedList.includes(gameId);
+  // const isCompleted = charProgress?.gamePlayedList.includes(gameId);
   // shows wether the game is ready to be played or not
-  const isUnlocked = isCompleted
-    ? true
-    : charProgress?.gamePlayedList.length === gamePosition;
+  // const isUnlocked = isCompleted
+  //   ? true
+  //   : charProgress?.gamePlayedList.length === gamePosition;
+  const isUnlocked = true;
+  const isCompleted = true;
 
   return (
     <motion.div

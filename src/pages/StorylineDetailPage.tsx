@@ -23,6 +23,20 @@ export default function StorylineDetailPage() {
         <StorylineDetailChapterCardSlider />
       </div>
 
+      <div
+        className='absolute top-4 left-4 hidden lg:block p-2 text-[10px] max-w-52 z-50 border-l border-slate-50 text-white bg-slate-600/40'
+        style={{
+          clipPath: 'polygon(0 0, 100% 0, 100% 93%, 93% 100%, 0 100%, 0% 50%)',
+        }}
+      >
+        <p className='mb-3 font-semibold text-xs'>Kontrol Navigasi:</p>
+
+        <p className='text-slate-50/60'>
+          Gunakanan "Shift" + "Mousewheel" atau tekan "Panah Kiri" atau "Panah
+          Kanan" untuk bernavigasi
+        </p>
+      </div>
+
       {/* DECORATION */}
       <Lines />
 
