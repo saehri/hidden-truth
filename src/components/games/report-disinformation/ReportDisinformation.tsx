@@ -1,55 +1,59 @@
-import React, {memo} from 'react';
+import {memo, useEffect, useState} from 'react';
 import {motion} from 'framer-motion';
 
-import {ReportDisinformationGameDataTypes} from '../../../services/utils/types';
+import {GameStateTypes, RDPostTypes} from '../../../services/utils/types';
 import ReportDisinformationPost from './ReportDisinformationPost';
+import {twMerge} from 'tailwind-merge';
 
 interface ReportDisinformation {
-  gameData: ReportDisinformationGameDataTypes[];
+  posts: RDPostTypes[];
+  gameState: GameStateTypes;
+  reducePlayerLife: (x: number) => void;
+  totalDisinformation: number;
+  setGameState: (state: GameStateTypes) => void;
 }
 
-const ReportDisinformation = memo(({gameData}: ReportDisinformation) => {
-  return (
-    <motion.section
-      initial={{opacity: 0}}
-      animate={{opacity: 1}}
-      className='h-full grid place-items-center p-4 py-0 overflow-hidden'
-    >
-      <PhoneFrame>
-        <div className='h-max pb-16'>
-          <Header />
+const ReportDisinformation = memo(
+  ({
+    posts,
+    gameState,
+    reducePlayerLife,
+    totalDisinformation,
+    setGameState,
+  }: ReportDisinformation) => {
+    const [disinformationCount] = useState<number>(totalDisinformation);
+    const [userCorrectAnswerCount, setUserCorrectAnswerCount] =
+      useState<number>(0);
 
-          <div>
-            {gameData.map((data) => (
-              <ReportDisinformationPost key={data.postId} {...data} />
-            ))}
-          </div>
+    useEffect(() => {
+      if (userCorrectAnswerCount === disinformationCount) {
+        setGameState('completed');
+      }
+    }, [userCorrectAnswerCount]);
+
+    return (
+      <motion.section
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        className={twMerge(
+          'h-max grid place-items-center overflow-hidden transition-all',
+          gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+        )}
+      >
+        <div className='flex flex-col gap-4 pb-36 lg:pb-14 p-2 lg:p-0'>
+          {posts.map((data, index) => (
+            <ReportDisinformationPost
+              index={index + 1}
+              key={data.postId}
+              reducePlayerLife={reducePlayerLife}
+              setUserCorrectAnswerCount={setUserCorrectAnswerCount}
+              {...data}
+            />
+          ))}
         </div>
-      </PhoneFrame>
-    </motion.section>
-  );
-});
+      </motion.section>
+    );
+  }
+);
 
 export default ReportDisinformation;
-
-function Header() {
-  return (
-    <div className='border-y border-slate-200 flex p-4 items-center justify-between'>
-      <div className='w-10 h-10 rounded-full bg-slate-300'></div>
-      <div className='w-10 h-10 rounded-full bg-slate-300'></div>
-      <div className='w-10 h-10 rounded-full bg-slate-300'></div>
-    </div>
-  );
-}
-
-function PhoneFrame({children}: {children: React.ReactNode}) {
-  return (
-    <div className='w-full h-full relative max-w-80 lg:max-w-[450px] bg-slate-950 rounded-[5rem] rounded-bl-none rounded-br-none p-2 lg:p-4 pb-0 lg:pb-0 overflow-hidden'>
-      <div className='bg-slate-50 h-full hideScrollbar rounded-[calc(5rem-16px)] pt-14 rounded-bl-none rounded-br-none overflow-y-auto'>
-        {children}
-
-        <div className='absolute w-[25%] h-8 rounded-full bg-slate-950 top-8 left-1/2 -translate-x-1/2'></div>
-      </div>
-    </div>
-  );
-}

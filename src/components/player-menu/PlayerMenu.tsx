@@ -1,4 +1,4 @@
-import {memo, useEffect, useState} from 'react';
+import {memo, useContext, useEffect, useState} from 'react';
 import {AnimatePresence} from 'framer-motion';
 
 import Icons from '../ui/Icons';
@@ -7,9 +7,13 @@ import PlayerMenuModal from './player-menu-modal/PlayerMenuModal';
 import useUserController from '../../services/controller/userController';
 import useCharacterController from '../../services/controller/characterController';
 
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
+
 const PlayerMenu = memo(function () {
   const [isCardOpen, setCardOpen] = useState<boolean>(false);
-  const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
+  const {activePage} = useContext(ActivePageContext);
+
+  const isHidden = activePage.location !== 'homepage';
 
   const userController = useUserController();
   const characterController = useCharacterController();
@@ -20,8 +24,13 @@ const PlayerMenu = memo(function () {
 
   return (
     <>
-      <Button onClick={() => setCardOpen(!isCardOpen)}>
-        <Icons.User className={buttonIconSizes} />
+      <Button
+        className={
+          isHidden ? 'hidden' : 'block bg-transparent border-none w-max h-max'
+        }
+        onClick={() => setCardOpen(true)}
+      >
+        <Icons.User />
       </Button>
 
       <AnimatePresence>

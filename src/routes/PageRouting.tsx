@@ -11,14 +11,16 @@ import {ErrorBoundary} from 'react-error-boundary';
 import AppLayout from '../layouts/AppLayout';
 import Homepage from '../pages/Homepage';
 import GamePage from '../pages/GamePage';
-import EpisodeTypeSelectionPage from '../pages/StorylineTypeSelectionPage';
-import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 import StorylineDetailPage from '../pages/StorylineDetailPage';
 import DialogPage from '../pages/DialogPage';
 import SignupPage from '../pages/SignupPage';
 import SigninPage from '../pages/SigninPage';
 import useUserController from '../services/controller/userController';
 import GlobalErrorBoundary from '../components/ui/GlobalErrorBoundary';
+import StorylineSelectionPage from '../pages/StorylineSelectionPage';
+import PrologPage from '../pages/PrologPage';
+import StartPage from '../pages/StartPage';
+import useCharacterProgressController from '../services/controller/characterProgressController';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -86,14 +88,15 @@ function PageViewer() {
   // }, [activePage.location]);
 
   const PAGES: Record<ViewablePageTypes, React.ReactNode> = {
+    startPage: <StartPage />,
     homepage: <Homepage />,
-    storylineTypeSelectionPage: <EpisodeTypeSelectionPage />,
     storylineSelectionPage: <StorylineSelectionPage />,
     storylineDetailPage: <StorylineDetailPage />,
     gamePage: <GamePage />,
     dialogPage: <DialogPage />,
     signupPage: <SignupPage />,
     signinPage: <SigninPage />,
+    prologPage: <PrologPage />,
   };
 
   return PAGES[pageName];

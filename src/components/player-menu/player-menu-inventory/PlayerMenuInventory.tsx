@@ -76,19 +76,19 @@ const filterButtonComponents: {
 }[] = [
   {
     id: 'all',
-    icon: <Icons.Grid className='w-3 h-3 lg:w-4 lg:h-4' />,
+    icon: <Icons.AddAlt className='w-3 h-3 lg:w-4 lg:h-4' />,
     label: 'See all items',
   },
   {
     id: 'energy',
     icon: (
-      <Icons.EnergyBlack className='w-[10px] h-[13px] lg:w-[13px] lg:h-[16px]' />
+      <Icons.EnergyAlt className='w-[10px] h-[13px] lg:w-[13px] lg:h-[16px]' />
     ),
     label: 'See only energy items',
   },
   {
     id: 'money',
-    icon: <Icons.MoneyBlack className='w-4 h-3 lg:w-[19px] lg:h-[15px]' />,
+    icon: <Icons.MoneyAlt className='w-4 h-3 lg:w-[19px] lg:h-[15px]' />,
     label: 'See only consumable money items',
   },
 ];

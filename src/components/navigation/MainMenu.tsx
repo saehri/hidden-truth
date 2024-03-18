@@ -1,27 +1,51 @@
+import {useContext} from 'react';
+import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
+import {motion} from 'framer-motion';
+
 import Icons from '../ui/Icons';
-import Button from '../ui/Button';
-import PlayerMenu from '../player-menu/PlayerMenu';
-import SettingDialog from '../dialog/setting/SettingDialog';
+import {twMerge} from 'tailwind-merge';
+
+const buttons = ['Character', 'Notification', 'Store'];
+const animationVariants = {
+  buttons: {
+    rest: {opacity: 0, x: 50},
+    show: {opacity: 1, x: 0, transition: {damping: 50}},
+  },
+};
 
 export default function MainMenu() {
-  const buttonIconSizes = 'w-4 h-4 lg:w-5 lg:h-5 3xl:w-8 3xl:h-8';
+  const {activePage} = useContext(ActivePageContext);
+  const isInHomepage = activePage.location === 'homepage';
+
+  const isHidden =
+    activePage.location === 'gamePage' || activePage.location === 'dialogPage';
 
   return (
-    <li
-      id='game__user-navigation'
-      className='flex gap-2 sm:gap-4 md:gap-6 xl:gap-8 3xl:gap-12'
+    <nav
+      className={twMerge(
+        'items-center justify-end fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-screen-sm z-50',
+        isHidden ? 'hidden' : 'flex'
+      )}
     >
-      <Button className='sr-only'>
-        <Icons.ShoppingBag className={buttonIconSizes} />
-      </Button>
-
-      <Button className='sr-only'>
-        <Icons.NotificationUnread className={buttonIconSizes} />
-      </Button>
-
-      <PlayerMenu />
-
-      <SettingDialog />
-    </li>
+      <motion.div
+        transition={{staggerChildren: 0.1, delayChildren: 0.5}}
+        initial='rest'
+        animate='show'
+        key={activePage.location}
+        className={twMerge(
+          'flex gap-8 w-max relative pr-4 sm:pr-0',
+          isInHomepage ? 'flex-col pb-20' : 'flex-row xl:translate-x-[100%]'
+        )}
+      >
+        {buttons.map((btn) => (
+          <motion.button
+            variants={animationVariants.buttons}
+            key={btn}
+            title={btn}
+            className='block w-9 h-9 bg-primary/40'
+          ></motion.button>
+        ))}
+      </motion.div>
+    </nav>
   );
 }

@@ -29,7 +29,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        overpass: 'overpass',
+        body: 'JetBrains Mono',
       },
       colors: {
         border: {

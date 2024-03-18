@@ -5,12 +5,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import {motion} from 'framer-motion';
 import {GameStateTypes} from '../../services/utils/types';
 
-import Icons from './Icons';
-import Button from './Button';
 import Countdown, {CountdownApi} from 'react-countdown';
-import PauseGameModal from '../modal/PauseGameModal';
+import PauseGameModal from '../modal/pause-game-modal/PauseGameModal';
+import Icons from './Icons';
 
 interface InGameCountdown {
   countdownDuration?: number;
@@ -49,7 +49,14 @@ export default function InGameCountdown({
     if (gameState === 'start') {
       startCountdown();
     }
-    if (gameState === 'paused' || gameState === 'completed') {
+    if (
+      gameState === 'paused' ||
+      gameState === 'gameOver' ||
+      gameState === 'preparation'
+    ) {
+      pauseCountdown();
+    }
+    if (gameState === 'completed') {
       pauseCountdown();
     }
   }, [gameState, date]);
@@ -66,18 +73,22 @@ export default function InGameCountdown({
         date={date}
         autoStart={false}
         renderer={customRenderer({children: <span>Hello world</span>})}
-        onComplete={() => setGameState('over')}
+        onComplete={() => setGameState('gameOver')}
       />
 
-      <Button
-        onClick={() => setGameState('paused')}
-        disabled={isCompleted()}
-        className='fixed top-4 left-4 z-[60] bg-gradient-to-t from-[#6e6122] via-[#BFA622] to-[#FFF8D1] p-1 rounded-full overflow-hidden'
-      >
-        <div className='bg-background rounded-full grid place-items-center p-2'>
-          <Icons.Pause className='w-4 h-4 xl:w-6 xl:h-6' />
-        </div>
-      </Button>
+      {gameState !== 'preparation' && (
+        <motion.button
+          initial={{y: 50, opacity: 0}}
+          animate={{y: 0, opacity: 1}}
+          transition={{damping: 50, delay: 1}}
+          onClick={() => setGameState('paused')}
+          disabled={isCompleted()}
+          className='absolute bottom-20 sm:bottom-32 right-4 sm:right-5 xl:right-auto
+         xl:left-5 xl:bottom-auto xl:top-32 z-[80] w-8 h-8 bg-orange-400/50 border border-orange-500 grid place-items-center hover:opacity-50'
+        >
+          <Icons.TimerPause fill='rgb(254 215 170)' />
+        </motion.button>
+      )}
 
       <PauseGameModal
         modalState={gameState === 'paused'}
@@ -127,15 +138,15 @@ interface CountdownClockWrapper extends React.HTMLAttributes<HTMLDivElement> {
 
 function CountdownClockWrapper({children, className}: CountdownClockWrapper) {
   return (
-    <>
-      <div className='bg-gradient-to-t from-[#81711f] via-[#BFA622] to-[#FFF8D1] rounded-tl-none rounded-tr-none pt-0 p-1 rounded-xl absolute top-0 left-1/2 -translate-x-1/2 z-50 w-28 h-max text-xl lg:text-2xl font-medium flex justify-center'>
-        <div className='bg-slate-50 grid grid-cols-[_1fr,max-content,_1fr] rounded-tl-none rounded-tr-none rounded-lg w-full'>
-          {children}
+    <div className='pt-0 p-1 absolute bottom-4 sm:bottom-16 right-4 xl:bottom-auto xl:top-16 xl:right-auto xl:left-4 z-50 w-32 h-max text-xl lg:text-2xl font-medium flex justify-center'>
+      <div className='bg-primary/50 text-slate-50 border border-slate-50/50 grid grid-cols-[_1fr,_1fr,max-content,_1fr] w-full font-body'>
+        <div className='grid place-items-center mr-2'>
+          <Icons.Timer fill='rgb(248, 250, 252)' className='w-4 h-[19px]' />
         </div>
-      </div>
 
-      <div className='absolute z-40 bg-gradient-to-r from-transparent via-slate-50 to-transparent w-full h-[2px] left-0'></div>
-    </>
+        {children}
+      </div>
+    </div>
   );
 }
 

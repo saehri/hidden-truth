@@ -1,89 +1,97 @@
-import {useContext} from 'react';
-import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
-import {StorylineIdTypes, StorylineTypes} from '../services/utils/types';
 import {motion} from 'framer-motion';
+import {useContext, useState} from 'react';
+import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 
-import {PrologWrapper} from '../components/ui/Prolog';
-import FullscreenBackground from '../components/ui/FullscreenBackground';
-import StorylineDetailChapterCard from '../components/ui/StorylineDetailChapterCard';
-import Icons from '../components/ui/Icons';
-import Marquee from 'react-fast-marquee';
+import BackButton from '../components/ui/BackButton';
+import StorylineDetailChapterCardSlider from '../components/slider/StorylineDetailChapterCardSlider';
+import {Lines} from './Homepage';
+
 import {homepageBackground} from '../assets/backgrounds/homepageBackground';
+import useCharacterProgressController from '../services/controller/characterProgressController';
+import {StorylineIdTypes} from '../services/utils/types';
 
 export default function StorylineDetailPage() {
-  const {activePage} = useContext(ActivePageContext);
-
   return (
-    <>
-      <Navigation />
+    <section className='relative w-full h-full'>
+      <div className='relative z-10 h-full w-full max-w-screen-sm mx-auto'>
+        <BackButton
+          goBackTo={{location: 'storylineSelectionPage'}}
+          iconType='back'
+        />
 
-      <div className='relative w-full h-full z-40'>
-        <div className='absolute right-0 top-0 pt-[13%] z-50 w-full h-full p-10 overflow-y-auto hideScrollbar bg-slate-950/70'>
-          <div className='w-max h-[calc((100%-13%)-_4rem)]'>
-            <StorylineDetailChapterCard
-              storylineId={activePage.state?.storylineId as StorylineIdTypes}
-              storylineType={activePage.state?.storylineType as StorylineTypes}
-            />
-          </div>
-        </div>
+        <GameInformationBar />
+        <StorylineDetailChapterCardSlider />
       </div>
 
-      <FullscreenBackground
-        imageLink={homepageBackground}
-        placeholderLink={
-          'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
-        }
-      />
+      {/* DECORATION */}
+      <Lines />
 
-      <PrologWrapper
-        storylineId={activePage.state?.storylineId as StorylineIdTypes}
+      <motion.img
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        src={homepageBackground}
+        className='w-full h-full object-cover brightness-[.1] absolute top-0 left-0 z-0'
+        alt=''
       />
-    </>
+    </section>
   );
 }
 
-function Navigation() {
-  const {activePage, setActivePage} = useContext(ActivePageContext);
+function GameInformationBar() {
+  const {activePage} = useContext(ActivePageContext);
+  const [isMaximize, setMaximize] = useState<boolean>(true);
+  const gameProgress = useCharacterProgressController();
+  const currentProgress = gameProgress.getStorylineProgress(
+    activePage.state?.storylineId as StorylineIdTypes
+  );
 
   return (
     <motion.div
-      initial={{opacity: 0, y: '-50%', x: '-50%'}}
-      animate={{opacity: 1, y: 0, x: '-50%'}}
-      className='absolute top-1 lg:top-2 left-1/2 z-50 p-2 lg:px-3 bg-gradient-to-t from-background to-background/90 flex items-center gap-3 lg:gap-6 text-yellow-400 w-max rounded-full border-t border-border'
+      animate={{top: isMaximize ? '56px' : '-4px'}}
+      className='absolute left-0 w-full px-4 z-50'
     >
       <button
-        onClick={() => setActivePage({location: 'homepage'})}
-        title='Halaman utama'
+        onClick={() => setMaximize(!isMaximize)}
+        className='absolute -bottom-4 outline-none border-none left-1/2 -translate-x-1/2 h-4 w-20 bg-slate-50/10 grid place-items-center lg:backdrop-blur-sm'
+        style={{
+          clipPath: 'polygon(0 0, 100% 0, 79% 100%, 23% 100%)',
+        }}
       >
-        <Icons.Home />
-        <span className='sr-only'>Kembali ke halaman utama</span>
+        <span className='block w-1/2 h-[1px] bg-slate-50/70' />
+        <span className='sr-only'>Toggle hud</span>
       </button>
 
-      <div className='max-w-16 lg:max-w-44 overflow-hidden relative after:absolute after:right-0 after:top-0 after:w-1/6 after:h-full after:bg-gradient-to-l after:from-background after:via-background/10 after:to-transparent after:z-10 before:absolute before:left-0 before:top-0 before:w-1/6 before:h-full before:bg-gradient-to-r before:from-background before:via-background/10 before:to-transparent before:z-10'>
-        <Marquee
-          className='overflow-hidden flex gap-3 text-xs lg:text-base'
-          delay={3}
-        >
-          {activePage.state?.storylineTitle as string}
-        </Marquee>
-      </div>
-
-      <button
-        title='Pemilihan alur cerita'
-        onClick={() =>
-          setActivePage({
-            location: 'storylineSelectionPage',
-            state: {
-              storylineType: activePage.state?.storylineType as StorylineTypes,
-            },
-          })
-        }
+      <motion.div
+        initial={false}
+        animate={{opacity: isMaximize ? 1 : 0}}
+        className='flex justify-between p-2 bg-slate-50/10 text-sm text-slate-50 lg:backdrop-blur-sm'
       >
-        <Icons.CloseCircled className='w-4 h-4' />
-        <span className='sr-only'>
-          Kembali ke halaman pemilihan alur cerita
-        </span>
-      </button>
+        <div>
+          <span className='text-[10px] text-slate-300 bg-slate-50/10 px-2 mb-1 w-max block border-x border-slate-50'>
+            KASUS
+          </span>
+
+          <div className='overflow-hidden max-w-36 sm:max-w-96'>
+            <p className='uppercase block w-max overflow-ellipsis'>
+              {activePage.state?.storylineTitle as string}
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div className='text-[10px] text-slate-300 bg-slate-50/10 px-2 mb-1 w-max border-x border-slate-50 flex'>
+            <span>COMPLETED</span>
+            <span className='hidden sm:block ml-1'>CHAPTER</span>
+            <span>/</span>
+            <span>TOTAL</span>
+            <span className='hidden sm:block ml-1'>CHAPTER</span>
+          </div>
+          <p className='text-right'>
+            {currentProgress?.finishedChapterCount}/
+            {currentProgress?.totalChapter}
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 }

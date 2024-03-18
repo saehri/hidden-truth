@@ -3,70 +3,67 @@ export type GameStateTypes =
   | 'start'
   | 'paused'
   | 'completed'
-  | 'over'
+  | 'gameOver'
   | 'preparation';
 
 /* @types defines the avaliable game types */
-export type GameTypes = 'TG' | 'SK' | 'TO' | 'MC' | 'RD' | 'TN';
+export type GameTypes = 'TG' | 'RD';
 /* 
   TG -> Tebak Gambar,
-  SK -> Susun Kata
   TK -> Tebak Orang
   MC -> Multiple Choice
   RD -> Report Disinformation
-  TN - Tebak Nada
 */
 
 export type StorylineIdTypes = 'PEMILU-24';
 
-export type StorylineTypes =
-  | 'specialStoryline'
-  | 'mainStoryline'
-  | 'premiumStoryline';
+export type StorylineTypes = 'specialStoryline' | 'mainStoryline';
+
+export type RewardTypes = {id: string; label: string; image: string};
 
 /* @types defines the game storyline chapters data structure */
+export type GameCardTypes = {
+  id: string;
+  type: GameTypes;
+  name: string;
+  gamePosition: number;
+  hasOpeningDialog: boolean;
+  gameName: string;
+  synopsis: string;
+  isFinalGame: boolean;
+  rewards: RewardTypes[];
+  difficulty: GameDifficultyTypes;
+};
+
 export type StorylineChapterTypes = {
-  chapterName: string;
-  games: {
-    gameId: string;
-    gameType: GameTypes;
-    gameName: string;
-    location: string;
-    hasOpeningDialog: boolean;
-    openingDialogId?: string;
-  }[];
+  gameName: string;
+  chapterId: string;
+  games: GameCardTypes[];
 };
 
 /* @types defines the game storyline episode data structure */
 export interface StorylineCardTypes
   extends React.HTMLAttributes<HTMLButtonElement> {
-  storylineId: StorylineIdTypes;
-  storylineTitle: string;
-  storylineCardBackground?: string;
-  storylineType: StorylineTypes;
+  id: StorylineIdTypes;
+  title: string;
+  background: string;
+  types: StorylineTypes;
+  synopsis: string;
+  rewards: RewardTypes[];
 }
 
 export interface StorylineDataTypes extends StorylineCardTypes {
-  storylineDetailPageCoverImage: string;
+  totalChapter: number;
   playableChapter: StorylineChapterTypes[];
 }
 
-type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
+export type GameDifficultyTypes = 'easy' | 'medium' | 'hard';
 
 /* @types defines the types of image guesser data stuctures */
 export type ImageGuesserGameDataTypes = {
-  id: string;
-  imageLink: string;
-  answer: string;
-};
-
-/* @types defines the types of arrange letter game data stuctures */
-export type ArrangeLettersGameDataTypes = {
-  id: string;
-  scrambledLetters: string[];
-  answer: string;
-  clue?: string;
-  difficulty: GameDifficultyTypes;
+  data: {imageLink: string; answer: string; clue: string};
+  rewards: RewardTypes[];
+  hasTutorial: boolean;
 };
 
 /* @types defines the types of guess the person game data stuctures */
@@ -100,7 +97,7 @@ export type DisinformationInfoTypes = [
   {id: 4; label: 'Sumber berita tidak terpercaya'; reason?: string}
 ];
 
-export type ReportDisinformationGameDataTypes = {
+export type RDPostTypes = {
   postId: number;
   postCaption: string;
   postAuthor: {
@@ -117,6 +114,13 @@ export type ReportDisinformationGameDataTypes = {
   hasMedia: boolean;
   mediaLink?: string;
   disinformationCategoryInfo: DisinformationInfoTypes;
+};
+
+export type ReportDisinformationGameDataTypes = {
+  data: RDPostTypes[];
+  hasTutorial: boolean;
+  rewards: RewardTypes[];
+  totalDisinformationCategory: number;
 };
 
 /* @types defines the form state */
@@ -153,18 +157,22 @@ export type AvatarTypes = {
 };
 
 export type CharacterTypes = {
-  user_id: string; // This is the _id of the user
-  character_name: string; // This is the character name
-  created_at: string; // Date ISO string
-  current_avatar: AvatarTypes; // Current used character
-  current_rank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
-  current_energy: number;
-  played_games: []; // string[] -> string is gameId
-  played_chapters: []; // string[] -> string is chapterId
+  userId: string; // This is the _id of the user
+  name: string; // This is the character name
+  currentAvatar: AvatarTypes; // Current used character
+  currentRank: DetectiveRankTypes; // Nobody | Junior Detektif | Senior Detektif | .etc
+  energy: {
+    current: number;
+    isFilling: boolean;
+  };
+  money: number;
+  createdAt: string; // Date ISO string
+  updatedAt: string;
   inventory: {
     consumable: ConsumableTypes[];
     avatar: AvatarTypes[];
   };
+  hiddenItems: string[];
 };
 
 export type UserTypes = {
@@ -178,4 +186,19 @@ export type UserTypes = {
   gender: string | null;
   is_new_user: boolean;
   created_at: string;
+};
+
+/* CHARACTER PROGRESS */
+export type CharacterProgressTypes = {
+  chardId: string;
+  userId: string;
+  userEmail: string;
+  unlockedStoryline: {
+    storylineId: StorylineIdTypes;
+    gamePlayedList: string[];
+    totalChapter: number;
+    finishedChapterList: string[];
+    finishedChapterCount: number; // We incre
+  }[];
+  hiddenPrologList: string[];
 };

@@ -62,8 +62,11 @@ function Form() {
     ev.preventDefault();
 
     const characterInitialData: CharacterTypes = {
-      user_id: userData._id,
-      current_avatar: {
+      userId: userData._id,
+      hiddenItems: [],
+      money: 300,
+      updatedAt: '',
+      currentAvatar: {
         avatar_id: formData.avatar_id,
         avatar_name:
           formData.avatar_id === 'df-female'
@@ -77,10 +80,10 @@ function Form() {
         obtained_at: new Date().toISOString(),
         rarity: 'common',
       },
-      character_name: formData.name,
-      created_at: new Date().toISOString(),
-      current_energy: 5,
-      current_rank: 'nobody',
+      name: formData.name,
+      createdAt: new Date().toISOString(),
+      energy: {current: 10, isFilling: false},
+      currentRank: 'nobody',
       inventory: {
         avatar: [
           {
@@ -100,8 +103,6 @@ function Form() {
         ],
         consumable: [],
       },
-      played_chapters: [],
-      played_games: [],
     };
 
     setFormState('process');
@@ -188,9 +189,7 @@ function Form() {
               />
             </span>
 
-            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'>
-              <Icons.CheckSmall />
-            </span>
+            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'></span>
           </label>
         </div>
 
@@ -218,9 +217,7 @@ function Form() {
               />
             </span>
 
-            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'>
-              <Icons.CheckSmall />
-            </span>
+            <span className='p-1 px-2 pt-2 rounded-lg bg-yellow-400 text-slate-800 font-semibold border border-border absolute top-0 right-0 peer-checked:block hidden rotate-12 z-10 text-xs'></span>
           </label>
         </div>
       </div>

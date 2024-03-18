@@ -1,65 +1,78 @@
-import {memo, useContext, useState} from 'react';
-import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
-import {AnimatePresence} from 'framer-motion';
-import {getGameData} from '../../../database/gameData';
-import {
-  GameStateTypes,
-  ReportDisinformationGameDataTypes,
-} from '../../../services/utils/types';
+import {memo, useEffect} from 'react';
 
-import GameEndingModal from '../../modal/GameEndingModal';
+import GameEndingModal from '../../modal/game-ending-modal/GameEndingModal';
 import InGameCountdown from '../../ui/InGameCountdown';
 import ReportDisinformation from './ReportDisinformation';
+import useGameController from '../../../services/hooks/useGameController';
+import GameTutorial from '../../game-tutorial/GameTutorial';
+import BlinkingRedLayer from '../../ui/BlinkingRedLayer';
+import GameHeader from '../GameHeader';
+
+const tutorialText = [
+  'Di misi kali ini kamu akan diberikan beberapa postingan sosial media',
+  'Tugasmu adalah untuk mengidentifikasi kategori disinformasi yang ada pada postingan tersebut',
+  'Jika kamu gagal menebak kategori disinformasi yang ada dalam suatu postingan, maka nyawamu akan berkurang sejumlah kategori yang salah kamu tebak',
+  'Harap diingat tidak semua postingan yang diberikan mengandung disinformasi',
+  'Pesan terakhir dariku, jika kamu merasa terhambat kamu bisa memulai ulang misi ini',
+  'Selamat bertugas!',
+];
 
 const ReportDisinformationGame = memo(() => {
-  const [gameState, setGameState] = useState<GameStateTypes>('start');
-  const {activePage} = useContext(ActivePageContext);
-  // @ts-ignore
-  const gameData = getGameData({
-    ...activePage.state,
-  }) as ReportDisinformationGameDataTypes[];
+  const {
+    gameData,
+    gameDuration,
+    gameState,
+    setGameState,
+    playerLife,
+    reducePlayerLife,
+  } = useGameController({
+    customDuration: {easy: 180, medium: 170, hard: 160},
+    initialLife: 5,
+  });
 
-  const isOver = gameState === 'completed' || gameState === 'over';
+  const hideGame = ['gameOver', 'completed', 'preparation'].includes(gameState);
 
-  const gameDuration = 2000;
+  useEffect(() => {
+    let startTimer: any;
+    if (!gameData.hasTutorial) {
+      // Start the game after 1 seconds delay
+      startTimer = setTimeout(() => setGameState('start'), 1 * 1000);
+    }
+
+    return () => clearTimeout(startTimer);
+  }, []);
 
   return (
-    <section className='w-full h-full max-w-[92%] flex mx-auto'>
+    <section className='w-full h-full'>
       <InGameCountdown
         gameState={gameState}
         setGameState={setGameState}
         countdownDuration={gameDuration}
       />
 
-      <div className='relative h-full flex w-full flex-col justify-between pt-1 lg:pt-12'>
-        <ReportDisinformation gameData={gameData} />
+      <div className='w-full h-full flex flex-col gap-8 mx-auto max-w-screen-sm pt-16'>
+        <GameHeader playerLife={playerLife} />
 
-        <div
-          className='bg-slate-100 p-2 lg:p-4 border border-border border-b-0 mx-auto w-full max-w-[90%] lg:max-w-[50%] text-slate-950'
-          style={{
-            clipPath: 'polygon(10% 0%, 90% 0, 100% 100%, 0% 100%)',
-          }}
-        >
-          <div className='max-w-[80%] mx-auto flex items-center gap-4'>
-            <h6 className='bg-gradient-to-t rounded-full from-yellow-700 to-yellow-600 text-yellow-300 p-1 px-2 pt-2 w-max mb-2 lg:mb-4 text-xs lg:text-base'>
-              Clue
-            </h6>
-
-            <p className='text-slate-700 text-xs lg:text-base'>
-              Pilih salah satu jawaban yang paling benar untuk lanjut ke
-              pertanyaan selanjutnya.
-            </p>
-          </div>
+        <div className='overflow-y-auto hideScrollbar'>
+          {!hideGame && (
+            <ReportDisinformation
+              gameState={gameState}
+              posts={gameData.data}
+              reducePlayerLife={reducePlayerLife}
+              totalDisinformation={gameData.totalDisinformationCategory}
+              setGameState={setGameState}
+            />
+          )}
         </div>
       </div>
 
-      <AnimatePresence>
-        {isOver && (
-          <GameEndingModal
-            status={gameState === 'completed' ? 'win' : 'over'}
-          />
-        )}
-      </AnimatePresence>
+      <GameTutorial
+        isOpen={gameData.hasTutorial && gameState === 'preparation'}
+        onTutorialEnd={() => setGameState('start')}
+        tutorialText={tutorialText}
+      />
+      <BlinkingRedLayer playerLife={playerLife} />
+      <GameEndingModal status={gameState} gameRewards={gameData.rewards} />
     </section>
   );
 });

@@ -39,7 +39,7 @@ export default function FormSubmitButton({
             className='flex items-center justify-center gap-2'
             key='c'
           >
-            <Icons.CheckSmall /> {buttonIdleName} BERHASIL
+            {buttonIdleName} BERHASIL
           </motion.span>
         ) : formState === 'error' ? (
           <motion.span
@@ -49,7 +49,7 @@ export default function FormSubmitButton({
             className='flex items-center justify-center gap-2'
             key='d'
           >
-            <Icons.CloseSmall /> {buttonIdleName} GAGAL
+            {buttonIdleName} GAGAL
           </motion.span>
         ) : (
           <motion.span

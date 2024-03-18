@@ -10,8 +10,7 @@ import {
 } from '../../services/utils/types';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {AnimatePresence} from 'framer-motion';
-import GameEndingModal from '../modal/GameEndingModal';
-import {thumbStackImage} from '../../assets/images/thumbStackImage';
+import GameEndingModal from '../modal/game-ending-modal/GameEndingModal';
 import {twMerge} from 'tailwind-merge';
 import {getGameData} from '../../database/gameData';
 
@@ -26,7 +25,7 @@ const GuessThePerson = memo(() => {
 
   const gameDuration =
     data.difficulty === 'easy' ? 180 : data.difficulty === 'medium' ? 150 : 120;
-  const isOver = gameState === 'completed' || gameState === 'over';
+  const isOver = gameState === 'completed' || gameState === 'gameOver';
 
   return (
     <section className='w-full h-full max-w-[92%] flex mx-auto'>
@@ -58,13 +57,13 @@ const GuessThePerson = memo(() => {
         </div>
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOver && (
           <GameEndingModal
-            status={gameState === 'completed' ? 'win' : 'over'}
+            ={gameState === 'completed' ? 'win' : 'over'}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </section>
   );
 });
@@ -156,7 +155,7 @@ const PersonCard = memo(
         }}
       >
         <motion.img
-          src={thumbStackImage}
+          src=''
           alt=''
           className='w-5 h-5 lg:w-8 lg:h-8 absolute top-1 left-1/2 -translate-x-1/2 z-50'
           initial={{

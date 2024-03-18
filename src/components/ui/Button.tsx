@@ -1,17 +1,21 @@
+import {motion} from 'framer-motion';
 import {twMerge} from 'tailwind-merge';
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export default function Button({children, className, ...rest}: ButtonProps) {
   return (
-    <button
+    <motion.button
+      whileTap={{scale: 0.6}}
       className={twMerge(
-        'flex gap-2 items-center justify-center shrink-0 p-1 relative after:absolute after:top-0 after:left-0 after:w-full after:h-full after:bg-yellow-600 after:rounded-full after:pointer-events-none after:blur-md after:opacity-0 after:hover:opacity-50 after:transition-opacity',
+        'bg-primary/30 border border-slate-50/50 w-9 h-9 relative group shadow-sm shadow-slate-950/30',
         className
       )}
-      {...rest}
+      {...(rest as any)}
     >
-      {children}
-    </button>
+      <span className='z-30 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'>
+        {children}
+      </span>
+    </motion.button>
   );
 }

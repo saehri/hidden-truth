@@ -7,7 +7,7 @@ import {
 } from '../../services/utils/types';
 
 import InGameCountdown from '../ui/InGameCountdown';
-import GameEndingModal from '../modal/GameEndingModal';
+import GameEndingModal from '../modal/game-ending-modal/GameEndingModal';
 
 import {homepageBackground} from '../../assets/backgrounds/homepageBackground';
 import {getGameData} from '../../database/gameData';
@@ -20,7 +20,7 @@ const MultipleChoice = memo(() => {
     ...activePage.state,
   }) as MultipleChoiceGameDataTypes[];
 
-  const isOver = gameState === 'completed' || gameState === 'over';
+  const isOver = gameState === 'completed' || gameState === 'gameOver';
 
   const gameDuration = 60 * 3;
 
@@ -54,13 +54,13 @@ const MultipleChoice = memo(() => {
         </div>
       </div>
 
-      <AnimatePresence>
+      {/* <AnimatePresence>
         {isOver && (
           <GameEndingModal
             status={gameState === 'completed' ? 'win' : 'over'}
           />
         )}
-      </AnimatePresence>
+      </AnimatePresence> */}
     </section>
   );
 });
@@ -80,7 +80,7 @@ const MultipleChoiceGame = memo(
       const isUserAnswerCorrect =
         userAnswer === gameData[currentQuestion].correctQcId;
       if (!isUserAnswerCorrect) {
-        return setGameState('over');
+        return setGameState('gameOver');
       }
 
       if (currentQuestion < gameData.length - 1) {

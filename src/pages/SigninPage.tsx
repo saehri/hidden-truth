@@ -1,8 +1,6 @@
 import {useContext} from 'react';
-import FullscreenBackground from '../components/ui/FullscreenBackground';
 import {ActivePageContext} from '../services/API/pageViewingManagerAPI';
 import SigninForm from '../components/forms/SigninForm';
-import {homepageBackground} from '../assets/backgrounds/homepageBackground';
 
 export default function SigninPage() {
   return (
@@ -19,15 +17,7 @@ export default function SigninPage() {
         </section>
       </section>
 
-      <div className='relative'>
-        <FullscreenBackground
-          animate={false}
-          imageLink={homepageBackground}
-          placeholderLink={
-            'https://utfs.io/f/9e30c3bc-3310-4497-a0d1-793a1ac62ae8-e5s95w.webp'
-          }
-        />
-      </div>
+      <div className='relative'></div>
     </div>
   );
 }

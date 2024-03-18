@@ -6,8 +6,23 @@ import {UserTypes} from '../utils/types';
 
 const SESSION_STORAGE_KEY = 'ud4t4';
 
+const FAKE_USER: UserTypes = {
+  _id: '1',
+  age: 25,
+  created_at: new Date().toISOString(),
+  email: {
+    valid: true,
+    value: 'lulu@lemon.com',
+  },
+  gender: 'M',
+  is_new_user: true,
+  username: 'lululemon@1',
+};
+
 const initialState = {
-  user: JSON.parse(sessionStorage.getItem(SESSION_STORAGE_KEY)! || '{}'),
+  user: JSON.parse(
+    sessionStorage.getItem(SESSION_STORAGE_KEY)! || JSON.stringify(FAKE_USER)
+  ),
 };
 
 const userStore = create<{user?: UserTypes}>(() => initialState);
@@ -73,6 +88,14 @@ export default function useUserController() {
         }
       } catch (error: any) {
         console.error(error.response.data);
+      }
+    },
+    logout: () => {
+      try {
+        userStore.setState({user: undefined});
+        sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      } catch (error: any) {
+        console.error(error.message);
       }
     },
   };

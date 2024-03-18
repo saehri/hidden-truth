@@ -14,18 +14,18 @@ import {Dispatch, SetStateAction, createContext, useState} from 'react';
 /* @types defines all the pages that the player can visit */
 export type ViewablePageTypes =
   | 'homepage'
-  | 'storylineTypeSelectionPage'
   | 'storylineSelectionPage'
   | 'storylineDetailPage'
+  | 'prologPage'
   | 'gamePage'
   | 'dialogPage'
   | 'signupPage'
-  | 'signinPage';
+  | 'signinPage'
+  | 'startPage';
 
 /* 
   @definitions
   homepage -> Homepage
-  storylineTypeSelectionPage -> Selecting storyline type
   storylineSelectionPage -> Selecting the storyline
   storylineDetail -> Viewing the storyline detail
   gamePage -> Plays game
@@ -33,7 +33,7 @@ export type ViewablePageTypes =
 */
 
 /* @types defines all the value types the "state" can take */
-export type PageStateValueTypes = string | number | (() => void);
+export type PageStateValueTypes = string | number | boolean | (() => void);
 /* @types defines the "state" object structures */
 export type PageStateTypes = Record<string, PageStateValueTypes>;
 export type ActivePageTypes = {
