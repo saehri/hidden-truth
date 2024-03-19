@@ -1,9 +1,7 @@
-import useUserController from '../../../services/controller/userController';
-
 export default function AccountSetting() {
   return (
     <div className='flex flex-col gap-2'>
-      <div className='flex justify-between items-center text-sm text-slate-300'>
+      {/* <div className='flex justify-between items-center text-sm text-slate-300'>
         <p className='uppercase'>Email</p>
         <p>user@email.com</p>
       </div>
@@ -11,7 +9,7 @@ export default function AccountSetting() {
       <div className='flex justify-between items-center text-sm text-slate-300'>
         <p className='uppercase'>Password</p>
         <p>******</p>
-      </div>
+      </div> */}
 
       <div className='flex justify-end text-sm text-slate-300'>
         <LogOutButton />
@@ -21,19 +19,17 @@ export default function AccountSetting() {
 }
 
 function LogOutButton() {
-  const userController = useUserController();
-
   function handleLoggingOut() {
-    userController.logout();
+    localStorage.clear();
     window.location.reload();
   }
 
   return (
     <button
       onClick={handleLoggingOut}
-      className='bg-red-500/50 border-x border-red-400 uppercase text-red-200 p-1 w-20 hover:w-24 transition-[width]'
+      className='bg-red-500/50 border-x border-red-400 uppercase text-red-200 p-1 w-32 hover:w-36 transition-[width]'
     >
-      Log Out
+      RESET PROGRESS
     </button>
   );
 }

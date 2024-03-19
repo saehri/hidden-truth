@@ -6,7 +6,8 @@ const COOLDOWN_DURATION: number = 120;
 const AddEnergyCD = memo(() => {
   const characterController = useCharacterController();
   const isFillingEnergy = characterController.character?.energy
-    .isFilling as boolean;
+    ?.isFilling as boolean;
+  /* ts-ignore */
 
   const [timer, setTimer] = useState(COOLDOWN_DURATION); // Initial countdown value
 

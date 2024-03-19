@@ -2,6 +2,8 @@ import {useContext} from 'react';
 import {ActivePageContext} from '../../services/API/pageViewingManagerAPI';
 import {AudioContext} from '../audio/AudioWrapper';
 import useUserController from '../../services/controller/userController';
+import useCharacterController from '../../services/controller/characterController';
+import useCharacterProgressController from '../../services/controller/characterProgressController';
 
 export default function StartPageCTA() {
   const userController = useUserController();
@@ -56,9 +58,13 @@ function AuthCTA() {
 function ButtonCTA() {
   const {setActivePage} = useContext(ActivePageContext);
   const audioController = useContext(AudioContext);
+  const characterController = useCharacterController();
+  const characterProgressController = useCharacterProgressController();
 
   function goToHomepage() {
     audioController.musicRef.play();
+    characterController.store();
+    characterProgressController.store();
     setActivePage({location: 'homepage'});
   }
 

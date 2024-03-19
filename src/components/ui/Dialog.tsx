@@ -68,7 +68,7 @@ function DialogSequenceRenderer({dialogSequences}: DialogSequenceRenderer) {
 
   const characterName = characterController.character?.name || '';
   const characterImage =
-    characterController.character?.currentAvatar.avatar_image || '';
+    characterController.character?.currentAvatar?.avatar_image || '';
 
   return (
     <>
@@ -157,7 +157,7 @@ function CharacterImageRendrer({
         <img
           src={imageLink}
           alt=''
-          className='absolute top-0 left-0 w-full h-full object-contain object-bottom'
+          className='absolute top-0 left-0 w-full h-full object-scale-down object-bottom'
         />
       </div>
     </div>

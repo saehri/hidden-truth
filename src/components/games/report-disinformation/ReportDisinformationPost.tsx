@@ -27,11 +27,13 @@ export default function ReportDisinformationPost({
 
       <div className='grid grid-cols-[max-content,_1fr] gap-4 mb-4'>
         <div className='w-11 h-11 shrink-0 bg-slate-300'>
-          <img
-            src={postAuthor.authorProfileImage}
-            alt=''
-            className='w-full h-full block'
-          />
+          {postAuthor.authorProfileImage.length > 0 && (
+            <img
+              src={postAuthor.authorProfileImage}
+              alt=''
+              className='w-full h-full block'
+            />
+          )}
         </div>
 
         <div className='flex flex-col gap-2'>

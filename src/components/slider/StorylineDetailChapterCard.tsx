@@ -205,6 +205,12 @@ function CardWrapper({
           {children}
         </div>
       </div>
+
+      {isCompleted && (
+        <div className='absolute bottom-28 right-8 rotate-6 text-red-600 font-bold text-sm outline-2 outline py-1 px-4 outline-offset-2 rounded-full outline-red-600'>
+          COMPLETED
+        </div>
+      )}
     </motion.div>
   );
 }
@@ -258,7 +264,9 @@ function CardCTA({
 
   return (
     <button
-      disabled={(characterController.character?.energy.current as number) === 0}
+      disabled={
+        (characterController.character?.energy?.current as number) === 0
+      }
       onClick={goToGamePage}
       className='text-yellow-300 bg-yellow-600/20 hover:bg-yellow-600/40 font-medium disabled:opacity-50 disabled:pointer-events-none text-sm py-1 w-20 hover:w-24 transition-[width] border-x border-yellow-600'
       style={{
@@ -309,7 +317,7 @@ function CardHeader({gameName}: CardHeaderProps) {
         <div className='bg-primary w-8 h-8'></div>
         <div className='font-body text-slate-50 bg-primary flex-1 flex items-center px-2 text-sm overflow-hidden'>
           <span className='w-max whitespace-nowrap tracking-tight'>
-            {gameName}
+            KARTU TUGAS
           </span>
         </div>
       </div>

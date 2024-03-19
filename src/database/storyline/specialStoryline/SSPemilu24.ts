@@ -5,23 +5,7 @@ import {
   StorylineDataTypes,
 } from '../../../services/utils/types';
 
-const chapterRewards: RewardTypes[] = [
-  {
-    id: 'big_energy_bottle',
-    label: 'Big energy bottle (+3 energy)',
-    image: '',
-  },
-  {
-    id: 'big_money_bag',
-    label: 'Big money bag (+300)',
-    image: '',
-  },
-  {
-    id: 'avatar_bundle_unique_batik_24',
-    label: 'Skins Batik (+3 energy)',
-    image: '',
-  },
-];
+const chapterRewards: RewardTypes[] = [];
 
 export const imageGuesserRewardsList: Record<string, RewardTypes[]> = {
   game1: [],
@@ -32,7 +16,7 @@ export const reportDisinformationRewardsList: Record<string, RewardTypes[]> = {
 
 const SSPemilu24: StorylineDataTypes = {
   id: 'PEMILU-24',
-  title: 'Serangan Cyber di Ibu Kota',
+  title: 'Kerusuhan di Pusat Kota',
   background: premiumStorylineCardCover,
   types: 'specialStoryline',
   rewards: chapterRewards,
@@ -118,8 +102,8 @@ const SSPemilu24: StorylineDataTypes = {
           id: 'PEMILU24-TG-C2-1',
           type: 'TG',
           name: 'Berita Kerusuhan',
-          hasOpeningDialog: true,
-          difficulty: 'easy',
+          hasOpeningDialog: false,
+          difficulty: 'medium',
           gamePosition: 5,
           gameName: 'CH 2.1 - BERITA KERUSUHAN',
           rewards: imageGuesserRewardsList.game1,
@@ -130,7 +114,7 @@ const SSPemilu24: StorylineDataTypes = {
           id: 'PEMILU24-TG-C2-2',
           type: 'TG',
           name: 'Berita Kerusuhan',
-          hasOpeningDialog: true,
+          hasOpeningDialog: false,
           difficulty: 'easy',
           gamePosition: 6,
           gameName: 'CH 2.2 - BERITA KERUSUHAN',
@@ -139,10 +123,10 @@ const SSPemilu24: StorylineDataTypes = {
           isFinalGame: false,
         },
         {
-          id: 'PEMILU24-TG-C2-3',
-          type: 'TG',
+          id: 'PEMILU24-RD-C2-3',
+          type: 'RD',
           name: 'Berita Kerusuhan',
-          hasOpeningDialog: true,
+          hasOpeningDialog: false,
           difficulty: 'easy',
           gamePosition: 7,
           gameName: 'CH 2.3 - BERITA KERUSUHAN',
@@ -151,23 +135,23 @@ const SSPemilu24: StorylineDataTypes = {
           isFinalGame: false,
         },
         {
-          id: 'PEMILU24-TG-C2-4',
-          type: 'TG',
+          id: 'PEMILU24-RD-C2-4',
+          type: 'RD',
           name: 'Berita Kerusuhan',
-          hasOpeningDialog: true,
-          difficulty: 'easy',
+          hasOpeningDialog: false,
+          difficulty: 'hard',
           gamePosition: 8,
           gameName: 'CH 2.4 - BERITA KERUSUHAN',
-          rewards: imageGuesserRewardsList.game1,
+          rewards: reportDisinformationRewardsList.game1,
           synopsis: '',
           isFinalGame: false,
         },
         {
-          id: 'PEMILU24-TG-C2-5',
-          type: 'TG',
+          id: 'PEMILU24-RD-C2-5',
+          type: 'RD',
           name: 'Berita Kerusuhan',
           hasOpeningDialog: true,
-          difficulty: 'easy',
+          difficulty: 'medium',
           gamePosition: 9,
           gameName: 'CH 2.5 - BERITA KERUSUHAN',
           rewards: imageGuesserRewardsList.game1,

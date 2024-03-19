@@ -10,7 +10,7 @@ export default function MainNavigation() {
         <GameUserEnergyAndMoneyBar />
         <SettingDialog />
 
-        <MainMenu />
+        {/* <MainMenu /> */}
         <AddEnergyCD />
       </div>
     </header>

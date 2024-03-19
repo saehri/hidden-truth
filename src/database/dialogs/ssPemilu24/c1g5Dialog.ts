@@ -1,8 +1,8 @@
 import {DialogSequenceTypes, DialogTypes} from '..';
+import {prtDefacto} from '../../../assets/images/prtDefacto';
 
 // IMAGES
-const MRDEFACTO_IMAGE =
-  'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp';
+const MRDEFACTO_IMAGE = prtDefacto;
 
 // ======================
 

@@ -1,4 +1,4 @@
-import {AnimatePresence, motion} from 'framer-motion';
+import {motion} from 'framer-motion';
 import React, {useContext, useEffect} from 'react';
 import {ActivePageContext} from '../../../services/API/pageViewingManagerAPI';
 
@@ -32,6 +32,7 @@ export default function GameEndingModal({
         activePage.state?.chapterId as string,
         activePage.state?.isFinalGame as boolean
       );
+      charProgress.sync();
     }
   }, [status]);
 

@@ -21,6 +21,7 @@ import StorylineSelectionPage from '../pages/StorylineSelectionPage';
 import PrologPage from '../pages/PrologPage';
 import StartPage from '../pages/StartPage';
 import useCharacterProgressController from '../services/controller/characterProgressController';
+import useCharacterController from '../services/controller/characterController';
 
 const defaultAnimaitonEasing = [0.7, 0.35, 0.33, 0.8];
 
@@ -57,7 +58,6 @@ const securePages = [
 function PageViewer() {
   const {activePage, setActivePage} = useContext(ActivePageContext);
   const pageName = activePage.location;
-  const userController = useUserController();
 
   /* Everytime the user navigate to a differen route, we check wether:
    - Are they about to visit secure route? If so check for the user data in local storage

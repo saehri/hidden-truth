@@ -1,17 +1,17 @@
 import {create} from 'zustand';
 import useFetch from '../hooks/useFetch';
 import {CharacterTypes} from '../utils/types';
+import {prtLucy} from '../../assets/images/prtLucy';
 
 const initialState: Record<'character', CharacterTypes> = {
   character: {
     userId: '011',
-    name: 'James Harlow',
+    name: 'Lucy',
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
     currentAvatar: {
-      avatar_id: 'df-male',
-      avatar_image:
-        'https://utfs.io/f/1d31e60b-4f2b-473a-8e05-0ffbca3fc951-tpwgpb.webp',
+      avatar_id: 'df-female',
+      avatar_image: prtLucy,
       avatar_thumbs: '',
       avatar_name: 'df male',
       obtained_at: new Date().toISOString(),
@@ -28,7 +28,11 @@ const initialState: Record<'character', CharacterTypes> = {
   },
 };
 
-const characterStore = create<{character?: CharacterTypes}>(() => initialState);
+const STORAGE_KEY = 'CHAR';
+
+const characterStore = create<{character?: CharacterTypes}>(
+  () => JSON.parse(localStorage.getItem(STORAGE_KEY)!) || '{}'
+);
 
 export default function useCharacterController() {
   const {character} = characterStore();
@@ -73,7 +77,7 @@ export default function useCharacterController() {
     },
     reduceEnergy: (amount: number) => {
       try {
-        const currentEnergy = character?.energy.current as number;
+        const currentEnergy = character?.energy?.current as number;
         if (currentEnergy - amount > -1) {
           const newEnergyAmount = currentEnergy - amount;
           const editedCharacterData = {
@@ -84,6 +88,7 @@ export default function useCharacterController() {
           characterStore.setState({
             character: editedCharacterData as CharacterTypes,
           });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(character));
         } else throw new Error('Your energy cannot go lower than 0');
       } catch (error: any) {
         console.error(error.message);
@@ -115,10 +120,30 @@ export default function useCharacterController() {
           characterStore.setState({
             character: editedCharacterData as CharacterTypes,
           });
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(character));
         } else throw new Error('Your energy cannot go lower than 0');
       } catch (error: any) {
         console.error(error.message);
       }
+    },
+    store: () => {
+      // if data is undefined
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(initialState.character)
+        );
+        characterStore.setState({
+          character: JSON.parse(localStorage.getItem(STORAGE_KEY)!),
+        });
+      } else {
+        characterStore.setState({
+          character: JSON.parse(localStorage.getItem(STORAGE_KEY)!),
+        });
+      }
+    },
+    sync: () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(character));
     },
   };
 }

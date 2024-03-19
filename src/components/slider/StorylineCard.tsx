@@ -7,7 +7,7 @@ import useCharacterProgressController from '../../services/controller/characterP
 
 interface Props extends StorylineCardTypes {
   isActive: boolean;
-  onClick: any;
+  onClick: () => void;
 }
 
 const StorylineCard = memo((props: Props) => {
@@ -18,8 +18,8 @@ const StorylineCard = memo((props: Props) => {
   const storylineProgress = charProgress.getStorylineProgress(props.id);
 
   function handleClick() {
-    props.onClick();
     charProgress.addUnlockedStoryline(props.id);
+    props.onClick();
   }
 
   return (
@@ -121,7 +121,9 @@ type RewardsBoxTypes = {rewards: RewardTypes[]};
 function RewardsBox({rewards}: RewardsBoxTypes) {
   return (
     <div className='mt-2 px-4'>
-      <p className='text-xs text-slate-50/70'>REWARDS</p>
+      {rewards.length > 0 && (
+        <p className='text-xs text-slate-50/70'>REWARDS</p>
+      )}
 
       <div className='flex items-center gap-1'>
         {rewards.map((reward) => (

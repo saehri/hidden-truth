@@ -13,9 +13,11 @@ const initialState: Record<'characterProgress', CharacterProgressTypes> = {
   },
 };
 
+const STORAGE_KEY = 'PROGRESS';
+
 const characterProgressStore = create<{
   characterProgress: CharacterProgressTypes;
-}>(() => initialState);
+}>(() => JSON.parse(localStorage.getItem(STORAGE_KEY)!) || '{}');
 
 export default function useCharacterProgressController() {
   const {characterProgress} = characterProgressStore();
@@ -26,9 +28,12 @@ export default function useCharacterProgressController() {
     addUnlockedStoryline: (storylineId: StorylineIdTypes) => {
       try {
         const currentState = characterProgress?.unlockedStoryline;
-        const isIdExist = Boolean(
-          currentState?.filter((x) => x.storylineId === storylineId).length
-        );
+        const isIdExist =
+          currentState.length === 0
+            ? false
+            : currentState?.filter((x) => x.storylineId === storylineId).length;
+
+        console.log(currentState, isIdExist);
 
         if (!isIdExist) {
           const storyline = getStorylineData(storylineId);
@@ -50,6 +55,7 @@ export default function useCharacterProgressController() {
           };
 
           characterProgressStore.setState({characterProgress: {...newState}});
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(characterProgress));
         }
       } catch (error: any) {
         console.error(error.message);
@@ -57,6 +63,8 @@ export default function useCharacterProgressController() {
     },
     getStorylineProgress: (storylineId: StorylineIdTypes) => {
       try {
+        if (!characterProgress.unlockedStoryline.length) return undefined;
+
         const currentStoryineProgress =
           characterProgress.unlockedStoryline.filter(
             (s) => s.storylineId === storylineId
@@ -117,11 +125,30 @@ export default function useCharacterProgressController() {
           ],
         };
 
-        console.log('game played list', updatedSelectedRecord);
         characterProgressStore.setState({characterProgress: updatedState});
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(characterProgress));
       } catch (error: any) {
         console.error(error.message);
       }
+    },
+    store: () => {
+      // if data is undefined
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(initialState.characterProgress)
+        );
+        characterProgressStore.setState({
+          characterProgress: JSON.parse(localStorage.getItem(STORAGE_KEY)!),
+        });
+      } else {
+        characterProgressStore.setState({
+          characterProgress: JSON.parse(localStorage.getItem(STORAGE_KEY)!),
+        });
+      }
+    },
+    sync: () => {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(characterProgress));
     },
   };
 }

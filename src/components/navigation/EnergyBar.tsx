@@ -9,7 +9,7 @@ import Icons from '../ui/Icons';
 const EnergyBar = memo(() => {
   const energyBars = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   const characterController = useCharacterController();
-  const energyCount = characterController.character?.energy.current as number;
+  const energyCount = characterController.character?.energy?.current as number;
 
   return (
     <div className='p-1 px-2 flex items-center overflow-hidden'>

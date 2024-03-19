@@ -61,7 +61,7 @@ export default function AppPageViewingManagerAPI({
   children,
 }: AppPageViewingManagerAPI) {
   const [activePage, setActivePage] = useState<ActivePageTypes>({
-    location: 'homepage',
+    location: 'startPage',
   });
 
   return (
