@@ -127,6 +127,7 @@ function PostReportResult({
   isDisinformation,
 }: PostReportResult) {
   const [report, setReport] = useState<any>([]);
+  const [correctAnswerCount, setRightAnswerCount] = useState<number>(0);
 
   function checkReports() {
     setShowCategory(false);
@@ -164,6 +165,7 @@ function PostReportResult({
 
     // reduce the player life with n amount of wrong answer made
     setUserCorrectAnswerCount((prev) => prev + correctAnswerCount);
+    setRightAnswerCount(correctAnswerCount);
     if (wrongAnswerCount > 0) reducePlayerLife(wrongAnswerCount);
 
     setReport(sortedReport);
@@ -185,6 +187,14 @@ function PostReportResult({
             <p className='text-sm text-slate-50'>
               Berikut adalah hasil analisa jawaban kamu:
             </p>
+
+            {isDisinformation && (
+              <span className='text-sm text-slate-950'>
+                Kamu berhasil menebak dengan benar {correctAnswerCount} dari{' '}
+                {disinformationCategoryId.split('-').length} kategori
+                disinformasi di postingan ini.
+              </span>
+            )}
 
             <div className='flex flex-col gap-2'>
               {report.map((report: any) => (

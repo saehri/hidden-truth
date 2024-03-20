@@ -42,7 +42,7 @@ const pemilu24ReportDisinformationGameData: Record<
             id: 4,
             label: 'Sumber berita tidak terpercaya',
             reason:
-              'Ucok Loreng Mba tidak mencantumkan sumber terpercaya yang bisa digunakan untuk memverifikasi silang pernyataan yang ia buat. Klaim yang tidak ada buktinya adalah salah satu ciri disinformasi.',
+              'Ucok Loreng Mba tidak mencantumkan sumber terpercaya yang bisa digunakan untuk memverifikasi silang pernyataan yang ia buat.',
           },
         ],
       },

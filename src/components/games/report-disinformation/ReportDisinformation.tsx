@@ -32,26 +32,28 @@ const ReportDisinformation = memo(
     }, [userCorrectAnswerCount]);
 
     return (
-      <motion.section
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        className={twMerge(
-          'h-max grid place-items-center overflow-hidden transition-all',
-          gameState === 'paused' ? 'brightness-0' : 'brightness-100'
-        )}
-      >
-        <div className='flex flex-col gap-4 pb-36 lg:pb-14 p-2 lg:p-0'>
-          {posts.map((data, index) => (
-            <ReportDisinformationPost
-              index={index + 1}
-              key={data.postId}
-              reducePlayerLife={reducePlayerLife}
-              setUserCorrectAnswerCount={setUserCorrectAnswerCount}
-              {...data}
-            />
-          ))}
-        </div>
-      </motion.section>
+      <>
+        <motion.section
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          className={twMerge(
+            'h-max grid place-items-center overflow-hidden transition-all',
+            gameState === 'paused' ? 'brightness-0' : 'brightness-100'
+          )}
+        >
+          <div className='flex flex-col gap-4 pb-36 lg:pb-14 p-2 lg:p-0'>
+            {posts.map((data, index) => (
+              <ReportDisinformationPost
+                index={index + 1}
+                key={data.postId}
+                reducePlayerLife={reducePlayerLife}
+                setUserCorrectAnswerCount={setUserCorrectAnswerCount}
+                {...data}
+              />
+            ))}
+          </div>
+        </motion.section>
+      </>
     );
   }
 );
