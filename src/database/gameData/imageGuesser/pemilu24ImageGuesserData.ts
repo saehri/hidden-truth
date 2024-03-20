@@ -62,7 +62,7 @@ const pemilu24ImageGuesserData: Record<string, ImageGuesserGameDataTypes> = {
     rewards: imageGuesserRewardsList.game1,
     hasTutorial: false,
   },
-  'PEMILU24-TG-C2-5': {
+  'PEMILU24-TG-C2-4': {
     data: {
       imageLink:
         'https://www.dropbox.com/scl/fi/6oep1lrdxj1n95c7bi4vm/soal13.webp?rlkey=pq8n530kmbi273bbh2k5496tw&raw=1',

@@ -135,8 +135,8 @@ const SSPemilu24: StorylineDataTypes = {
           isFinalGame: false,
         },
         {
-          id: 'PEMILU24-RD-C2-4',
-          type: 'RD',
+          id: 'PEMILU24-TG-C2-4',
+          type: 'TG',
           name: 'Berita Kerusuhan',
           hasOpeningDialog: false,
           difficulty: 'hard',
