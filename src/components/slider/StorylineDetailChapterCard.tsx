@@ -207,7 +207,7 @@ function CardWrapper({
       </div>
 
       {isCompleted && (
-        <div className='absolute bottom-28 right-8 rotate-6 text-red-600 font-bold text-sm outline-2 outline py-1 px-4 outline-offset-2 rounded-full outline-red-600'>
+        <div className='absolute bottom-28 right-8 rotate-6 text-yellow-400 font-bold text-sm outline-2 outline py-1 px-4 outline-offset-2 rounded-full outline-yellow-400'>
           COMPLETED
         </div>
       )}
