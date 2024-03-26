@@ -26,7 +26,7 @@ export default function ReportDisinformationPost({
       <div className='text-xs mb-3 bg-red-600 w-max px-2'>POST - 00{index}</div>
 
       <div className='grid grid-cols-[max-content,_1fr] gap-4 mb-4'>
-        <div className='w-11 h-11 shrink-0 bg-slate-300'>
+        <div className='w-8 h-8 xs:w-11 xs:h-11 shrink-0 bg-slate-300'>
           {postAuthor.authorProfileImage.length > 0 && (
             <img
               src={postAuthor.authorProfileImage}
@@ -36,14 +36,19 @@ export default function ReportDisinformationPost({
           )}
         </div>
 
-        <div className='flex flex-col gap-2'>
-          <div className='flex gap-2 text-sm text-slate-400'>
-            <h4 className='font-semibold text-slate-50'>
-              {postAuthor.authorName}
-            </h4>
-            <p>{postAuthor.authorUsername}</p>
+        <div className='flex flex-col gap-3'>
+          <div className='text-sm flex flex-col sm:flex-row sm:gap-2 text-slate-400'>
+            <div className='flex gap-2'>
+              <div className='max-w-8 xs:max-w-[20ch] overflow-hidden'>
+                <h4 className='font-semibold text-nowrap text-slate-50'>
+                  {postAuthor.authorName}
+                </h4>
+              </div>
 
-            <span>•</span>
+              <p>{postAuthor.authorUsername}</p>
+
+              <span className='hidden sm:block'>•</span>
+            </div>
 
             <p>{postUploadedTime}</p>
           </div>
